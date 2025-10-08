@@ -16,7 +16,7 @@
     </script>
 
     <!-- Main Content -->
-    <div class="pt-20 bg-white mt-12">
+    <div class="pt-12 bg-white">
 
 
         <!-- Image Gallery Section -->

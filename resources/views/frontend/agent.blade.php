@@ -2,7 +2,7 @@
 @section('content')
 
   <!-- Property Agents Section -->
-<section class="py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 font-sans">
+<section class="py-16 md:py-12 bg-gradient-to-b from-white to-gray-50 font-sans">
     {{-- PROPERTY AGENT --}}
 
     <div class="max-w-7xl mx-auto lg:my-24 px-4 py-8 font-spartan">

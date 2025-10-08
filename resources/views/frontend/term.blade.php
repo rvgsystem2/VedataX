@@ -4,7 +4,7 @@
 
 
   <!-- Main Content -->
-  <main class="max-w-5xl mx-auto p-6 mt-20">
+  <main class="max-w-5xl mx-auto p-6">
     <h2 class="text-3xl font-bold text-[#449FC3] mb-4 border-b-4 border-black inline-block pb-1 font-spartan">  Terms and Condition</h2>
     <br>
     <span class="font-light text-base font-spartan"> Last updated: 9th September 2025</span>

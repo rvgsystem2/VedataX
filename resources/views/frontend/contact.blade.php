@@ -25,7 +25,7 @@
 
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 max-w-6xl md:mt-24 mt-12">
+    <main class="container mx-auto px-4 py-8 max-w-6xl ">
         <!-- Hero Section -->
 
 
