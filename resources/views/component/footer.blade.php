@@ -68,9 +68,9 @@
                     <a href="{{route('frontend.agent')}}">  <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Agents
                     </li></a>
-                    <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
+                    {{-- <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i>
-                    </li></a>
+                    </li></a> --}}
                 </ul>
             </div>
 
