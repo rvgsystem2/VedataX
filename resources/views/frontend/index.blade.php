@@ -3000,7 +3000,7 @@
         <!-- Heading -->
         <div class="text-center mb-10">
             <h1
-                class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-black to-black font-spartan">
+                class="text-4xl font-extrabold text-black bg-clip-text  font-spartan">
                 Services We Offer
             </h1>
             <p class="text-gray-700 text-base md:text-lg font-medium mt-2 font-spartan">
