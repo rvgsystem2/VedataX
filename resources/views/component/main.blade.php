@@ -7,7 +7,7 @@
   <title>Vedata x Reality One</title>
 
   @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="icon" href="{{ asset('asset/img/logo1.png') }}" type="image/x-icon">
