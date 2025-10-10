@@ -159,6 +159,11 @@
                     <i class="fas fa-info-circle mr-1"></i>
                     About
                 </a>
+                <a href="{{ route('feature') }}"
+                class="text-black hover:text-blue-500 transition flex items-center hover-lift">
+                <i class="fas fa-info-circle mr-1"></i>
+                Detail
+            </a>
                 <a href="{{ route('contact') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-envelope mr-1"></i>
@@ -304,7 +309,11 @@
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
                 <i class="fas fa-info-circle mr-3 w-5 text-center"></i>
                 About
-            </a>
+            </a><a href="{{ route('feature') }}"
+            class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
+            <i class="fas fa-info-circle mr-3 w-5 text-center"></i>
+            Detail
+        </a>
             <a href="{{ route('contact') }}"
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
                 <i class="fas fa-envelope mr-3 w-5 text-center"></i>
