@@ -8,7 +8,7 @@
                 <div class="flex justify-center md:justify-start">
                     <img src="{{ asset('asset/img/WhatsApp Image 2025-10-02 at 15.19.08_1c3d1629.jpg') }}" alt="" class="max-w-[150px] h-auto rounded">
                 </div>
-                <h2 class="text-xl font-bold text-center md:text-left font-spartan">Vedata Reality One</h2>
+                <h2 class="text-xl font-bold text-center md:text-left font-spartan">Vedata </h2>
 
                 <p class="text-gray-300 flex items-start gap-2 text-sm">
                     <i class="fas fa-map-marker-alt text-blue-400 mt-1"></i>
@@ -21,11 +21,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-phone text-blue-400"></i>
-                        <a href="tel:+06966626272" class="hover:text-blue-300 transition-colors text-sm font-spartan">+06 96 662 6272</a>
+                        <a href="tel:+06966626272" class="hover:text-blue-300 transition-colors text-sm font-spartan">+66 96 662 6272</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-phone text-blue-400"></i>
-                        <a href="tel:+06536427888" class="hover:text-blue-300 transition-colors text-sm font-spartan">+06 53 642 7888</a>
+                        <a href="tel:+06536427888" class="hover:text-blue-300 transition-colors text-sm font-spartan">+66 96 807 5911</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
 
             <!-- Resources Section -->
             <div>
-                <h4 class="text-md font-semibold mb-4 text-gray-300 font-spartan">Important Links</h4>
+                <h4 class="text-md font-semibold mb-4 text-gray-300 font-spartan ">Other Links</h4>
                 <ul class="space-y-2">
                    <a href="{{route('contact')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Contact Us
@@ -76,7 +76,7 @@
 
             <!-- Image Section -->
             <div class="flex justify-center lg:justify-end">
-                <img src="https://m.media-amazon.com/images/I/61BgYtg3k2L._UF350,350_QL50_.jpg" alt="" class="w-full max-w-xs h-auto rounded-lg shadow-lg">
+                <img src="{{asset('asset/img/footer.jpg')}}" alt="" class="w-full max-w-xs h-auto rounded-lg shadow-lg">
             </div>
         </div>
 
@@ -92,15 +92,17 @@
                 <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-400 hover:text-white p-2 rounded-full transition">
+                {{-- <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-400 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-twitter"></i>
-                </a>
+                </a> --}}
                 <a href="#" class="bg-gray-800 text-gray-300 hover:bg-pink-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-700 hover:text-white p-2 rounded-full transition">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
+                <a href="https://wa.me/1234567890" target="_blank"
+   class="bg-gray-800 text-gray-300 hover:bg-green-600 hover:text-white p-2 rounded-full transition">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
             </div>
         </div>
     </div>

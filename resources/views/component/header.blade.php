@@ -117,7 +117,7 @@
                                     <i class="fas fa-building text-gray-600"></i>
                                 </div>
                                 <div>
-                                    <div class="font-medium">Apartments</div>
+                                    <div class="font-medium">Villa/House</div>
                                     <div class="text-xs text-gray-500">1,234 properties</div>
                                 </div>
                             </a>
@@ -127,7 +127,7 @@
                                     <i class="fas fa-umbrella-beach text-gray-600"></i>
                                 </div>
                                 <div>
-                                    <div class="font-medium">Villas</div>
+                                    <div class="font-medium">Sea View</div>
                                     <div class="text-xs text-gray-500">567 properties</div>
                                 </div>
                             </a>
@@ -137,7 +137,7 @@
                                     <i class="fas fa-city text-gray-600"></i>
                                 </div>
                                 <div>
-                                    <div class="font-medium">Townhouses</div>
+                                    <div class="font-medium">Beachfront</div>
                                     <div class="text-xs text-gray-500">890 properties</div>
                                 </div>
                             </a>
@@ -150,20 +150,40 @@
                                     <div class="text-xs text-gray-500">321 properties</div>
                                 </div>
                             </a>
+                            <a href="{{route('property')}}"
+                            class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-city text-gray-600"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium">Bussiness</div>
+                                <div class="text-xs text-gray-500">890 properties</div>
+                            </div>
+                        </a>
+                        <a href="{{route('property')}}"
+                        class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                        <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-city text-gray-600"></i>
+                        </div>
+                        <div>
+                            <div class="font-medium">Rental</div>
+                            <div class="text-xs text-gray-500">890 properties</div>
+                        </div>
+                    </a>
                         </div>
                     </div>
                 </div>
 
-                <a href="{{ route('about') }}"
+                {{-- <a href="{{ route('about') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-info-circle mr-1"></i>
                     About
                 </a>
-                <a href="{{ route('feature') }}"
+            <a href="{{ route('feature') }}"
                 class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                 <i class="fas fa-info-circle mr-1"></i>
                 Detail
-            </a>
+            </a> --}}
                 <a href="{{ route('contact') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-envelope mr-1"></i>
@@ -305,15 +325,16 @@
                     </a>
                 </div>
             </div>
-            <a href="{{ route('about') }}"
+            {{-- <a href="{{ route('about') }}"
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
                 <i class="fas fa-info-circle mr-3 w-5 text-center"></i>
                 About
-            </a><a href="{{ route('feature') }}"
+            </a>
+        <a href="{{ route('feature') }}"
             class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
             <i class="fas fa-info-circle mr-3 w-5 text-center"></i>
             Detail
-        </a>
+        </a> --}}
             <a href="{{ route('contact') }}"
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
                 <i class="fas fa-envelope mr-3 w-5 text-center"></i>

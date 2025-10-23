@@ -69,8 +69,8 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-gray-700 font-spartan">Phone</p>
-                                <p class="text-gray-600 mt-1 font-spartan">+66 83 642 7888</p>
-                                <p class="text-gray-600 mt-1 font-spartan">WhatsApp: +66 96 662 6272</p>
+                                <p class="text-gray-600 mt-1 font-spartan">+66 968075911</p>
+                                <p class="text-gray-600 mt-1 font-spartan">WhatsApp: +66 966626272</p>
                             </div>
                         </div>
                     </div>
@@ -83,15 +83,15 @@
                         <a href="#" class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition duration-300 shadow-md">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center text-white hover:bg-blue-500 transition duration-300 shadow-md">
+                        {{-- <a href="#" class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center text-white hover:bg-blue-500 transition duration-300 shadow-md">
                             <i class="fab fa-twitter"></i>
-                        </a>
+                        </a> --}}
                         <a href="#" class="w-12 h-12 rounded-full bg-pink-600 flex items-center justify-center text-white hover:bg-pink-700 transition duration-300 shadow-md">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center text-white hover:bg-blue-800 transition duration-300 shadow-md">
+                        {{-- <a href="#" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center text-white hover:bg-blue-800 transition duration-300 shadow-md">
                             <i class="fab fa-linkedin-in"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             </div>

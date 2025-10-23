@@ -449,7 +449,7 @@
                         </div>
                     </div>
 
-                    <!-- Mortgage Calculator -->
+                    {{-- <!-- Mortgage Calculator -->
                     <div class="bg-white rounded-xl shadow-lg p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-4 font-spartan">Mortgage Calculator</h3>
                         <div class="space-y-4">
@@ -478,7 +478,7 @@
                             </div>
                             <button class="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-gray-600 transition font-spartan">Calculate</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
