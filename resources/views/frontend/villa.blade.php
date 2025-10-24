@@ -146,7 +146,7 @@
 
 
   <!-- ✅ Navbar -->
-  <nav class="bg-gray-200/70 backdrop-blur-lg border-b border-black/10 w-full z-50 top-0 pt-14">
+  <nav class="bg-gray-200/70 backdrop-blur-lg border-b border-black/10 w-full z-50 top-0 md:pt-14">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
 

@@ -79,20 +79,32 @@
                 <!-- Social Media -->
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
                     <h2 class="text-xl font-bold text-gray-800 mb-4 font-spartan">Follow Us</h2>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 transition duration-300 shadow-md">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        {{-- <a href="#" class="w-12 h-12 rounded-full bg-blue-400 flex items-center justify-center text-white hover:bg-blue-500 transition duration-300 shadow-md">
-                            <i class="fab fa-twitter"></i>
-                        </a> --}}
-                        <a href="#" class="w-12 h-12 rounded-full bg-pink-600 flex items-center justify-center text-white hover:bg-pink-700 transition duration-300 shadow-md">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        {{-- <a href="#" class="w-12 h-12 rounded-full bg-blue-700 flex items-center justify-center text-white hover:bg-blue-800 transition duration-300 shadow-md">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a> --}}
-                    </div>
+                    <!-- Social Media Links -->
+<div class="flex flex-wrap justify-center gap-4 mt-6">
+    <!-- Facebook -->
+    <a href="https://facebook.com" target="_blank" aria-label="Facebook"
+      class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:scale-105 transition-transform duration-300 ease-out">
+      <i class="fab fa-facebook-f text-lg"></i>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp"
+      class="flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-md hover:bg-green-600 hover:scale-105 transition-transform duration-300 ease-out">
+      <i class="fab fa-whatsapp text-lg"></i>
+    </a>
+
+    <!-- Instagram -->
+    <a href="https://instagram.com" target="_blank" aria-label="Instagram"
+      class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 text-white shadow-md hover:opacity-90 hover:scale-105 transition-transform duration-300 ease-out">
+      <i class="fab fa-instagram text-lg"></i>
+    </a>
+
+    <!-- Optional: Add more -->
+    <!-- <a href="#" aria-label="LinkedIn" class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-800 text-white shadow-md hover:bg-blue-900 hover:scale-105 transition-transform duration-300 ease-out">
+      <i class="fab fa-linkedin-in text-lg"></i>
+    </a> -->
+  </div>
+
                 </div>
             </div>
             <!-- Contact Form -->
