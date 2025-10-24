@@ -1,5 +1,4 @@
 
-
 @extends('component.main')
 @section('content')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
@@ -300,7 +299,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text-sm text-gray-600 mt-4">
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed text-gray-400 mr-1"></i>
                                     <span>4 Beds</span>
@@ -408,7 +407,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text-sm text-gray-600 mt-4">
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed text-gray-400 mr-1"></i>
                                     <span>2 Beds</span>
@@ -512,7 +511,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text-sm text-gray-600 mt-4">
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed text-gray-400 mr-1"></i>
                                     <span>1 Bed</span>
@@ -616,7 +615,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text-sm text-gray-600 mt-4">
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed text-gray-400 mr-1"></i>
                                     <span>5 Beds</span>
@@ -720,7 +719,7 @@
                                 </div>
                             </div>
 
-                            <div class="flex justify-between text-sm text-gray-600 mt-4">
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed text-gray-400 mr-1"></i>
                                     <span>3 Beds</span>
@@ -788,20 +787,16 @@
 
                     <div id="property-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         <!-- Property Card 1 - White Lotus Beach Residence -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="sale" data-category="luxury">
+                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="rent" data-category="luxury">
                             <div class="relative">
-                                <div class="swiper propertySwiper1 h-48">
+                                <div class="swiper propertySwiper6 h-48">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2013/10/12/18/05/villa-194671_1280.jpg"
+                                            <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/living-room-2569325_1280.jpg"
                                                 class="w-full h-full object-cover" />
                                         </div>
                                         <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2020/03/20/20/06/strasbourg-4951889_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2012/08/25/11/28/at-home-54935_1280.jpg"
+                                            <img src="https://cdn.pixabay.com/photo/2017/08/27/10/16/interior-2685521_1280.jpg"
                                                 class="w-full h-full object-cover" />
                                         </div>
                                     </div>
@@ -809,7 +804,7 @@
                                     <div class="swiper-button-prev"></div>
                                 </div>
                                 <div class="absolute top-3 left-3">
-                                    <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">LEASEHOLD FOR SALE</span>
+                                    <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">LUXURY RENTAL</span>
                                 </div>
                                 <div class="absolute top-3 right-3">
                                     <button
@@ -818,11 +813,11 @@
                                     </button>
                                 </div>
 
-                                <!-- Price and icons overlay -->
+                                <!-- Price overlay -->
                                 <div
                                     class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
                                     <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">12,900,000THB</span>
+                                    <span class="text-white font-semibold text-lg">85,000THB/month</span>
 
                                     <!-- Icons -->
                                     <div class="flex space-x-3 text-white text-lg">
@@ -844,26 +839,31 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <h2 class="text-lg font-bold text-gray-900 mb-1">White Lotus Beach Residence - Premium Villa...</h2>
-                                <p class="text-gray-600 text-sm mb-4">Bang Por, Koh Samui, Thailand</p>
-
-                                <!-- Property features -->
-                                <div class="flex justify-between text-sm text-gray-700 mb-6">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-500 mr-1"></i>
-                                        <span>2-3 Bedrooms</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-500 mr-1"></i>
-                                        <span>3 Bathrooms</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-ruler-combined text-gray-500 mr-1"></i>
-                                        <span>320 SQM</span>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800">Executive Rental Villa</h3>
+                                        <p class="text-gray-600 text-sm flex items-center mt-1">
+                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                            Pattaya, Thailand
+                                        </p>
                                     </div>
                                 </div>
 
-                                <!-- Agent info and time -->
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                        <span>3 Beds</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                        <span>3 Baths</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                        <span>280 SQM</span>
+                                    </div>
+                                </div>
+
                                 <div class="flex justify-between items-center mt-4">
                                     <!-- Agent Info -->
                                     <div class="flex items-center">
@@ -884,12 +884,11 @@
                                             <i class="fas fa-share-alt"></i>
                                         </button>
                                         <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">2 months ago</p>
+                                        <p class="text-xs text-gray-500">1 month ago</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Property Card 2 - Modern Villa -->
                         <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="sale" data-category="luxury">
                             <div class="relative">
@@ -957,7 +956,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     <div class="flex items-center">
                                         <i class="fas fa-bed text-gray-400 mr-1"></i>
                                         <span>4 Beds</span>
@@ -1065,7 +1064,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     <div class="flex items-center">
                                         <i class="fas fa-bed text-gray-400 mr-1"></i>
                                         <span>2 Beds</span>
@@ -1169,7 +1168,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     <div class="flex items-center">
                                         <i class="fas fa-bed text-gray-400 mr-1"></i>
                                         <span>1 Bed</span>
@@ -1273,7 +1272,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     <div class="flex items-center">
                                         <i class="fas fa-bed text-gray-400 mr-1"></i>
                                         <span>5 Beds</span>
@@ -1377,7 +1376,7 @@
                                     </div>
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     <div class="flex items-center">
                                         <i class="fas fa-bed text-gray-400 mr-1"></i>
                                         <span>3 Beds</span>
