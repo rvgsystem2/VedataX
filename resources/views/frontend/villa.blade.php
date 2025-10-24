@@ -4,11 +4,11 @@
 {{--    <div class="w-full h-[300px] md:h-[400px] relative">--}}
 {{--        <img src="{{ asset('asset/img/banner.jpg') }}" alt="Property Banner" class="w-full h-full object-cover">--}}
 {{--        <div class="absolute inset-0 top-0 left-0 right-0 bg-black/50 items-center text-center pt-32">--}}
-{{--            <h1 class="text-white text-3xl md:text-5xl font-extrabold tracking-wide drop-shadow-lg">--}}
+{{--            <h1 class="text-black text-3xl md:text-5xl font-extrabold tracking-wide drop-shadow-lg">--}}
 {{--                Find Your Dream Property--}}
 {{--            </h1>--}}
 {{--            <div class="flex justify-center space-x-2 py-2">--}}
-{{--                <p class="text-white hover:underline"> <a href="/">Home</p></a>--}}
+{{--                <p class="text-black hover:underline"> <a href="/">Home</p></a>--}}
 {{--                <p class="text-white">/</p>--}}
 {{--                <p class="text-white hover:underline"><a href="{{ route('villa') }}">Villa</p></a>--}}
 {{--            </div>--}}
@@ -147,6 +147,161 @@
 
 
 
+  <!-- Navbar -->
+  <nav class="bg-gray-200/70 backdrop-blur-lg border-b border-black/10 fixed w-full z-50 top-0 mt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
 
+          <a href="/" class="text-white text-2xl font-bold hover:text-blue-400 transition">
+            <img src="{{asset('asset/img/logo2.png')}}" alt="" class="h-10 w-auto"/>
+          </a>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center space-x-6">
+          <!-- Buy / Rent -->
+          <a href="{{ route('property') }}" class="text-black hover:text-blue-400 transition flex items-center">
+            <i class="fas fa-shopping-cart mr-1"></i> Buy
+          </a>
+          <a href="{{ route('property') }}" class="text-black hover:text-blue-400 transition flex items-center">
+            <i class="fas fa-key mr-1"></i> Rent
+          </a>
+
+          <!-- Filters -->
+          <form class="flex items-center gap-3">
+
+            <!-- Location -->
+            <div class="relative">
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <select class="bg-black/10 border border-black/20 rounded-2xl text-sm text-black pl-12 pr-4 py-3 focus:ring-2 focus:ring-black-400 hover:bg-black/15 transition-all cursor-pointer">
+                <option class="text-gray-900">Location</option>
+                <option class="text-gray-900">Koh Samui</option>
+                <option class="text-gray-900">Bophut</option>
+                <option class="text-gray-900">Lamai</option>
+                <option class="text-gray-900">Maenam</option>
+              </select>
+            </div>
+
+            <!-- Property Type -->
+            <div class="relative">
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10h3m10-11l2 2v9h-3m-6 0h6" />
+              </svg>
+              <select class="bg-black/10 border border-black/20 rounded-2xl text-sm text-black pl-12 pr-4 py-3 focus:ring-2 focus:ring-black-400 hover:bg-black/15 transition-all cursor-pointer">
+                <option class="text-gray-900">Property Type</option>
+                <option class="text-gray-900">Villa/House</option>
+                <option class="text-gray-900">Beachfront</option>
+                <option class="text-gray-900">Sea View</option>
+                <option class="text-gray-900">Land</option>
+              </select>
+            </div>
+
+            <!-- Price Range -->
+            <div class="flex gap-2">
+              <select class="bg-black/10 border border-black/20 rounded-2xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-black-400 hover:bg-black/15 cursor-pointer">
+                <option class="text-gray-900">Min</option>
+                <option class="text-gray-900">฿1,000,000</option>
+                <option class="text-gray-900">฿5,000,000</option>
+                <option class="text-gray-900">฿10,000,000</option>
+              </select>
+              <select class="bg-black/10 border border-black/20 rounded-2xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-black-400 hover:bg-black/15 cursor-pointer">
+                <option class="text-gray-900">Max</option>
+                <option class="text-gray-900">฿10,000,000</option>
+                <option class="text-gray-900">฿20,000,000</option>
+                <option class="text-gray-900">฿50,000,000</option>
+              </select>
+            </div>
+
+            <!-- Bed & Bath -->
+            <div class="relative">
+              <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 22V12h6v10" />
+              </svg>
+              <select class="bg-black/10 border border-black/20 rounded-2xl text-sm text-black pl-12 pr-4 py-3 focus:ring-2 focus:ring-black-400 hover:bg-black/15 transition-all cursor-pointer">
+                <option class="text-gray-900">Bed & Bath</option>
+                <option class="text-gray-900">1 Bed / 1 Bath</option>
+                <option class="text-gray-900">2 Bed / 2 Bath</option>
+                <option class="text-gray-900">3 Bed / 3 Bath</option>
+              </select>
+            </div>
+
+            <!-- Reset Button -->
+            <button type="submit" class=" text-black px-6 py-3 rounded-2xl font-semibold  transition flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Reset
+            </button>
+          </form>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="lg:hidden">
+          <button id="menu-btn" class="text-black focus:outline-none text-2xl">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-gray-800 border-t border-white/10">
+      <div class="p-4 space-y-4">
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-400">
+          <i class="fas fa-shopping-cart"></i><span>Buy</span>
+        </a>
+        <a href="#" class="flex items-center space-x-2 text-black hover:text-blue-400">
+          <i class="fas fa-key"></i><span>Rent</span>
+        </a>
+
+        <form class="flex flex-col gap-3">
+          <select class="bg-white/10 border border-white/20 rounded-xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-blue-400 hover:bg-white/15">
+            <option>Location</option>
+            <option>Koh Samui</option>
+            <option>Bophut</option>
+          </select>
+          <select class="bg-white/10 border border-white/20 rounded-xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-blue-400 hover:bg-white/15">
+            <option>Property Type</option>
+            <option>Villa</option>
+            <option>Beachfront</option>
+          </select>
+          <div class="flex gap-2">
+            <select class="flex-1 bg-white/10 border border-white/20 rounded-xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-blue-400 hover:bg-white/15">
+              <option>Min</option>
+            </select>
+            <select class="flex-1 bg-white/10 border border-white/20 rounded-xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-blue-400 hover:bg-white/15">
+              <option>Max</option>
+            </select>
+          </div>
+          <select class="bg-white/10 border border-white/20 rounded-xl text-sm text-black px-4 py-3 focus:ring-2 focus:ring-blue-400 hover:bg-white/15">
+            <option>Bed & Bath</option>
+          </select>
+          <button class="bg-blue-500 text-black py-3 rounded-xl font-semibold hover:bg-blue-600 transition">
+            Reset
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menu-btn').addEventListener('click', function () {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
 
 
