@@ -32,7 +32,7 @@
 
             <!-- Sale Collection Section -->
             <div>
-                <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 font-spartan">Sale Collection</h3>
+                <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 font-spartan">Categories</h3>
                 <ul class="space-y-2">
                     <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Sea View Properties
@@ -46,9 +46,9 @@
                     <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Business
                     </li></a>
-                    <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
+                    {{-- <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Rental Properties
-                    </li></a>
+                    </li></a> --}}
                 </ul>
             </div>
 
@@ -86,7 +86,7 @@
         <!-- Copyright -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-gray-400 text-sm text-center font-spartan">
-                © 2025 All Rights Reserved | Vedata a Reality One
+                © 2025 All Rights Reserved | Vedata Properties
             </p>
             <div class="flex space-x-3">
                 <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">

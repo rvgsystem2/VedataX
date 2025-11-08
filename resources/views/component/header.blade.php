@@ -87,11 +87,11 @@
                     <i class="fas fa-shopping-cart mr-1"></i>
                     Buy
                 </a>
-                <a href="{{ route('property') }}"
+               {{--  <a href="{{ route('property') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-key mr-1"></i>
                     Rent
-                </a>
+                </a> --}}
 
                 <!-- Enhanced Categories Dropdown -->
                 <div class="relative group">
@@ -160,7 +160,7 @@
                                 <div class="text-xs text-gray-500">890 properties</div>
                             </div>
                         </a>
-                        <a href="{{route('property')}}"
+                        {{-- <a href="{{route('property')}}"
                         class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
                         <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
                             <i class="fas fa-city text-gray-600"></i>
@@ -169,7 +169,7 @@
                             <div class="font-medium">Rental</div>
                             <div class="text-xs text-gray-500">890 properties</div>
                         </div>
-                    </a>
+                    </a> --}}
                         </div>
                     </div>
                 </div>
@@ -209,17 +209,27 @@
                         </div>
                         <div class="py-2">
                             <a href="#"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="font-medium mr-2">THB</span> ฿ Thai Baht
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="font-medium mr-2">Baht</span>- THB ฿
                             </a>
                             <a href="#"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="font-medium mr-2">USD</span> $ US Dollar
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="font-medium mr-2">United</span>- USD $
                             </a>
                             <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="font-medium mr-2">EUR</span> € Euro
+                                <span class="font-medium mr-2">Euro</span>- EUR €
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
+                                <span class="font-medium mr-2">Pound Sterling</span>- GBP £
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
+                                <span class="font-medium mr-2">Russian Ruble</span>- RUB ₽
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
+                                <span class="font-medium mr-2">Chinese Yuan</span>- CNY ¥
                             </a>
                         </div>
+
                     </div>
                 </div>
 
@@ -242,17 +252,27 @@
                         </div>
                         <div class="py-2">
                             <a href="#"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="w-6 mr-2 text-center">🇺🇸</span> English
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English
                             </a>
                             <a href="#"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="w-6 mr-2 text-center">🇹🇭</span> ไทย
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย
                             </a>
-                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="w-6 mr-2 text-center">🇨🇳</span> 中文
+                            <a href="#"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文
+                            </a>
+                            <a href="#"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français
+                            </a>
+                            <a href="#"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย
                             </a>
                         </div>
+
                     </div>
                 </div>
 
@@ -287,11 +307,11 @@
                 <i class="fas fa-shopping-cart mr-3 w-5 text-center"></i>
                 Buy
             </a>
-            <a href="{{ route('property') }}"
+            {{-- <a href="{{ route('property') }}"
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
                 <i class="fas fa-key mr-3 w-5 text-center"></i>
                 Rent
-            </a>
+            </a> --}}
             <div>
                 <button onclick="toggleMobileDropdown('categories-mobile')"
                     class="w-full text-left py-3 flex justify-between items-center text-white hover:bg-white/10 rounded-lg px-3 transition z-90">
@@ -354,10 +374,13 @@
                     </div>
                     <div class="bg-white/10 rounded-lg p-3">
                         <label class="text-white text-xs block mb-1">Language</label>
-                        <select class="w-full bg-transparent text-white text-sm focus:outline-none">
-                            <option class="text-gray-800">English</option>
-                            <option class="text-gray-800">ไทย</option>
-                            <option class="text-gray-800">中文</option>
+                        <select class="w-full text-black text-sm focus:outline-none">
+
+                            <option><span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English<option>
+                           <option ><span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย</option>
+                           <option >  <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文</option>
+                           <option > <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français</option>
+                           <option> <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย</option>
                         </select>
                     </div>
                 </div>

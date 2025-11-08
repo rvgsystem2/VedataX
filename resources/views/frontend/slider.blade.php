@@ -82,8 +82,8 @@
 
     .custom-nav-btn {
         pointer-events: all;
-        width: 40px;
-        height: 40px;
+        /* width: 40px;
+        height: 40px; */
         border-radius: 50%;
         background: rgb(17, 0, 0);
         display: flex;
@@ -165,7 +165,7 @@
 </style>
 
 <!-- Best Deals Section -->
-<section class="w-full max-w-7xl mx-auto px-4 py-6">
+{{-- <section class="w-full max-w-7xl mx-auto px-4 py-6">
     <div class="text-center mb-12 fade-in">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Best Deals</h1>
         <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of premium properties
@@ -1297,7 +1297,7 @@
     {{-- <div class="slide-counter text-sm text-gray-600">
       <span class="current-slide font-medium">1</span> / <span class="total-slides font-medium">6</span>
     </div> --}}
-  </div>
+  {{-- </div>
 
 </div>
 </section>
@@ -1340,12 +1340,12 @@
         1024: { slidesPerView: 3 },
       },
     });
-</script>
+</script> --}}
 
 
 
 <!-- Premium Villa Deals Section -->
-<section class="w-full max-w-7xl mx-auto px-4 py-6">
+<section class="w-full max-w-7xl mx-auto px-4 py-8">
     <div class="text-center mb-12 fade-in">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Villas</h1>
         <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of luxury villas designed
@@ -2451,24 +2451,25 @@
 
         <div class="custom-controls mt-8 flex flex-col items-center ">
             <!-- Pagination + Arrows in One Row -->
-            <div class="flex items-center justify-center">
-              <!-- Prev Button -->
-              <button
-                class="custom-nav-btn villa-prev-btn md:w-10 md:h-10 rounded-full bg-white shadow hover:bg-gray-50 flex items-center justify-center transition"
-              >
-                <i class="fas fa-chevron-left text-white"></i>
-              </button>
+            <div class="flex items-center justify-center space-x-4">
+                <!-- Prev Button -->
+                <button
+                  class="custom-nav-btn villa-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
+                >
+                  <i class="fas fa-chevron-left text-white"></i>
+                </button>
 
-              <!-- Pagination Dots (Centered) -->
-              <div class="custom-pagination villa-pagination flex justify-center text-black "></div>
+                <!-- Pagination Dots (Centered) -->
+                <div class="custom-pagination villa-pagination flex justify-center text-black"></div>
 
-              <!-- Next Button -->
-              <button
-                class="custom-nav-btn villa-next-btn w-10 h-10 rounded-full bg-white shadow hover:bg-gray-50 flex items-center justify-center transition"
-              >
-                <i class="fas fa-chevron-right text-white"></i>
-              </button>
-            </div>
+                <!-- Next Button -->
+                <button
+                  class="custom-nav-btn villa-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
+                >
+                  <i class="fas fa-chevron-right text-white"></i>
+                </button>
+              </div>
+
 
             <!-- Slide Counter (Optional, Below Pagination Row) -->
             <div class="slide-counter text-sm text-gray-600">
@@ -2520,7 +2521,7 @@
 </script>
 
 <!-- Premium Land Deals Section -->
-<section class="w-full max-w-7xl mx-auto px-4 py-6">
+<section class="w-full max-w-7xl mx-auto px-4 py-8">
     <div class="text-center mb-12 fade-in">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Lands</h1>
         <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of prime land parcels
@@ -3520,7 +3521,7 @@
             <div class="flex items-center justify-center">
               <!-- Prev Button -->
               <button
-                class="custom-nav-btn land-prev-btn md:w-10 md:h-10 rounded-full bg-black text-white shadow hover:bg-gray-50 flex items-center justify-center transition ml-4"
+                class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
               >
                 <i class="fas fa-chevron-left text-white hover:text-white"></i>
               </button>
@@ -3530,7 +3531,7 @@
 
               <!-- Next Button -->
               <button
-                class="custom-nav-btn land-next-btn md:w-10 md:h-10 rounded-full bg-black shadow hover:bg-gray-50 flex items-center justify-center transition mr-4"
+                class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
               >
                 <i class="fas fa-chevron-right text-white hover:text-white"></i>
               </button>

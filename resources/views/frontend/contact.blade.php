@@ -68,9 +68,10 @@
                                 <i class="fas fa-phone text-blue-600"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-700 font-spartan">Phone</p>
-                                <p class="text-gray-600 mt-1 font-spartan">+66 968075911</p>
-                                <p class="text-gray-600 mt-1 font-spartan">WhatsApp: +66 966626272</p>
+                                <p class="font-semibold text-gray-700 font-spartan">Phone:</p>
+                                <p class="text-gray-600 mt-1 font-spartan font-bold">+66 96 807 5911
+                                   </p>
+                                <p class="text-gray-600 mt-1 font-spartan font-bold" > +66 96 662 6272</p>
                             </div>
                         </div>
                     </div>

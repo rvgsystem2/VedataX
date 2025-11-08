@@ -3,179 +3,202 @@
     <!-- Hero Section -->
 
     <!-- Hero Section -->
-    <section class="relative h-screen w-full ">
+    <section class="relative h-screen w-full">
         <!-- Background Image with Loading State -->
         <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-            alt="Luxury beach property in Thailand with pristine waters and modern architecture"
-            class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" loading="eager"
-            onload="this.style.opacity='1'" style="opacity: 0;">
+        <img
+          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          alt="Luxury beach property in Thailand with pristine waters and modern architecture"
+          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
+          loading="eager"
+          onload="this.style.opacity='1'"
+        />
 
-        <!-- Gradient Overlay for Better Text Readability -->
+        <!-- Gradient Overlay -->
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
 
         <!-- Content Container -->
         <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
-            <!-- Main Heading -->
-            <h1
-                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
-                VEDATA <span class="text-white">X</span> REALTY ONE
-            </h1>
+          <!-- Main Heading -->
+          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
+            VEDATA PROPERTIES
+          </h1>
 
-            <!-- Subtitle -->
-            <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 max-w-3xl leading-relaxed font-light">
-                Premium Properties in Thailand's Most Desirable Locations
-            </p>
+          <!-- Subtitle -->
+          <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 max-w-3xl leading-relaxed font-light">
+            Premium Properties in Thailand's Most Desirable Locations
+          </p>
 
-            <!-- 🔍 Search Section -->
-            <div class="w-full max-w-6xl">
-                <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/10">
-                  <form class="flex flex-col lg:flex-row gap-4 items-stretch">
+          <!-- Search Form -->
+          <div class="w-full max-w-6xl">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/10">
+              <form class="flex flex-col lg:flex-row gap-4 items-stretch">
 
-                    <!-- Search Fields Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
+                <!-- Grid of Inputs -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
 
-                      <!-- Location -->
-                      <div class="relative group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                          <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                        </div>
-                        <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
-                            focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                          <option class="text-gray-900">Koh Samui</option>
-                          <option class="text-gray-900">Bang Makham</option>
-                          <option class="text-gray-900">Band Por</option>
-                          <option class="text-gray-900">Bang Rak</option>
-                          <option class="text-gray-900">Bophut</option>
-                          <option class="text-gray-900">Bantai</option>
-                          <option class="text-gray-900">Chaweng</option>
-                          <option class="text-gray-900">Chaweng Noi</option>
-                          <option class="text-gray-900">Choeng Man</option>
-                          <option class="text-gray-900">Lamai</option>
-                          <option class="text-gray-900">Lipa Noi</option>
-                          <option class="text-gray-900">Maenam</option>
-                          <option class="text-gray-900">Nathon</option>
-                           <option class="text-gray-900">Na Muaeng</option>
-                          <option class="text-gray-900">Plai Laem</option>
-                          <option class="text-gray-900">Thong Krut</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
-                      </div>
+                  <!-- Location -->
+                  <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                      </svg>
+                    </div>
+                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
+                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
+                      <option class="text-gray-900">Koh Samui</option>
+                      <option class="text-gray-900">Bang Makham</option>
+                      <option class="text-gray-900">Band Por</option>
+                      <option class="text-gray-900">Bang Rak</option>
+                      <option class="text-gray-900">Bophut</option>
+                      <option class="text-gray-900">Bantai</option>
+                      <option class="text-gray-900">Chaweng</option>
+                      <option class="text-gray-900">Chaweng Noi</option>
+                      <option class="text-gray-900">Choeng Man</option>
+                      <option class="text-gray-900">Lamai</option>
+                      <option class="text-gray-900">Lipa Noi</option>
+                      <option class="text-gray-900">Maenam</option>
+                      <option class="text-gray-900">Nathon</option>
+                      <option class="text-gray-900">Na Muaeng</option>
+                      <option class="text-gray-900">Plai Laem</option>
+                      <option class="text-gray-900">Thong Krut</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
 
-                      <!-- Property Type -->
-                      <div class="relative group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                          <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                          </svg>
-                        </div>
-                        <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
-                            focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                          <option class="text-gray-900">Property Type</option>
-                          <option class="text-gray-900">Villa/House</option>
-                          <option class="text-gray-900">Sea View</option>
-                          <option class="text-gray-900">Beachfront</option>
-                          <option class="text-gray-900">Lands </option>
-                          <option class="text-gray-900">Bussiness</option>
-                          <option class="text-gray-900">Rental</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 9l-7 7-7-7" />
-                          </svg>
-                        </div>
-                      </div>
+                  <!-- Property Type -->
+                  <div class="relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                      </svg>
+                    </div>
+                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
+                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
+                      <option class="text-gray-900">Property Type</option>
+                      <option class="text-gray-900">Villa/House</option>
+                      <option class="text-gray-900">Sea View</option>
+                      <option class="text-gray-900">Beachfront</option>
+                      <option class="text-gray-900">Lands</option>
+                      <option class="text-gray-900">Business</option>
+                      <option class="text-gray-900">Rental</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
 
-                      <!-- 💰 Price Range (Min/Max) -->
-                      <div>
-                        <div class="flex gap-2">
-                          <!-- Min -->
-                          <div class="relative flex-1 group">
-                            <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
-                                focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                              <option class="text-gray-900">Min</option>
-                              <option  class="text-gray-900">฿1,000,000</option>
-                              <option class="text-gray-900">฿2,000,000</option>
-                              <option class="text-gray-900">฿3,000,000</option>
-                              <option class="text-gray-900">฿5,000,000</option>
-                              <option class="text-gray-900">฿10,000,000</option>
-                              <option class="text-gray-900">฿20,000,000</option>
-                            </select>
+                  <!-- Price Range -->
+                  <div class="flex gap-2">
+                    <!-- Min -->
+                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
+                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
+                      <option class="text-gray-900">Min</option>
+                      <option class="text-gray-900">฿1,000,000</option>
+                      <option class="text-gray-900">฿2,000,000</option>
+                      <option class="text-gray-900">฿3,000,000</option>
+                      <option class="text-gray-900">฿5,000,000</option>
+                      <option class="text-gray-900">฿10,000,000</option>
+                      <option class="text-gray-900">฿20,000,000</option>
+                    </select>
+
+                    <!-- Max -->
+                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
+                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
+                      <option class="text-gray-900">Max</option>
+                      <option class="text-gray-900">฿5,000,000</option>
+                      <option class="text-gray-900">฿10,000,000</option>
+                      <option class="text-gray-900">฿20,000,000</option>
+                      <option class="text-gray-900">฿30,000,000</option>
+                      <option class="text-gray-900">฿50,000,000</option>
+                      <option class="text-gray-900">฿100,000,000</option>
+                    </select>
+                  </div>
+
+                  <!-- Bed & Bath Dropdown -->
+                  <div class="relative">
+                    <button
+                      type="button"
+                      id="bb-toggle"
+                      class="w-full bg-white/10 border border-white/20 text-white text-white text-sm rounded-2xl px-4 py-4 flex items-center justify-between focus:ring-2 focus:ring-white"
+                    >
+                      <span class="font-bold">Bed & Bath</span>
+                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </button>
+
+                    <div id="bb-dropdown" class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-50 transition-all duration-200 origin-top scale-95 opacity-0">
+                      <div class="flex flex-col gap-6">
+                        <div>
+                          <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bedrooms</p>
+                          <div class="flex gap-2 flex-wrap">
+                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white">Any</button>
+                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">1+</button>
+                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">2+</button>
+                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">3+</button>
                           </div>
+                        </div>
 
-                          <!-- Max -->
-                          <div class="relative flex-1 group">
-                            <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
-                                focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                              <option class="text-gray-900">Max</option>
-                              <option class="text-gray-900">฿5,000,000</option>
-                              <option class="text-gray-900">฿10,000,000</option>
-                              <option class="text-gray-900">฿20,000,000</option>
-                              <option class="text-gray-900">฿30,000,000</option>
-                              <option class="text-gray-900">฿50,000,000</option>
-                              <option class="text-gray-900">฿100,000,000</option>
-                            </select>
+                        <div>
+                          <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bathrooms</p>
+                          <div class="flex gap-2 flex-wrap">
+                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white">Any</button>
+                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">1+</button>
+                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">2+</button>
+                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">3+</button>
                           </div>
-                        </div>
-                      </div>
-
-                      <!-- Bed & Bath -->
-                      <div class="relative group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                          <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M9 22V12h6v10" />
-                          </svg>
-                        </div>
-                        <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
-                            focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                          <option class="text-gray-900">Bed & Bath</option>
-                          <option class="text-gray-900">1 Bed / 1 Bath</option>
-                          <option class="text-gray-900">2 Bed / 2 Bath</option>
-                          <option class="text-gray-900">3 Bed / 2 Bath</option>
-                          <option class="text-gray-900">4+ Bed / 3+ Bath</option>
-                        </select>
-                        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                          <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 9l-7 7-7-7" />
-                          </svg>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <!-- Search Button -->
-                    <button type="submit"
-                      class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20
-                      transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[140px]">
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                      Search
-                    </button>
-                  </form>
                 </div>
-              </div>
 
+                <!-- Search Button -->
+                <button type="submit" class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[140px]">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                  </svg>
+                  Search
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
+      </section>
 
+      <script>
+        // Bed & Bath dropdown toggle
+        const bbToggle = document.getElementById('bb-toggle');
+        const bbDropdown = document.getElementById('bb-dropdown');
 
-    </section>
+        bbToggle.addEventListener('click', () => {
+          bbDropdown.classList.toggle('hidden');
+          bbDropdown.classList.toggle('opacity-0');
+          bbDropdown.classList.toggle('scale-95');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
+            bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+          }
+        });
+      </script>
+
 {{-- testing slider --}}
 <style>
     ::-webkit-scrollbar { width: 6px; }
@@ -3116,16 +3139,16 @@
 
     <section class="bg-white">
         <!-- Container -->
-        <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-8">
 
           <!-- Header -->
           <div class="text-center max-w-3xl mx-auto mb-12">
             <p class="text-sm uppercase text-gray-500 tracking-widest mb-2">Exclusive Locations</p>
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Discover the Best Properties in the Thailand
+              Discover Thailand's Finest Properties
             </h2>
             <p class="text-gray-600 uppercase tracking-wider text-xs md:text-sm">
-              Explore diverse neighborhoods, each offering unique amenities and lifestyle opportunities.
+              From hilltop sunsets to beachfront mornings, discover areas that fit your lifestyle, vision and investment goals.
             </p>
           </div>
 
@@ -3136,7 +3159,7 @@
               <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bophut" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
               <div class="absolute bottom-4 left-4 text-white">
-                <p class="uppercase text-xs tracking-widest font-semibold">LUXURY PROPERTY</p>
+
                 <h3 class="text-lg font-semibold mt-1">Bophut</h3>
                 <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
                   <span>More Details</span>
@@ -3152,7 +3175,7 @@
               <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Chaweng" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
               <div class="absolute bottom-4 left-4 text-white">
-                <p class="uppercase text-xs tracking-widest font-semibold">LUXURY PROPERTY</p>
+
                 <h3 class="text-lg font-semibold mt-1">Chaweng</h3>
                 <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
                   <span>More Details</span>
@@ -3168,7 +3191,7 @@
               <img src="https://images.unsplash.com/photo-1472220625704-91e1462799b2?auto=format&fit=crop&w=400&q=80" alt="Bang Por" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
               <div class="absolute bottom-4 left-4 text-white">
-                <p class="uppercase text-xs tracking-widest font-semibold">LUXURY PROPERTY</p>
+
                 <h3 class="text-lg font-semibold mt-1">Bang Por</h3>
                 <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
                   <span>More Details</span>
@@ -3184,7 +3207,7 @@
               <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" alt="Maenam" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
               <div class="absolute bottom-4 left-4 text-white">
-                <p class="uppercase text-xs tracking-widest font-semibold">LUXURY PROPERTY</p>
+
                 <h3 class="text-lg font-semibold mt-1">Maenam</h3>
                 <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
                   <span>More Details</span>
@@ -3197,54 +3220,58 @@
           </div>
 
              <!-- CTA Section -->
-    <div class="bg-gradient-to-r from-[#0a0b3b] via-[#11134c] to-[#0a0b3b] rounded-2xl shadow-lg p-10 md:p-16 text-center text-white max-w-7xl mx-auto mt-16">
-        <h3 class="text-2xl md:text-4xl font-extrabold mb-8 leading-tight">
-          Are You Interested in Renting Exceptional Properties with Zenith Samui?
+    <div class="bg-white rounded-2xl  md:p-10 md:p-16 text-center text-white max-w-7xl mx-auto mt-16">
+        <h3 class="text-2xl text-black md:text-4xl font-extrabold mb-8 leading-tight md:pt-0 pt-12 ">
+          Interested in Buying Prime Properties with Vedata Properties?
         </h3>
-        <p class="text-gray-300 uppercase tracking-widest mb-12 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-          Discover the option of luxury living in Koh Samui with Zenith Samui. We specialize in offering an exclusive collection of high-end rental properties, from stunning beachfront villas to hillside homes with breathtaking ocean views.
+        <p class="text-black uppercase tracking-widest md:mb-12 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
+          Experince a new standard of living with vedata Properties, where Koh Samui's finest real state meet thoughful investment. We specialize in showcasing a handpicked selection of high-end homes, villas and development opportunities across the island, each choosen for its design, location, and long-term value.
         </p>
 
         <!-- Features -->
-        <div class="flex flex-col md:flex-row justify-between gap-12 mb-12 px-4 md:px-0">
+        <div class="flex flex-col md:flex-row justify-between gap-12 md:mb-12 px-4 md:px-0">
           <!-- Feature -->
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto space-y-4">
+          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
             <i class="fas fa-user-cog text-white text-3xl"></i>
 
-            <h4 class="font-bold text-lg">Tailored Experience</h4>
-            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-              Our dedicated team provides a personalized approach, ensuring we find the perfect property that aligns with your lifestyle, whether for a short getaway or a long-term stay.
+            <h4 class="font-bold text-lg text-black">Personalized Guidance</h4>
+            <p class="text-black text-sm md:text-base leading-relaxed text-black">
+                Buying property in Samui is more than a transaction. It's about finding the right fit for your lifestyle and investment goals. Our team works closely with each client to understand what truly matters, offering honest advice and tailored solutions from first viewing to final handover.
+
+
             </p>
           </div>
 
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto space-y-4">
+          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
             <i class="fas fa-clipboard-check text-white text-3xl"></i>
 
 
-            <h4 class="font-bold text-lg">Excellent Service</h4>
-            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-              Exceptional service is at the heart of everything we do. Our commitment to excellence sets us apart, ensuring your luxury rental experience is nothing short of extraordinary.
+            <h4 class="font-bold text-lg text-black">Excellent Service
+            </h4>
+            <p class="text-black text-sm md:text-base leading-relaxed text-black">
+                We take pride in making every step clear, efficient, and enjoyable. From market insights and legal support to private viewings and deal structuring, Vedata ensures a smooth process built on trust and transparency.
+
             </p>
           </div>
 
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto space-y-4">
+          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
             {{-- <i class="fas fa-clipboard-check text-green-400 text-3xl"></i> --}}
             <i class="fas fa-hands-helping text-white text-3xl"></i>
-            <h4 class="font-bold text-lg">Customer Care</h4>
+            <h4 class="font-bold text-lg text-black">Customer Care</h4>
 
 
-            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
-              Our commitment to outstanding customer care is the cornerstone of our success. We believe that every client deserves a seamless, memorable experience.
+            <p class="text-black text-sm md:text-base leading-relaxed">
+                Our connection doesn't stop at the sale. Vedata continues to assist clients with after-purchase support, local insights, and opportunities to grow their property portfolio. Because for us, lasting relationships are the real investment.
             </p>
           </div>
         </div>
 
-        <button
+        {{-- <button
           class="bg-white text-[#0a0b3b] font-bold px-10 py-4 rounded-full shadow-lg hover:bg-black hover:text-white transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-green-300"
           aria-label="Contact Zenith Samui"
         >
           Contact Us
-        </button>
+        </button> --}}
       </div>
     </div>
         </div>
@@ -3252,7 +3279,7 @@
 
 
     <!-- About Section -->
-    <section class="py-16 bg-white">
+    <section class="py-8 bg-white">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto px-4">
             <div class="overflow-hidden rounded-3xl shadow-lg">
                 <img src="https://cdn.pixabay.com/photo/2019/07/14/10/48/river-4336788_1280.jpg"
@@ -3261,11 +3288,7 @@
             <div class="flex flex-col justify-center">
                 <h1 class="font-bold text-4xl py-4 text-gray-800 font-spartan">About Us</h1>
                 <p class="text-gray-600 text-base leading-relaxed font-spartan">
-                    At Vedata, we specialize in premium real estate on Koh Samui, offering villas, condos, land, and
-                    commercial properties for both living and investment. Our team's local expertise ensures you're
-                    guided through every step, from purchase to rental and management. Whether you're looking for a
-                    private residence or a profitable opportunity, we provide trusted, personalized service to help you
-                    make the right choice.
+                    At Vedata, we specialize in premium real estate across Koh Samui, presenting an exclusive portfolio of villas, land, condominiums and commercial spaces suited for both lifestyle and investment. With deep local insight and a client first approach, our team guides you through every stage of the buying process, from property selection to ownership transfer. Alongside established properties, we also curate access to select development projects and off-plan investments, offering clients the chance to be part of Koh Samui's continued growth. Whether you're seeking a private home, a development venture, or a strategic addition to your portfolio, Vedata delivers trusted expertise and a personalized experience designed to help youake comident, informed decisions.
                 </p>
 
             </div>
@@ -3274,7 +3297,7 @@
 
 
     <!-- Final CTA Section -->
-    <section class="relative h-96 w-full">
+    <section class="relative h-96 w-full mt-4">
         <!-- Background Image -->
         <img src="https://cdn.pixabay.com/photo/2020/06/23/00/53/river-5330961_1280.jpg"
             alt="Beautiful property landscape" class="absolute inset-0 w-full h-full object-cover">

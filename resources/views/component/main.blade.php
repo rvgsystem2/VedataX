@@ -18,12 +18,22 @@
 
   {{-- font --}}
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
+/>
 </head>
+<style>
+    body {
+      font-family: 'League Spartan', sans-serif;
+    }
+  </style>
 
 <body>
   @include('component.header')
 
-  <main class="bg-gray-200 font-spartan">@yield('content')</main>
+  <main class="bg-white font-spartan">@yield('content')</main>
 
   @include('component.footer')
 
