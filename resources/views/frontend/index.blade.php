@@ -1,211 +1,329 @@
 @extends('component.main')
 @section('content')
     <!-- Hero Section -->
+    <style>
+        /* Custom scrollbar for aesthetic consistency */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 3px; }
 
-    <!-- Hero Section -->
-    <section class="relative h-screen w-full">
-        <!-- Background Image with Loading State -->
-        <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
+        /* General style for the custom input wrappers */
+        .custom-select-wrapper {
+            position: relative;
+            user-select: none;
+        }
+
+        /* Style for the visible, clickable dropdown header */
+        .custom-select-header {
+            background-color: #e1e1e11f;
+
+            border: 2px solid #fffbfb;
+            color: #f6f6f6;
+            font-size: 0.875rem; /* text-sm */
+            padding: 1rem 1rem; /* py-4 px-4 */
+            border-radius: 1rem; /* rounded-2xl */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .custom-select-header:hover {
+            background-color: #b6b8bc; /* Slightly darker on hover */
+        }
+        .custom-select-header.icon-padded {
+            padding-left: 3rem; /* Extra padding for icon */
+        }
+
+        /* Style for the hidden dropdown options list */
+        .custom-select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 0.5rem;
+            width: 100%;
+            background-color: #ffffff; /* Options list is white with black text */
+            color: #000000;
+            border-radius: 1rem; /* rounded-2xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 50;
+            transition: all 0.2s;
+            transform-origin: top;
+        }
+        .custom-option {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.1s;
+        }
+        .custom-option:hover {
+            background-color: #e5e7eb; /* Light gray hover */
+        }
+        .custom-option.selected {
+            background-color: #000000;
+            color: #ffffff;
+        }
+    </style>
+
+    <section class="relative h-screen w-full ">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
+
         <img
+
           src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+
           alt="Luxury beach property in Thailand with pristine waters and modern architecture"
+
           class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
+
           loading="eager"
+
           onload="this.style.opacity='1'"
+
         />
+            <!-- Gradient Overlay -->
 
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
-
-        <!-- Content Container -->
-        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
-          <!-- Main Heading -->
-          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
-            VEDATA PROPERTIES
-          </h1>
-
-          <!-- Subtitle -->
-          <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 max-w-3xl leading-relaxed font-light">
-            Premium Properties in Thailand's Most Desirable Locations
-          </p>
-
-          <!-- Search Form -->
-          <div class="w-full max-w-6xl">
-            <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/10">
-              <form class="flex flex-col lg:flex-row gap-4 items-stretch">
-
-                <!-- Grid of Inputs -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
-
-                  <!-- Location -->
-                  <div class="relative group">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    </div>
-                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
-                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                      <option class="text-gray-900">Koh Samui</option>
-                      <option class="text-gray-900">Bang Makham</option>
-                      <option class="text-gray-900">Band Por</option>
-                      <option class="text-gray-900">Bang Rak</option>
-                      <option class="text-gray-900">Bophut</option>
-                      <option class="text-gray-900">Bantai</option>
-                      <option class="text-gray-900">Chaweng</option>
-                      <option class="text-gray-900">Chaweng Noi</option>
-                      <option class="text-gray-900">Choeng Man</option>
-                      <option class="text-gray-900">Lamai</option>
-                      <option class="text-gray-900">Lipa Noi</option>
-                      <option class="text-gray-900">Maenam</option>
-                      <option class="text-gray-900">Nathon</option>
-                      <option class="text-gray-900">Na Muaeng</option>
-                      <option class="text-gray-900">Plai Laem</option>
-                      <option class="text-gray-900">Thong Krut</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 9l-7 7-7-7"/>
-                      </svg>
-                    </div>
-                  </div>
-
-                  <!-- Property Type -->
-                  <div class="relative group">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                      <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                      </svg>
-                    </div>
-                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl pl-12 pr-4 py-4
-                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                      <option class="text-gray-900">Property Type</option>
-                      <option class="text-gray-900">Villa/House</option>
-                      <option class="text-gray-900">Sea View</option>
-                      <option class="text-gray-900">Beachfront</option>
-                      <option class="text-gray-900">Lands</option>
-                      <option class="text-gray-900">Business</option>
-                      <option class="text-gray-900">Rental</option>
-                    </select>
-                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 9l-7 7-7-7"/>
-                      </svg>
-                    </div>
-                  </div>
-
-                  <!-- Price Range -->
-                  <div class="flex gap-2">
-                    <!-- Min -->
-                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
-                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                      <option class="text-gray-900">Min</option>
-                      <option class="text-gray-900">฿1,000,000</option>
-                      <option class="text-gray-900">฿2,000,000</option>
-                      <option class="text-gray-900">฿3,000,000</option>
-                      <option class="text-gray-900">฿5,000,000</option>
-                      <option class="text-gray-900">฿10,000,000</option>
-                      <option class="text-gray-900">฿20,000,000</option>
-                    </select>
-
-                    <!-- Max -->
-                    <select class="w-full bg-white/10 border border-white/20 text-white text-sm rounded-2xl px-4 py-4
-                                   focus:ring-2 focus:ring-white hover:bg-white/15 transition-all appearance-none cursor-pointer">
-                      <option class="text-gray-900">Max</option>
-                      <option class="text-gray-900">฿5,000,000</option>
-                      <option class="text-gray-900">฿10,000,000</option>
-                      <option class="text-gray-900">฿20,000,000</option>
-                      <option class="text-gray-900">฿30,000,000</option>
-                      <option class="text-gray-900">฿50,000,000</option>
-                      <option class="text-gray-900">฿100,000,000</option>
-                    </select>
-                  </div>
-
-                  <!-- Bed & Bath Dropdown -->
-                  <div class="relative">
-                    <button
-                      type="button"
-                      id="bb-toggle"
-                      class="w-full bg-white/10 border border-white/20 text-white text-white text-sm rounded-2xl px-4 py-4 flex items-center justify-between focus:ring-2 focus:ring-white"
-                    >
-                      <span class="">Bed & Bath</span>
-                      <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                      </svg>
-                    </button>
-
-                    <div id="bb-dropdown" class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-50 transition-all duration-200 origin-top scale-95 opacity-0">
-                      <div class="flex flex-col gap-6">
-                        <div>
-                          <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bedrooms</p>
-                          <div class="flex gap-2 flex-wrap">
-                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white">Any</button>
-                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">1+</button>
-                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">2+</button>
-                            <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">3+</button>
-                          </div>
-                        </div>
-
-                        <div>
-                          <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bathrooms</p>
-                          <div class="flex gap-2 flex-wrap">
-                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white">Any</button>
-                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">1+</button>
-                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">2+</button>
-                            <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white">3+</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- Search Button -->
-                <button type="submit" class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[140px]">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                  </svg>
-                  Search
-                </button>
-              </form>
-            </div>
-          </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
         </div>
-      </section>
 
-      <script>
-        // Bed & Bath dropdown toggle
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
+                VEDATA PROPERTIES
+            </h1>
+            <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 max-w-3xl leading-relaxed font-light">
+                Premium Properties in Thailand's Most Desirable Locations
+            </p>
+
+            <div class="w-full max-w-6xl">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/50 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/20">
+                    <form class="flex flex-col lg:flex-row gap-4 items-stretch" onsubmit="alert('Searching with custom values...'); return false;">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
+
+                            <div class="custom-select-wrapper" data-dropdown-id="location">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-50">
+                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="custom-select-header icon-padded" data-value="Koh Samui">
+                                    <span class="custom-select-label">Koh Samui</span>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                                <div class="custom-select-options hidden">
+                                    <div class="custom-option selected" data-value="Koh Samui">Koh Samui</div>
+                                    <div class="custom-option" data-value="Bang Makham">Bang Makham</div>
+                                    <div class="custom-option" data-value="Band Por">Band Por</div>
+                                    <div class="custom-option" data-value="Bang Rak">Bang Rak</div>
+                                    <div class="custom-option" data-value="Bophut">Bophut</div>
+                                    </div>
+                            </div>
+
+                            <div class="custom-select-wrapper" data-dropdown-id="property-type">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-50">
+                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                    </svg>
+                                </div>
+                                <div class="custom-select-header icon-padded" data-value="Property Type">
+                                    <span class="custom-select-label">Property Type</span>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                                <div class="custom-select-options hidden">
+                                    <div class="custom-option selected" data-value="Property Type">Property Type</div>
+                                    <div class="custom-option" data-value="Villa/House">Villa/House</div>
+                                    <div class="custom-option" data-value="Sea View">Sea View</div>
+                                    <div class="custom-option" data-value="Beachfront">Beachfront</div>
+                                    </div>
+                            </div>
+
+                            <div class="flex gap-2">
+                                <div class="custom-select-wrapper flex-1" data-dropdown-id="min-price">
+                                    <div class="custom-select-header" data-value="Min">
+                                        <span class="custom-select-label font-medium">Min</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </div>
+                                    <div class="custom-select-options hidden">
+                                        <div class="custom-option selected" data-value="Min">Min</div>
+                                        <div class="custom-option" data-value="฿1,000,000">฿1,000,000</div>
+                                        <div class="custom-option" data-value="฿3,000,000">฿3,000,000</div>
+                                        </div>
+                                </div>
+
+                                <div class="custom-select-wrapper flex-1" data-dropdown-id="max-price">
+                                    <div class="custom-select-header" data-value="Max">
+                                        <span class="custom-select-label font-medium">Max</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        </svg>
+                                    </div>
+                                    <div class="custom-select-options hidden">
+                                        <div class="custom-option selected" data-value="Max">Max</div>
+                                        <div class="custom-option" data-value="฿10,000,000">฿10,000,000</div>
+                                        <div class="custom-option" data-value="฿20,000,000">฿20,000,000</div>
+                                        </div>
+                                </div>
+                            </div>
+
+                            <div class="relative">
+                                <button
+                                    type="button"
+                                    id="bb-toggle"
+                                    class="custom-select-header w-full border text-sm rounded-2xl px-4 py-4 flex items-center justify-between"
+                                >
+                                    <span class="font-medium">Bed & Bath</span>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
+
+                                <div id="bb-dropdown" class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-50 transition-all duration-200 origin-top scale-95 opacity-0">
+                                    <div class="flex flex-col gap-6">
+                                        <div>
+                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bedrooms</p>
+                                            <div class="flex gap-2 flex-wrap">
+                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white transition-colors" data-value="any">Any</button>
+                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="1+">1+</button>
+                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="2+">2+</button>
+                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="3+">3+</button>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bathrooms</p>
+                                            <div class="flex gap-2 flex-wrap">
+                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white transition-colors" data-value="any">Any</button>
+                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="1+">1+</button>
+                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="2+">2+</button>
+                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="3+">3+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[140px]">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- Custom Dropdown Logic (Replacing <select>) ---
+        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+            const header = wrapper.querySelector('.custom-select-header');
+            const optionsContainer = wrapper.querySelector('.custom-select-options');
+            const options = wrapper.querySelectorAll('.custom-option');
+
+            // Toggle dropdown visibility
+            header.addEventListener('click', () => {
+                // Close any other open dropdowns first
+                document.querySelectorAll('.custom-select-options').forEach(container => {
+                    if (container !== optionsContainer) {
+                        container.classList.add('hidden');
+                    }
+                });
+                document.getElementById('bb-dropdown').classList.add('hidden', 'opacity-0', 'scale-95'); // Also close Bed/Bath
+
+                optionsContainer.classList.toggle('hidden');
+            });
+
+            // Handle option selection
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    const value = option.getAttribute('data-value');
+                    const label = option.textContent.trim();
+
+                    // Update header display and value
+                    header.querySelector('.custom-select-label').textContent = label;
+                    header.setAttribute('data-value', value);
+
+                    // Update selection highlight
+                    options.forEach(opt => opt.classList.remove('selected'));
+                    option.classList.add('selected');
+
+                    // Close dropdown
+                    optionsContainer.classList.add('hidden');
+                });
+            });
+        });
+
+
+        // --- Bed & Bath dropdown toggle (Original Logic) ---
         const bbToggle = document.getElementById('bb-toggle');
         const bbDropdown = document.getElementById('bb-dropdown');
 
         bbToggle.addEventListener('click', () => {
-          bbDropdown.classList.toggle('hidden');
-          bbDropdown.classList.toggle('opacity-0');
-          bbDropdown.classList.toggle('scale-95');
+            // Close any other open dropdowns first
+            document.querySelectorAll('.custom-select-options').forEach(container => {
+                container.classList.add('hidden');
+            });
+
+            // Toggle Bed & Bath visibility
+            const isHidden = bbDropdown.classList.contains('hidden');
+
+            if (isHidden) {
+                bbDropdown.classList.remove('hidden');
+                void bbDropdown.offsetWidth;
+                bbDropdown.classList.remove('opacity-0', 'scale-95');
+            } else {
+                bbDropdown.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    if (bbDropdown.classList.contains('opacity-0')) {
+                        bbDropdown.classList.add('hidden');
+                    }
+                }, 200);
+            }
         });
 
-        // Close dropdown when clicking outside
+        // --- Close all dropdowns when clicking outside ---
         document.addEventListener('click', (e) => {
+          // Check for custom dropdowns
+          if (!e.target.closest('.custom-select-wrapper')) {
+            document.querySelectorAll('.custom-select-options').forEach(container => {
+                container.classList.add('hidden');
+            });
+          }
+          // Check for Bed & Bath dropdown
           if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
             bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
           }
         });
-      </script>
 
-{{-- testing slider --}}
-<style>
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background-color: rgba(255,255,255,0.2); border-radius: 3px; }
-  </style>
-
-
+        // --- Bed/Bath button logic to simulate selection ---
+        function setupButtonSelection(selector) {
+            document.querySelectorAll(selector).forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll(selector).forEach(btn => {
+                        // Remove selection style
+                        btn.classList.remove('bg-black', 'text-white');
+                        btn.classList.add('hover:bg-black', 'hover:text-white');
+                    });
+                    // Apply selection style to the clicked button
+                    button.classList.add('bg-black', 'text-white');
+                    button.classList.remove('hover:bg-black', 'hover:text-white');
+                });
+            });
+        }
+        setupButtonSelection('.bb-bed');
+        setupButtonSelection('.bb-bath');
+    </script>
 
 {{--
   <div class="w-full relative">
