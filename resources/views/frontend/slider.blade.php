@@ -165,7 +165,7 @@
 </style>
 
 <!-- Best Deals Section -->
-{{-- <section class="w-full max-w-7xl mx-auto px-4 py-6">
+<section class="w-full max-w-7xl mx-auto px-4 py-6">
     <div class="text-center mb-12 fade-in">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Best Deals</h1>
         <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of premium properties
@@ -1297,7 +1297,7 @@
     {{-- <div class="slide-counter text-sm text-gray-600">
       <span class="current-slide font-medium">1</span> / <span class="total-slides font-medium">6</span>
     </div> --}}
-  {{-- </div>
+</div>
 
 </div>
 </section>
@@ -1340,7 +1340,7 @@
         1024: { slidesPerView: 3 },
       },
     });
-</script> --}}
+</script>
 
 
 
@@ -2454,9 +2454,8 @@
             <div class="flex items-center justify-center space-x-4">
                 <!-- Prev Button -->
                 <button
-                  class="custom-nav-btn villa-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
-                >
-                  <i class="fas fa-chevron-left text-white"></i>
+                    class="custom-nav-btn villa-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-left text-white"></i>
                 </button>
 
                 <!-- Pagination Dots (Centered) -->
@@ -2464,60 +2463,63 @@
 
                 <!-- Next Button -->
                 <button
-                  class="custom-nav-btn villa-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
-                >
-                  <i class="fas fa-chevron-right text-white"></i>
+                    class="custom-nav-btn villa-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-right text-white"></i>
                 </button>
-              </div>
+            </div>
 
 
             <!-- Slide Counter (Optional, Below Pagination Row) -->
             <div class="slide-counter text-sm text-gray-600">
-              <span class="villa-current-slide font-medium">1</span> / <span class="villa-total-slides font-medium">6</span>
+                <span class="villa-current-slide font-medium">1</span> / <span
+                    class="villa-total-slides font-medium">6</span>
             </div>
-          </div>
+        </div>
 
-          <style>
+        <style>
             .villa-pagination .swiper-pagination-bullet {
-              @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;
+                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;
             }
 
             .villa-pagination .swiper-pagination-bullet-active {
-              @apply bg-green-600 w-5;
+                @apply bg-green-600 w-5;
             }
-          </style>
+        </style>
 
 </section>
 
 <script>
     const villaSwiper = new Swiper('.villa-multiple-slide-carousel', {
-  loop: true,
-  slidesPerView: 1,
-  spaceBetween: 20,
-  pagination: {
-    el: '.villa-pagination',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.villa-next-btn',
-    prevEl: '.villa-prev-btn',
-  },
-  on: {
-    init: function () {
-      const totalSlides = this.slides.length - this.loopedSlides * 2;
-      document.querySelector('.villa-total-slides').textContent = totalSlides;
-      document.querySelector('.villa-current-slide').textContent = this.realIndex + 1;
-    },
-    slideChange: function () {
-      document.querySelector('.villa-current-slide').textContent = this.realIndex + 1;
-    },
-  },
-  breakpoints: {
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
-});
-
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.villa-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.villa-next-btn',
+            prevEl: '.villa-prev-btn',
+        },
+        on: {
+            init: function() {
+                const totalSlides = this.slides.length - this.loopedSlides * 2;
+                document.querySelector('.villa-total-slides').textContent = totalSlides;
+                document.querySelector('.villa-current-slide').textContent = this.realIndex + 1;
+            },
+            slideChange: function() {
+                document.querySelector('.villa-current-slide').textContent = this.realIndex + 1;
+            },
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2
+            },
+            1024: {
+                slidesPerView: 3
+            },
+        },
+    });
 </script>
 
 <!-- Premium Land Deals Section -->
@@ -3519,39 +3521,38 @@
         <div class="custom-controls mt-8 flex flex-col items-center ">
             <!-- Pagination + Arrows in One Row -->
             <div class="flex items-center justify-center">
-              <!-- Prev Button -->
-              <button
-                class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
-              >
-                <i class="fas fa-chevron-left text-white hover:text-white"></i>
-              </button>
+                <!-- Prev Button -->
+                <button
+                    class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-left text-white hover:text-white"></i>
+                </button>
 
-              <!-- Pagination Dots (Centered) -->
-              <div class="custom-pagination land-pagination flex justify-center text-black "></div>
+                <!-- Pagination Dots (Centered) -->
+                <div class="custom-pagination land-pagination flex justify-center text-black "></div>
 
-              <!-- Next Button -->
-              <button
-                class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition"
-              >
-                <i class="fas fa-chevron-right text-white hover:text-white"></i>
-              </button>
+                <!-- Next Button -->
+                <button
+                    class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-right text-white hover:text-white"></i>
+                </button>
             </div>
 
             <!-- Slide Counter (Below Pagination Row) -->
             <div class="slide-counter text-sm text-gray-600">
-              <span class="land-current-slide font-medium">1</span> / <span class="land-total-slides font-medium">6</span>
+                <span class="land-current-slide font-medium">1</span> / <span
+                    class="land-total-slides font-medium">6</span>
             </div>
-          </div>
+        </div>
 
-          <style>
+        <style>
             .land-pagination .swiper-pagination-bullet {
-              @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;
+                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;
             }
 
             .land-pagination .swiper-pagination-bullet-active {
-              @apply bg-green-600 w-5;
+                @apply bg-green-600 w-5;
             }
-          </style>
+        </style>
 
     </div>
 </section>
@@ -3559,33 +3560,37 @@
 
 <script>
     const landSwiper = new Swiper('.land-multiple-slide-carousel', {
-  loop: true,
-  slidesPerView: 1,
-  spaceBetween: 20,
-  pagination: {
-    el: '.land-pagination',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.land-next-btn',
-    prevEl: '.land-prev-btn',
-  },
-  on: {
-    init: function () {
-      const totalSlides = this.slides.length - this.loopedSlides * 2; // exclude duplicated slides from loop mode
-      document.querySelector('.land-total-slides').textContent = totalSlides;
-      document.querySelector('.land-current-slide').textContent = this.realIndex + 1;
-    },
-    slideChange: function () {
-      document.querySelector('.land-current-slide').textContent = this.realIndex + 1;
-    },
-  },
-  breakpoints: {
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  },
-});
-
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        pagination: {
+            el: '.land-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.land-next-btn',
+            prevEl: '.land-prev-btn',
+        },
+        on: {
+            init: function() {
+                const totalSlides = this.slides.length - this.loopedSlides *
+                2; // exclude duplicated slides from loop mode
+                document.querySelector('.land-total-slides').textContent = totalSlides;
+                document.querySelector('.land-current-slide').textContent = this.realIndex + 1;
+            },
+            slideChange: function() {
+                document.querySelector('.land-current-slide').textContent = this.realIndex + 1;
+            },
+        },
+        breakpoints: {
+            768: {
+                slidesPerView: 2
+            },
+            1024: {
+                slidesPerView: 3
+            },
+        },
+    });
 </script>
 <!-- Share Modal -->
 <div id="shareModal" class="hidden fixed inset-0 z-50 flex items-center justify-center modal-overlay">
