@@ -134,7 +134,7 @@
                       id="bb-toggle"
                       class="w-full bg-white/10 border border-white/20 text-white text-white text-sm rounded-2xl px-4 py-4 flex items-center justify-between focus:ring-2 focus:ring-white"
                     >
-                      <span class="font-bold">Bed & Bath</span>
+                      <span class="">Bed & Bath</span>
                       <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                       </svg>
