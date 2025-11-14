@@ -35,6 +35,9 @@
                 <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 font-spartan">Categories</h3>
                 <ul class="space-y-2">
                     <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Villas/ Houses
+                    </li></a>
+                    <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i> Sea View Properties
                     </li></a>
                     <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
