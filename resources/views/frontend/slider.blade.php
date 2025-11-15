@@ -1279,7 +1279,7 @@
 
       <!-- Prev Button -->
       <button
-        class="custom-nav-btn custom-prev-btn md:w-10 md:h-10 rounded-full bg-white shadow hover:bg-gray-50 flex items-center justify-center transition">
+        class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
         <i class="fas fa-chevron-left text-white"></i>
       </button>
 
@@ -1288,7 +1288,7 @@
 
       <!-- Next Button -->
       <button
-        class="custom-nav-btn custom-next-btn md:w-10 md:h-10 rounded-full bg-white shadow hover:bg-gray-50 flex items-center justify-center transition">
+        class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
         <i class="fas fa-chevron-right text-white "></i>
       </button>
     </div>
@@ -2751,7 +2751,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -2860,7 +2861,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -2969,7 +2971,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -3078,7 +3081,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -3187,7 +3191,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -3296,7 +3301,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
@@ -3405,7 +3411,8 @@
                         </div>
                     </div>
                 </div>
-            </div><!-- Land Slide 1 -->
+            </div>
+            <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
                     <div class="relative">
