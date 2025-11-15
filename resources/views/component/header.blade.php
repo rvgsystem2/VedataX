@@ -76,7 +76,7 @@
 
             <!-- Enhanced Logo -->
             <a href="/" class="flex items-center space-x-2">
-                <img src="{{ asset('asset/img/logo2.png') }}" alt="" class="w-36 h-8">
+                <img src="{{ asset('asset/img/head-logo.jpeg') }}" alt="" class="w-28 h-12">
             </a>
 
             <!-- Desktop Menu -->

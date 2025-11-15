@@ -1,12 +1,12 @@
 <!-- Footer Section -->
-<footer class="bg-black text-white">
+<footer class="bg-[#102540] text-white">
     <div class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:mx-24">
 
             <!-- Company Info -->
             <div class="space-y-4 ">
                 <div class="flex justify-center md:justify-start">
-                    <img src="{{ asset('asset/img/WhatsApp Image 2025-10-02 at 15.19.08_1c3d1629.jpg') }}" alt="" class="max-w-[150px] h-auto rounded">
+                    <img src="{{ asset('asset/img/footerlogo.jpeg') }}" alt="" class="max-w-[150px] h-auto rounded">
                 </div>
                 <h2 class="text-xl font-bold text-center md:text-left font-spartan">Vedata </h2>
 
@@ -79,7 +79,7 @@
 
             <!-- Image Section -->
             <div class="flex justify-center lg:justify-end">
-                <img src="{{asset('asset/img/footer.jpg')}}" alt="" class="w-full max-w-xs h-auto rounded-lg shadow-lg">
+                <img src="{{asset('asset/img/plam-img.png')}}" alt="" class="w-full max-w-xs h-auto ">
             </div>
         </div>
 

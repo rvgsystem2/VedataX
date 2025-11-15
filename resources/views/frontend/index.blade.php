@@ -3,8 +3,14 @@
     <!-- Hero Section -->
     <style>
         /* Custom scrollbar for aesthetic consistency */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
 
         /* General style for the custom input wrappers */
         .custom-select-wrapper {
@@ -18,20 +24,27 @@
 
             border: 2px solid #fffbfb;
             color: #f6f6f6;
-            font-size: 0.875rem; /* text-sm */
-            padding: 1rem 1rem; /* py-4 px-4 */
-            border-radius: 1rem; /* rounded-2xl */
+            font-size: 0.875rem;
+            /* text-sm */
+            padding: 1rem 1rem;
+            /* py-4 px-4 */
+            border-radius: 1rem;
+            /* rounded-2xl */
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
             transition: all 0.2s;
         }
+
         .custom-select-header:hover {
-            background-color: #b6b8bc; /* Slightly darker on hover */
+            background-color: #b6b8bc;
+            /* Slightly darker on hover */
         }
+
         .custom-select-header.icon-padded {
-            padding-left: 3rem; /* Extra padding for icon */
+            padding-left: 3rem;
+            /* Extra padding for icon */
         }
 
         /* Style for the hidden dropdown options list */
@@ -41,9 +54,11 @@
             left: 0;
             margin-top: 0.5rem;
             width: 100%;
-            background-color: #ffffff; /* Options list is white with black text */
+            background-color: #ffffff;
+            /* Options list is white with black text */
             color: #000000;
-            border-radius: 1rem; /* rounded-2xl */
+            border-radius: 1rem;
+            /* rounded-2xl */
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             max-height: 300px;
             overflow-y: auto;
@@ -51,15 +66,19 @@
             transition: all 0.2s;
             transform-origin: top;
         }
+
         .custom-option {
             padding: 0.75rem 1rem;
             cursor: pointer;
             font-weight: 500;
             transition: background-color 0.1s;
         }
+
         .custom-option:hover {
-            background-color: #e5e7eb; /* Light gray hover */
+            background-color: #e5e7eb;
+            /* Light gray hover */
         }
+
         .custom-option.selected {
             background-color: #000000;
             color: #ffffff;
@@ -70,26 +89,18 @@
         <div class="absolute inset-0">
             <div class="absolute inset-0 bg-gray-200 animate-pulse"></div>
 
-        <img
-
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-
-          alt="Luxury beach property in Thailand with pristine waters and modern architecture"
-
-          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
-
-          loading="eager"
-
-          onload="this.style.opacity='1'"
-
-        />
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Luxury beach property in Thailand with pristine waters and modern architecture"
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" loading="eager"
+                onload="this.style.opacity='1'" />
             <!-- Gradient Overlay -->
 
             <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50"></div>
         </div>
 
         <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight tracking-tight">
                 VEDATA PROPERTIES
             </h1>
             <p class="text-xl md:text-2xl lg:text-3xl text-white/90 mb-8 md:mb-12 max-w-3xl leading-relaxed font-light">
@@ -97,128 +108,198 @@
             </p>
 
             <div class="w-full max-w-6xl">
-                <div class="bg-white/10 backdrop-blur-sm border border-white/50 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/20">
-                    <form class="flex flex-col lg:flex-row gap-4 items-stretch" onsubmit="alert('Searching with custom values...'); return false;">
+                <div
+                    class="bg-white/10 backdrop-blur-sm border border-white/50 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/20">
+                    <form class="flex flex-col lg:flex-row gap-4 items-stretch"
+                        onsubmit="alert('Searching with custom values...'); return false;">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
 
+                            <!-- LOCATION -->
                             <div class="custom-select-wrapper" data-dropdown-id="location">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-50">
-                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[9999]">
+                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
                                 </div>
+
                                 <div class="custom-select-header icon-padded" data-value="Koh Samui">
                                     <span class="custom-select-label">Koh Samui</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
-                                <div class="custom-select-options hidden">
+
+                                <div class="custom-select-options hidden z-[9999]">
                                     <div class="custom-option selected" data-value="Koh Samui">Koh Samui</div>
                                     <div class="custom-option" data-value="Bang Makham">Bang Makham</div>
                                     <div class="custom-option" data-value="Band Por">Band Por</div>
                                     <div class="custom-option" data-value="Bang Rak">Bang Rak</div>
                                     <div class="custom-option" data-value="Bophut">Bophut</div>
-                                    </div>
+                                    <div class="custom-option">Bantai</div>
+                                    <div class="custom-option">Chaweng Noi</div>
+                                    <div class="custom-option">Choeng Mon</div>
+                                    <div class="custom-option">Lamai</div>
+                                    <div class="custom-option">Lipa Noi</div>
+                                    <div class="custom-option">Maenam</div>
+                                    <div class="custom-option">Nathon</div>
+                                    <div class="custom-option">Na Muang</div>
+                                    <div class="custom-option">Plai Laem</div>
+                                    <div class="custom-option">Thong Krut</div>
+                                </div>
                             </div>
 
+                            <!-- PROPERTY TYPE -->
                             <div class="custom-select-wrapper" data-dropdown-id="property-type">
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-50">
-                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[9999]">
+                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                                     </svg>
                                 </div>
+
                                 <div class="custom-select-header icon-padded" data-value="Property Type">
                                     <span class="custom-select-label">Property Type</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </div>
-                                <div class="custom-select-options hidden">
-                                    <div class="custom-option selected" data-value="Property Type">Property Type</div>
-                                    <div class="custom-option" data-value="Villa/House">Villa/House</div>
+
+                                <div class="custom-select-options hidden z-[9999]">
+                                    <div class="custom-option selected">Property Type</div>
+                                    <div class="custom-option" data-value="Villa/House">Villa / House</div>
                                     <div class="custom-option" data-value="Sea View">Sea View</div>
                                     <div class="custom-option" data-value="Beachfront">Beachfront</div>
-                                    </div>
+                                    <div class="custom-option" data-value="Villa/House">Lands</div>
+                                    <div class="custom-option" data-value="Sea View">Bussiness</div>
+                                    <div class="custom-option" data-value="Beachfront">Rental</div>
+                                </div>
                             </div>
 
+                            <!-- PRICE RANGE -->
                             <div class="flex gap-2">
+
+                                <!-- MIN PRICE -->
                                 <div class="custom-select-wrapper flex-1" data-dropdown-id="min-price">
                                     <div class="custom-select-header" data-value="Min">
                                         <span class="custom-select-label font-medium">Min</span>
-                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
-                                    <div class="custom-select-options hidden">
+
+                                    <div class="custom-select-options hidden z-[9999]">
                                         <div class="custom-option selected" data-value="Min">Min</div>
                                         <div class="custom-option" data-value="฿1,000,000">฿1,000,000</div>
                                         <div class="custom-option" data-value="฿3,000,000">฿3,000,000</div>
-                                        </div>
+                                    </div>
                                 </div>
 
+                                <!-- MAX PRICE -->
                                 <div class="custom-select-wrapper flex-1" data-dropdown-id="max-price">
                                     <div class="custom-select-header" data-value="Max">
                                         <span class="custom-select-label font-medium">Max</span>
-                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
-                                    <div class="custom-select-options hidden">
+
+                                    <div class="custom-select-options hidden z-[9999]">
                                         <div class="custom-option selected" data-value="Max">Max</div>
                                         <div class="custom-option" data-value="฿10,000,000">฿10,000,000</div>
                                         <div class="custom-option" data-value="฿20,000,000">฿20,000,000</div>
-                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
 
+                            <!-- BED & BATH -->
                             <div class="relative">
-                                <button
-                                    type="button"
-                                    id="bb-toggle"
-                                    class="custom-select-header w-full border text-sm rounded-2xl px-4 py-4 flex items-center justify-between"
-                                >
+                                <button type="button" id="bb-toggle"
+                                    class="custom-select-header w-full border text-sm rounded-2xl px-4 py-4 flex items-center justify-between">
                                     <span class="font-medium">Bed & Bath</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
 
-                                <div id="bb-dropdown" class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-50 transition-all duration-200 origin-top scale-95 opacity-0">
+                                <div id="bb-dropdown"
+                                    class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-[9999] opacity-0 scale-95 transition-all duration-200 origin-top">
+
                                     <div class="flex flex-col gap-6">
+
+                                        <!-- Bedrooms -->
                                         <div>
-                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bedrooms</p>
+                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide">Bedrooms</p>
                                             <div class="flex gap-2 flex-wrap">
-                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white transition-colors" data-value="any">Any</button>
-                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="1+">1+</button>
-                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="2+">2+</button>
-                                                <button class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="3+">3+</button>
+                                                <button
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
+                                                    data-value="any">Any</button>
+                                                <button
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="1+">1+</button>
+                                                <button
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="2+">2+</button>
+                                                <button
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="3+">3+</button>
                                             </div>
                                         </div>
 
+                                        <!-- Bathrooms -->
                                         <div>
-                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide text-start">Bathrooms</p>
+                                            <p class="uppercase text-xs font-semibold mb-3 tracking-wide">Bathrooms</p>
                                             <div class="flex gap-2 flex-wrap">
-                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white transition-colors" data-value="any">Any</button>
-                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="1+">1+</button>
-                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="2+">2+</button>
-                                                <button class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium hover:bg-black hover:text-white transition-colors" data-value="3+">3+</button>
+                                                <button
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
+                                                    data-value="any">Any</button>
+                                                <button
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="1+">1+</button>
+                                                <button
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="2+">2+</button>
+                                                <button
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="3+">3+</button>
                                             </div>
                                         </div>
+
                                     </div>
+
                                 </div>
                             </div>
+
                         </div>
 
-                        <button type="submit" class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center gap-2 min-w-[140px]">
+                        <!-- SEARCH BUTTON -->
+                        <button type="submit"
+                            class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 flex items-center justify-center gap-2 min-w-[140px]">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                             Search
                         </button>
+
                     </form>
+
                 </div>
             </div>
         </div>
@@ -239,7 +320,8 @@
                         container.classList.add('hidden');
                     }
                 });
-                document.getElementById('bb-dropdown').classList.add('hidden', 'opacity-0', 'scale-95'); // Also close Bed/Bath
+                document.getElementById('bb-dropdown').classList.add('hidden', 'opacity-0',
+                    'scale-95'); // Also close Bed/Bath
 
                 optionsContainer.classList.toggle('hidden');
             });
@@ -294,16 +376,16 @@
 
         // --- Close all dropdowns when clicking outside ---
         document.addEventListener('click', (e) => {
-          // Check for custom dropdowns
-          if (!e.target.closest('.custom-select-wrapper')) {
-            document.querySelectorAll('.custom-select-options').forEach(container => {
-                container.classList.add('hidden');
-            });
-          }
-          // Check for Bed & Bath dropdown
-          if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
-            bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
-          }
+            // Check for custom dropdowns
+            if (!e.target.closest('.custom-select-wrapper')) {
+                document.querySelectorAll('.custom-select-options').forEach(container => {
+                    container.classList.add('hidden');
+                });
+            }
+            // Check for Bed & Bath dropdown
+            if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
+                bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
+            }
         });
 
         // --- Bed/Bath button logic to simulate selection ---
@@ -325,7 +407,7 @@
         setupButtonSelection('.bb-bath');
     </script>
 
-{{--
+    {{--
   <div class="w-full relative">
     <div class="swiper multiple-slide-carousel swiper-container relative">
       <div class="swiper-wrapper mb-16">
@@ -393,10 +475,10 @@
     });
   </script> --}}
 
-@include('frontend.slider')
+    @include('frontend.slider')
 
 
-{{-- end testing slider --}}
+    {{-- end testing slider --}}
     <!-- Best Deals Section -->
     {{-- <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
@@ -3259,139 +3341,165 @@
         <!-- Container -->
         <div class="max-w-7xl mx-auto px-6 md:px-12 py-8">
 
-          <!-- Header -->
-          <div class="text-center max-w-3xl mx-auto mb-12">
-            <p class="text-sm uppercase text-gray-500 tracking-widest mb-2">Exclusive Locations</p>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Discover Thailand's Finest Properties
-            </h2>
-            <p class="text-gray-600 uppercase tracking-wider text-xs md:text-sm">
-              From hilltop sunsets to beachfront mornings, discover areas that fit your lifestyle, vision and investment goals.
-            </p>
-          </div>
-
-          <!-- Properties grid -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 -mb-20">
-            <!-- Property Card 1 -->
-            <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Bophut" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-              <div class="absolute bottom-4 left-4 text-white">
-
-                <h3 class="text-lg font-semibold mt-1">Bophut</h3>
-                <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
-                  <span>More Details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+            <!-- Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <p class="text-sm uppercase text-gray-500 tracking-widest mb-2">Exclusive Locations</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+                    Discover Thailand's Finest Properties
+                </h2>
+                <p class="text-gray-600 uppercase tracking-wider text-xs md:text-sm">
+                    From hilltop sunsets to beachfront mornings, discover areas that fit your lifestyle, vision and
+                    investment goals.
+                </p>
             </div>
 
-            <!-- Property Card 2 -->
-            <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80" alt="Chaweng" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-              <div class="absolute bottom-4 left-4 text-white">
+            <!-- Properties grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 -mb-20">
+                <!-- Property Card 1 -->
+                <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80"
+                        alt="Bophut"
+                        class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
 
-                <h3 class="text-lg font-semibold mt-1">Chaweng</h3>
-                <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
-                  <span>More Details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+                        <h3 class="text-lg font-semibold mt-1">Bophut</h3>
+                        <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
+                            <span>More Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80"
+                        alt="Chaweng"
+                        class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+
+                        <h3 class="text-lg font-semibold mt-1">Chaweng</h3>
+                        <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
+                            <span>More Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1472220625704-91e1462799b2?auto=format&fit=crop&w=400&q=80"
+                        alt="Bang Por"
+                        class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+
+                        <h3 class="text-lg font-semibold mt-1">Bang Por</h3>
+                        <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
+                            <span>More Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Property Card 4 -->
+                <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80"
+                        alt="Maenam"
+                        class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70">
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+
+                        <h3 class="text-lg font-semibold mt-1">Maenam</h3>
+                        <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
+                            <span>More Details</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Property Card 3 -->
-            <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1472220625704-91e1462799b2?auto=format&fit=crop&w=400&q=80" alt="Bang Por" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-              <div class="absolute bottom-4 left-4 text-white">
+            <!-- CTA Section -->
+            <div class="bg-white rounded-2xl  md:p-10 md:p-16 text-center text-white max-w-7xl mx-auto mt-16">
+                <h3 class="text-2xl text-black md:text-4xl font-extrabold mb-8 leading-tight md:pt-0 pt-12 ">
+                    Interested in Buying Prime Properties with Vedata Properties?
+                </h3>
+                <p
+                    class="text-black uppercase tracking-widest md:mb-12 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
+                    Experince a new standard of living with vedata Properties, where Koh Samui's finest real state meet
+                    thoughful investment. We specialize in showcasing a handpicked selection of high-end homes, villas and
+                    development opportunities across the island, each choosen for its design, location, and long-term value.
+                </p>
 
-                <h3 class="text-lg font-semibold mt-1">Bang Por</h3>
-                <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
-                  <span>More Details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
+                <!-- Features -->
+                <div class="flex flex-col md:flex-row justify-between gap-12 md:mb-12 px-4 md:px-0">
+                    <!-- Feature -->
+                    <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
+                        <i class="fas fa-user-cog text-white text-3xl"></i>
 
-            <!-- Property Card 4 -->
-            <div class="relative group rounded-lg overflow-hidden shadow-lg cursor-pointer">
-              <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" alt="Maenam" class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
-              <div class="absolute bottom-4 left-4 text-white">
-
-                <h3 class="text-lg font-semibold mt-1">Maenam</h3>
-                <button class="mt-2 text-xs underline hover:text-green-500 flex items-center space-x-1">
-                  <span>More Details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-             <!-- CTA Section -->
-    <div class="bg-white rounded-2xl  md:p-10 md:p-16 text-center text-white max-w-7xl mx-auto mt-16">
-        <h3 class="text-2xl text-black md:text-4xl font-extrabold mb-8 leading-tight md:pt-0 pt-12 ">
-          Interested in Buying Prime Properties with Vedata Properties?
-        </h3>
-        <p class="text-black uppercase tracking-widest md:mb-12 max-w-3xl mx-auto text-sm md:text-base leading-relaxed">
-          Experince a new standard of living with vedata Properties, where Koh Samui's finest real state meet thoughful investment. We specialize in showcasing a handpicked selection of high-end homes, villas and development opportunities across the island, each choosen for its design, location, and long-term value.
-        </p>
-
-        <!-- Features -->
-        <div class="flex flex-col md:flex-row justify-between gap-12 md:mb-12 px-4 md:px-0">
-          <!-- Feature -->
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
-            <i class="fas fa-user-cog text-white text-3xl"></i>
-
-            <h4 class="font-bold text-lg text-black">Personalized Guidance</h4>
-            <p class="text-black text-sm md:text-base leading-relaxed text-black">
-                Buying property in Samui is more than a transaction. It's about finding the right fit for your lifestyle and investment goals. Our team works closely with each client to understand what truly matters, offering honest advice and tailored solutions from first viewing to final handover.
+                        <h4 class="font-bold text-lg text-black">Personalized Guidance</h4>
+                        <p class="text-black text-sm md:text-base leading-relaxed text-black">
+                            Buying property in Samui is more than a transaction. It's about finding the right fit for your
+                            lifestyle and investment goals. Our team works closely with each client to understand what truly
+                            matters, offering honest advice and tailored solutions from first viewing to final handover.
 
 
-            </p>
-          </div>
+                        </p>
+                    </div>
 
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
-            <i class="fas fa-clipboard-check text-white text-3xl"></i>
-
-
-            <h4 class="font-bold text-lg text-black">Excellent Service
-            </h4>
-            <p class="text-black text-sm md:text-base leading-relaxed text-black">
-                We take pride in making every step clear, efficient, and enjoyable. From market insights and legal support to private viewings and deal structuring, Vedata ensures a smooth process built on trust and transparency.
-
-            </p>
-          </div>
-
-          <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
-            {{-- <i class="fas fa-clipboard-check text-green-400 text-3xl"></i> --}}
-            <i class="fas fa-hands-helping text-white text-3xl"></i>
-            <h4 class="font-bold text-lg text-black">Customer Care</h4>
+                    <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
+                        <i class="fas fa-clipboard-check text-white text-3xl"></i>
 
 
-            <p class="text-black text-sm md:text-base leading-relaxed">
-                Our connection doesn't stop at the sale. Vedata continues to assist clients with after-purchase support, local insights, and opportunities to grow their property portfolio. Because for us, lasting relationships are the real investment.
-            </p>
-          </div>
-        </div>
+                        <h4 class="font-bold text-lg text-black">Excellent Service
+                        </h4>
+                        <p class="text-black text-sm md:text-base leading-relaxed text-black">
+                            We take pride in making every step clear, efficient, and enjoyable. From market insights and
+                            legal support to private viewings and deal structuring, Vedata ensures a smooth process built on
+                            trust and transparency.
 
-        {{-- <button
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center max-w-xs mx-auto md:space-y-4">
+                        {{-- <i class="fas fa-clipboard-check text-green-400 text-3xl"></i> --}}
+                        <i class="fas fa-hands-helping text-white text-3xl"></i>
+                        <h4 class="font-bold text-lg text-black">Customer Care</h4>
+
+
+                        <p class="text-black text-sm md:text-base leading-relaxed">
+                            Our connection doesn't stop at the sale. Vedata continues to assist clients with after-purchase
+                            support, local insights, and opportunities to grow their property portfolio. Because for us,
+                            lasting relationships are the real investment.
+                        </p>
+                    </div>
+                </div>
+
+                {{-- <button
           class="bg-white text-[#0a0b3b] font-bold px-10 py-4 rounded-full shadow-lg hover:bg-black hover:text-white transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-green-300"
           aria-label="Contact Zenith Samui"
         >
           Contact Us
         </button> --}}
-      </div>
-    </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -3406,7 +3514,14 @@
             <div class="flex flex-col justify-center">
                 <h1 class="font-bold text-4xl py-4 text-gray-800 font-spartan">About Us</h1>
                 <p class="text-gray-600 text-base leading-relaxed font-spartan">
-                    At Vedata, we specialize in premium real estate across Koh Samui, presenting an exclusive portfolio of villas, land, condominiums and commercial spaces suited for both lifestyle and investment. With deep local insight and a client first approach, our team guides you through every stage of the buying process, from property selection to ownership transfer. Alongside established properties, we also curate access to select development projects and off-plan investments, offering clients the chance to be part of Koh Samui's continued growth. Whether you're seeking a private home, a development venture, or a strategic addition to your portfolio, Vedata delivers trusted expertise and a personalized experience designed to help youake comident, informed decisions.
+                    At Vedata, we specialize in premium real estate across Koh Samui, presenting an exclusive portfolio of
+                    villas, land, condominiums and commercial spaces suited for both lifestyle and investment. With deep
+                    local insight and a client first approach, our team guides you through every stage of the buying
+                    process, from property selection to ownership transfer. Alongside established properties, we also curate
+                    access to select development projects and off-plan investments, offering clients the chance to be part
+                    of Koh Samui's continued growth. Whether you're seeking a private home, a development venture, or a
+                    strategic addition to your portfolio, Vedata delivers trusted expertise and a personalized experience
+                    designed to help youake comident, informed decisions.
                 </p>
 
             </div>
