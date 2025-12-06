@@ -48,26 +48,45 @@ class UserController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'name'         => 'required|string|max:255',
+            'email'        => 'required|email|unique:users,email',
             'phone_number' => ['nullable', 'string', 'regex:/^\+?[0-9]{7,15}$/'],
+
+            // New fields
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'facebook'      => 'nullable|string|max:255',
+            'instagram'     => 'nullable|string|max:255',
+            'whatsapp'      => 'nullable|string|max:20',
+
             'password' => 'required|min:6',
-            'role' => 'required|exists:roles,name',
+            'role'     => 'required|exists:roles,name',
         ]);
 
-        // Create user
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number'=>$request->phone_number,
-            'password' => Hash::make($request->password), // Hash the password
-        ]);
+        // Prepare data for user creation
+        $data = [
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone_number' => $request->phone_number,
+            'facebook'     => $request->facebook,
+            'instagram'    => $request->instagram,
+            'whatsapp'     => $request->whatsapp,
+            'password'     => Hash::make($request->password),
+        ];
 
-        // Assign roles
-        // $user->roles()->attach($request->roles);
+        // Upload profile image if exists
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profiles', 'public');
+            $data['profile_image'] = $path;
+        }
+
+        // Create user + fill all data
+        $user = User::create($data);
+
+        // Assign role (single role radio button)
         $user->syncRoles([$request->role]);
 
-        return redirect()->route('user.index')->with('success', 'User created successfully.');
+        return redirect()->route('user.index')
+            ->with('success', 'User created successfully.');
     }
 
 
@@ -83,25 +102,60 @@ class UserController extends Controller implements HasMiddleware
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'name'         => 'required|string|max:255',
+            'email'        => 'required|email|unique:users,email,' . $user->id,
             'phone_number' => ['nullable', 'string', 'regex:/^\+?[0-9]{7,15}$/'],
-            'role' => 'required|exists:roles,name',
-            'password' => 'nullable|min:6', // Password is optional when updating
+
+            // New fields
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'facebook'      => 'nullable|string|max:255',
+            'instagram'     => 'nullable|string|max:255',
+            'whatsapp'      => 'nullable|string|max:20',
+
+            // Role (Spatie)
+            'role'     => 'required|exists:roles,name',
+
+            // Password optional on update
+            'password' => 'nullable|min:6',
         ]);
 
-        // Update user data
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone_number'=>$request->phone_number,
-            'password' => $request->password ? Hash::make($request->password) : $user->password,
-        ]);
+        // Base data to update
+        $data = [
+            'name'         => $request->name,
+            'email'        => $request->email,
+            'phone_number' => $request->phone_number,
+            'facebook'     => $request->facebook,
+            'instagram'    => $request->instagram,
+            'whatsapp'     => $request->whatsapp,
+        ];
 
-        // Sync roles to update user roles correctly
-        $user->syncRoles([$request->role]); // e.g., "Admin"
+        // Optional password change
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
 
-        return redirect()->route('user.index')->with('success', 'User updated successfully.');
+        // Profile image upload (optional)
+        if ($request->hasFile('profile_image')) {
+
+            // Purani image delete (agar ho to)
+            if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+                Storage::disk('public')->delete($user->profile_image);
+            }
+
+            // Nayi image save
+            $path = $request->file('profile_image')->store('profiles', 'public');
+            $data['profile_image'] = $path;
+        }
+
+        // User update
+        $user->update($data);
+
+        // Role sync (single role)
+        $user->syncRoles([$request->role]);
+
+        return redirect()
+            ->route('user.index')
+            ->with('success', 'User updated successfully.');
     }
 
 
@@ -145,12 +199,12 @@ class UserController extends Controller implements HasMiddleware
             'permissions' => 'required|array',
             'permissions.*' => 'exists:permissions,id',
         ]);
-    
+
         $user = User::findOrFail($user);
-    
+
         // Convert permission IDs to names
         $permissionNames = Permission::whereIn('id', $request->permissions)->pluck('name')->toArray();
-    
+
         // Now sync by names
         $user->syncPermissions($permissionNames);
 
