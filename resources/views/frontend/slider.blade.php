@@ -175,441 +175,153 @@
     <div class="swiper multiple-slide-carousel w-full relative fade-in">
         <div class="swiper-wrapper">
             <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
+            @foreach($bestDeals as $bestDeal)
+
+                <div class="swiper-slide">
+                    <a href="{{route('detail', ['property' => $bestDeal->id])}}">
+                    <div class="property-card">
+                        <div class="relative">
+
+                            {{-- INNER SWIPER (Property Images) --}}
+
+                            <div class="swiper inner-swiper h-48">
+                                <div class="swiper-wrapper">
+                                    @if($bestDeal->images && count($bestDeal->images))
+                                        @foreach($bestDeal->images as $img)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('storage/' . $img->url) }}"
+                                                     class="w-full h-full object-cover"
+                                                     alt="{{ $bestDeal->title }}">
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        {{-- Default fallback image --}}
+                                        <div class="swiper-slide">
+                                            <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
+                                                 class="w-full h-full object-cover"
+                                                 alt="No Image">
+                                        </div>
+                                    @endif
+
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
+
+                                {{-- tiny arrows --}}
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
+                            {{-- BADGE --}}
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">
+                                    {{ strtoupper($bestDeal->type) }} {{-- RENT / SALE --}}
+                                </span>
+                            </div>
 
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
+                            {{-- FAVORITE BUTTON --}}
+                            <div class="absolute top-3 right-3">
+                                <button
+                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
                                     <i class="far fa-heart"></i>
                                 </button>
+                            </div>
 
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
+                            {{-- PRICE OVERLAY --}}
+                            <div
+                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
 
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
+                                {{-- PRICE --}}
+                                <span class="text-white font-semibold text-lg">
+                                    {{ number_format($bestDeal->price, 0) }} THB
+                                </span>
 
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
+                                {{-- ACTION ICONS --}}
+                                <div class="flex space-x-3 text-white text-lg">
+                                    <button class="expand-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                    <button class="favorite-btn hover:text-red-400 transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="compare-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
                             </div>
 
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
+                        </div>
+
+                        {{-- CONTENT --}}
+                        <div class="p-4">
+
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800">
+                                        {{ $bestDeal->title }}
+                                    </h3>
+
+                                    <p class="text-gray-600 text-sm flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        {{ $bestDeal->address ?? 'No Address' }},
+                                        {{ optional($bestDeal->city)->name }}
+                                    </p>
+                                </div>
                             </div>
+
+                            {{-- BEDROOMS, BATHROOMS, AREA --}}
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                    <span>{{ $bestDeal->bedrooms ?? '-' }} Beds</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                    <span>{{ $bestDeal->bathrooms ?? '-' }} Baths</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                    <span>{{ $bestDeal->area ?? '-' }} sqft</span>
+                                </div>
+
+                            </div>
+
+                            {{-- LISTED BY + TIME --}}
+                            <div class="flex justify-between items-center mt-4">
+
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
+                                        {{ strtoupper(substr($bestDeal->listedBy->name, 0, 2)) }}
+                                    </div>
+
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">
+                                            {{ $bestDeal->listedBy->name }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+
+                                    {{-- Time ago --}}
+                                    <p class="text-xs text-gray-500">
+                                        {{ $bestDeal->created_at->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+                    </a>
                 </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
+            @endforeach
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start items-center mt-4 gap-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Slide 1 -->
             <div class="swiper-slide">
@@ -721,550 +433,7 @@
                 </div>
             </div>
             <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Modern interior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                        class="w-full h-full object-cover" alt="House exterior" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Living room" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">12,900,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    1234 Sunset Blvd, Beverly Hills
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>4 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>3 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>3,500 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                    SH
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">2 months ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Additional slides (2-6) would go here -->
             <!-- For brevity, I'm including just one slide in this example -->
@@ -1355,115 +524,165 @@
     <div class="swiper villa-multiple-slide-carousel w-full relative fade-in">
         <div class="swiper-wrapper">
             <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
+            @if(!empty($villas))
+            @foreach($villas as $villa)
+                <div class="swiper-slide">
+                    <a href="{{route('detail', ['property' => $villa->id])}}">
+                    <div class="property-card">
+                        <div class="relative">
+
+                            {{-- INNER SWIPER IMAGES --}}
+                            <div class="swiper inner-swiper h-48">
+                                <div class="swiper-wrapper">
+
+                                    @if(optional($villa->images)->count() > 0)
+                                        @foreach($villa->images as $img)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('storage/' . $img->url) }}"
+                                                     class="w-full h-full object-cover"
+                                                     alt="{{ $villa->title ?? 'Property' }}">
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        {{-- FALLBACK IMAGE --}}
+                                        <div class="swiper-slide">
+                                            <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
+                                                 class="w-full h-full object-cover"
+                                                 alt="No image available" />
+                                        </div>
+                                    @endif
+
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
+
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
+                            {{-- BADGE --}}
+                            <div class="absolute top-3 left-3">
+                                @php
+                                    $badgeType  = strtoupper($villa->type ?? 'SALE');
+                                    $badgeColor = ($villa->type ?? '') === 'rent' ? 'bg-green-600' : 'bg-purple-600';
+                                @endphp
 
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
+                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
+                                    FOR {{ $badgeType }}
+                                </span>
+                            </div>
 
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
+                            {{-- FAVORITE BUTTON --}}
+                            <div class="absolute top-3 right-3">
+                                <button
+                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
                                     <i class="far fa-heart"></i>
                                 </button>
+                            </div>
 
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
+                            {{-- PRICE OVERLAY --}}
+                            <div
+                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
+                                bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
 
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
+                                <span class="text-white font-semibold text-lg">
+                                    {{ number_format($villa->price ?? 0) }} THB
+                                </span>
 
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
+                                <div class="flex space-x-3 text-white text-lg">
+                                    <button class="expand-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                    <button class="favorite-btn hover:text-red-400 transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="compare-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
+                            </div>
+                        </div>
+
+                        {{-- CONTENT --}}
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800">
+                                        {{ $villa->title ?? 'Untitled Property' }}
+                                    </h3>
+
+                                    <p class="text-gray-600 text-sm flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        {{ $villa->address ?? 'No address' }}
+                                        @if(optional($villa->city)->name)
+                                            , {{ $villa->city->name }}
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
 
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
+                            {{-- BED / BATH / AREA --}}
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                    <span>{{ $villa->bedrooms ?? '-' }} Beds</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                    <span>{{ $villa->bathrooms ?? '-' }} Baths</span>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                    <span>{{ $villa->area ?? '-' }} sqft</span>
+                                </div>
+                            </div>
+
+                            {{-- AGENT --}}
+                            <div class="flex justify-between items-center mt-4">
+
+                                @php
+                                    $agent = optional($villa->listedBy);
+                                    $agentName = $agent->name ?? 'Agent';
+                                    $initials = collect(explode(' ', $agentName))
+                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+                                                    ->take(2)->implode('');
+                                @endphp
+
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500
+                            flex items-center justify-center text-white font-bold">
+                                        {{ $initials }}
+                                    </div>
+
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">
+                                            {{ $agentName }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
+                            text-gray-600 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+
+                                    <p class="text-xs text-gray-500">
+                                        {{ $villa->created_at?->diffForHumans() ?? '' }}
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
+
                     </div>
+                    </a>
                 </div>
-            </div>
+            @endforeach
+            @endif
+
             <!-- Villa Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">
@@ -1574,878 +793,7 @@
                     </div>
                 </div>
             </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- Villa Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Luxury villa" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa pool" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Villa interior" />
-                                </div>
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">25,500,000THB</span>
-
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
-
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Luxury Beachfront Villa</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    567 Ocean Drive, Phuket
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                <span>5 Beds</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                <span>4 Baths</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                <span>5,200 sqft</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 flex items-center justify-center text-white font-bold">
-                                    MJ
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Maria Johnson</p>
-                                </div>
-                            </div>
-
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">3 weeks ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Additional villa slides would go here -->
         </div>
 
@@ -2475,6 +823,7 @@
                     class="villa-total-slides font-medium">6</span>
             </div>
         </div>
+    </div>
 
         <style>
             .villa-pagination .swiper-pagination-bullet {
@@ -2533,115 +882,181 @@
     <div class="swiper land-multiple-slide-carousel w-full relative fade-in">
         <div class="swiper-wrapper">
             <!-- Land Slide 1 -->
-            <div class="swiper-slide">
-                <div class="property-card">
-                    <div class="relative">
-                        <div class="swiper inner-swiper h-48">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Land plot" />
+            @foreach(($lands ?? collect()) as $land)
+                <div class="swiper-slide">
+                    <a href="{{route('detail', ['property' => $land->id])}}">
+                    <div class="property-card">
+                        <div class="relative">
+                            {{-- INNER SWIPER --}}
+                            <div class="swiper inner-swiper h-48">
+                                <div class="swiper-wrapper">
+
+                                    @if(optional($land->images)->count() > 0)
+                                        @foreach($land->images as $img)
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('storage/' . $img->url) }}"
+                                                     class="w-full h-full object-cover"
+                                                     alt="{{ $land->title ?? 'Land' }}" />
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        {{-- Fallback images --}}
+                                        <div class="swiper-slide">
+                                            <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"
+                                                 class="w-full h-full object-cover" alt="Land plot" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"
+                                                 class="w-full h-full object-cover" alt="Land view" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"
+                                                 class="w-full h-full object-cover" alt="Land landscape" />
+                                        </div>
+                                    @endif
+
                                 </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Land view" />
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"
-                                        class="w-full h-full object-cover" alt="Land landscape" />
-                                </div>
+
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                        <div class="absolute top-3 left-3">
-                            <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">FOR
-                                SALE</span>
-                        </div>
-                        <div class="absolute top-3 right-3">
-                            <button
-                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
 
-                        <!-- Price overlay -->
-                        <div
-                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                            <!-- Price -->
-                            <span class="text-white font-semibold text-lg">8,500,000THB</span>
+                            {{-- BADGE --}}
+                            <div class="absolute top-3 left-3">
+                                @php
+                                    $badgeType  = strtoupper($land->type ?? 'SALE'); // RENT / SALE
+                                    $badgeColor = ($land->type ?? '') === 'rent' ? 'bg-blue-600' : 'bg-green-600';
+                                @endphp
 
-                            <!-- Icons -->
-                            <div class="flex space-x-3 text-white text-lg">
-                                <!-- Expand Icon -->
-                                <button class="expand-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-expand"></i>
-                                </button>
+                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
+                        FOR {{ $badgeType }}
+                    </span>
+                            </div>
 
-                                <!-- Heart Icon -->
-                                <button class="favorite-btn hover:text-red-400 transition">
+                            {{-- FAVORITE ICON --}}
+                            <div class="absolute top-3 right-3">
+                                <button
+                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
                                     <i class="far fa-heart"></i>
                                 </button>
+                            </div>
 
-                                <!-- Plus Icon -->
-                                <button class="compare-btn hover:text-gray-300 transition">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Prime Land in Chiang Mai</h3>
-                                <p class="text-gray-600 text-sm flex items-center mt-1">
-                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                    5678 Mountain View, Chiang Mai
-                                </p>
-                            </div>
-                        </div>
+                            {{-- PRICE OVERLAY --}}
+                            <div
+                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
+                           bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+                    <span class="text-white font-semibold text-lg">
+                        {{ number_format($land->price ?? 0) }} THB
+                    </span>
 
-                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>
-                                <span>5 Rai</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-road text-gray-400 mr-1"></i>
-                                <span>Road Access</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-tint text-gray-400 mr-1"></i>
-                                <span>Water Supply</span>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-4">
-                            <!-- Agent Info -->
-                            <div class="flex items-center">
-                                <div
-                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center text-white font-bold">
-                                    TJ
+                                <div class="flex space-x-3 text-white text-lg">
+                                    <button class="expand-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-expand"></i>
+                                    </button>
+                                    <button class="favorite-btn hover:text-red-400 transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                    <button class="compare-btn hover:text-gray-300 transition">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
                                 </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">Tom Johnson</p>
+                            </div>
+                        </div>
+
+                        {{-- CONTENT --}}
+                        <div class="p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800">
+                                        {{ $land->title ?? 'Prime Land' }}
+                                    </h3>
+                                    <p class="text-gray-600 text-sm flex items-center mt-1">
+                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                        {{ $land->address ?? 'Location not specified' }}
+                                        @if(optional($land->city)->name)
+                                            , {{ $land->city->name }}
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
 
-                            <!-- Share Button and Time -->
-                            <div class="flex items-center space-x-2">
-                                <!-- Share Icon -->
-                                <button
-                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                    <i class="fas fa-share-alt"></i>
-                                </button>
-                                <!-- Time Posted -->
-                                <p class="text-xs text-gray-500">1 month ago</p>
+                            {{-- META ROW: Area + Road Access + Water Supply --}}
+                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                {{-- Area --}}
+                                <div class="flex items-center">
+                                    <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>
+                                    <span>
+                            @if($land->area)
+                                            {{ $land->area }} sqft
+                                        @else
+                                            Area not specified
+                                        @endif
+                        </span>
+                                </div>
+
+                                {{-- Road Access (amenity based) --}}
+                                @php
+                                    $hasRoad = optional($land->amenities)
+                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)
+                                        : false;
+                                @endphp
+                                <div class="flex items-center">
+                                    <i class="fas fa-road text-gray-400 mr-1"></i>
+                                    <span>{{ $hasRoad ? 'Road Access' : 'Road info N/A' }}</span>
+                                </div>
+
+                                {{-- Water Supply (amenity based) --}}
+                                @php
+                                    $hasWater = optional($land->amenities)
+                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)
+                                        : false;
+                                @endphp
+                                <div class="flex items-center">
+                                    <i class="fas fa-tint text-gray-400 mr-1"></i>
+                                    <span>{{ $hasWater ? 'Water Supply' : 'Water info N/A' }}</span>
+                                </div>
+                            </div>
+
+                            {{-- AGENT + TIME --}}
+                            <div class="flex justify-between items-center mt-4">
+                                @php
+                                    $agent     = optional($land->listedBy);
+                                    $agentName = $agent->name ?? 'Agent';
+                                    $initials  = collect(explode(' ', $agentName))
+                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+                                                    ->take(2)->implode('');
+                                @endphp
+
+                                <div class="flex items-center">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500
+                                   flex items-center justify-center text-white font-bold">
+                                        {{ $initials }}
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">
+                                            {{ $agentName }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
+                                   text-gray-600 hover:bg-gray-200 transition-colors">
+                                        <i class="fas fa-share-alt"></i>
+                                    </button>
+                                    <p class="text-xs text-gray-500">
+                                        {{ $land->created_at?->diffForHumans() ?? '' }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
-            </div>
+            @endforeach
+
             <!-- Land Slide 1 -->
             <div class="swiper-slide">
                 <div class="property-card">

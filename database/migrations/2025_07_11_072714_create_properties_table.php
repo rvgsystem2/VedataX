@@ -30,6 +30,7 @@ return new class extends Migration
             $table->decimal('area', 10, 2)->nullable();
             $table->year('built_in')->nullable();
             $table->foreignId('listed_by')->constrained('users')->cascadeOnDelete();
+            $table->boolean('best_deal')->default(false);
             $table->timestamps();
         });
     }

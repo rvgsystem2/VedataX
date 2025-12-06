@@ -46,7 +46,7 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate">
-                            <form action="{{ route('enquiries.status', $enquiry) }}" method="POST">
+                            <form @can('update enquiry status') action="{{ route('enquiries.status', $enquiry) }}" @endcan method="POST">
                                 @csrf
                                 <select name="status" onchange="this.form.submit()"
                                         class="block w-full text-sm rounded-md border border-gray-300 bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition ease-in-out duration-150 px-3 py-2 text-gray-700">

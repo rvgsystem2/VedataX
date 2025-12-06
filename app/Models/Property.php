@@ -8,6 +8,10 @@ class Property extends Model
 {
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'best_deal' => 'boolean',
+    ];
+
     public function propertyType(){
         return $this->belongsTo(PropertyType::class, 'property_type_id');
     }
@@ -27,5 +31,22 @@ class Property extends Model
 
     public function city(){
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function listedBy() {
+        return $this->belongsTo(User::class, 'listed_by');
+    }
+    public function agent()
+    {
+        return $this->belongsTo(User::class, 'listed_by');
+    }
+
+    public function interiors() { return $this->hasMany(PropertyInterior::class); }
+    public function utilityInfrastructures() { return $this->hasMany(PropertyUtilityInfrastructure::class); }
+    public function safetySecurities() { return $this->hasMany(PropertySafetySecurity::class); }
+
+    public function enquiries()
+    {
+        return $this->hasMany(Enquiry::class);
     }
 }

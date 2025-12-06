@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone')->nullable();
+            $table->string('subject')->nullable();
             $table->text('message')->nullable();
             $table->enum('status', ['pending', 'contacted', 'in_progress', 'closed', 'rejected']);
             $table->foreign('property_id')->references('id')->on('properties')->onDelete('SET NULL');

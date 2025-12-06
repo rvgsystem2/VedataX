@@ -113,67 +113,139 @@
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-6 font-spartan">Send us a message</h2>
 
-                    <form class="space-y-6">
-                        <!-- Name Fields -->
+                    <form action="{{route('contact.save')}}" method="POST" class="space-y-6">
+                        @csrf
+
+                        <input type="hidden" id="subject-input" name="subject" value="Buy a Property">
+
+                        <!-- GLOBAL ERROR -->
+                        @if($errors->has('contact'))
+                            <div class="bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm">
+                                {{ $errors->first('contact') }}
+                            </div>
+                        @endif
+
+                        <!-- FIRST + LAST NAME -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium font-spartan" for="first-name">First name</label>
-                                <input type="text" id="first-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                <label class="block text-gray-700 mb-2 font-medium">First name</label>
+                                <input type="text" name="first_name"
+                                       value="{{ old('first_name') }}"
+                                       class="w-full px-4 py-3 border rounded-lg @error('first_name') border-red-500 @enderror">
+
+                                @error('first_name')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium font-spartan" for="last-name">Last name</label>
-                                <input type="text" id="last-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                <label class="block text-gray-700 mb-2 font-medium">Last name</label>
+                                <input type="text" name="last_name"
+                                       value="{{ old('last_name') }}"
+                                       class="w-full px-4 py-3 border rounded-lg @error('last_name') border-red-500 @enderror">
+
+                                @error('last_name')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
-                        <!-- Contact Fields -->
+                        <!-- EMAIL + PHONE -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium font-spartan" for="email">Email address</label>
-                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                <label class="block text-gray-700 mb-2 font-medium">Email</label>
+                                <input type="email" name="email"
+                                       value="{{ old('email') }}"
+                                       class="w-full px-4 py-3 border rounded-lg @error('email') border-red-500 @enderror">
+
+                                @error('email')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium font-spartan" for="phone">Phone number</label>
-                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                                <label class="block text-gray-700 mb-2 font-medium">Phone</label>
+                                <input type="tel" name="phone"
+                                       value="{{ old('phone') }}"
+                                       class="w-full px-4 py-3 border rounded-lg @error('phone') border-red-500 @enderror">
+
+                                @error('phone')
+                                <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
-                        <!-- Subject Options -->
+                        <!-- SUBJECT OPTIONS -->
                         <div>
-                            <label class="block text-gray-700 mb-3 font-medium font-spartan">Subject</label>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center selected">
-                                    <i class="fas fa-home text-blue-500 text-xl mb-2 font-spartan"></i>
-                                    <p class="font-medium font-spartan">Buy a Property</p>
+                            <label class="block text-gray-700 mb-3 font-medium">Subject</label>
+
+                            @error('subject')
+                            <p class="text-red-600 text-sm mb-2">{{ $message }}</p>
+                            @enderror
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 subject-options">
+
+                                <div class="property-option selected border-2 border-blue-500 rounded-lg p-4 cursor-pointer text-center"
+                                     data-subject="Buy a Property">
+                                    <i class="fas fa-home text-blue-500 text-xl mb-2"></i>
+                                    <p>Buy a Property</p>
                                 </div>
-                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center">
+
+                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
+                                     data-subject="Rent a Property">
                                     <i class="fas fa-key text-blue-500 text-xl mb-2"></i>
-                                    <p class="font-medium font-spartan">Rent a Property</p>
+                                    <p>Rent a Property</p>
                                 </div>
-                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center">
+
+                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
+                                     data-subject="List a Property">
                                     <i class="fas fa-list text-blue-500 text-xl mb-2"></i>
-                                    <p class="font-medium font-spartan">List a Property</p>
+                                    <p>List a Property</p>
                                 </div>
-                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center">
+
+                                <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
+                                     data-subject="General Inquiry">
                                     <i class="fas fa-question-circle text-blue-500 text-xl mb-2"></i>
-                                    <p class="font-medium font-spartan">General Inquiry</p>
+                                    <p>General Inquiry</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Message Field -->
+                        <!-- MESSAGE -->
                         <div>
-                            <label class="block text-gray-700 mb-2 font-medium font-spartan" for="message">Message</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="Tell us about your property needs..."></textarea>
+                            <label class="block text-gray-700 mb-2 font-medium">Message</label>
+                            <textarea name="message" rows="5"
+                                      class="w-full px-4 py-3 border rounded-lg @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+
+                            @error('message')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        <!-- Submit Button -->
-                        <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition duration-300 shadow-md hover:shadow-lg font-spartan">
+                        <!-- SUBMIT -->
+                        <button type="submit"
+                                class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700">
                             SUBMIT
                         </button>
                     </form>
+
+
+                    <script>
+                        document.querySelectorAll(".property-option").forEach(item => {
+                            item.addEventListener("click", () => {
+                                document.querySelectorAll(".property-option").forEach(o => {
+                                    o.classList.remove("border-blue-500","selected");
+                                    o.classList.add("border-gray-200");
+                                });
+                                item.classList.remove("border-gray-200");
+                                item.classList.add("border-blue-500","selected");
+
+                                document.getElementById("subject-input").value = item.dataset.subject;
+                            });
+                        });
+                    </script>
+
+
                 </div>
             </div>
 

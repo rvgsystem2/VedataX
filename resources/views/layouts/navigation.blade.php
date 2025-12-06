@@ -66,32 +66,42 @@
                         <div x-show="openProperties" @click.away="openProperties = false" x-cloak
                              class="absolute z-50 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
 
+                            @can('show property types')
                             <x-nav-link :href="route('property-types.index')" :active="request()->routeIs('property-types.index')" class="block px-4 py-2 text-left">
                                 <i class="fas fa-layer-group mr-1"></i> Property Types
                             </x-nav-link>
+                            @endcan
 
+                            @can('show cities')
                             <x-nav-link :href="route('cities.index')" :active="request()->routeIs('cities.index')" class="block px-4 py-2 text-left">
                                 <i class="fas fa-layer-group mr-1"></i> Cities
                             </x-nav-link>
+                                @endcan
 
+                                @can('show properties')
                             <x-nav-link :href="route('properties.index')" :active="request()->routeIs('properties.index')" class="block px-4 py-2 text-left">
                                 <i class="fas fa-layer-group mr-1"></i> Properties
                             </x-nav-link>
+                                @endcan
 
+                                @can('show amenities')
                             <x-nav-link :href="route('amenities.index')" :active="request()->routeIs('amenities.index')" class="block px-4 py-2 text-left">
                                 <i class="fas fa-layer-group mr-1"></i> Amenities
                             </x-nav-link>
+                                @endcan
 
+                                @can('show enquiries')
                             <x-nav-link :href="route('enquiries.index')" :active="request()->routeIs('enquiries.index')" class="block px-4 py-2 text-left">
                                 <i class="fas fa-layer-group mr-1"></i> Enquiries
                             </x-nav-link>
+                                @endcan
 
                         </div>
                     </div>
 
-                    <x-nav-link :href="route('lands.index')" :active="request()->routeIs('lands.*')" class="block px-4 py-2 text-left">
-                        <i class="fas fa-layer-group mr-1"></i> Lands
-                    </x-nav-link>
+{{--                    <x-nav-link :href="route('lands.index')" :active="request()->routeIs('lands.*')" class="block px-4 py-2 text-left">--}}
+{{--                        <i class="fas fa-layer-group mr-1"></i> Lands--}}
+{{--                    </x-nav-link>--}}
 
 
 {{--                    <div class="relative" x-data="{ openEnquiries: false }">--}}

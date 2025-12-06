@@ -54,216 +54,189 @@
 
                     <div id="property-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         <!-- Property Card 1 - White Lotus Beach Residence -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="rent" data-category="luxury">
-                            <div class="relative">
-                                <div class="swiper propertySwiper6 h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/living-room-2569325_1280.jpg"
-                                                class="w-full h-full object-cover" />
+                        @php
+                            use Illuminate\Support\Str;
+                        @endphp
+
+                        @foreach($properties as $property)
+                            @php
+                                $cityName = optional($property->city)->name;
+
+                                // Main image pick
+                                $mainImage = $property->images
+                                    ? $property->images->firstWhere('is_main', true) ?? $property->images->first()
+                                    : null;
+
+                                // Badge text (top-left)
+                                $badgeText = strtoupper($property->type ?? 'property');   // RENT / SALE
+                                if (!empty($property->best_deal) && $property->best_deal) {
+                                    $badgeText = 'BEST DEAL';
+                                }
+
+                                // Card filters
+                                $dataType     = $property->type;                          // rent / sale
+                                $dataCategory = $property->best_deal ? 'luxury' : 'standard';
+
+                                // Agent (agar relation agent ya user ho)
+                                $agent = $property->listedBy ?? $property->user ?? null;
+                                $agentName = $agent->name ?? 'Agent';
+                                $initials = collect(explode(' ', $agentName))
+                                                ->map(fn($p) => Str::substr($p, 0, 1))
+                                                ->implode('');
+                                $initials = Str::upper(Str::limit($initials, 2, ''));
+
+                                $postedAgo = $property->created_at ? $property->created_at->diffForHumans() : '';
+                            @endphp
+
+                            <a href="{{ route('detail', $property->id) }}" class="block">
+                                <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card"
+                                     data-type="{{ $dataType }}"
+                                     data-category="{{ $dataCategory }}">
+                                    <div class="relative">
+                                        {{-- Swiper for property images --}}
+                                        <div class="swiper propertySwiper6 h-48">
+                                            <div class="swiper-wrapper">
+                                                @if($property->images && $property->images->count())
+                                                    @foreach($property->images as $img)
+                                                        <div class="swiper-slide">
+                                                            <img src="{{ asset('storage/' . ($img->url ?? $img->path)) }}"
+                                                                 class="w-full h-full object-cover"
+                                                                 alt="{{ $property->title }}">
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    {{-- Fallback image --}}
+                                                    <div class="swiper-slide">
+                                                        <img src="https://via.placeholder.com/800x600?text=No+Image"
+                                                             class="w-full h-full object-cover"
+                                                             alt="No image available">
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
                                         </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2017/08/27/10/16/interior-2685521_1280.jpg"
-                                                class="w-full h-full object-cover" />
+
+                                        {{-- Badge (Top Left) --}}
+                                        <div class="absolute top-3 left-3">
+                                            <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">
+                                                {{ $badgeText }}
+                                                @if($property->type === 'rent')
+                                                    RENTAL
+                                                @endif
+                                            </span>
                                         </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">LUXURY RENTAL</span>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <button
-                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
 
-                                <!-- Price overlay -->
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                                    <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">85,000THB/month</span>
+                                        {{-- Favourite (Top Right) --}}
+                                        <div class="absolute top-3 right-3">
+                                            <button
+                                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                        </div>
 
-                                    <!-- Icons -->
-                                    <div class="flex space-x-3 text-white text-lg">
-                                        <!-- Expand Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-
-                                        <!-- Heart Icon -->
-                                        <button class="favorite-btn hover:text-red-400 transition">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-
-                                        <!-- Plus Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800">Executive Rental Villa</h3>
-                                        <p class="text-gray-600 text-sm flex items-center mt-1">
-                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                            Pattaya, Thailand
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>3 Beds</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>3 Baths</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                        <span>280 SQM</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4">
-                                    <!-- Agent Info -->
-                                    <div class="flex items-center">
+                                        <!-- Price overlay -->
                                         <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                            SH
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                        </div>
-                                    </div>
+                                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+                                            <!-- Price -->
+                                            <span class="text-white font-semibold text-lg">
+                                                ฿{{ number_format($property->price, 0) }}
+                                                                        @if($property->type === 'rent')
+                                                                            /month
+                                                                        @endif
+                                            </span>
 
-                                    <!-- Share Button and Time -->
-                                    <div class="flex items-center space-x-2">
-                                        <!-- Share Icon -->
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
-                                        <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">1 month ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Property Card 2 - Modern Villa -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="sale" data-category="luxury">
-                            <div class="relative">
-                                <div class="swiper propertySwiper2 h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <button
-                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
+                                            <!-- Icons -->
+                                            <div class="flex space-x-3 text-white text-lg">
+                                                <!-- Expand Icon -->
+                                                <button class="hover:text-gray-300 transition" title="View details">
+                                                    <i class="fas fa-expand"></i>
+                                                </button>
 
-                                <!-- Price overlay -->
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                                    <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">12,900,000THB</span>
+                                                <!-- Heart Icon -->
+                                                <button class="favorite-btn hover:text-red-400 transition" title="Add to favorites">
+                                                    <i class="far fa-heart"></i>
+                                                </button>
 
-                                    <!-- Icons -->
-                                    <div class="flex space-x-3 text-white text-lg">
-                                        <!-- Expand Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-
-                                        <!-- Heart Icon -->
-                                        <button class="favorite-btn hover:text-red-400 transition">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-
-                                        <!-- Plus Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>
-                                        <p class="text-gray-600 text-sm flex items-center mt-1">
-                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                            1234 Sunset Blvd, Beverly Hills
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>4 Beds</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>3 Baths</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                        <span>3,500 sqft</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4">
-                                    <!-- Agent Info -->
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                            SH
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
+                                                <!-- Plus Icon (e.g. compare / shortlist) -->
+                                                <button class="hover:text-gray-300 transition" title="Add to compare">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <!-- Share Button and Time -->
-                                    <div class="flex items-center space-x-2">
-                                        <!-- Share Icon -->
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
-                                        <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">2 months ago</p>
+                                    <div class="p-4">
+                                        <div class="flex justify-between items-start">
+                                            <div>
+                                                {{-- Title --}}
+                                                <h3 class="font-bold text-lg text-gray-800">
+                                                    {{ Str::limit($property->title, 60) }}
+                                                </h3>
+
+                                                {{-- Location --}}
+                                                <p class="text-gray-600 text-sm flex items-center mt-1">
+                                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                                    {{ $cityName ?: 'Thailand' }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {{-- Beds / Baths / Area --}}
+                                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                            @if(!is_null($property->bedrooms))
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                                    <span>{{ $property->bedrooms }} Beds</span>
+                                                </div>
+                                            @endif
+
+                                            @if(!is_null($property->bathrooms))
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                                    <span>{{ $property->bathrooms }} Baths</span>
+                                                </div>
+                                            @endif
+
+                                            @if(!is_null($property->area))
+                                                <div class="flex items-center">
+                                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                                    <span>{{ rtrim(rtrim(number_format($property->area, 2, '.', ''), '0'), '.') }} SQM</span>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <div class="flex justify-between items-center mt-4">
+                                            <!-- Agent Info -->
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
+                                                    {{ $initials }}
+                                                </div>
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-medium text-gray-900">
+                                                        {{ $agentName }}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Share Button and Time -->
+                                            <div class="flex items-center space-x-2">
+                                                <!-- Share Icon -->
+                                                <button
+                                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
+                                                    <i class="fas fa-share-alt"></i>
+                                                </button>
+                                                <!-- Time Posted -->
+                                                @if($postedAgo)
+                                                    <p class="text-xs text-gray-500">{{ $postedAgo }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
+                            </a>
+                        @endforeach
                         <!-- Property Card 3 - Luxury Apartment -->
                         <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="rent" data-category="new">
                             <div class="relative">
@@ -370,319 +343,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            </div>  {{-- property-card --}}
 
                         <!-- Property Card 4 - New Development -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="sale" data-category="new">
-                            <div class="relative">
-                                <div class="swiper propertySwiper4 h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2016/09/22/11/55/kitchen-1687121_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">NEW DEVELOPMENT</span>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <button
-                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
 
-                                <!-- Price overlay -->
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                                    <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">8,500,000THB</span>
-
-                                    <!-- Icons -->
-                                    <div class="flex space-x-3 text-white text-lg">
-                                        <!-- Expand Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-
-                                        <!-- Heart Icon -->
-                                        <button class="favorite-btn hover:text-red-400 transition">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-
-                                        <!-- Plus Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800">Modern Condo Development</h3>
-                                        <p class="text-gray-600 text-sm flex items-center mt-1">
-                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                            Sukhumvit, Bangkok
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>1 Bed</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>1 Bath</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                        <span>45 SQM</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4">
-                                    <!-- Agent Info -->
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                            SH
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Share Button and Time -->
-                                    <div class="flex items-center space-x-2">
-                                        <!-- Share Icon -->
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
-                                        <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">1 week ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Property Card 5 - Luxury Villa -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="sale" data-category="luxury">
-                            <div class="relative">
-                                <div class="swiper propertySwiper5 h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2016/04/18/08/50/kitchen-1336160_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2016/11/18/17/46/architecture-1836070_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded">LUXURY VILLA</span>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <button
-                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <!-- Price overlay -->
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                                    <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">25,000,000THB</span>
-
-                                    <!-- Icons -->
-                                    <div class="flex space-x-3 text-white text-lg">
-                                        <!-- Expand Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-
-                                        <!-- Heart Icon -->
-                                        <button class="favorite-btn hover:text-red-400 transition">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-
-                                        <!-- Plus Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800">Premium Luxury Villa</h3>
-                                        <p class="text-gray-600 text-sm flex items-center mt-1">
-                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                            Phuket, Thailand
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>5 Beds</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>4 Baths</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                        <span>650 SQM</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4">
-                                    <!-- Agent Info -->
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                            SH
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Share Button and Time -->
-                                    <div class="flex items-center space-x-2">
-                                        <!-- Share Icon -->
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
-                                        <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">3 days ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Property Card 6 - Rental Property -->
-                        <div class="bg-white rounded-xl shadow-sm overflow-hidden property-card" data-type="rent" data-category="luxury">
-                            <div class="relative">
-                                <div class="swiper propertySwiper6 h-48">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2017/08/02/01/01/living-room-2569325_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2017/08/27/10/16/interior-2685521_1280.jpg"
-                                                class="w-full h-full object-cover" />
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next"></div>
-                                    <div class="swiper-button-prev"></div>
-                                </div>
-                                <div class="absolute top-3 left-3">
-                                    <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">LUXURY RENTAL</span>
-                                </div>
-                                <div class="absolute top-3 right-3">
-                                    <button
-                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
-
-                                <!-- Price overlay -->
-                                <div
-                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                                    <!-- Price -->
-                                    <span class="text-white font-semibold text-lg">85,000THB/month</span>
-
-                                    <!-- Icons -->
-                                    <div class="flex space-x-3 text-white text-lg">
-                                        <!-- Expand Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-expand"></i>
-                                        </button>
-
-                                        <!-- Heart Icon -->
-                                        <button class="favorite-btn hover:text-red-400 transition">
-                                            <i class="far fa-heart"></i>
-                                        </button>
-
-                                        <!-- Plus Icon -->
-                                        <button class="hover:text-gray-300 transition">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-4">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="font-bold text-lg text-gray-800">Executive Rental Villa</h3>
-                                        <p class="text-gray-600 text-sm flex items-center mt-1">
-                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                            Pattaya, Thailand
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>3 Beds</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>3 Baths</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                        <span>280 SQM</span>
-                                    </div>
-                                </div>
-
-                                <div class="flex justify-between items-center mt-4">
-                                    <!-- Agent Info -->
-                                    <div class="flex items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                            SH
-                                        </div>
-                                        <div class="ml-3">
-                                            <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Share Button and Time -->
-                                    <div class="flex items-center space-x-2">
-                                        <!-- Share Icon -->
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
-                                        <!-- Time Posted -->
-                                        <p class="text-xs text-gray-500">1 month ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

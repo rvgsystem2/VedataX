@@ -568,194 +568,391 @@
 <section class="relative w-full max-w-9xl md:block hidden">
     <div class="bg-gray-200 p-6 transition-all duration-500 hover:shadow-xl relative z-10">
 
-        <form class="flex flex-col lg:flex-row gap-4 items-stretch z-50"
-            onsubmit="alert('Searching with custom values...'); return false;">
+        <form action="{{ route('property') }}"
+              method="GET"
+              class="flex flex-col lg:flex-row gap-4 items-stretch z-50">
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
 
-                <!-- Location Dropdown -->
-                <div class="custom-select-wrapper relative z-50 border border-gray-300 rounded-2xl">
-                    <div class="custom-select-header" data-value="Koh Samui">
-                        <span class="custom-select-label">Koh Samui</span>
-                        <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </div>
-                    <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
-                        <div class="custom-option selected" data-value="Koh Samui">Koh Samui</div>
-                        <div class="custom-option" data-value="Bang Makham">Bang Makham</div>
-                        <div class="custom-option" data-value="Band Por">Band Por</div>
-                        <div class="custom-option" data-value="Bang Rak">Bang Rak</div>
-                        <div class="custom-option" data-value="Bophut">Bophut</div>
-                        <div class="custom-option" data-value="Bantai">Bantai</div>
-                        <div class="custom-option" data-value="Chaweng Noi">Chaweng Noi</div>
-                        <div class="custom-option" data-value="Choeng Man">Choeng Man</div>
-                        <div class="custom-option" data-value="Lamai">Lamai</div>
-                        <div class="custom-option" data-value="Lipa Noi">Lipa Noi</div>
-                        <div class="custom-option" data-value="Maenam">Maenam</div>
-                        <div class="custom-option" data-value="Nathon">Nathon</div>
-                        <div class="custom-option" data-value="Na Muaeng">Na Muaeng</div>
-                        <div class="custom-option" data-value="Plai Laem">Plai Laem</div>
-                        <div class="custom-option" data-value="Thong Krut">Thong Krut</div>
-                    </div>
-                </div>
-
-                <!-- Property Type Dropdown -->
-                <div class="custom-select-wrapper relative z-50 border border-gray-300 rounded-2xl">
-                    <div class="custom-select-header" data-value="Property Type">
-                        <span class="custom-select-label">Property Type</span>
-                        <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </div>
-                    <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
-                        <div class="custom-option selected" data-value="Property Type">Property Type</div>
-                        <div class="custom-option" data-value="Villa/House">Villa/House</div>
-                        <div class="custom-option" data-value="Sea View">Sea View</div>
-                        <div class="custom-option" data-value="Beachfront">Beachfront</div>
-                        <div class="custom-option" data-value="Lands">Lands</div>
-                        <div class="custom-option" data-value="Business">Business</div>
-                        <div class="custom-option" data-value="Rental">Rental</div>
-                    </div>
-                </div>
-
-                <!-- Price Range -->
-                <div class="flex gap-2">
-                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl">
-                        <div class="custom-select-header" data-value="Min">
-                            <span class="custom-select-label font-medium">Min</span>
-                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
-                            <div class="custom-option selected" data-value="Min">Min</div>
-                            <div class="custom-option" data-value="฿1,000,000">฿1,000,000</div>
-                            <div class="custom-option" data-value="฿3,000,000">฿3,000,000</div>
-                        </div>
-                    </div>
-                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl">
-                        <div class="custom-select-header" data-value="Max">
-                            <span class="custom-select-label font-medium">Max</span>
-                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </div>
-                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
-                            <div class="custom-option selected" data-value="Max">Max</div>
-                            <div class="custom-option" data-value="฿10,000,000">฿10,000,000</div>
-                            <div class="custom-option" data-value="฿20,000,000">฿20,000,000</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bed & Bath Dropdown -->
-                <div class="relative z-50 border border-gray-300 rounded-2xl">
-                    <button type="button" id="bb-toggle" class="custom-select-header w-full">
-                        <span class="font-medium">Bed & Bath</span>
+                {{-- LOCATION DROPDOWN (same style) --}}
+                <div class="custom-select-wrapper relative z-50 border border-gray-300 rounded-2xl"
+                     data-target="city">
+                    <div class="custom-select-header" data-value="{{ request('city', '') }}">
+                <span class="custom-select-label">
+                    {{ request('city', 'Location') }}
+                </span>
                         <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7" />
+                                  d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+
+                    <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                        {{-- Default option --}}
+                        <div class="custom-option {{ request('city') === null || request('city') === '' ? 'selected' : '' }}"
+                             data-value="">
+                            Location
+                        </div>
+
+                        {{-- Dynamic cities --}}
+                        @foreach($cities as $city)
+                            <div class="custom-option {{ request('city') === $city->name ? 'selected' : '' }}"
+                                 data-value="{{ $city->name }}">
+                                {{ $city->name }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <input type="hidden" name="city" id="city" value="{{ request('city', '') }}">
+
+
+                {{-- PROPERTY TYPE DROPDOWN (same style) --}}
+                <div class="custom-select-wrapper relative z-50 border border-gray-300 rounded-2xl"
+                     data-target="property_type_id">
+                    <div class="custom-select-header" data-value="{{ request('property_type_id', '') }}">
+                <span class="custom-select-label">
+                    {{ request('property_type_id') ? ($propertyTypes->firstWhere('id', request('property_type_id'))->title ?? 'Property Type') : 'Property Type' }}
+                </span>
+                        <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+
+                    <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                        <div class="custom-option {{ !request('property_type_id') ? 'selected' : '' }}"
+                             data-value="">
+                            Property Type
+                        </div>
+
+                        @foreach($propertyTypes as $type)
+                            <div class="custom-option {{ (string)request('property_type_id') === (string)$type->id ? 'selected' : '' }}"
+                                 data-value="{{ $type->id }}">
+                                {{ $type->title }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <input type="hidden" name="property_type_id" id="property_type_id" value="{{ request('property_type_id', '') }}">
+
+
+                {{-- PRICE RANGE (same layout: Min + Max side by side) --}}
+                <div class="flex gap-2">
+                    {{-- MIN --}}
+                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"
+                         data-target="min_price">
+                        <div class="custom-select-header" data-value="{{ request('min_price', 'Min') }}">
+                    <span class="custom-select-label font-medium">
+                        @php
+                            $minPrice = request('min_price');
+                        @endphp
+                        @if(!$minPrice)
+                            Min
+                        @elseif($minPrice == 1000000)
+                            ฿1,000,000
+                        @elseif($minPrice == 3000000)
+                            ฿3,000,000
+                        @else
+                            Min
+                        @endif
+                    </span>
+                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                            <div class="custom-option {{ !request('min_price') ? 'selected' : '' }}"
+                                 data-value="Min">Min</div>
+                            <div class="custom-option {{ request('min_price') == 1000000 ? 'selected' : '' }}"
+                                 data-value="1000000">฿1,000,000</div>
+                            <div class="custom-option {{ request('min_price') == 3000000 ? 'selected' : '' }}"
+                                 data-value="3000000">฿3,000,000</div>
+                        </div>
+                    </div>
+
+                    {{-- MAX --}}
+                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"
+                         data-target="max_price">
+                        <div class="custom-select-header" data-value="{{ request('max_price', 'Max') }}">
+                    <span class="custom-select-label font-medium">
+                        @php
+                            $maxPrice = request('max_price');
+                        @endphp
+                        @if(!$maxPrice)
+                            Max
+                        @elseif($maxPrice == 10000000)
+                            ฿10,000,000
+                        @elseif($maxPrice == 20000000)
+                            ฿20,000,000
+                        @else
+                            Max
+                        @endif
+                    </span>
+                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                            <div class="custom-option {{ !request('max_price') ? 'selected' : '' }}"
+                                 data-value="Max">Max</div>
+                            <div class="custom-option {{ request('max_price') == 10000000 ? 'selected' : '' }}"
+                                 data-value="10000000">฿10,000,000</div>
+                            <div class="custom-option {{ request('max_price') == 20000000 ? 'selected' : '' }}"
+                                 data-value="20000000">฿20,000,000</div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="min_price" id="min_price" value="{{ request('min_price', '') }}">
+                <input type="hidden" name="max_price" id="max_price" value="{{ request('max_price', '') }}">
+
+
+                {{-- BED & BATH (same UI as your original) --}}
+                <div class="relative z-50 border border-gray-300 rounded-2xl">
+                    <button type="button" id="bb-toggle" class="custom-select-header w-full">
+                <span class="font-medium">
+                    Bed & Bath
+                </span>
+                        <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                    <div id="bb-dropdown" class="p-4">
+                    <div id="bb-dropdown" class="p-4 hidden bg-white rounded-2xl shadow-lg">
                         <div class="flex flex-col gap-4">
+
+                            {{-- Bedrooms --}}
                             <div>
                                 <p class="uppercase text-xs font-semibold mb-2">Bedrooms</p>
                                 <div class="flex gap-2 flex-wrap">
-                                    <button class="bb-bed active" data-value="any">Any</button>
-                                    <button class="bb-bed" data-value="1+">1+</button>
-                                    <button class="bb-bed" data-value="2+">2+</button>
-                                    <button class="bb-bed" data-value="3+">3+</button>
+                                    @php $beds = request('bedrooms', 'any'); @endphp
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === 'any' ? 'active' : '' }}"
+                                            data-value="any">Any</button>
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === '1+' || $beds === '1' ? 'active' : '' }}"
+                                            data-value="1+">1+</button>
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === '2+' || $beds === '2' ? 'active' : '' }}"
+                                            data-value="2+">2+</button>
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === '3+' || $beds === '3' ? 'active' : '' }}"
+                                            data-value="3+">3+</button>
                                 </div>
                             </div>
+
+                            {{-- Bathrooms --}}
                             <div>
                                 <p class="uppercase text-xs font-semibold mb-2">Bathrooms</p>
                                 <div class="flex gap-2 flex-wrap">
-                                    <button class="bb-bath active" data-value="any">Any</button>
-                                    <button class="bb-bath" data-value="1+">1+</button>
-                                    <button class="bb-bath" data-value="2+">2+</button>
-                                    <button class="bb-bath" data-value="3+">3+</button>
+                                    @php $baths = request('bathrooms', 'any'); @endphp
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === 'any' ? 'active' : '' }}"
+                                            data-value="any">Any</button>
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === '1+' || $baths === '1' ? 'active' : '' }}"
+                                            data-value="1+">1+</button>
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === '2+' || $baths === '2' ? 'active' : '' }}"
+                                            data-value="2+">2+</button>
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === '3+' || $baths === '3' ? 'active' : '' }}"
+                                            data-value="3+">3+</button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Reset Button -->
+            {{-- Hidden fields for bed & bath --}}
+            <input type="hidden" name="bedrooms" id="bedrooms" value="{{ request('bedrooms', 'any') }}">
+            <input type="hidden" name="bathrooms" id="bathrooms" value="{{ request('bathrooms', 'any') }}">
+
+            {{-- BUTTON – same style as your RESET button, text "Search" --}}
             <button type="submit"
-                class="bg-black text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 min-w-[140px]">
-                Reset
+                    class="bg-black text-white px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 min-w-[140px]">
+                Search
             </button>
 
         </form>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const bbToggle   = document.getElementById('bb-toggle');
+                const bbDropdown = document.getElementById('bb-dropdown');
+
+                // ---------- Custom Select Logic (Location, Type, Min, Max) ----------
+                document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+                    const header           = wrapper.querySelector('.custom-select-header');
+                    const optionsContainer = wrapper.querySelector('.custom-select-options');
+                    const options          = wrapper.querySelectorAll('.custom-option');
+                    const target           = wrapper.dataset.target;
+
+                    // Bed & Bath wrapper me custom-select-options hi nahi hain, usko skip kar do
+                    if (!header || !optionsContainer) return;
+
+                    header.addEventListener('click', (e) => {
+                        e.stopPropagation();
+
+                        // Sab dropdown close
+                        document.querySelectorAll('.custom-select-options').forEach(c => {
+                            if (c !== optionsContainer) c.classList.add('hidden');
+                        });
+
+                        // Bed & Bath band
+                        if (bbDropdown) bbDropdown.style.display = 'none';
+
+                        optionsContainer.classList.toggle('hidden');
+                    });
+
+                    options.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                            e.stopPropagation();
+
+                            // Label text change
+                            const labelEl = header.querySelector('.custom-select-label');
+                            if (labelEl) {
+                                labelEl.textContent = option.textContent.trim();
+                            }
+
+                            // header data-value set
+                            header.dataset.value = option.dataset.value;
+
+                            // selected class manage
+                            options.forEach(opt => opt.classList.remove('selected'));
+                            option.classList.add('selected');
+
+                            // Hidden input update (city, property_type_id, min_price, max_price)
+                            if (target) {
+                                const hiddenInput = document.getElementById(target);
+                                if (hiddenInput) {
+                                    const val = option.dataset.value;
+                                    // Min/Max text ko empty treat karo
+                                    hiddenInput.value = (val === 'Min' || val === 'Max') ? '' : val;
+                                }
+                            }
+
+                            optionsContainer.classList.add('hidden');
+                        });
+                    });
+                });
+
+                // ---------- Bed & Bath Dropdown ----------
+                if (bbToggle && bbDropdown) {
+                    bbToggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+
+                        // sab select dropdown band
+                        document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));
+
+                        bbDropdown.style.display = (bbDropdown.style.display === 'block' ? 'none' : 'block');
+                    });
+                }
+
+                // ---------- Close dropdowns when clicking outside ----------
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.custom-select-wrapper')) {
+                        document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));
+                    }
+
+                    if (bbDropdown && !bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
+                        bbDropdown.style.display = 'none';
+                    }
+                });
+
+                // ---------- Bed & Bath Button Selection + hidden field update ----------
+                function setupButtonSelection(selector, hiddenId) {
+                    const buttons    = document.querySelectorAll(selector);
+                    const hiddenInput = document.getElementById(hiddenId);
+
+                    buttons.forEach(button => {
+                        button.addEventListener('click', (e) => {
+                            e.preventDefault();
+
+                            buttons.forEach(btn => btn.classList.remove('active'));
+                            button.classList.add('active');
+
+                            if (hiddenInput) {
+                                hiddenInput.value = button.dataset.value;
+                            }
+                        });
+                    });
+                }
+
+                setupButtonSelection('.bb-bed', 'bedrooms');
+                setupButtonSelection('.bb-bath', 'bathrooms');
+            });
+        </script>
+
+
+
     </div>
 </section>
 
-<script>
-    // ---------- Custom Select Logic ----------
-    document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
-        const header = wrapper.querySelector('.custom-select-header');
-        const optionsContainer = wrapper.querySelector('.custom-select-options');
-        const options = wrapper.querySelectorAll('.custom-option');
+{{--<script>--}}
+{{--    // ---------- Custom Select Logic ------------}}
+{{--    document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {--}}
+{{--        const header = wrapper.querySelector('.custom-select-header');--}}
+{{--        const optionsContainer = wrapper.querySelector('.custom-select-options');--}}
+{{--        const options = wrapper.querySelectorAll('.custom-option');--}}
 
-        header.addEventListener('click', () => {
-            document.querySelectorAll('.custom-select-options').forEach(c => {
-                if (c !== optionsContainer) c.classList.add('hidden');
-            });
-            bbDropdown.style.display = 'none';
-            optionsContainer.classList.toggle('hidden');
-        });
+{{--        header.addEventListener('click', () => {--}}
+{{--            document.querySelectorAll('.custom-select-options').forEach(c => {--}}
+{{--                if (c !== optionsContainer) c.classList.add('hidden');--}}
+{{--            });--}}
+{{--            bbDropdown.style.display = 'none';--}}
+{{--            optionsContainer.classList.toggle('hidden');--}}
+{{--        });--}}
 
-        options.forEach(option => {
-            option.addEventListener('click', () => {
-                header.querySelector('.custom-select-label').textContent = option.textContent
-                    .trim();
-                header.dataset.value = option.dataset.value;
-                options.forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-                optionsContainer.classList.add('hidden');
-            });
-        });
-    });
+{{--        options.forEach(option => {--}}
+{{--            option.addEventListener('click', () => {--}}
+{{--                header.querySelector('.custom-select-label').textContent = option.textContent--}}
+{{--                    .trim();--}}
+{{--                header.dataset.value = option.dataset.value;--}}
+{{--                options.forEach(opt => opt.classList.remove('selected'));--}}
+{{--                option.classList.add('selected');--}}
+{{--                optionsContainer.classList.add('hidden');--}}
+{{--            });--}}
+{{--        });--}}
+{{--    });--}}
 
-    // ---------- Bed & Bath Dropdown ----------
-    const bbToggle = document.getElementById('bb-toggle');
-    const bbDropdown = document.getElementById('bb-dropdown');
+{{--    // ---------- Bed & Bath Dropdown ------------}}
+{{--    const bbToggle = document.getElementById('bb-toggle');--}}
+{{--    const bbDropdown = document.getElementById('bb-dropdown');--}}
 
-    bbToggle.addEventListener('click', () => {
-        document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));
-        bbDropdown.style.display = bbDropdown.style.display === 'block' ? 'none' : 'block';
-    });
+{{--    bbToggle.addEventListener('click', () => {--}}
+{{--        document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));--}}
+{{--        bbDropdown.style.display = bbDropdown.style.display === 'block' ? 'none' : 'block';--}}
+{{--    });--}}
 
-    // ---------- Close dropdowns when clicking outside ----------
-    document.addEventListener('click', e => {
-        if (!e.target.closest('.custom-select-wrapper')) {
-            document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));
-        }
-        if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {
-            bbDropdown.style.display = 'none';
-        }
-    });
+{{--    // ---------- Close dropdowns when clicking outside ------------}}
+{{--    document.addEventListener('click', e => {--}}
+{{--        if (!e.target.closest('.custom-select-wrapper')) {--}}
+{{--            document.querySelectorAll('.custom-select-options').forEach(c => c.classList.add('hidden'));--}}
+{{--        }--}}
+{{--        if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {--}}
+{{--            bbDropdown.style.display = 'none';--}}
+{{--        }--}}
+{{--    });--}}
 
-    // ---------- Bed & Bath Button Selection ----------
-    function setupButtonSelection(selector) {
-        document.querySelectorAll(selector).forEach(button => {
-            button.addEventListener('click', () => {
-                document.querySelectorAll(selector).forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-            });
-        });
-    }
+{{--    // ---------- Bed & Bath Button Selection ------------}}
+{{--    function setupButtonSelection(selector) {--}}
+{{--        document.querySelectorAll(selector).forEach(button => {--}}
+{{--            button.addEventListener('click', () => {--}}
+{{--                document.querySelectorAll(selector).forEach(btn => btn.classList.remove('active'));--}}
+{{--                button.classList.add('active');--}}
+{{--            });--}}
+{{--        });--}}
+{{--    }--}}
 
-    setupButtonSelection('.bb-bed');
-    setupButtonSelection('.bb-bath');
-</script>
+{{--    setupButtonSelection('.bb-bed');--}}
+{{--    setupButtonSelection('.bb-bath');--}}
+{{--</script>--}}
 
 
 {{-- mobile screen --}}

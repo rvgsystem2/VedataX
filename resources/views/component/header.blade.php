@@ -92,6 +92,9 @@
                     <i class="fas fa-key mr-1"></i>
                     Rent
                 </a> --}}
+                @php
+                    $propertyTypes = \App\Models\PropertyType::all();
+                @endphp
 
                 <!-- Enhanced Categories Dropdown -->
                 <div class="relative group">
@@ -111,66 +114,88 @@
                             <h3 class="font-semibold">Property Types</h3>
                         </div>
                         <div class="py-2">
-                            <a href="{{ route('property') }}"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-building text-gray-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-medium">Villa/House</div>
-                                    <div class="text-xs text-gray-500">1,234 properties</div>
-                                </div>
-                            </a>
-                            <a href="{{ route('property') }}"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-umbrella-beach text-gray-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-medium">Sea View</div>
-                                    <div class="text-xs text-gray-500">567 properties</div>
-                                </div>
-                            </a>
-                            <a href="{{route('property')}}"
-                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-city text-gray-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-medium">Beachfront</div>
-                                    <div class="text-xs text-gray-500">890 properties</div>
-                                </div>
-                            </a>
-                            <a href="{{route('property')}}" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fas fa-mountain text-gray-600"></i>
-                                </div>
-                                <div>
-                                    <div class="font-medium">Land</div>
-                                    <div class="text-xs text-gray-500">321 properties</div>
-                                </div>
-                            </a>
-                            <a href="{{route('property')}}"
-                            class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-city text-gray-600"></i>
-                            </div>
-                            <div>
-                                <div class="font-medium">Bussiness</div>
-                                <div class="text-xs text-gray-500">890 properties</div>
-                            </div>
-                        </a>
-                        {{-- <a href="{{route('property')}}"
-                        class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                        <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-city text-gray-600"></i>
+                            @foreach($propertyTypes as $propertyType)
+                                <a href="{{ route('property', $propertyType->slug) }}"
+                                   class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="{{ $propertyType->icon_class }} text-gray-600"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium">
+                                            {{ $propertyType->title ?? $propertyType->name }}
+                                        </div>
+                                        <div class="text-xs text-gray-500">
+                                            {{ number_format($propertyType->properties_count) }} properties
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
-                        <div>
-                            <div class="font-medium">Rental</div>
-                            <div class="text-xs text-gray-500">890 properties</div>
-                        </div>
-                    </a> --}}
-                        </div>
+
+                        {{--                        <div class="py-2">--}}
+{{--                            @foreach($propertyTypes as $propertyType)--}}
+{{--                                <a href="{{ route('property', 'villa-house') }}"--}}
+{{--                                   class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                        <i class="{{$propertyType->icon_class}} text-gray-600"></i>--}}
+{{--                                    </div>--}}
+{{--                                    <div>--}}
+{{--                                        <div class="font-medium">{{$propertyType->name}}</div>--}}
+{{--                                        <div class="text-xs text-gray-500">{{number_format($propertyType->properties->count())}} properties</div>--}}
+{{--                                    </div>--}}
+{{--                                </a>--}}
+{{--                            @endforeach--}}
+
+{{--                            <a href="{{ route('property', 'sea-view') }}"--}}
+{{--                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                    <i class="fas fa-umbrella-beach text-gray-600"></i>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <div class="font-medium">Sea View</div>--}}
+{{--                                    <div class="text-xs text-gray-500">567 properties</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                            <a href="{{route('property', 'beachfront')}}"--}}
+{{--                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                    <i class="fas fa-city text-gray-600"></i>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <div class="font-medium">Beachfront</div>--}}
+{{--                                    <div class="text-xs text-gray-500">890 properties</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                            <a href="{{route('property', 'land')}}" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                    <i class="fas fa-mountain text-gray-600"></i>--}}
+{{--                                </div>--}}
+{{--                                <div>--}}
+{{--                                    <div class="font-medium">Land</div>--}}
+{{--                                    <div class="text-xs text-gray-500">321 properties</div>--}}
+{{--                                </div>--}}
+{{--                            </a>--}}
+{{--                            <a href="{{route('property', 'business')}}"--}}
+{{--                            class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                <i class="fas fa-city text-gray-600"></i>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <div class="font-medium">Bussiness</div>--}}
+{{--                                <div class="text-xs text-gray-500">890 properties</div>--}}
+{{--                            </div>--}}
+{{--                        </a>--}}
+{{--                        --}}{{-- <a href="{{route('property')}}"--}}
+{{--                        class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                        <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                            <i class="fas fa-city text-gray-600"></i>--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div class="font-medium">Rental</div>--}}
+{{--                            <div class="text-xs text-gray-500">890 properties</div>--}}
+{{--                        </div>--}}
+{{--                    </a> --}}
+{{--                        </div>--}}
                     </div>
                 </div>
 

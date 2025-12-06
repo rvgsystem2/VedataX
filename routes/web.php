@@ -36,7 +36,7 @@ Route::get('/refund', [HomeController::class, 'refund'])->name('refund');
 Route::get('/disclaimer', [HomeController::class, 'disclaimer'])->name('disclaimer');
 Route::get('/agent', [HomeController::class, 'agent'])->name('frontend.agent');
 Route::post('contact/save', [HomeController::class, 'contactSave'])->name('contact.save');
-Route::get('/property', [HomeController::class, 'property'])->name('property');
+Route::get('/property/{type?}', [HomeController::class, 'property'])->name('property');
 Route::get('/feature', [HomeController::class, 'feature'])->name('feature');
 
 
@@ -119,7 +119,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(\App\Http\Controllers\EnquiryController::class)->prefix('enquiries')->name('enquiries.')->group(function(){
         Route::get('/', 'index')->name('index');
         Route::post('status/{enquiry}', 'status')->name('status');
-        Route::post('destroy/{amenity}', 'destroy')->name('destroy');
+        Route::post('destroy/{enquiry}', 'destroy')->name('destroy');
     });
 
 

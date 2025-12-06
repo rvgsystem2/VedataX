@@ -25,23 +25,23 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <label for="state" class="block font-medium text-gray-700">State</label>
-                        <input type="text" id="state" name="state" value="{{ old('state', $city->state ?? '') }}"
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#c21108] focus:border-[#c21108]">
-                        @error('state')
-                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+{{--                    <div>--}}
+{{--                        <label for="state" class="block font-medium text-gray-700">State</label>--}}
+{{--                        <input type="text" id="state" name="state" value="{{ old('state', $city->state ?? '') }}"--}}
+{{--                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#c21108] focus:border-[#c21108]">--}}
+{{--                        @error('state')--}}
+{{--                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
 
-                    <div>
-                        <label for="country" class="block font-medium text-gray-700">Country</label>
-                        <input type="text" id="country" name="country" value="{{ old('country', $city->country ?? '') }}"
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#c21108] focus:border-[#c21108]">
-                        @error('country')
-                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
+{{--                    <div>--}}
+{{--                        <label for="country" class="block font-medium text-gray-700">Country</label>--}}
+{{--                        <input type="text" id="country" name="country" value="{{ old('country', $city->country ?? '') }}"--}}
+{{--                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#c21108] focus:border-[#c21108]">--}}
+{{--                        @error('country')--}}
+{{--                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>--}}
+{{--                        @enderror--}}
+{{--                    </div>--}}
                 </div>
 
                 <div class="mt-6">

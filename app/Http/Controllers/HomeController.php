@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\City;
 use App\Models\Enquiry;
 use App\Models\Property;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -26,7 +29,16 @@ class HomeController extends Controller
                 })->toArray(),
             ];
         });
-        return view('frontend.index', compact('propertyTypes', 'properties'));
+        $cities = City::all();
+        $bestDeals = Property::where('best_deal', true)->get();
+        $villas = PropertyType::where('slug', 'like', "%villa%")->orWhere('slug', 'like', "%house%")->first()?->properties;
+// Option 1: PropertyType se (tumhari style)
+        $lands = PropertyType::where(function ($q) {
+                $q->where('slug', 'like', '%land%');
+            })
+                ->with(['properties.images', 'properties.city', 'properties.listedBy', 'properties.amenities'])
+                ->first()?->properties ?? collect();
+        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands'));
     }
 
     public function landproperty(){
@@ -120,8 +132,17 @@ class HomeController extends Controller
         return view('frontend.blog');
     }
 
-    public function detail(Property $property){
+    public function detail(Property $property = null){
 
+        $property->load([
+            'city',
+            'propertyType',
+            'images',
+            'interiors',
+            'utilityInfrastructures',
+            'safetySecurities',
+            'amenities',
+        ]);
         return view('frontend.detail', compact('property'));
     }
 
@@ -145,23 +166,213 @@ class HomeController extends Controller
         return view('frontend.disclaimer');
     }
 
-    public function property(){
-        return view('frontend.property');
+    public function property(Request $request, $type = null)
+    {
+        // Base query
+        $query = Property::with([
+            'city',
+            'images',
+            'listedBy',     // ya 'user' agar relation ka naam woh hai
+        ])->latest();
+
+        // 1) Type filter (rent / sale) – URL se aa raha hai
+        if (!empty($type)) {
+            $query->where('type', $type);    // example: /properties/rent
+        }
+
+        // 2) Location (city name se)
+        if ($request->filled('city')) {
+            $cityName = $request->input('city');
+
+            $query->whereHas('city', function ($q) use ($cityName) {
+                $q->where('name', $cityName);
+            });
+        }
+
+        // 3) Property Type
+        if ($request->filled('property_type_id')) {
+            $query->where('property_type_id', $request->input('property_type_id'));
+        }
+
+        // 4) Min / Max Price
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', (float) $request->input('min_price'));
+        }
+
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', (float) $request->input('max_price'));
+        }
+
+        // 5) Bedrooms
+        $bedrooms = $request->input('bedrooms', 'any');
+        if ($bedrooms !== 'any' && $bedrooms !== null && $bedrooms !== '') {
+            $query->where('bedrooms', '>=', (int) $bedrooms);
+        }
+
+        // 6) Bathrooms
+        $bathrooms = $request->input('bathrooms', 'any');
+        if ($bathrooms !== 'any' && $bathrooms !== null && $bathrooms !== '') {
+            $query->where('bathrooms', '>=', (int) $bathrooms);
+        }
+
+        // Final result (agar chaho to paginate bhi kar sakte ho)
+        // $properties = $query->paginate(12)->appends($request->query());
+        $properties = $query->get();
+
+        // Filters ke liye dropdown data
+        $cities        = City::orderBy('name')->get();
+        $propertyTypes = PropertyType::orderBy('title')->get();
+
+        return view('frontend.property', compact(
+            'properties',
+            'cities',
+            'propertyTypes',
+            'type'
+        ));
     }
 
     public function feature(){
         return view('frontend.feature');
     }
-    public function contactSave(Request $request){
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'nullable',
-            'message' => 'nullable',
+//    public function contactSave(Request $request)
+//    {
+//        // Validate
+//        $data = $request->validate([
+//            'first_name'  => 'required|string|max:100',
+//            'last_name'   => 'required|string|max:100',
+//            'email'       => 'required|email|max:255',
+//            'phone'       => 'nullable|string|max:50',
+//            'subject'     => 'required|string|max:255',
+//            'message'     => 'nullable|string',
+//        ]);
+//
+//        // Combine name
+//        $data['name'] = trim($data['first_name'] . ' ' . $data['last_name']);
+//        unset($data['first_name'], $data['last_name']);
+//
+//        // Logged in or not
+//        $userId = Auth::check() ? Auth::id() : null;
+//
+//        // Duplicate check (global)
+//        $alreadyExists = Enquiry::where(function ($q) use ($data, $userId) {
+//
+//            if ($userId) {
+//                $q->where('user_id', $userId);
+//            }
+//
+//            $q->orWhere('email', $data['email']);
+//
+//            if (!empty($data['phone'])) {
+//                $q->orWhere('phone', $data['phone']);
+//            }
+//        })->exists();
+//
+//        if ($alreadyExists) {
+//            return back()
+//                ->withErrors(['contact' => 'You have already submitted an enquiry.'])
+//                ->withInput();
+//        }
+//
+//        // Save Enquiry
+//        Enquiry::create($data + ['user_id' => $userId]);
+//
+//        return back()->with('success', 'Form submitted successfully, we will contact you soon!');
+//    }
+
+    public function contactSave(Request $request)
+    {
+        // Check: ye request property enquiry hai ya general contact?
+        $isPropertyEnquiry = $request->filled('property_id');
+
+        if ($isPropertyEnquiry) {
+            // 🏠 PROPERTY PAGE WALA FORM (name, email, phone, message + property_id)
+            $data = $request->validate([
+                'property_id' => 'required|exists:properties,id',
+                'name'        => 'required|string|max:255',
+                'email'       => 'required|email|max:255',
+                'phone'       => 'nullable|string|max:50',
+                'message'     => 'nullable|string',
+            ]);
+
+            // final name direct aaya hai
+            $name    = $data['name'];
+            $subject = null; // yaha subject nahi hai (agar chaho to "Property Enquiry" set kar sakte ho)
+
+        } else {
+            // 🌍 CONTACT PAGE WALA FORM (first_name, last_name, email, phone, subject, message)
+            $data = $request->validate([
+                'first_name'  => 'required|string|max:100',
+                'last_name'   => 'required|string|max:100',
+                'email'       => 'required|email|max:255',
+                'phone'       => 'nullable|string|max:50',
+                'subject'     => 'required|string|max:255',
+                'message'     => 'nullable|string',
+            ]);
+
+            $name    = trim($data['first_name'] . ' ' . $data['last_name']);
+            $subject = $data['subject'];
+        }
+
+        $userId = Auth::check() ? Auth::id() : null;
+
+        // 🔁 DUPLICATE CHECK
+
+        if ($isPropertyEnquiry) {
+            // Same property pe same user/email/phone se repeat enquiry na ho
+            $alreadyExists = Enquiry::where('property_id', $data['property_id'])
+                ->where(function ($q) use ($data, $userId) {
+                    if ($userId) {
+                        $q->where('user_id', $userId);
+                    }
+
+                    $q->orWhere('email', $data['email']);
+
+                    if (!empty($data['phone'])) {
+                        $q->orWhere('phone', $data['phone']);
+                    }
+                })
+                ->exists();
+        } else {
+            // General contact form: site-wide ek hi baar (without property)
+            $alreadyExists = Enquiry::whereNull('property_id')
+                ->where(function ($q) use ($data, $userId) {
+                    if ($userId) {
+                        $q->where('user_id', $userId);
+                    }
+
+                    $q->orWhere('email', $data['email']);
+
+                    if (!empty($data['phone'])) {
+                        $q->orWhere('phone', $data['phone']);
+                    }
+                })
+                ->exists();
+        }
+
+        if ($alreadyExists) {
+            return back()
+                ->withErrors([
+                    'contact' => $isPropertyEnquiry
+                        ? 'You have already sent an enquiry for this property.'
+                        : 'You have already submitted an enquiry.',
+                ])
+                ->withInput();
+        }
+
+        // 📝 FINAL DATA SAVE
+        $enquiry = Enquiry::create([
+            'property_id' => $isPropertyEnquiry ? $data['property_id'] : null,
+            'name'        => $name,
+            'email'       => $data['email'],
+            'phone'       => $data['phone'] ?? null,
+            'subject'     => $subject,
+            'message'     => $data['message'] ?? null,
+            'user_id'     => $userId,
         ]);
 
-        Enquiry::create($request->all() + ['user_id' => auth()->check() ? auth()->id() : null]);
-        return back()->with('success', 'Form submitted successfully we contact you back soon!');
+        Mail::to('info@vedata.co')->send(new ContactMail($enquiry));
+
+        return back()->with('success', 'Form submitted successfully, we will contact you soon!');
     }
 }
 

@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Property;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -14,7 +15,19 @@ class PropertyController extends Controller
 {
     public function index()
     {
-        $properties = Property::latest()->with('propertyType', 'city')->paginate(10);
+        $user = Auth::user();
+
+        $query = Property::with(['propertyType', 'city'])
+            ->latest();
+
+        // Agar user Super Admin नहीं है,
+        // to sirf uski listed properties दिखाओ
+        if (! $user->hasRole('Super Admin')) {
+            $query->where('listed_by', $user->id);
+        }
+
+        $properties = $query->paginate(10);
+
         return view('properties.index', compact('properties'));
     }
 
@@ -26,35 +39,56 @@ class PropertyController extends Controller
         return view('properties.form', compact('propertyTypes', 'cities', 'amenities'));
     }
 
+
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'type' => 'required|in:rent,sale',
-            'status' => 'required|in:available,sold,rented',
-            'property_type_id' => 'required|exists:property_types,id',
-            'city_id' => 'nullable|exists:cities,id',
-            'address' => 'nullable|string|max:255',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-            'area' => 'nullable|numeric',
-            'built_in' => 'nullable|digits:4',
+            'title'             => 'required|string|max:255',
+            'description'       => 'required|string',
+            'price'             => 'required|numeric',
+            'type'              => 'required|in:rent,sale',
+            'status'            => 'required|in:available,sold,rented',
+            'property_type_id'  => 'required|exists:property_types,id',
+            'city_id'           => 'nullable|exists:cities,id',
+            'address'           => 'nullable|string|max:255',
+            'latitude'          => 'nullable|numeric',
+            'longitude'         => 'nullable|numeric',
+            'bedrooms'          => 'nullable|integer',
+            'bathrooms'         => 'nullable|integer',
+            'area'              => 'nullable|numeric',
+            'built_in'          => 'nullable|digits:4',
 
-            'amenities' => 'nullable|array',
-            'amenities.*' => 'exists:amenities,id',
+            'amenities'         => 'nullable|array',
+            'amenities.*'       => 'exists:amenities,id',
 
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images'            => 'nullable|array',
+            'images.*'          => 'image|mimes:jpg,jpeg,png|max:2048',
 
-            'main_image_index' => 'nullable|integer|min:0',
+            'main_image_index'  => 'nullable|integer|min:0',
+
+            'best_deal'         => 'nullable|boolean',
+
+            // NEW: Interiors
+            'interiors'                 => 'nullable|array',
+            'interiors.*.name'          => 'nullable|string|max:255',
+            'interiors.*.icon_class'    => 'nullable|string|max:255',
+
+            // NEW: Utilities
+            'utilities'                 => 'nullable|array',
+            'utilities.*.name'          => 'nullable|string|max:255',
+            'utilities.*.icon_class'    => 'nullable|string|max:255',
+
+            // NEW: Safety & Security
+            'safeties'                  => 'nullable|array',
+            'safeties.*.name'           => 'nullable|string|max:255',
+            'safeties.*.icon_class'     => 'nullable|string|max:255',
         ]);
 
-        // Generate unique slug
-        $slug = Str::slug($request->title);
+        // Checkbox => true/false
+        $validated['best_deal'] = $request->has('best_deal');
+
+        // Unique slug
+        $slug = Str::slug($validated['title']);
         $originalSlug = $slug;
         $counter = 1;
 
@@ -62,33 +96,96 @@ class PropertyController extends Controller
             $slug = $originalSlug . '-' . $counter++;
         }
 
+        // images / amenities / main_image_index / interiors / utilities / safeties ko nikaal do
+        $data = $validated;
+        unset(
+            $data['images'],
+            $data['amenities'],
+            $data['main_image_index'],
+            $data['interiors'],
+            $data['utilities'],
+            $data['safeties']
+        );
+
         // Create property
-        $property = Property::create($request->except('images', 'amenities', 'main_image_index') + ['slug' => $slug, 'listed_by' => auth()->id()]);
+        $property = Property::create($data + [
+                'slug'      => $slug,
+                'listed_by' => auth()->id(),
+            ]);
 
-        // Sync amenities
-        $property->amenities()->sync($request->amenities ?? []);
+        // Amenities sync
+        $property->amenities()->sync($validated['amenities'] ?? []);
 
-        // Save property images
+        // Interiors create
+        if ($request->filled('interiors')) {
+            foreach ($request->interiors as $row) {
+                if (!empty($row['name'])) {
+                    $property->interiors()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // Utilities create
+        if ($request->filled('utilities')) {
+            foreach ($request->utilities as $row) {
+                if (!empty($row['name'])) {
+                    $property->utilityInfrastructures()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // Safety & Security create
+        if ($request->filled('safeties')) {
+            foreach ($request->safeties as $row) {
+                if (!empty($row['name'])) {
+                    $property->safetySecurities()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // Images save
         if ($request->hasFile('images')) {
+            $mainIndex = (int)($validated['main_image_index'] ?? 0);
+
             foreach ($request->file('images') as $index => $image) {
                 $path = $image->store('property-images', 'public');
 
                 $property->images()->create([
-                    'url' => $path,
-                    'is_main' => ($index === (int) $request->main_image_index),
+                    'url'     => $path,
+                    'is_main' => $index === $mainIndex,
                 ]);
             }
         }
 
-        return redirect()->route('properties.index')->with('success', 'Property created with images and amenities.');
+        return redirect()
+            ->route('properties.index')
+            ->with('success', 'Property created with images, amenities and details.');
     }
+
 
     public function edit(Property $property)
     {
         $propertyTypes = PropertyType::all();
-        $cities = City::all();
-        $amenities = Amenity::all();
-        $property->load('amenities');
+        $cities        = City::all();
+        $amenities     = Amenity::all();
+
+        // relations load
+        $property->load([
+            'amenities',
+            'images',
+            'interiors',
+            'utilityInfrastructures',
+            'safetySecurities',
+        ]);
 
         return view('properties.form', compact('property', 'propertyTypes', 'cities', 'amenities'));
     }
@@ -100,35 +197,55 @@ class PropertyController extends Controller
     public function update(Request $request, Property $property)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'type' => 'required|in:rent,sale',
-            'status' => 'required|in:available,sold,rented',
-            'property_type_id' => 'required|exists:property_types,id',
-            'city_id' => 'nullable|exists:cities,id',
-            'address' => 'nullable|string|max:255',
-            'latitude' => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-            'area' => 'nullable|numeric',
-            'built_in' => 'nullable|digits:4',
+            'title'             => 'required|string|max:255',
+            'description'       => 'required|string',
+            'price'             => 'required|numeric',
+            'type'              => 'required|in:rent,sale',
+            'status'            => 'required|in:available,sold,rented',
+            'property_type_id'  => 'required|exists:property_types,id',
+            'city_id'           => 'nullable|exists:cities,id',
+            'address'           => 'nullable|string|max:255',
+            'latitude'          => 'nullable|numeric',
+            'longitude'         => 'nullable|numeric',
+            'bedrooms'          => 'nullable|integer',
+            'bathrooms'         => 'nullable|integer',
+            'area'              => 'nullable|numeric',
+            'built_in'          => 'nullable|digits:4',
 
-            'amenities' => 'nullable|array',
-            'amenities.*' => 'exists:amenities,id',
+            'amenities'         => 'nullable|array',
+            'amenities.*'       => 'exists:amenities,id',
 
-            'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images'            => 'nullable|array',
+            'images.*'          => 'image|mimes:jpg,jpeg,png|max:2048',
 
-            'main_image_index' => 'nullable|integer|min:0',
+            'main_image_index'  => 'nullable|integer|min:0',
+
+            'best_deal'         => 'nullable|boolean',
+
+            // NEW: Interiors
+            'interiors'                 => 'nullable|array',
+            'interiors.*.name'          => 'nullable|string|max:255',
+            'interiors.*.icon_class'    => 'nullable|string|max:255',
+
+            // NEW: Utilities
+            'utilities'                 => 'nullable|array',
+            'utilities.*.name'          => 'nullable|string|max:255',
+            'utilities.*.icon_class'    => 'nullable|string|max:255',
+
+            // NEW: Safety
+            'safeties'                  => 'nullable|array',
+            'safeties.*.name'           => 'nullable|string|max:255',
+            'safeties.*.icon_class'     => 'nullable|string|max:255',
         ]);
 
-        // Generate new slug only if title has changed
-        if ($request->title !== $property->title) {
-            $slug = Str::slug($request->title);
+        // checkbox handle
+        $validated['best_deal'] = $request->has('best_deal');
+
+        // slug change only when title changed
+        if ($validated['title'] !== $property->title) {
+            $slug         = Str::slug($validated['title']);
             $originalSlug = $slug;
-            $counter = 1;
+            $counter      = 1;
 
             while (
             Property::where('slug', $slug)
@@ -138,37 +255,96 @@ class PropertyController extends Controller
                 $slug = $originalSlug . '-' . $counter++;
             }
 
-            $property->slug = $slug;
+            $validated['slug'] = $slug;
         }
 
-        // Update basic fields (excluding images and amenities)
-        $property->update($request->except('images', 'amenities', 'main_image_index'), ['listed_by' => auth()->id()]);
+        // remove non-column fields
+        $data = $validated;
+        unset(
+            $data['images'],
+            $data['amenities'],
+            $data['main_image_index'],
+            $data['interiors'],
+            $data['utilities'],
+            $data['safeties']
+        );
 
-        // Sync amenities
-        $property->amenities()->sync($request->amenities ?? []);
+        // listed_by ko current user se override karna hai
+        $data['listed_by'] = auth()->id();
 
-        // If new images are uploaded, delete old ones and add new
+        // basic update
+        $property->update($data);
+
+        // amenities sync
+        $property->amenities()->sync($validated['amenities'] ?? []);
+
+        // Interiors reset + recreate
+        $property->interiors()->delete();
+        if ($request->filled('interiors')) {
+            foreach ($request->interiors as $row) {
+                if (!empty($row['name'])) {
+                    $property->interiors()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // Utilities reset + recreate
+        $property->utilityInfrastructures()->delete();
+        if ($request->filled('utilities')) {
+            foreach ($request->utilities as $row) {
+                if (!empty($row['name'])) {
+                    $property->utilityInfrastructures()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // Safety & Security reset + recreate
+        $property->safetySecurities()->delete();
+        if ($request->filled('safeties')) {
+            foreach ($request->safeties as $row) {
+                if (!empty($row['name'])) {
+                    $property->safetySecurities()->create([
+                        'name'       => $row['name'],
+                        'icon_class' => $row['icon_class'] ?? null,
+                    ]);
+                }
+            }
+        }
+
+        // images handle (simple: nayi aayi to purani sab hata kar replace)
         if ($request->hasFile('images')) {
-            // Delete old image files from storage
+            // old files delete
             foreach ($property->images as $img) {
-                Storage::disk('public')->delete($img->url);
+                if ($img->url) {
+                    Storage::disk('public')->delete($img->url);
+                }
             }
 
-            // Delete old DB records
+            // old records delete
             $property->images()->delete();
 
-            // Upload new images
+            // new save
+            $mainIndex = (int)($validated['main_image_index'] ?? 0);
+
             foreach ($request->file('images') as $index => $image) {
                 $path = $image->store('property-images', 'public');
 
                 $property->images()->create([
-                    'url' => $path,
-                    'is_main' => ($index === (int) $request->main_image_index),
+                    'url'     => $path,
+                    'is_main' => $index === $mainIndex,
                 ]);
             }
         }
 
-        return redirect()->route('properties.index')->with('success', 'Property updated successfully.');
+        return redirect()
+            ->route('properties.index')
+            ->with('success', 'Property updated successfully.');
     }
 
 

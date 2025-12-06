@@ -24,8 +24,8 @@ class CityController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'country' => 'nullable|string|max:255',
         ]);
 
         City::create($validated);

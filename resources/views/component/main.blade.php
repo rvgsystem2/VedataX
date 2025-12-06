@@ -23,6 +23,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css"
 />
+
 </head>
 <style>
     body {
@@ -34,6 +35,8 @@
   @include('component.header')
 
   <main class="bg-white font-spartan">@yield('content')</main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
   @include('component.footer')
 
@@ -73,5 +76,27 @@
     });
   </script>
   --}}
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          @if(session('success'))
+          Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: "{{ session('success') }}",
+              confirmButtonColor: '#3085d6',
+          });
+          @endif
+
+          @if($errors->has('contact'))
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "{{ $errors->first('contact') }}",
+              confirmButtonColor: '#d33',
+          });
+          @endif
+      });
+  </script>
+
 </body>
 </html>
