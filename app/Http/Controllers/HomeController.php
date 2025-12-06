@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Enquiry;
 use App\Models\Property;
 use App\Models\PropertyType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -159,7 +160,8 @@ class HomeController extends Controller
     }
 
     public function agent(){
-        return view('frontend.agent');
+        $users = User::role('agent')->get();
+        return view('frontend.agent', compact('users'));
     }
 
     public function disclaimer(){
