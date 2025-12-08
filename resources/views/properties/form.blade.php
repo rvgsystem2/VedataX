@@ -41,12 +41,21 @@
                         <label class="block text-sm font-medium text-gray-700">
                             Price (THB)
                         </label>
-                        <input type="number" name="price"
-                               value="{{ old('price', $property->price ?? '') }}"
-                               required
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
 
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 text-sm">฿</span>
+                            </div>
+
+                            <input type="number"
+                                   name="price"
+                                   value="{{ old('price', $property->price ?? '') }}"
+                                   required
+                                   class="block w-full pl-7 pr-3 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                   placeholder="0.00">
+                        </div>
                     </div>
+
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Type</label>
