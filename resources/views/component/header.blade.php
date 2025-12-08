@@ -215,6 +215,12 @@
                     Contact
                 </a>
 
+                <a href="{{ route('dashboard') }}"
+                    class="text-black hover:text-blue-500 transition flex items-center hover-lift">
+                    <i class="fas fa-envelope mr-1"></i>
+                    Dashboard
+                </a>
+
                 <!-- Enhanced Currency Dropdown -->
                 <div class="relative group">
                     <button class="flex items-center text-black hover:text-blue-500 transition hover-lift"
