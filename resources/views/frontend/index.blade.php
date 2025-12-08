@@ -111,135 +111,140 @@
             <div class="w-full max-w-6xl">
                 <div
                     class="bg-white/10 backdrop-blur-sm border border-white/50 rounded-3xl p-6 md:p-8 shadow-2xl transition-all duration-500 hover:shadow-white/20">
+                    <form action="{{ route('property') }}" method="GET"
+                        class="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center">
 
-                    <form action="{{ route('property') }}"
-                          method="GET"
-                          class="flex flex-col lg:flex-row gap-4 items-stretch">
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 flex-1">
+                        <div class="flex flex-col lg:flex-row gap-4 flex-1">
 
                             {{-- LOCATION --}}
-                            <div class="custom-select-wrapper" data-dropdown-id="location" data-target="city">
-                                <!-- Left Icon -->
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[10]">
-                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
+                            <div class="flex-1 relative">
+                                <div class="custom-select-wrapper" data-dropdown-id="location" data-target="city">
+                                    <!-- Left Icon -->
+                                    <div
+                                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[10]">
+                                        <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
 
-                                <!-- Header -->
-                                <div class="custom-select-header icon-padded" data-value="">
-                                    <span class="custom-select-label">Location</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
+                                    <!-- Header -->
+                                    <div class="custom-select-header icon-padded" data-value="">
+                                        <span class="custom-select-label">Location</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
 
-                                <!-- Options (dynamic) -->
-                                <div class="custom-select-options hidden z-[9999]">
-                                    @foreach($cities as $city)
-                                        <div class="custom-option" data-value="{{ $city->name }}">
-                                            {{ $city->name }}
-                                        </div>
-                                    @endforeach
+                                    <!-- Options -->
+                                    <div class="custom-select-options hidden z-[9999]">
+                                        @foreach ($cities as $city)
+                                            <div class="custom-option" data-value="{{ $city->name }}">
+                                                {{ $city->name }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
+                                <input type="hidden" name="city" value="">
                             </div>
-                            <input type="hidden" name="city" value="">
-
 
                             {{-- PROPERTY TYPE --}}
-                            <div class="custom-select-wrapper" data-dropdown-id="property-type" data-target="property_type_id">
-                                <!-- Left Icon -->
-                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[10]">
-                                    <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                    </svg>
-                                </div>
+                            <div class="flex-1 relative">
+                                <div class="custom-select-wrapper" data-dropdown-id="property-type"
+                                    data-target="property_type_id">
+                                    <!-- Left Icon -->
+                                    <div
+                                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-[10]">
+                                        <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        </svg>
+                                    </div>
 
-                                <!-- Header -->
-                                <div class="custom-select-header icon-padded" data-value="">
-                                    <span class="custom-select-label">Property Type</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
+                                    <!-- Header -->
+                                    <div class="custom-select-header icon-padded" data-value="">
+                                        <span class="custom-select-label">Property Type</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
 
-                                <!-- Options (dynamic) -->
-                                <div class="custom-select-options hidden z-[9999]">
-                                    @foreach($propertyTypes as $type)
-                                        <div class="custom-option" data-value="{{ $type->id }}">
-                                            {{ $type->title }}
-                                        </div>
-                                    @endforeach
+                                    <!-- Options -->
+                                    <div class="custom-select-options hidden z-[9999]">
+                                        @foreach ($propertyTypes as $type)
+                                            <div class="custom-option" data-value="{{ $type->id }}">
+                                                {{ $type->title }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
+                                <input type="hidden" name="property_type_id" value="">
                             </div>
-                            <input type="hidden" name="property_type_id" value="">
-
 
                             {{-- MIN PRICE --}}
-                            <div class="custom-select-wrapper" data-dropdown-id="min-price" data-target="min_price">
-                                <div class="custom-select-header icon-padded" data-value="">
-                                    <span class="custom-select-label">Min</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
+                            <div class="flex-1 relative">
+                                <div class="custom-select-wrapper" data-dropdown-id="min-price" data-target="min_price">
+                                    <div class="custom-select-header icon-padded" data-value="">
+                                        <span class="custom-select-label">Min</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
 
-                                <div class="custom-select-options hidden z-[9999]">
-                                    <div class="custom-option" data-value="">Min</div>
-                                    <div class="custom-option" data-value="1000000">฿1,000,000</div>
-                                    <div class="custom-option" data-value="3000000">฿3,000,000</div>
+                                    <div class="custom-select-options hidden z-[9999]">
+                                        <div class="custom-option" data-value="">Min</div>
+                                        <div class="custom-option" data-value="1000000">฿1,000,000</div>
+                                        <div class="custom-option" data-value="3000000">฿3,000,000</div>
+                                    </div>
                                 </div>
+                                <input type="hidden" name="min_price" value="">
                             </div>
-                            <input type="hidden" name="min_price" value="">
 
                             {{-- MAX PRICE --}}
-                            <div class="custom-select-wrapper" data-dropdown-id="max-price" data-target="max_price">
-                                <div class="custom-select-header icon-padded" data-value="">
-                                    <span class="custom-select-label">Max</span>
-                                    <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
+                            <div class="flex-1 relative">
+                                <div class="custom-select-wrapper" data-dropdown-id="max-price" data-target="max_price">
+                                    <div class="custom-select-header icon-padded" data-value="">
+                                        <span class="custom-select-label">Max</span>
+                                        <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
 
-                                <div class="custom-select-options hidden z-[9999]">
-                                    <div class="custom-option" data-value="">Max</div>
-                                    <div class="custom-option" data-value="10000000">฿10,000,000</div>
-                                    <div class="custom-option" data-value="20000000">฿20,000,000</div>
+                                    <div class="custom-select-options hidden z-[9999]">
+                                        <div class="custom-option" data-value="">Max</div>
+                                        <div class="custom-option" data-value="10000000">฿10,000,000</div>
+                                        <div class="custom-option" data-value="20000000">฿20,000,000</div>
+                                    </div>
                                 </div>
+                                <input type="hidden" name="max_price" value="">
                             </div>
-                            <input type="hidden" name="max_price" value="">
 
-
-                            {{-- BED & BATH (same as original style) --}}
-                            <div class="relative">
+                            {{-- BED & BATH --}}
+                            <div class="flex-1 relative">
                                 <button type="button" id="bb-toggle"
-                                        class="custom-select-header w-full text-sm rounded-2xl px-4 py-4 flex items-center justify-between">
+                                    class="custom-select-header w-full text-sm rounded-2xl px-4 py-4 flex items-center justify-between">
                                     <span class="font-medium">Bed & Bath</span>
                                     <svg class="w-4 h-4 text-white/70" fill="none" stroke="currentColor"
-                                         viewBox="0 0 24 24">
+                                        viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M19 9l-7 7-7-7" />
+                                            d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
 
                                 <div id="bb-dropdown"
-                                     class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-[9999] opacity-0 scale-95 transition-all duration-200 origin-top">
-
+                                    class="absolute left-0 mt-2 w-full sm:w-80 bg-white text-black rounded-2xl shadow-2xl p-6 hidden z-[9999] opacity-0 scale-95 transition-all duration-200 origin-top">
                                     <div class="flex flex-col gap-6">
 
                                         <!-- Bedrooms -->
@@ -247,17 +252,17 @@
                                             <p class="uppercase text-xs font-semibold mb-3 tracking-wide">Bedrooms</p>
                                             <div class="flex gap-2 flex-wrap">
                                                 <button type="button"
-                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
-                                                        data-value="any">Any</button>
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
+                                                    data-value="any">Any</button>
                                                 <button type="button"
-                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="1">1+</button>
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="1">1+</button>
                                                 <button type="button"
-                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="2">2+</button>
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="2">2+</button>
                                                 <button type="button"
-                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="3">3+</button>
+                                                    class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="3">3+</button>
                                             </div>
                                         </div>
 
@@ -266,42 +271,42 @@
                                             <p class="uppercase text-xs font-semibold mb-3 tracking-wide">Bathrooms</p>
                                             <div class="flex gap-2 flex-wrap">
                                                 <button type="button"
-                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
-                                                        data-value="any">Any</button>
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium bg-black text-white"
+                                                    data-value="any">Any</button>
                                                 <button type="button"
-                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="1">1+</button>
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="1">1+</button>
                                                 <button type="button"
-                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="2">2+</button>
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="2">2+</button>
                                                 <button type="button"
-                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
-                                                        data-value="3">3+</button>
+                                                    class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                    data-value="3">3+</button>
                                             </div>
                                         </div>
 
                                     </div>
-
                                 </div>
                             </div>
 
                         </div>
 
-                        {{-- Hidden fields for bed & bath --}}
+                        {{-- Hidden fields --}}
                         <input type="hidden" name="bedrooms" id="bedrooms" value="any">
                         <input type="hidden" name="bathrooms" id="bathrooms" value="any">
 
                         {{-- SEARCH BUTTON --}}
                         <button type="submit"
-                                class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 flex items-center justify-center gap-2 min-w-[140px]">
+                            class="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-2xl font-semibold shadow-lg hover:shadow-white/20 transition-all duration-300 flex items-center justify-center gap-2 min-w-[140px] mt-4 lg:mt-0">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                             Search
                         </button>
 
                     </form>
+
 
                 </div>
             </div>
@@ -313,31 +318,31 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // ----- Generic custom select -----
             const wrappers = document.querySelectorAll('.custom-select-wrapper[data-target]');
 
             wrappers.forEach(wrapper => {
-                const header      = wrapper.querySelector('.custom-select-header');
-                const optionsBox  = wrapper.querySelector('.custom-select-options');
-                const labelEl     = wrapper.querySelector('.custom-select-label');
-                const targetName  = wrapper.dataset.target;
+                const header = wrapper.querySelector('.custom-select-header');
+                const optionsBox = wrapper.querySelector('.custom-select-options');
+                const labelEl = wrapper.querySelector('.custom-select-label');
+                const targetName = wrapper.dataset.target;
                 const hiddenInput = document.querySelector('input[name="' + targetName + '"]');
 
                 if (!header || !optionsBox || !hiddenInput) return;
 
                 // open / close dropdown
-                header.addEventListener('click', function (e) {
+                header.addEventListener('click', function(e) {
                     e.stopPropagation();
                     optionsBox.classList.toggle('hidden');
                 });
 
                 // option click
                 optionsBox.querySelectorAll('.custom-option').forEach(opt => {
-                    opt.addEventListener('click', function (e) {
+                    opt.addEventListener('click', function(e) {
                         e.stopPropagation();
                         const value = this.dataset.value ?? this.textContent.trim();
-                        const text  = this.textContent.trim();
+                        const text = this.textContent.trim();
 
                         // label + data-value update
                         if (labelEl) labelEl.textContent = text;
@@ -347,7 +352,8 @@
                         hiddenInput.value = value;
 
                         // selected class
-                        optionsBox.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+                        optionsBox.querySelectorAll('.custom-option').forEach(o => o
+                            .classList.remove('selected'));
                         this.classList.add('selected');
 
                         optionsBox.classList.add('hidden');
@@ -356,18 +362,19 @@
             });
 
             // close all on outside click
-            document.addEventListener('click', function () {
-                document.querySelectorAll('.custom-select-options').forEach(box => box.classList.add('hidden'));
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.custom-select-options').forEach(box => box.classList.add(
+                    'hidden'));
             });
 
             // ----- Bed & Bath -----
-            const bbToggle   = document.getElementById('bb-toggle');
+            const bbToggle = document.getElementById('bb-toggle');
             const bbDropdown = document.getElementById('bb-dropdown');
-            const bedInput   = document.getElementById('bedrooms');
-            const bathInput  = document.getElementById('bathrooms');
+            const bedInput = document.getElementById('bedrooms');
+            const bathInput = document.getElementById('bathrooms');
 
             if (bbToggle && bbDropdown) {
-                bbToggle.addEventListener('click', function (e) {
+                bbToggle.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const isHidden = bbDropdown.classList.contains('hidden');
                     bbDropdown.classList.toggle('hidden', !isHidden);
@@ -376,23 +383,25 @@
                 });
 
                 document.querySelectorAll('.bb-bed').forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        document.querySelectorAll('.bb-bed').forEach(b => b.classList.remove('bg-black', 'text-white'));
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.bb-bed').forEach(b => b.classList.remove(
+                            'bg-black', 'text-white'));
                         this.classList.add('bg-black', 'text-white');
                         if (bedInput) bedInput.value = this.dataset.value;
                     });
                 });
 
                 document.querySelectorAll('.bb-bath').forEach(btn => {
-                    btn.addEventListener('click', function () {
-                        document.querySelectorAll('.bb-bath').forEach(b => b.classList.remove('bg-black', 'text-white'));
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.bb-bath').forEach(b => b.classList.remove(
+                            'bg-black', 'text-white'));
                         this.classList.add('bg-black', 'text-white');
                         if (bathInput) bathInput.value = this.dataset.value;
                     });
                 });
 
                 // outside click to close
-                document.addEventListener('click', function () {
+                document.addEventListener('click', function() {
                     bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');
                 });
             }
@@ -400,107 +409,107 @@
     </script>
 
 
-    {{--    <script>--}}
-{{--        // --- Custom Dropdown Logic (Replacing <select>) -----}}
-{{--        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {--}}
-{{--            const header = wrapper.querySelector('.custom-select-header');--}}
-{{--            const optionsContainer = wrapper.querySelector('.custom-select-options');--}}
-{{--            const options = wrapper.querySelectorAll('.custom-option');--}}
+    {{--    <script> --}}
+    {{--        // --- Custom Dropdown Logic (Replacing <select>) --- --}}
+    {{--        document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => { --}}
+    {{--            const header = wrapper.querySelector('.custom-select-header'); --}}
+    {{--            const optionsContainer = wrapper.querySelector('.custom-select-options'); --}}
+    {{--            const options = wrapper.querySelectorAll('.custom-option'); --}}
 
-{{--            // Toggle dropdown visibility--}}
-{{--            header.addEventListener('click', () => {--}}
-{{--                // Close any other open dropdowns first--}}
-{{--                document.querySelectorAll('.custom-select-options').forEach(container => {--}}
-{{--                    if (container !== optionsContainer) {--}}
-{{--                        container.classList.add('hidden');--}}
-{{--                    }--}}
-{{--                });--}}
-{{--                document.getElementById('bb-dropdown').classList.add('hidden', 'opacity-0',--}}
-{{--                    'scale-95'); // Also close Bed/Bath--}}
+    {{--            // Toggle dropdown visibility --}}
+    {{--            header.addEventListener('click', () => { --}}
+    {{--                // Close any other open dropdowns first --}}
+    {{--                document.querySelectorAll('.custom-select-options').forEach(container => { --}}
+    {{--                    if (container !== optionsContainer) { --}}
+    {{--                        container.classList.add('hidden'); --}}
+    {{--                    } --}}
+    {{--                }); --}}
+    {{--                document.getElementById('bb-dropdown').classList.add('hidden', 'opacity-0', --}}
+    {{--                    'scale-95'); // Also close Bed/Bath --}}
 
-{{--                optionsContainer.classList.toggle('hidden');--}}
-{{--            });--}}
+    {{--                optionsContainer.classList.toggle('hidden'); --}}
+    {{--            }); --}}
 
-{{--            // Handle option selection--}}
-{{--            options.forEach(option => {--}}
-{{--                option.addEventListener('click', () => {--}}
-{{--                    const value = option.getAttribute('data-value');--}}
-{{--                    const label = option.textContent.trim();--}}
+    {{--            // Handle option selection --}}
+    {{--            options.forEach(option => { --}}
+    {{--                option.addEventListener('click', () => { --}}
+    {{--                    const value = option.getAttribute('data-value'); --}}
+    {{--                    const label = option.textContent.trim(); --}}
 
-{{--                    // Update header display and value--}}
-{{--                    header.querySelector('.custom-select-label').textContent = label;--}}
-{{--                    header.setAttribute('data-value', value);--}}
+    {{--                    // Update header display and value --}}
+    {{--                    header.querySelector('.custom-select-label').textContent = label; --}}
+    {{--                    header.setAttribute('data-value', value); --}}
 
-{{--                    // Update selection highlight--}}
-{{--                    options.forEach(opt => opt.classList.remove('selected'));--}}
-{{--                    option.classList.add('selected');--}}
+    {{--                    // Update selection highlight --}}
+    {{--                    options.forEach(opt => opt.classList.remove('selected')); --}}
+    {{--                    option.classList.add('selected'); --}}
 
-{{--                    // Close dropdown--}}
-{{--                    optionsContainer.classList.add('hidden');--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
+    {{--                    // Close dropdown --}}
+    {{--                    optionsContainer.classList.add('hidden'); --}}
+    {{--                }); --}}
+    {{--            }); --}}
+    {{--        }); --}}
 
 
-{{--        // --- Bed & Bath dropdown toggle (Original Logic) -----}}
-{{--        const bbToggle = document.getElementById('bb-toggle');--}}
-{{--        const bbDropdown = document.getElementById('bb-dropdown');--}}
+    {{--        // --- Bed & Bath dropdown toggle (Original Logic) --- --}}
+    {{--        const bbToggle = document.getElementById('bb-toggle'); --}}
+    {{--        const bbDropdown = document.getElementById('bb-dropdown'); --}}
 
-{{--        bbToggle.addEventListener('click', () => {--}}
-{{--            // Close any other open dropdowns first--}}
-{{--            document.querySelectorAll('.custom-select-options').forEach(container => {--}}
-{{--                container.classList.add('hidden');--}}
-{{--            });--}}
+    {{--        bbToggle.addEventListener('click', () => { --}}
+    {{--            // Close any other open dropdowns first --}}
+    {{--            document.querySelectorAll('.custom-select-options').forEach(container => { --}}
+    {{--                container.classList.add('hidden'); --}}
+    {{--            }); --}}
 
-{{--            // Toggle Bed & Bath visibility--}}
-{{--            const isHidden = bbDropdown.classList.contains('hidden');--}}
+    {{--            // Toggle Bed & Bath visibility --}}
+    {{--            const isHidden = bbDropdown.classList.contains('hidden'); --}}
 
-{{--            if (isHidden) {--}}
-{{--                bbDropdown.classList.remove('hidden');--}}
-{{--                void bbDropdown.offsetWidth;--}}
-{{--                bbDropdown.classList.remove('opacity-0', 'scale-95');--}}
-{{--            } else {--}}
-{{--                bbDropdown.classList.add('opacity-0', 'scale-95');--}}
-{{--                setTimeout(() => {--}}
-{{--                    if (bbDropdown.classList.contains('opacity-0')) {--}}
-{{--                        bbDropdown.classList.add('hidden');--}}
-{{--                    }--}}
-{{--                }, 200);--}}
-{{--            }--}}
-{{--        });--}}
+    {{--            if (isHidden) { --}}
+    {{--                bbDropdown.classList.remove('hidden'); --}}
+    {{--                void bbDropdown.offsetWidth; --}}
+    {{--                bbDropdown.classList.remove('opacity-0', 'scale-95'); --}}
+    {{--            } else { --}}
+    {{--                bbDropdown.classList.add('opacity-0', 'scale-95'); --}}
+    {{--                setTimeout(() => { --}}
+    {{--                    if (bbDropdown.classList.contains('opacity-0')) { --}}
+    {{--                        bbDropdown.classList.add('hidden'); --}}
+    {{--                    } --}}
+    {{--                }, 200); --}}
+    {{--            } --}}
+    {{--        }); --}}
 
-{{--        // --- Close all dropdowns when clicking outside -----}}
-{{--        document.addEventListener('click', (e) => {--}}
-{{--            // Check for custom dropdowns--}}
-{{--            if (!e.target.closest('.custom-select-wrapper')) {--}}
-{{--                document.querySelectorAll('.custom-select-options').forEach(container => {--}}
-{{--                    container.classList.add('hidden');--}}
-{{--                });--}}
-{{--            }--}}
-{{--            // Check for Bed & Bath dropdown--}}
-{{--            if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) {--}}
-{{--                bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95');--}}
-{{--            }--}}
-{{--        });--}}
+    {{--        // --- Close all dropdowns when clicking outside --- --}}
+    {{--        document.addEventListener('click', (e) => { --}}
+    {{--            // Check for custom dropdowns --}}
+    {{--            if (!e.target.closest('.custom-select-wrapper')) { --}}
+    {{--                document.querySelectorAll('.custom-select-options').forEach(container => { --}}
+    {{--                    container.classList.add('hidden'); --}}
+    {{--                }); --}}
+    {{--            } --}}
+    {{--            // Check for Bed & Bath dropdown --}}
+    {{--            if (!bbDropdown.contains(e.target) && !bbToggle.contains(e.target)) { --}}
+    {{--                bbDropdown.classList.add('hidden', 'opacity-0', 'scale-95'); --}}
+    {{--            } --}}
+    {{--        }); --}}
 
-{{--        // --- Bed/Bath button logic to simulate selection -----}}
-{{--        function setupButtonSelection(selector) {--}}
-{{--            document.querySelectorAll(selector).forEach(button => {--}}
-{{--                button.addEventListener('click', () => {--}}
-{{--                    document.querySelectorAll(selector).forEach(btn => {--}}
-{{--                        // Remove selection style--}}
-{{--                        btn.classList.remove('bg-black', 'text-white');--}}
-{{--                        btn.classList.add('hover:bg-black', 'hover:text-white');--}}
-{{--                    });--}}
-{{--                    // Apply selection style to the clicked button--}}
-{{--                    button.classList.add('bg-black', 'text-white');--}}
-{{--                    button.classList.remove('hover:bg-black', 'hover:text-white');--}}
-{{--                });--}}
-{{--            });--}}
-{{--        }--}}
-{{--        setupButtonSelection('.bb-bed');--}}
-{{--        setupButtonSelection('.bb-bath');--}}
-{{--    </script>--}}
+    {{--        // --- Bed/Bath button logic to simulate selection --- --}}
+    {{--        function setupButtonSelection(selector) { --}}
+    {{--            document.querySelectorAll(selector).forEach(button => { --}}
+    {{--                button.addEventListener('click', () => { --}}
+    {{--                    document.querySelectorAll(selector).forEach(btn => { --}}
+    {{--                        // Remove selection style --}}
+    {{--                        btn.classList.remove('bg-black', 'text-white'); --}}
+    {{--                        btn.classList.add('hover:bg-black', 'hover:text-white'); --}}
+    {{--                    }); --}}
+    {{--                    // Apply selection style to the clicked button --}}
+    {{--                    button.classList.add('bg-black', 'text-white'); --}}
+    {{--                    button.classList.remove('hover:bg-black', 'hover:text-white'); --}}
+    {{--                }); --}}
+    {{--            }); --}}
+    {{--        } --}}
+    {{--        setupButtonSelection('.bb-bed'); --}}
+    {{--        setupButtonSelection('.bb-bath'); --}}
+    {{--    </script> --}}
 
     {{--
   <div class="w-full relative">
