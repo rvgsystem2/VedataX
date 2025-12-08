@@ -39,6 +39,7 @@ Route::post('contact/save', [HomeController::class, 'contactSave'])->name('conta
 Route::get('/property/{type?}', [HomeController::class, 'property'])->name('property');
 Route::get('/feature', [HomeController::class, 'feature'])->name('feature');
 
+Route::post('set-currency', [HomeController::class, 'setCurrency'])->name('setCurrency');
 
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth','verified'])->name('dashboard');

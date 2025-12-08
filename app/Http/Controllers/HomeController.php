@@ -10,6 +10,7 @@ use App\Models\PropertyType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
@@ -179,7 +180,7 @@ class HomeController extends Controller
 
         // 1) Type filter (rent / sale) – URL se aa raha hai
         if (!empty($type)) {
-            $query->where('type', $type);    // example: /properties/rent
+            $query->where('slug', 'like', "%$type%");    // example: /properties/rent
         }
 
         // 2) Location (city name se)
@@ -376,5 +377,26 @@ class HomeController extends Controller
 
         return back()->with('success', 'Form submitted successfully, we will contact you soon!');
     }
+
+    public function setCurrency(Request $request)
+    {
+        $response = Http::withoutVerifying()->get('https://api.exchangerate-api.com/v4/latest/INR');
+
+        $codeAndSymbol = explode('-', $request->currency);
+        $code   = $codeAndSymbol[0] ?? null;
+        $symbol = $codeAndSymbol[1] ?? null;
+
+        session([
+            'currency' => [
+                'code'     => $code,
+                'rate'     => $response->json()['rates'][$code],
+                'symbol'   => $symbol,
+                'flag_url' => $request->flag_url, // header se empty aa raha hoga, modal me actual flag
+            ]
+        ]);
+
+        return back();
+    }
+
 }
 

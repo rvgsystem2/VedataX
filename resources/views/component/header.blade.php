@@ -94,9 +94,46 @@
                 </a> --}}
                 @php
                     $propertyTypes = \App\Models\PropertyType::all();
+
+                    $currencies = [
+                        ['code' => 'INR', 'symbol' => '₹',  'label' => 'INR - Indian Rupee'],
+                        ['code' => 'USD', 'symbol' => '$',  'label' => 'USD - US Dollar'],
+                        ['code' => 'EUR', 'symbol' => '€',  'label' => 'EUR - Euro'],
+                        ['code' => 'GBP', 'symbol' => '£',  'label' => 'GBP - British Pound'],
+                        ['code' => 'AUD', 'symbol' => '$',  'label' => 'AUD - Australian Dollar'],
+                        ['code' => 'CAD', 'symbol' => '$',  'label' => 'CAD - Canadian Dollar'],
+                        ['code' => 'JPY', 'symbol' => '¥',  'label' => 'JPY - Japanese Yen'],
+                        ['code' => 'CNY', 'symbol' => '¥',  'label' => 'CNY - Chinese Yuan'],
+                        ['code' => 'SGD', 'symbol' => '$',  'label' => 'SGD - Singapore Dollar'],
+                        ['code' => 'NZD', 'symbol' => '$',  'label' => 'NZD - New Zealand Dollar'],
+                        ['code' => 'CHF', 'symbol' => 'CHF','label' => 'CHF - Swiss Franc'],
+                        ['code' => 'HKD', 'symbol' => '$',  'label' => 'HKD - Hong Kong Dollar'],
+                        ['code' => 'SEK', 'symbol' => 'kr', 'label' => 'SEK - Swedish Krona'],
+                        ['code' => 'KRW', 'symbol' => '₩',  'label' => 'KRW - South Korean Won'],
+                        ['code' => 'BRL', 'symbol' => 'R$', 'label' => 'BRL - Brazilian Real'],
+                        ['code' => 'ZAR', 'symbol' => 'R',  'label' => 'ZAR - South African Rand'],
+                        ['code' => 'MXN', 'symbol' => '$',  'label' => 'MXN - Mexican Peso'],
+                        ['code' => 'TRY', 'symbol' => '₺',  'label' => 'TRY - Turkish Lira'],
+                        ['code' => 'RUB', 'symbol' => '₽',  'label' => 'RUB - Russian Ruble'],
+                        ['code' => 'AED', 'symbol' => 'د.إ','label' => 'AED - UAE Dirham'],
+                        ['code' => 'SAR', 'symbol' => '﷼',  'label' => 'SAR - Saudi Riyal'],
+                        ['code' => 'THB', 'symbol' => '฿',  'label' => 'THB - Thai Baht'],
+                        ['code' => 'IDR', 'symbol' => 'Rp', 'label' => 'IDR - Indonesian Rupiah'],
+                        ['code' => 'PKR', 'symbol' => '₨',  'label' => 'PKR - Pakistani Rupee'],
+                        ['code' => 'EGP', 'symbol' => '£',  'label' => 'EGP - Egyptian Pound'],
+                        ['code' => 'NGN', 'symbol' => '₦',  'label' => 'NGN - Nigerian Naira'],
+                        ['code' => 'TWD', 'symbol' => 'NT$','label' => 'TWD - Taiwan Dollar'],
+                    ];
+
+                    // ⚠️ DEFAULT = THB
+                    $activeCurrencyCode   = session('currency.code', 'THB');
+                    $activeCurrencySymbol = session('currency.symbol', '฿');
                 @endphp
 
-                <!-- Enhanced Categories Dropdown -->
+
+
+
+                    <!-- Enhanced Categories Dropdown -->
                 <div class="relative group">
                     <button class="flex items-center text-black hover:text-blue-500 transition hover-lift"
                         onclick="toggleDropdown('categories')">
@@ -224,44 +261,75 @@
                 <!-- Enhanced Currency Dropdown -->
                 <div class="relative group">
                     <button class="flex items-center text-black hover:text-blue-500 transition hover-lift"
-                        onclick="toggleDropdown('currency')">
+                            onclick="toggleDropdown('currency')">
                         <i class="fas fa-money-bill-wave mr-1"></i>
-                        THB ฿
+                        {{ $activeCurrencyCode }} {{ $activeCurrencySymbol }}
                         <svg id="arrow-currency" class="w-4 h-4 ml-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                             stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
+
+
+{{--                    <div id="menu-currency"--}}
+{{--                        class="absolute mt-2 w-40 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"--}}
+{{--                        style="z-index: 70;">--}}
+{{--                        <div class="p-3 dropdown-header text-white">--}}
+{{--                            <h3 class="font-semibold">Select Currency</h3>--}}
+{{--                        </div>--}}
+{{--                        <div class="py-2">--}}
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <span class="font-medium mr-2">Baht</span>- THB ฿--}}
+{{--                            </a>--}}
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <span class="font-medium mr-2">United</span>- USD $--}}
+{{--                            </a>--}}
+{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <span class="font-medium mr-2">Euro</span>- EUR €--}}
+{{--                            </a>--}}
+{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <span class="font-medium mr-2">Pound Sterling</span>- GBP £--}}
+{{--                            </a>--}}
+{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <span class="font-medium mr-2">Russian Ruble</span>- RUB ₽--}}
+{{--                            </a>--}}
+{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <span class="font-medium mr-2">Chinese Yuan</span>- CNY ¥--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+
+{{--                    </div>--}}
+
                     <div id="menu-currency"
-                        class="absolute mt-2 w-40 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
-                        style="z-index: 70;">
+                         class="absolute mt-2 w-56 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
+                         style="z-index: 70;">
                         <div class="p-3 dropdown-header text-white">
                             <h3 class="font-semibold">Select Currency</h3>
                         </div>
-                        <div class="py-2">
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="font-medium mr-2">Baht</span>- THB ฿
-                            </a>
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="font-medium mr-2">United</span>- USD $
-                            </a>
-                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="font-medium mr-2">Euro</span>- EUR €
-                            </a>
-                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="font-medium mr-2">Pound Sterling</span>- GBP £
-                            </a>
-                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="font-medium mr-2">Russian Ruble</span>- RUB ₽
-                            </a>
-                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="font-medium mr-2">Chinese Yuan</span>- CNY ¥
-                            </a>
-                        </div>
 
+                        {{-- YAHAN SCROLLING ADD KI --}}
+                        <div class="py-2 max-h-64 overflow-y-auto">
+                            @foreach($currencies as $cur)
+                                <form action="{{ route('setCurrency') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="currency" value="{{ $cur['code'] . '-' . $cur['symbol'] }}">
+                                    <input type="hidden" name="flag_url" value="">
+
+                                    <button type="submit"
+                                            class="w-full text-left flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100 {{ $activeCurrencyCode === $cur['code'] ? 'bg-gray-100 font-semibold' : '' }}">
+                                        <span class="font-medium mr-2">{{ $cur['label'] }}</span>
+                                        <span>{{ $cur['symbol'] }}</span>
+                                    </button>
+                                </form>
+                            @endforeach
+                        </div>
                     </div>
+
+
+
                 </div>
 
                 <!-- Enhanced Language Dropdown -->
@@ -355,26 +423,21 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <div id="menu-categories-mobile" class="ml-8 mt-2 space-y-2  hidden">
-                    <a href="{{ route('property') }}"
-                        class="block py-2 text-white/80 hover:text-white transition flex items-center">
-                        <i class="fas fa-building mr-2 w-4 text-center"></i>
-                        Apartments <span class="property-count">1,234</span>
-                    </a>
-                    <a href="{{ route('property') }}"
-                        class="block py-2 text-white/80 hover:text-white transition flex items-center">
-                        <i class="fas fa-umbrella-beach mr-2 w-4 text-center"></i>
-                        Villas <span class="property-count">567</span>
-                    </a>
-                    <a href="{{route('property')}}" class="block py-2 text-white/80 hover:text-white transition flex items-center">
-                        <i class="fas fa-city mr-2 w-4 text-center"></i>
-                        Townhouses <span class="property-count">890</span>
-                    </a>
-                    <a href="{{route('property')}}" class="block py-2 text-white/80 hover:text-white transition flex items-center">
-                        <i class="fas fa-mountain mr-2 w-4 text-center"></i>
-                        Land <span class="property-count">321</span>
-                    </a>
+                <div id="menu-categories-mobile" class="ml-8 mt-2 space-y-2 hidden">
+                    @foreach($propertyTypes as $propertyType)
+                        <a href="{{ route('property', $propertyType->slug) }}"
+                           class="block py-2 text-white/80 hover:text-white transition flex items-center">
+                            <i class="{{ $propertyType->icon_class }} mr-2 w-4 text-center"></i>
+                            {{ $propertyType->title ?? $propertyType->name }}
+                            @if(isset($propertyType->properties_count))
+                                <span class="property-count">
+                    {{ number_format($propertyType->properties_count) }}
+                </span>
+                            @endif
+                        </a>
+                    @endforeach
                 </div>
+
             </div>
             {{-- <a href="{{ route('about') }}"
                 class="block py-3 text-white hover:bg-white/10 rounded-lg px-3 transition flex items-center">
