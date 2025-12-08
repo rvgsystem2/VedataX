@@ -42,7 +42,7 @@
                         <td class="px-6 py-4 text-sm text-gray-800">{{ $properties->firstItem() + $index }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900 font-semibold">{{ $property->title }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700 capitalize">{{ $property->type }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">₹{{ number_format($property->price, 2) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-700">฿{{ number_format($property->price, 2) }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $property->propertyType->title ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $property->city->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm">
