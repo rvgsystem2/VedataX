@@ -140,7 +140,7 @@
                                             class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
                                             <!-- Price -->
                                             <span class="text-white font-semibold text-lg">
-                                                ฿{{ number_format($property->price, 0) }}
+                                                {{ display_price($bestDeal->price) }}
                                                                         @if($property->type === 'rent')
                                                                             /month
                                                                         @endif

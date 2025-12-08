@@ -380,23 +380,35 @@ class HomeController extends Controller
 
     public function setCurrency(Request $request)
     {
-        $response = Http::withoutVerifying()->get('https://api.exchangerate-api.com/v4/latest/INR');
-
         $codeAndSymbol = explode('-', $request->currency);
-        $code   = $codeAndSymbol[0] ?? null;
-        $symbol = $codeAndSymbol[1] ?? null;
+        $code   = $codeAndSymbol[0] ?? null;   // e.g. "USD"
+        $symbol = $codeAndSymbol[1] ?? null;   // e.g. "$"
+
+        // Base = THB (kyunki database price THB me hai)
+        $response = Http::withoutVerifying()->get('https://api.exchangerate-api.com/v4/latest/THB');
+        $data  = $response->json();
+        $rates = $data['rates'] ?? [];
+
+        // Agar THB hi select kare, to rate 1 rakho
+        if ($code === 'THB') {
+            $rate = 1;
+        } else {
+            // Agar API se rate mila to use karo, warna fallback = 1
+            $rate = $rates[$code] ?? 1;
+        }
 
         session([
             'currency' => [
                 'code'     => $code,
-                'rate'     => $response->json()['rates'][$code],
+                'rate'     => $rate,    // 1 THB = ? selected currency
                 'symbol'   => $symbol,
-                'flag_url' => $request->flag_url, // header se empty aa raha hoga, modal me actual flag
+                'flag_url' => $request->flag_url,
             ]
         ]);
 
         return back();
     }
+
 
 }
 

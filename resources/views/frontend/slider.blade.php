@@ -231,7 +231,7 @@
 
                                 {{-- PRICE --}}
                                 <span class="text-white font-semibold text-lg">
-                                    {{ number_format($bestDeal->price, 0) }} THB
+                                    {{ display_price($bestDeal->price) }}
                                 </span>
 
                                 {{-- ACTION ICONS --}}
@@ -584,7 +584,7 @@
                                 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
 
                                 <span class="text-white font-semibold text-lg">
-                                    {{ number_format($villa->price ?? 0) }} THB
+                                    {{ display_price($bestDeal->price) }}
                                 </span>
 
                                 <div class="flex space-x-3 text-white text-lg">
@@ -837,7 +837,7 @@
                                 class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
                            bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
                     <span class="text-white font-semibold text-lg">
-                        {{ number_format($land->price ?? 0) }} THB
+                        {{ display_price($bestDeal->price) }}
                     </span>
 
                                 <div class="flex space-x-3 text-white text-lg">

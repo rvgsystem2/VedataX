@@ -38,9 +38,14 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Price (INR)</label>
-                        <input type="number" name="price" value="{{ old('price', $property->price ?? '') }}" required
+                        <label class="block text-sm font-medium text-gray-700">
+                            Price (THB)
+                        </label>
+                        <input type="number" name="price"
+                               value="{{ old('price', $property->price ?? '') }}"
+                               required
                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+
                     </div>
 
                     <div>
