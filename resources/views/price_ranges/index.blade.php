@@ -7,10 +7,12 @@
                 {{ __('Price Ranges') }}
             </h2>
 
+            @can('add price ranges')
             <a href="{{ route('price-ranges.create') }}"
                class="font-bold text-base text-white bg-gradient-to-r from-[#c21108] to-[#000308] px-4 py-2 rounded-md shadow-md hover:from-[#000308] hover:to-[#c21108] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#c21108] transition duration-300 ease-in-out">
                 + Add New
             </a>
+            @endcan
         </div>
     </x-slot>
 
@@ -72,6 +74,7 @@
                         {{-- Actions --}}
                         <td class="px-6 py-4 text-right text-sm">
 
+                            @can('remove price ranges')
                             <form action="{{ route('price-ranges.destroy', $range->id) }}"
                                   method="POST"
                                   class="inline-block"
@@ -79,9 +82,10 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:underline">
-                                    Delete
+                                    Remove
                                 </button>
                             </form>
+                            @endcan
                         </td>
                     </tr>
                 @empty
