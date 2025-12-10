@@ -133,6 +133,13 @@ Route::middleware('auth')->group(function () {
         Route::delete('force/{id}','forceDelete')->name('forceDelete');
     });
 
+    Route::prefix('price-ranges')->name('price-ranges.')->controller(\App\Http\Controllers\PriceRangeController::class)->group(function(){
+       Route::get('index', 'index')->name('index');
+       Route::get('create', 'create')->name('create');
+       Route::post('store', 'store')->name('store');
+       Route::delete('delete/{range}', 'destroy')->name('destroy');
+    });
+
 
 });
 

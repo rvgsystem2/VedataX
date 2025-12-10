@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Models\City;
 use App\Models\Enquiry;
+use App\Models\PriceRange;
 use App\Models\Property;
 use App\Models\PropertyType;
 use App\Models\User;
@@ -40,7 +41,9 @@ class HomeController extends Controller
             })
                 ->with(['properties.images', 'properties.city', 'properties.listedBy', 'properties.amenities'])
                 ->first()?->properties ?? collect();
-        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands'));
+        $minPrices = PriceRange::where('type', 'min')->get();
+        $maxPrices = PriceRange::where('type', 'max')->get();
+        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands', 'minPrices','maxPrices'));
     }
 
     public function landproperty(){

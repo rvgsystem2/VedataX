@@ -201,11 +201,21 @@
                                         </svg>
                                     </div>
 
+{{--                                    <div class="custom-select-options hidden z-[9999]">--}}
+{{--                                        <div class="custom-option" data-value="">Min</div>--}}
+{{--                                        <div class="custom-option" data-value="1000000">฿1,000,000</div>--}}
+{{--                                        <div class="custom-option" data-value="3000000">฿3,000,000</div>--}}
+{{--                                    </div>--}}
                                     <div class="custom-select-options hidden z-[9999]">
                                         <div class="custom-option" data-value="">Min</div>
-                                        <div class="custom-option" data-value="1000000">฿1,000,000</div>
-                                        <div class="custom-option" data-value="3000000">฿3,000,000</div>
+
+                                        @foreach($minPrices as $price)
+                                            <div class="custom-option" data-value="{{ $price->value }}">
+                                                {{ $price->label }}
+                                            </div>
+                                        @endforeach
                                     </div>
+
                                 </div>
                                 <input type="hidden" name="min_price" value="">
                             </div>
@@ -222,11 +232,21 @@
                                         </svg>
                                     </div>
 
+{{--                                    <div class="custom-select-options hidden z-[9999]">--}}
+{{--                                        <div class="custom-option" data-value="">Max</div>--}}
+{{--                                        <div class="custom-option" data-value="10000000">฿10,000,000</div>--}}
+{{--                                        <div class="custom-option" data-value="20000000">฿20,000,000</div>--}}
+{{--                                    </div>--}}
                                     <div class="custom-select-options hidden z-[9999]">
                                         <div class="custom-option" data-value="">Max</div>
-                                        <div class="custom-option" data-value="10000000">฿10,000,000</div>
-                                        <div class="custom-option" data-value="20000000">฿20,000,000</div>
+
+                                        @foreach($maxPrices as $price)
+                                            <div class="custom-option" data-value="{{ $price->value }}">
+                                                {{ $price->label }}
+                                            </div>
+                                        @endforeach
                                     </div>
+
                                 </div>
                                 <input type="hidden" name="max_price" value="">
                             </div>

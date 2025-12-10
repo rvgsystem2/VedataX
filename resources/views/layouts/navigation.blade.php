@@ -96,6 +96,12 @@
                             </x-nav-link>
                                 @endcan
 
+                                @can('show price ranges')
+                                    <x-nav-link :href="route('price-ranges.index')" :active="request()->routeIs('price-ranges.index')" class="block px-4 py-2 text-left">
+                                        <i class="fas fa-layer-group mr-1"></i> __(Price Ranges)
+                                    </x-nav-link>
+                                @endcan
+
                         </div>
                     </div>
 
