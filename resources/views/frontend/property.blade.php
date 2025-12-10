@@ -140,7 +140,7 @@
                                             class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
                                             <!-- Price -->
                                             <span class="text-white font-semibold text-lg">
-                                                {{ display_price($bestDeal->price) }}
+                                                {{ display_price($property->price) }}
                                                                         @if($property->type === 'rent')
                                                                             /month
                                                                         @endif
@@ -245,22 +245,85 @@
                 </div>
 
                 <!-- Pagination -->
-                <div class="flex justify-center mt-12">
-                    <nav class="flex items-center space-x-1">
-                        <button class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+{{--                <div class="flex justify-center mt-12">--}}
+{{--                    <nav class="flex items-center space-x-1">--}}
+{{--                        <button class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">--}}
+{{--                            <i class="fas fa-chevron-left text-xs"></i>--}}
+{{--                        </button>--}}
+{{--                        <button class="px-3 py-1 rounded bg-black text-white text-sm">1</button>--}}
+{{--                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">2</button>--}}
+{{--                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">3</button>--}}
+{{--                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">4</button>--}}
+{{--                        <button class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">--}}
+{{--                            <i class="fas fa-chevron-right text-xs"></i>--}}
+{{--                        </button>--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
+
+
+        @if ($properties->hasPages())
+            <div class="flex justify-center mt-12">
+                <nav class="flex items-center space-x-1">
+
+                    {{-- Previous Button --}}
+                    @if ($properties->onFirstPage())
+                        <button
+                            class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-400 cursor-not-allowed transition-colors"
+                            disabled
+                        >
                             <i class="fas fa-chevron-left text-xs"></i>
                         </button>
-                        <button class="px-3 py-1 rounded bg-black text-white text-sm">1</button>
-                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">2</button>
-                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">3</button>
-                        <button class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm">4</button>
-                        <button class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors">
+                    @else
+                        <a
+                            href="{{ $properties->previousPageUrl() }}"
+                            class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                            <i class="fas fa-chevron-left text-xs"></i>
+                        </a>
+                    @endif
+
+                    {{-- Page Numbers --}}
+                    @for ($page = 1; $page <= $properties->lastPage(); $page++)
+                        @if ($page == $properties->currentPage())
+                            {{-- Active page --}}
+                            <span
+                                class="px-3 py-1 rounded bg-black text-white text-sm"
+                            >
+                        {{ $page }}
+                    </span>
+                        @else
+                            <a
+                                href="{{ $properties->url($page) }}"
+                                class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm"
+                            >
+                                {{ $page }}
+                            </a>
+                        @endif
+                    @endfor
+
+                    {{-- Next Button --}}
+                    @if ($properties->hasMorePages())
+                        <a
+                            href="{{ $properties->nextPageUrl() }}"
+                            class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors"
+                        >
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a>
+                    @else
+                        <button
+                            class="px-2 py-1 rounded border border-gray-300 bg-white text-gray-400 cursor-not-allowed transition-colors"
+                            disabled
+                        >
                             <i class="fas fa-chevron-right text-xs"></i>
                         </button>
-                    </nav>
-                </div>
+                    @endif
 
-                <script>
+                </nav>
+            </div>
+        @endif
+
+
+        <script>
                     // Initialize Swiper for each property card
                     document.addEventListener('DOMContentLoaded', function() {
                         // Initialize all property swipers

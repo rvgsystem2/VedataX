@@ -637,73 +637,164 @@
 
 
                 {{-- PRICE RANGE (same layout: Min + Max side by side) --}}
+{{--                <div class="flex gap-2">--}}
+{{--                    --}}{{-- MIN --}}
+{{--                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"--}}
+{{--                         data-target="min_price">--}}
+{{--                        <div class="custom-select-header" data-value="{{ request('min_price', 'Min') }}">--}}
+{{--                    <span class="custom-select-label font-medium">--}}
+{{--                        @php--}}
+{{--                            $minPrice = request('min_price');--}}
+{{--                        @endphp--}}
+{{--                        @if(!$minPrice)--}}
+{{--                            Min--}}
+{{--                        @elseif($minPrice == 1000000)--}}
+{{--                            ฿1,000,000--}}
+{{--                        @elseif($minPrice == 3000000)--}}
+{{--                            ฿3,000,000--}}
+{{--                        @else--}}
+{{--                            Min--}}
+{{--                        @endif--}}
+{{--                    </span>--}}
+{{--                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                      d="M19 9l-7 7-7-7" />--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">--}}
+{{--                            <div class="custom-option {{ !request('min_price') ? 'selected' : '' }}"--}}
+{{--                                 data-value="Min">Min</div>--}}
+{{--                            <div class="custom-option {{ request('min_price') == 1000000 ? 'selected' : '' }}"--}}
+{{--                                 data-value="1000000">฿1,000,000</div>--}}
+{{--                            <div class="custom-option {{ request('min_price') == 3000000 ? 'selected' : '' }}"--}}
+{{--                                 data-value="3000000">฿3,000,000</div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    --}}{{-- MAX --}}
+{{--                    <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"--}}
+{{--                         data-target="max_price">--}}
+{{--                        <div class="custom-select-header" data-value="{{ request('max_price', 'Max') }}">--}}
+{{--                    <span class="custom-select-label font-medium">--}}
+{{--                        @php--}}
+{{--                            $maxPrice = request('max_price');--}}
+{{--                        @endphp--}}
+{{--                        @if(!$maxPrice)--}}
+{{--                            Max--}}
+{{--                        @elseif($maxPrice == 10000000)--}}
+{{--                            ฿10,000,000--}}
+{{--                        @elseif($maxPrice == 20000000)--}}
+{{--                            ฿20,000,000--}}
+{{--                        @else--}}
+{{--                            Max--}}
+{{--                        @endif--}}
+{{--                    </span>--}}
+{{--                            <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                      d="M19 9l-7 7-7-7" />--}}
+{{--                            </svg>--}}
+{{--                        </div>--}}
+{{--                        <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">--}}
+{{--                            <div class="custom-option {{ !request('max_price') ? 'selected' : '' }}"--}}
+{{--                                 data-value="Max">Max</div>--}}
+{{--                            <div class="custom-option {{ request('max_price') == 10000000 ? 'selected' : '' }}"--}}
+{{--                                 data-value="10000000">฿10,000,000</div>--}}
+{{--                            <div class="custom-option {{ request('max_price') == 20000000 ? 'selected' : '' }}"--}}
+{{--                                 data-value="20000000">฿20,000,000</div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+
                 <div class="flex gap-2">
                     {{-- MIN --}}
                     <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"
                          data-target="min_price">
-                        <div class="custom-select-header" data-value="{{ request('min_price', 'Min') }}">
-                    <span class="custom-select-label font-medium">
+
                         @php
-                            $minPrice = request('min_price');
+                            $selectedMinValue = request('min_price');
+                            $selectedMinLabel = 'Min';
+
+                            if ($selectedMinValue) {
+                                $foundMin = $minPrices->firstWhere('value', (int) $selectedMinValue);
+                                if ($foundMin) {
+                                    $selectedMinLabel = $foundMin->label;
+                                }
+                            }
                         @endphp
-                        @if(!$minPrice)
-                            Min
-                        @elseif($minPrice == 1000000)
-                            ฿1,000,000
-                        @elseif($minPrice == 3000000)
-                            ฿3,000,000
-                        @else
-                            Min
-                        @endif
-                    </span>
+
+                        <div class="custom-select-header" data-value="{{ $selectedMinValue ?? '' }}">
+            <span class="custom-select-label font-medium">
+                {{ $selectedMinLabel }}
+            </span>
                             <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
+
                         <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                            {{-- Default Min --}}
                             <div class="custom-option {{ !request('min_price') ? 'selected' : '' }}"
-                                 data-value="Min">Min</div>
-                            <div class="custom-option {{ request('min_price') == 1000000 ? 'selected' : '' }}"
-                                 data-value="1000000">฿1,000,000</div>
-                            <div class="custom-option {{ request('min_price') == 3000000 ? 'selected' : '' }}"
-                                 data-value="3000000">฿3,000,000</div>
+                                 data-value="">
+                                Min
+                            </div>
+
+                            {{-- Dynamic Min Options --}}
+                            @foreach($minPrices as $price)
+                                <div class="custom-option {{ (string)request('min_price') === (string)$price->value ? 'selected' : '' }}"
+                                     data-value="{{ $price->value }}">
+                                    {{ $price->label }}
+                                </div>
+                            @endforeach
                         </div>
                     </div>
 
                     {{-- MAX --}}
                     <div class="custom-select-wrapper flex-1 relative z-50 border border-gray-300 rounded-2xl"
                          data-target="max_price">
-                        <div class="custom-select-header" data-value="{{ request('max_price', 'Max') }}">
-                    <span class="custom-select-label font-medium">
+
                         @php
-                            $maxPrice = request('max_price');
+                            $selectedMaxValue = request('max_price');
+                            $selectedMaxLabel = 'Max';
+
+                            if ($selectedMaxValue) {
+                                $foundMax = $maxPrices->firstWhere('value', (int) $selectedMaxValue);
+                                if ($foundMax) {
+                                    $selectedMaxLabel = $foundMax->label;
+                                }
+                            }
                         @endphp
-                        @if(!$maxPrice)
-                            Max
-                        @elseif($maxPrice == 10000000)
-                            ฿10,000,000
-                        @elseif($maxPrice == 20000000)
-                            ฿20,000,000
-                        @else
-                            Max
-                        @endif
-                    </span>
+
+                        <div class="custom-select-header" data-value="{{ $selectedMaxValue ?? '' }}">
+            <span class="custom-select-label font-medium">
+                {{ $selectedMaxLabel }}
+            </span>
                             <svg class="w-4 h-4 text-black/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                       d="M19 9l-7 7-7-7" />
                             </svg>
                         </div>
+
                         <div class="custom-select-options hidden absolute left-0 mt-2 w-full bg-white">
+                            {{-- Default Max --}}
                             <div class="custom-option {{ !request('max_price') ? 'selected' : '' }}"
-                                 data-value="Max">Max</div>
-                            <div class="custom-option {{ request('max_price') == 10000000 ? 'selected' : '' }}"
-                                 data-value="10000000">฿10,000,000</div>
-                            <div class="custom-option {{ request('max_price') == 20000000 ? 'selected' : '' }}"
-                                 data-value="20000000">฿20,000,000</div>
+                                 data-value="">
+                                Max
+                            </div>
+
+                            {{-- Dynamic Max Options --}}
+                            @foreach($maxPrices as $price)
+                                <div class="custom-option {{ (string)request('max_price') === (string)$price->value ? 'selected' : '' }}"
+                                     data-value="{{ $price->value }}">
+                                    {{ $price->label }}
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
+
+
 
                 <input type="hidden" name="min_price" id="min_price" value="{{ request('min_price', '') }}">
                 <input type="hidden" name="max_price" id="max_price" value="{{ request('max_price', '') }}">

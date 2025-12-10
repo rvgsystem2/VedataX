@@ -104,7 +104,7 @@ class HomeController extends Controller
         if ($request->filled('bedrooms')) {
             $query->where('bedrooms', '>=', $request->bedrooms);
         }
-        $properties = $query->where('status', 'available')->get();
+        $properties = $query->where('status', 'available')->paginate();
         $propertyTypes = PropertyType::all();
         $cities = City::all();
         return view('frontend.typed-property', compact('properties', 'recommendations', 'propertyTypes', 'cities', 'finalType'));
@@ -223,17 +223,19 @@ class HomeController extends Controller
 
         // Final result (agar chaho to paginate bhi kar sakte ho)
         // $properties = $query->paginate(12)->appends($request->query());
-        $properties = $query->get();
+        $properties = $query->paginate(2);
 
         // Filters ke liye dropdown data
         $cities        = City::orderBy('name')->get();
         $propertyTypes = PropertyType::orderBy('title')->get();
-
+        $minPrices = PriceRange::where('type', 'min')->orderBy('value')->get();
+        $maxPrices = PriceRange::where('type', 'max')->orderBy('value')->get();
         return view('frontend.property', compact(
             'properties',
             'cities',
             'propertyTypes',
-            'type'
+            'type',
+            'minPrices', 'maxPrices'
         ));
     }
 
