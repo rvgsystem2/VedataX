@@ -321,154 +321,34 @@
                     </a>
                 </div>
             @endforeach
-
-
-{{--            <!-- Slide 1 -->--}}
-{{--            <div class="swiper-slide">--}}
-{{--                <div class="property-card">--}}
-{{--                    <div class="relative">--}}
-{{--                        <div class="swiper inner-swiper h-48">--}}
-{{--                            <div class="swiper-wrapper">--}}
-{{--                                <div class="swiper-slide">--}}
-{{--                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"--}}
-{{--                                        class="w-full h-full object-cover" alt="Modern interior" />--}}
-{{--                                </div>--}}
-{{--                                <div class="swiper-slide">--}}
-{{--                                    <img src="https://cdn.pixabay.com/photo/2015/11/06/11/39/single-family-home-1026371_1280.jpg"--}}
-{{--                                        class="w-full h-full object-cover" alt="House exterior" />--}}
-{{--                                </div>--}}
-{{--                                <div class="swiper-slide">--}}
-{{--                                    <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg"--}}
-{{--                                        class="w-full h-full object-cover" alt="Living room" />--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="swiper-button-next"></div>--}}
-{{--                            <div class="swiper-button-prev"></div>--}}
-{{--                        </div>--}}
-{{--                        <div class="absolute top-3 left-3">--}}
-{{--                            <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">FOR SALE</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="absolute top-3 right-3">--}}
-{{--                            <button--}}
-{{--                                class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">--}}
-{{--                                <i class="far fa-heart"></i>--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-
-{{--                        <!-- Price overlay -->--}}
-{{--                        <div--}}
-{{--                            class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">--}}
-{{--                            <!-- Price -->--}}
-{{--                            <span class="text-white font-semibold text-lg">12,900,000THB</span>--}}
-
-{{--                            <!-- Icons -->--}}
-{{--                            <div class="flex space-x-3 text-white text-lg">--}}
-{{--                                <!-- Expand Icon -->--}}
-{{--                                <button class="expand-btn hover:text-gray-300 transition">--}}
-{{--                                    <i class="fas fa-expand"></i>--}}
-{{--                                </button>--}}
-
-{{--                                <!-- Heart Icon -->--}}
-{{--                                <button class="favorite-btn hover:text-red-400 transition">--}}
-{{--                                    <i class="far fa-heart"></i>--}}
-{{--                                </button>--}}
-
-{{--                                <!-- Plus Icon -->--}}
-{{--                                <button class="compare-btn hover:text-gray-300 transition">--}}
-{{--                                    <i class="fas fa-plus"></i>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="p-4">--}}
-{{--                        <div class="flex justify-between items-start">--}}
-{{--                            <div>--}}
-{{--                                <h3 class="font-bold text-lg text-gray-800">Modern Villa in Beverly Hills</h3>--}}
-{{--                                <p class="text-gray-600 text-sm flex items-center mt-1">--}}
-{{--                                    <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>--}}
-{{--                                    1234 Sunset Blvd, Beverly Hills--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">--}}
-{{--                            <div class="flex items-center">--}}
-{{--                                <i class="fas fa-bed text-gray-400 mr-1"></i>--}}
-{{--                                <span>4 Beds</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex items-center">--}}
-{{--                                <i class="fas fa-bath text-gray-400 mr-1"></i>--}}
-{{--                                <span>3 Baths</span>--}}
-{{--                            </div>--}}
-{{--                            <div class="flex items-center">--}}
-{{--                                <i class="fas fa-vector-square text-gray-400 mr-1"></i>--}}
-{{--                                <span>3,500 sqft</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        <div class="flex justify-between items-center mt-4">--}}
-{{--                            <!-- Agent Info -->--}}
-{{--                            <div class="flex items-center">--}}
-{{--                                <div--}}
-{{--                                    class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">--}}
-{{--                                    SH--}}
-{{--                                </div>--}}
-{{--                                <div class="ml-3">--}}
-{{--                                    <p class="text-sm font-medium text-gray-900">Sunny Houssaye</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <!-- Share Button and Time -->--}}
-{{--                            <div class="flex items-center space-x-2">--}}
-{{--                                <!-- Share Icon -->--}}
-{{--                                <button--}}
-{{--                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">--}}
-{{--                                    <i class="fas fa-share-alt"></i>--}}
-{{--                                </button>--}}
-{{--                                <!-- Time Posted -->--}}
-{{--                                <p class="text-xs text-gray-500">2 months ago</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <!-- Slide 1 -->--}}
-
-
-            <!-- Additional slides (2-6) would go here -->
-            <!-- For brevity, I'm including just one slide in this example -->
         </div>
 
 
         <!-- ✅ Bottom Controls (Pagination Centered with Arrows on Both Sides) -->
-<div class="custom-controls mt-8 flex flex-col items-center space-y-4 pb-6">
+        <div class="custom-controls mt-8 flex flex-col items-center space-y-4 pb-6">
 
-    <!-- Pagination + Arrows in One Row -->
-    <div class="flex items-center justify-center">
+            <!-- Pagination + Arrows in One Row -->
+            <div class="flex items-center justify-center">
 
-      <!-- Prev Button -->
-      <button
-        class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-        <i class="fas fa-chevron-left text-white"></i>
-      </button>
+              <!-- Prev Button -->
+              <button
+                class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <i class="fas fa-chevron-left text-white"></i>
+              </button>
 
-      <!-- Pagination Dots (Centered) -->
-      <div class="custom-pagination flex justify-center text-black "></div>
+              <!-- Pagination Dots (Centered) -->
+              <div class="custom-pagination flex justify-center text-black "></div>
 
-      <!-- Next Button -->
-      <button
-        class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-        <i class="fas fa-chevron-right text-white "></i>
-      </button>
+              <!-- Next Button -->
+              <button
+                class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                <i class="fas fa-chevron-right text-white "></i>
+              </button>
+            </div>
+
+        </div>
+
     </div>
-
-    <!-- Slide Counter (Optional, Below Pagination Row) -->
-    {{-- <div class="slide-counter text-sm text-gray-600">
-      <span class="current-slide font-medium">1</span> / <span class="total-slides font-medium">6</span>
-    </div> --}}
-</div>
-
-</div>
 </section>
 
 

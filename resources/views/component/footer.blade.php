@@ -40,7 +40,7 @@
                     @foreach($propertyTypes as $propertyType)
 
                     <a href="{{route('property', ['type' => $propertyType->slug])}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
-                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Villas/ Houses
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> {{$propertyType->title}}
                     </li></a>
                     @endforeach
 

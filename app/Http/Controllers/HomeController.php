@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -411,6 +412,11 @@ class HomeController extends Controller
             ]
         ]);
 
+        return back();
+    }
+
+    public function setLang($lang){
+        Session::put('lang', $lang);
         return back();
     }
 

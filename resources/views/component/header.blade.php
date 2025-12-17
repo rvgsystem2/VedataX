@@ -85,7 +85,7 @@
                 <a href="{{ route('property') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-shopping-cart mr-1"></i>
-                    Buy
+                    {{__('header.buy')}}
                 </a>
                {{--  <a href="{{ route('property') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
@@ -138,7 +138,7 @@
                     <button class="flex items-center text-black hover:text-blue-500 transition hover-lift"
                         onclick="toggleDropdown('categories')">
                         <i class="fas fa-th-large mr-1"></i>
-                        Categories
+                        {{__('header.categories')}}
                         <svg id="arrow-categories" class="w-4 h-4 ml-1 transition-transform" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -148,7 +148,7 @@
                         class="absolute mt-2 w-56 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
                         style="z-index: 70;">
                         <div class="p-3 dropdown-header text-white">
-                            <h3 class="font-semibold">Property Types</h3>
+                            <h3 class="font-semibold">{{__('header.property_type')}}</h3>
                         </div>
                         <div class="py-2">
                             @foreach($propertyTypes as $propertyType)
@@ -249,13 +249,13 @@
                 <a href="{{ route('contact') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-envelope mr-1"></i>
-                    Contact
+                    {{__('header.contact')}}
                 </a>
 
                 <a href="{{ route('dashboard') }}"
                     class="text-black hover:text-blue-500 transition flex items-center hover-lift">
                     <i class="fas fa-envelope mr-1"></i>
-                    Dashboard
+                    {{__('header.dashboard')}}
                 </a>
 
                 <!-- Enhanced Currency Dropdown -->
@@ -307,7 +307,7 @@
                          class="absolute mt-2 w-56 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
                          style="z-index: 70;">
                         <div class="p-3 dropdown-header text-white">
-                            <h3 class="font-semibold">Select Currency</h3>
+                            <h3 class="font-semibold">{{__('header.select_currency')}}</h3>
                         </div>
 
                         {{-- YAHAN SCROLLING ADD KI --}}
@@ -347,17 +347,17 @@
                         class="absolute mt-2 w-40 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
                         style="z-index: 70;">
                         <div class="p-3 dropdown-header text-white">
-                            <h3 class="font-semibold">Select Language</h3>
+                            <h3 class="font-semibold">{{__('header.select_language')}}</h3>
                         </div>
                         <div class="py-2">
-                            <a href="#"
+                            <a href="{{route('set-lang', 'en')}}"
                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
                                 <span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English
                             </a>
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย--}}
-{{--                            </a>--}}
+                            <a href="{{route('set-lang', 'th')}}"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย
+                            </a>
 {{--                            <a href="#"--}}
 {{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
 {{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文--}}
