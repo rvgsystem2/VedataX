@@ -354,22 +354,22 @@
                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
                                 <span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English
                             </a>
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย
-                            </a>
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文
-                            </a>
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
-                                <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français
-                            </a>
-                            <a href="#"
-                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition">
-                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย
-                            </a>
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย--}}
+{{--                            </a>--}}
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文--}}
+{{--                            </a>--}}
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français--}}
+{{--                            </a>--}}
+{{--                            <a href="#"--}}
+{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
+{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย--}}
+{{--                            </a>--}}
                         </div>
 
                     </div>

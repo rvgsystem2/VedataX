@@ -47,8 +47,15 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-gray-700 font-spartan">Address</p>
-                                <p class="text-gray-600 mt-1 font-spartan">7/21 moo 6 Maenam 84330, Koh Samui, Thailand</p>
+
+                                <a
+                                    href="https://www.google.com/maps/search/?api=1&query=7%2F21+moo+6+Maenam+84330%2C+Koh+Samui%2C+Thailand"
+                                    target="_blank"
+                                    class="text-gray-600 mt-1 font-spartan hover:text-blue-600 underline">
+                                    7/21 moo 6 Maenam 84330, Koh Samui, Thailand
+                                </a>
                             </div>
+
                         </div>
 
                         <!-- Email -->
@@ -58,8 +65,14 @@
                             </div>
                             <div>
                                 <p class="font-semibold text-gray-700 font-spartan">Email</p>
-                                <p class="text-gray-600 mt-1 font-spartan">info@vedata.co</p>
+
+                                <a
+                                    href="mailto:info@vedata.co"
+                                    class="text-gray-600 mt-1 font-spartan hover:text-blue-600 underline">
+                                    info@vedata.co
+                                </a>
                             </div>
+
                         </div>
 
                         <!-- Phone -->
@@ -68,10 +81,19 @@
                                 <i class="fas fa-phone text-blue-600"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-700 font-spartan">Phone:</p>
-                                <p class="text-gray-600 mt-1 font-spartan font-bold">+66 96 807 5911
-                                   </p>
-                                <p class="text-gray-600 mt-1 font-spartan font-bold" > +66 96 662 6272</p>
+                                <div>
+                                    <p class="font-semibold text-gray-700 font-spartan">Phone:</p>
+
+                                    <a href="tel:+66968075911"
+                                       class="text-gray-600 mt-1 font-spartan font-bold hover:text-blue-600 underline block">
+                                        +66 96 807 5911
+                                    </a>
+
+                                    <a href="tel:+66966626272"
+                                       class="text-gray-600 mt-1 font-spartan font-bold hover:text-blue-600 underline block">
+                                        +66 96 662 6272
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
