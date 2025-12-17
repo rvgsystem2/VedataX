@@ -165,164 +165,355 @@
 </style>
 
 <!-- Best Deals Section -->
+{{--<section class="w-full max-w-7xl mx-auto px-4 py-6">--}}
+{{--    <div class="text-center mb-12 fade-in">--}}
+{{--        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Best Deals</h1>--}}
+{{--        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of premium properties--}}
+{{--            designed to enhance your lifestyle.</p>--}}
+{{--    </div>--}}
+
+{{--    <div class="swiper multiple-slide-carousel w-full relative fade-in">--}}
+{{--        <div class="swiper-wrapper">--}}
+{{--            <!-- Slide 1 -->--}}
+{{--            @foreach($bestDeals as $bestDeal)--}}
+
+{{--                <div class="swiper-slide">--}}
+{{--                    <a href="{{route('detail', ['property' => $bestDeal->id])}}">--}}
+{{--                    <div class="property-card">--}}
+{{--                        <div class="relative">--}}
+
+{{--                            --}}{{-- INNER SWIPER (Property Images) --}}
+
+{{--                            <div class="swiper inner-swiper h-48">--}}
+{{--                                <div class="swiper-wrapper">--}}
+{{--                                    @if($bestDeal->images && count($bestDeal->images))--}}
+{{--                                        @foreach($bestDeal->images as $img)--}}
+{{--                                            <div class="swiper-slide">--}}
+{{--                                                <img src="{{ asset('storage/' . $img->url) }}"--}}
+{{--                                                     class="w-full h-full object-cover"--}}
+{{--                                                     alt="{{ $bestDeal->title }}">--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+{{--                                    @else--}}
+{{--                                        --}}{{-- Default fallback image --}}
+{{--                                        <div class="swiper-slide">--}}
+{{--                                            <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"--}}
+{{--                                                 class="w-full h-full object-cover"--}}
+{{--                                                 alt="No Image">--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+
+{{--                                </div>--}}
+
+{{--                                --}}{{-- tiny arrows --}}
+{{--                                <div class="swiper-button-next"></div>--}}
+{{--                                <div class="swiper-button-prev"></div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- BADGE --}}
+{{--                            <div class="absolute top-3 left-3">--}}
+{{--                                <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">--}}
+{{--                                    {{ strtoupper($bestDeal->type) }} --}}{{-- RENT / SALE --}}
+{{--                                </span>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- FAVORITE BUTTON --}}
+{{--                            <div class="absolute top-3 right-3">--}}
+{{--                                <button--}}
+{{--                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">--}}
+{{--                                    <i class="far fa-heart"></i>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- PRICE OVERLAY --}}
+{{--                            <div--}}
+{{--                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">--}}
+
+{{--                                --}}{{-- PRICE --}}
+{{--                                <span class="text-white font-semibold text-lg">--}}
+{{--                                    {{ display_price($bestDeal->price) }}--}}
+{{--                                </span>--}}
+
+{{--                                --}}{{-- ACTION ICONS --}}
+{{--                                <div class="flex space-x-3 text-white text-lg">--}}
+{{--                                    <button class="expand-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-expand"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="favorite-btn hover:text-red-400 transition">--}}
+{{--                                        <i class="far fa-heart"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="compare-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-plus"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                        </div>--}}
+
+{{--                        --}}{{-- CONTENT --}}
+{{--                        <div class="p-4">--}}
+
+{{--                            <div class="flex justify-between items-start">--}}
+{{--                                <div>--}}
+{{--                                    <h3 class="font-bold text-lg text-gray-800">--}}
+{{--                                        {{ $bestDeal->title }}--}}
+{{--                                    </h3>--}}
+
+{{--                                    <p class="text-gray-600 text-sm flex items-center mt-1">--}}
+{{--                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>--}}
+{{--                                        {{ $bestDeal->address ?? 'No Address' }},--}}
+{{--                                        {{ optional($bestDeal->city)->name }}--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- BEDROOMS, BATHROOMS, AREA --}}
+{{--                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-bed text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $bestDeal->bedrooms ?? '-' }} Beds</span>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-bath text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $bestDeal->bathrooms ?? '-' }} Baths</span>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $bestDeal->area ?? '-' }} sqft</span>--}}
+{{--                                </div>--}}
+
+{{--                            </div>--}}
+
+{{--                            --}}{{-- LISTED BY + TIME --}}
+{{--                            <div class="flex justify-between items-center mt-4">--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <div--}}
+{{--                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">--}}
+{{--                                        {{ strtoupper(substr($bestDeal->listedBy->name, 0, 2)) }}--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="ml-3">--}}
+{{--                                        <p class="text-sm font-medium text-gray-900">--}}
+{{--                                            {{ $bestDeal->listedBy->name }}--}}
+{{--                                        </p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center space-x-2">--}}
+{{--                                    <button--}}
+{{--                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                        <i class="fas fa-share-alt"></i>--}}
+{{--                                    </button>--}}
+
+{{--                                    --}}{{-- Time ago --}}
+{{--                                    <p class="text-xs text-gray-500">--}}
+{{--                                        {{ $bestDeal->created_at->diffForHumans() }}--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+
+
+{{--        <!-- ✅ Bottom Controls (Pagination Centered with Arrows on Both Sides) -->--}}
+{{--        <div class="custom-controls mt-8 flex flex-col items-center space-y-4 pb-6">--}}
+
+{{--            <!-- Pagination + Arrows in One Row -->--}}
+{{--            <div class="flex items-center justify-center">--}}
+
+{{--              <!-- Prev Button -->--}}
+{{--              <button--}}
+{{--                class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                <i class="fas fa-chevron-left text-white"></i>--}}
+{{--              </button>--}}
+
+{{--              <!-- Pagination Dots (Centered) -->--}}
+{{--              <div class="custom-pagination flex justify-center text-black "></div>--}}
+
+{{--              <!-- Next Button -->--}}
+{{--              <button--}}
+{{--                class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                <i class="fas fa-chevron-right text-white "></i>--}}
+{{--              </button>--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+
+{{--    </div>--}}
+{{--</section>--}}
+
+
 <section class="w-full max-w-7xl mx-auto px-4 py-6">
     <div class="text-center mb-12 fade-in">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Best Deals</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of premium properties
-            designed to enhance your lifestyle.</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            {{ __('index.best_deals.title') }}
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            {{ __('index.best_deals.subtitle') }}
+        </p>
     </div>
 
     <div class="swiper multiple-slide-carousel w-full relative fade-in">
         <div class="swiper-wrapper">
-            <!-- Slide 1 -->
             @foreach($bestDeals as $bestDeal)
-
                 <div class="swiper-slide">
-                    <a href="{{route('detail', ['property' => $bestDeal->id])}}">
-                    <div class="property-card">
-                        <div class="relative">
+                    <a href="{{ route('detail', ['property' => $bestDeal->id]) }}">
+                        <div class="property-card">
+                            <div class="relative">
 
-                            {{-- INNER SWIPER (Property Images) --}}
-
-                            <div class="swiper inner-swiper h-48">
-                                <div class="swiper-wrapper">
-                                    @if($bestDeal->images && count($bestDeal->images))
-                                        @foreach($bestDeal->images as $img)
+                                {{-- INNER SWIPER (Property Images) --}}
+                                <div class="swiper inner-swiper h-48">
+                                    <div class="swiper-wrapper">
+                                        @if($bestDeal->images && count($bestDeal->images))
+                                            @foreach($bestDeal->images as $img)
+                                                <div class="swiper-slide">
+                                                    <img src="{{ asset('storage/' . $img->url) }}"
+                                                         class="w-full h-full object-cover"
+                                                         alt="{{ $bestDeal->title }}">
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            {{-- Default fallback image --}}
                                             <div class="swiper-slide">
-                                                <img src="{{ asset('storage/' . $img->url) }}"
+                                                <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
                                                      class="w-full h-full object-cover"
-                                                     alt="{{ $bestDeal->title }}">
+                                                     alt="{{ __('index.best_deals.no_image') }}">
                                             </div>
-                                        @endforeach
-                                    @else
-                                        {{-- Default fallback image --}}
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2015/11/06/11/45/interior-1026447_1280.jpg"
-                                                 class="w-full h-full object-cover"
-                                                 alt="No Image">
-                                        </div>
-                                    @endif
-
-                                </div>
-
-                                {{-- tiny arrows --}}
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-
-                            {{-- BADGE --}}
-                            <div class="absolute top-3 left-3">
-                                <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">
-                                    {{ strtoupper($bestDeal->type) }} {{-- RENT / SALE --}}
-                                </span>
-                            </div>
-
-                            {{-- FAVORITE BUTTON --}}
-                            <div class="absolute top-3 right-3">
-                                <button
-                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-
-                            {{-- PRICE OVERLAY --}}
-                            <div
-                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-
-                                {{-- PRICE --}}
-                                <span class="text-white font-semibold text-lg">
-                                    {{ display_price($bestDeal->price) }}
-                                </span>
-
-                                {{-- ACTION ICONS --}}
-                                <div class="flex space-x-3 text-white text-lg">
-                                    <button class="expand-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                    <button class="favorite-btn hover:text-red-400 transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="compare-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        {{-- CONTENT --}}
-                        <div class="p-4">
-
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg text-gray-800">
-                                        {{ $bestDeal->title }}
-                                    </h3>
-
-                                    <p class="text-gray-600 text-sm flex items-center mt-1">
-                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                        {{ $bestDeal->address ?? 'No Address' }},
-                                        {{ optional($bestDeal->city)->name }}
-                                    </p>
-                                </div>
-                            </div>
-
-                            {{-- BEDROOMS, BATHROOMS, AREA --}}
-                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-
-                                <div class="flex items-center">
-                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                    <span>{{ $bestDeal->bedrooms ?? '-' }} Beds</span>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                    <span>{{ $bestDeal->bathrooms ?? '-' }} Baths</span>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                    <span>{{ $bestDeal->area ?? '-' }} sqft</span>
-                                </div>
-
-                            </div>
-
-                            {{-- LISTED BY + TIME --}}
-                            <div class="flex justify-between items-center mt-4">
-
-                                <div class="flex items-center">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
-                                        {{ strtoupper(substr($bestDeal->listedBy->name, 0, 2)) }}
+                                        @endif
                                     </div>
 
-                                    <div class="ml-3">
-                                        <p class="text-sm font-medium text-gray-900">
-                                            {{ $bestDeal->listedBy->name }}
+                                    {{-- tiny arrows --}}
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+
+                                {{-- BADGE --}}
+                                <div class="absolute top-3 left-3">
+                                    <span class="bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded">
+                                        @php
+                                            $type = strtoupper((string) ($bestDeal->type ?? ''));
+                                        @endphp
+
+                                        {{ $type === 'RENT'
+                                            ? __('index.best_deals.rent')
+                                            : ($type === 'SALE' ? __('index.best_deals.sale') : strtoupper($bestDeal->type)) }}
+                                    </span>
+                                </div>
+
+                                {{-- FAVORITE BUTTON --}}
+                                <div class="absolute top-3 right-3">
+                                    <button
+                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
+                                        <i class="far fa-heart"></i>
+                                    </button>
+                                </div>
+
+                                {{-- PRICE OVERLAY --}}
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+
+                                    {{-- PRICE --}}
+                                    <span class="text-white font-semibold text-lg">
+                                        {{ display_price($bestDeal->price) }}
+                                    </span>
+
+                                    {{-- ACTION ICONS --}}
+                                    <div class="flex space-x-3 text-white text-lg">
+                                        <button class="expand-btn hover:text-gray-300 transition">
+                                            <i class="fas fa-expand"></i>
+                                        </button>
+                                        <button class="favorite-btn hover:text-red-400 transition">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="compare-btn hover:text-gray-300 transition">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            {{-- CONTENT --}}
+                            <div class="p-4">
+
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800">
+                                            {{ $bestDeal->title }}
+                                        </h3>
+
+                                        <p class="text-gray-600 text-sm flex items-center mt-1">
+                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                            {{ $bestDeal->address ?? __('index.best_deals.no_address') }},
+                                            {{ optional($bestDeal->city)->name }}
                                         </p>
                                     </div>
                                 </div>
 
-                                <div class="flex items-center space-x-2">
-                                    <button
-                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
+                                {{-- BEDROOMS, BATHROOMS, AREA --}}
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
 
-                                    {{-- Time ago --}}
-                                    <p class="text-xs text-gray-500">
-                                        {{ $bestDeal->created_at->diffForHumans() }}
-                                    </p>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                        <span>{{ $bestDeal->bedrooms ?? '-' }} {{ __('index.best_deals.beds') }}</span>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                        <span>{{ $bestDeal->bathrooms ?? '-' }} {{ __('index.best_deals.baths') }}</span>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                        <span>{{ $bestDeal->area ?? '-' }} {{ __('index.best_deals.sqft') }}</span>
+                                    </div>
+
                                 </div>
-                            </div>
 
+                                {{-- LISTED BY + TIME --}}
+                                <div class="flex justify-between items-center mt-4">
+
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
+                                            {{ strtoupper(substr($bestDeal->listedBy->name, 0, 2)) }}
+                                        </div>
+
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">
+                                                {{ $bestDeal->listedBy->name }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-2">
+                                        <button
+                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+
+                                        {{-- Time ago --}}
+                                        <p class="text-xs text-gray-500">
+                                            {{ $bestDeal->created_at->diffForHumans() }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
                     </a>
                 </div>
             @endforeach
         </div>
-
 
         <!-- ✅ Bottom Controls (Pagination Centered with Arrows on Both Sides) -->
         <div class="custom-controls mt-8 flex flex-col items-center space-y-4 pb-6">
@@ -330,20 +521,20 @@
             <!-- Pagination + Arrows in One Row -->
             <div class="flex items-center justify-center">
 
-              <!-- Prev Button -->
-              <button
-                class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <i class="fas fa-chevron-left text-white"></i>
-              </button>
+                <!-- Prev Button -->
+                <button
+                    class="custom-nav-btn custom-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-left text-white"></i>
+                </button>
 
-              <!-- Pagination Dots (Centered) -->
-              <div class="custom-pagination flex justify-center text-black "></div>
+                <!-- Pagination Dots (Centered) -->
+                <div class="custom-pagination flex justify-center text-black "></div>
 
-              <!-- Next Button -->
-              <button
-                class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                <i class="fas fa-chevron-right text-white "></i>
-              </button>
+                <!-- Next Button -->
+                <button
+                    class="custom-nav-btn custom-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
+                    <i class="fas fa-chevron-right text-white "></i>
+                </button>
             </div>
 
         </div>
@@ -394,218 +585,335 @@
 
 
 <!-- Premium Villa Deals Section -->
+{{--<section class="w-full max-w-7xl mx-auto px-4 py-8">--}}
+{{--    <div class="text-center mb-12 fade-in">--}}
+{{--        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Villas</h1>--}}
+{{--        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of luxury villas designed--}}
+{{--            to enhance your lifestyle.</p>--}}
+{{--    </div>--}}
+
+{{--    <div class="swiper villa-multiple-slide-carousel w-full relative fade-in">--}}
+{{--        <div class="swiper-wrapper">--}}
+{{--            <!-- Villa Slide 1 -->--}}
+{{--            @if(!empty($villas))--}}
+{{--            @foreach($villas as $villa)--}}
+{{--                <div class="swiper-slide">--}}
+{{--                    <a href="{{route('detail', ['property' => $villa->id])}}">--}}
+{{--                    <div class="property-card">--}}
+{{--                        <div class="relative">--}}
+
+{{--                            --}}{{-- INNER SWIPER IMAGES --}}
+{{--                            <div class="swiper inner-swiper h-48">--}}
+{{--                                <div class="swiper-wrapper">--}}
+
+{{--                                    @if(optional($villa->images)->count() > 0)--}}
+{{--                                        @foreach($villa->images as $img)--}}
+{{--                                            <div class="swiper-slide">--}}
+{{--                                                <img src="{{ asset('storage/' . $img->url) }}"--}}
+{{--                                                     class="w-full h-full object-cover"--}}
+{{--                                                     alt="{{ $villa->title ?? 'Property' }}">--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+{{--                                    @else--}}
+{{--                                        --}}{{-- FALLBACK IMAGE --}}
+{{--                                        <div class="swiper-slide">--}}
+{{--                                            <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"--}}
+{{--                                                 class="w-full h-full object-cover"--}}
+{{--                                                 alt="No image available" />--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+
+{{--                                </div>--}}
+
+{{--                                <div class="swiper-button-next"></div>--}}
+{{--                                <div class="swiper-button-prev"></div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- BADGE --}}
+{{--                            <div class="absolute top-3 left-3">--}}
+{{--                                @php--}}
+{{--                                    $badgeType  = strtoupper($villa->type ?? 'SALE');--}}
+{{--                                    $badgeColor = ($villa->type ?? '') === 'rent' ? 'bg-green-600' : 'bg-purple-600';--}}
+{{--                                @endphp--}}
+
+{{--                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">--}}
+{{--                                    FOR {{ $badgeType }}--}}
+{{--                                </span>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- FAVORITE BUTTON --}}
+{{--                            <div class="absolute top-3 right-3">--}}
+{{--                                <button--}}
+{{--                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">--}}
+{{--                                    <i class="far fa-heart"></i>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- PRICE OVERLAY --}}
+{{--                            <div--}}
+{{--                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center--}}
+{{--                                bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">--}}
+
+{{--                                <span class="text-white font-semibold text-lg">--}}
+{{--                                    {{ display_price($bestDeal->price) }}--}}
+{{--                                </span>--}}
+
+{{--                                <div class="flex space-x-3 text-white text-lg">--}}
+{{--                                    <button class="expand-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-expand"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="favorite-btn hover:text-red-400 transition">--}}
+{{--                                        <i class="far fa-heart"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="compare-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-plus"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        --}}{{-- CONTENT --}}
+{{--                        <div class="p-4">--}}
+{{--                            <div class="flex justify-between items-start">--}}
+{{--                                <div>--}}
+{{--                                    <h3 class="font-bold text-lg text-gray-800">--}}
+{{--                                        {{ $villa->title ?? 'Untitled Property' }}--}}
+{{--                                    </h3>--}}
+
+{{--                                    <p class="text-gray-600 text-sm flex items-center mt-1">--}}
+{{--                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>--}}
+{{--                                        {{ $villa->address ?? 'No address' }}--}}
+{{--                                        @if(optional($villa->city)->name)--}}
+{{--                                            , {{ $villa->city->name }}--}}
+{{--                                        @endif--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- BED / BATH / AREA --}}
+{{--                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">--}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-bed text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $villa->bedrooms ?? '-' }} Beds</span>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-bath text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $villa->bathrooms ?? '-' }} Baths</span>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $villa->area ?? '-' }} sqft</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- AGENT --}}
+{{--                            <div class="flex justify-between items-center mt-4">--}}
+
+{{--                                @php--}}
+{{--                                    $agent = optional($villa->listedBy);--}}
+{{--                                    $agentName = $agent->name ?? 'Agent';--}}
+{{--                                    $initials = collect(explode(' ', $agentName))--}}
+{{--                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))--}}
+{{--                                                    ->take(2)->implode('');--}}
+{{--                                @endphp--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <div--}}
+{{--                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500--}}
+{{--                            flex items-center justify-center text-white font-bold">--}}
+{{--                                        {{ $initials }}--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="ml-3">--}}
+{{--                                        <p class="text-sm font-medium text-gray-900">--}}
+{{--                                            {{ $agentName }}--}}
+{{--                                        </p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center space-x-2">--}}
+{{--                                    <button--}}
+{{--                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center--}}
+{{--                            text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                        <i class="fas fa-share-alt"></i>--}}
+{{--                                    </button>--}}
+
+{{--                                    <p class="text-xs text-gray-500">--}}
+{{--                                        {{ $villa->created_at?->diffForHumans() ?? '' }}--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                    </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+{{--            @endif--}}
+
+
+
+{{--            <!-- Additional villa slides would go here -->--}}
+{{--        </div>--}}
+
+{{--        <div class="custom-controls mt-8 flex flex-col items-center ">--}}
+{{--            <!-- Pagination + Arrows in One Row -->--}}
+{{--            <div class="flex items-center justify-center space-x-4">--}}
+{{--                <!-- Prev Button -->--}}
+{{--                <button--}}
+{{--                    class="custom-nav-btn villa-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                    <i class="fas fa-chevron-left text-white"></i>--}}
+{{--                </button>--}}
+
+{{--                <!-- Pagination Dots (Centered) -->--}}
+{{--                <div class="custom-pagination villa-pagination flex justify-center text-black"></div>--}}
+
+{{--                <!-- Next Button -->--}}
+{{--                <button--}}
+{{--                    class="custom-nav-btn villa-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                    <i class="fas fa-chevron-right text-white"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+
+
+{{--            <!-- Slide Counter (Optional, Below Pagination Row) -->--}}
+{{--            <div class="slide-counter text-sm text-gray-600">--}}
+{{--                <span class="villa-current-slide font-medium">1</span> / <span--}}
+{{--                    class="villa-total-slides font-medium">6</span>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--        <style>--}}
+{{--            .villa-pagination .swiper-pagination-bullet {--}}
+{{--                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;--}}
+{{--            }--}}
+
+{{--            .villa-pagination .swiper-pagination-bullet-active {--}}
+{{--                @apply bg-green-600 w-5;--}}
+{{--            }--}}
+{{--        </style>--}}
+
+{{--</section>--}}
+
+
 <section class="w-full max-w-7xl mx-auto px-4 py-8">
     <div class="text-center mb-12 fade-in">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Villas</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of luxury villas designed
-            to enhance your lifestyle.</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            {{ __('index.villas.section.title') }}
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            {{ __('index.villas.section.subtitle') }}
+        </p>
     </div>
 
     <div class="swiper villa-multiple-slide-carousel w-full relative fade-in">
         <div class="swiper-wrapper">
-            <!-- Villa Slide 1 -->
+
             @if(!empty($villas))
-            @foreach($villas as $villa)
-                <div class="swiper-slide">
-                    <a href="{{route('detail', ['property' => $villa->id])}}">
-                    <div class="property-card">
-                        <div class="relative">
+                @foreach($villas as $villa)
+                    <div class="swiper-slide">
+                        <a href="{{ route('detail', ['property' => $villa->id]) }}">
+                            <div class="property-card">
+                                <div class="relative">
 
-                            {{-- INNER SWIPER IMAGES --}}
-                            <div class="swiper inner-swiper h-48">
-                                <div class="swiper-wrapper">
-
-                                    @if(optional($villa->images)->count() > 0)
-                                        @foreach($villa->images as $img)
-                                            <div class="swiper-slide">
-                                                <img src="{{ asset('storage/' . $img->url) }}"
-                                                     class="w-full h-full object-cover"
-                                                     alt="{{ $villa->title ?? 'Property' }}">
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        {{-- FALLBACK IMAGE --}}
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
-                                                 class="w-full h-full object-cover"
-                                                 alt="No image available" />
+                                    {{-- INNER SWIPER --}}
+                                    <div class="swiper inner-swiper h-48">
+                                        <div class="swiper-wrapper">
+                                            @if(optional($villa->images)->count() > 0)
+                                                @foreach($villa->images as $img)
+                                                    <div class="swiper-slide">
+                                                        <img src="{{ asset('storage/' . $img->url) }}"
+                                                             class="w-full h-full object-cover"
+                                                             alt="{{ $villa->title ?? __('index.villas.fallback.property') }}">
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="swiper-slide">
+                                                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/house-1867187_1280.jpg"
+                                                         class="w-full h-full object-cover"
+                                                         alt="{{ __('index.villas.fallback.no_image') }}">
+                                                </div>
+                                            @endif
                                         </div>
-                                    @endif
 
+                                        <div class="swiper-button-next"></div>
+                                        <div class="swiper-button-prev"></div>
+                                    </div>
+
+                                    {{-- BADGE --}}
+                                    @php
+                                        $rawType = strtolower($villa->type ?? 'sale');
+                                        $typeKey = $rawType === 'rent' ? 'rent' : 'sale';
+                                        $badgeColor = $rawType === 'rent' ? 'bg-green-600' : 'bg-purple-600';
+                                    @endphp
+
+                                    <div class="absolute top-3 left-3">
+                                    <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
+                                        {{ __('index.villas.labels.for') }}
+                                        {{ strtoupper(__('index.villas.labels.' . $typeKey)) }}
+                                    </span>
+                                    </div>
+
+                                    {{-- PRICE --}}
+                                    <div class="absolute bottom-0 left-0 right-0 px-4 py-3
+                                    flex justify-between items-center
+                                    bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+
+                                    <span class="text-white font-semibold text-lg">
+                                        {{ display_price($villa->price) }}
+                                    </span>
+
+                                        <div class="flex space-x-3 text-white text-lg">
+                                            <i class="fas fa-expand"></i>
+                                            <i class="far fa-heart"></i>
+                                            <i class="fas fa-plus"></i>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-
-                            {{-- BADGE --}}
-                            <div class="absolute top-3 left-3">
-                                @php
-                                    $badgeType  = strtoupper($villa->type ?? 'SALE');
-                                    $badgeColor = ($villa->type ?? '') === 'rent' ? 'bg-green-600' : 'bg-purple-600';
-                                @endphp
-
-                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
-                                    FOR {{ $badgeType }}
-                                </span>
-                            </div>
-
-                            {{-- FAVORITE BUTTON --}}
-                            <div class="absolute top-3 right-3">
-                                <button
-                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-
-                            {{-- PRICE OVERLAY --}}
-                            <div
-                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
-                                bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-
-                                <span class="text-white font-semibold text-lg">
-                                    {{ display_price($bestDeal->price) }}
-                                </span>
-
-                                <div class="flex space-x-3 text-white text-lg">
-                                    <button class="expand-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                    <button class="favorite-btn hover:text-red-400 transition">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                    <button class="compare-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- CONTENT --}}
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <div>
+                                {{-- CONTENT --}}
+                                <div class="p-4">
                                     <h3 class="font-bold text-lg text-gray-800">
-                                        {{ $villa->title ?? 'Untitled Property' }}
+                                        {{ $villa->title ?? __('index.villas.fallback.untitled') }}
                                     </h3>
 
                                     <p class="text-gray-600 text-sm flex items-center mt-1">
-                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                        {{ $villa->address ?? 'No address' }}
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        {{ $villa->address ?? __('index.villas.fallback.no_address') }}
                                         @if(optional($villa->city)->name)
                                             , {{ $villa->city->name }}
                                         @endif
                                     </p>
-                                </div>
-                            </div>
 
-                            {{-- BED / BATH / AREA --}}
-                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                <div class="flex items-center">
-                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                    <span>{{ $villa->bedrooms ?? '-' }} Beds</span>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                    <span>{{ $villa->bathrooms ?? '-' }} Baths</span>
-                                </div>
-
-                                <div class="flex items-center">
-                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                    <span>{{ $villa->area ?? '-' }} sqft</span>
-                                </div>
-                            </div>
-
-                            {{-- AGENT --}}
-                            <div class="flex justify-between items-center mt-4">
-
-                                @php
-                                    $agent = optional($villa->listedBy);
-                                    $agentName = $agent->name ?? 'Agent';
-                                    $initials = collect(explode(' ', $agentName))
-                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))
-                                                    ->take(2)->implode('');
-                                @endphp
-
-                                <div class="flex items-center">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-500
-                            flex items-center justify-center text-white font-bold">
-                                        {{ $initials }}
+                                    <div class="flex gap-4 text-sm text-gray-600 mt-4">
+                                        <span>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>
+                                        <span>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>
+                                        <span>{{ $villa->area ?? '-' }} {{ __('index.villas.labels.sqft') }}</span>
                                     </div>
 
-                                    <div class="ml-3">
-                                        <p class="text-sm font-medium text-gray-900">
-                                            {{ $agentName }}
-                                        </p>
+                                    <div class="flex justify-between items-center mt-4">
+                                        <div class="text-sm font-medium">
+                                            {{ optional($villa->listedBy)->name ?? __('index.villas.fallback.agent') }}
+                                        </div>
+
+                                        <div class="text-xs text-gray-500">
+                                            {{ $villa->created_at?->diffForHumans() }}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="flex items-center space-x-2">
-                                    <button
-                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
-                            text-gray-600 hover:bg-gray-200 transition-colors">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-
-                                    <p class="text-xs text-gray-500">
-                                        {{ $villa->created_at?->diffForHumans() ?? '' }}
-                                    </p>
-                                </div>
-
                             </div>
-                        </div>
-
+                        </a>
                     </div>
-                    </a>
-                </div>
-            @endforeach
+                @endforeach
             @endif
 
-
-
-            <!-- Additional villa slides would go here -->
-        </div>
-
-        <div class="custom-controls mt-8 flex flex-col items-center ">
-            <!-- Pagination + Arrows in One Row -->
-            <div class="flex items-center justify-center space-x-4">
-                <!-- Prev Button -->
-                <button
-                    class="custom-nav-btn villa-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                    <i class="fas fa-chevron-left text-white"></i>
-                </button>
-
-                <!-- Pagination Dots (Centered) -->
-                <div class="custom-pagination villa-pagination flex justify-center text-black"></div>
-
-                <!-- Next Button -->
-                <button
-                    class="custom-nav-btn villa-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
-                    <i class="fas fa-chevron-right text-white"></i>
-                </button>
-            </div>
-
-
-            <!-- Slide Counter (Optional, Below Pagination Row) -->
-            <div class="slide-counter text-sm text-gray-600">
-                <span class="villa-current-slide font-medium">1</span> / <span
-                    class="villa-total-slides font-medium">6</span>
-            </div>
         </div>
     </div>
-
-        <style>
-            .villa-pagination .swiper-pagination-bullet {
-                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;
-            }
-
-            .villa-pagination .swiper-pagination-bullet-active {
-                @apply bg-green-600 w-5;
-            }
-        </style>
-
 </section>
 
 <script>
@@ -643,11 +951,242 @@
 </script>
 
 <!-- Premium Land Deals Section -->
+{{--<section class="w-full max-w-7xl mx-auto px-4 py-8">--}}
+{{--    <div class="text-center mb-12 fade-in">--}}
+{{--        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Lands</h1>--}}
+{{--        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of prime land parcels--}}
+{{--            designed for your future development.</p>--}}
+{{--    </div>--}}
+
+{{--    <div class="swiper land-multiple-slide-carousel w-full relative fade-in">--}}
+{{--        <div class="swiper-wrapper">--}}
+{{--            <!-- Land Slide 1 -->--}}
+{{--            @foreach(($lands ?? collect()) as $land)--}}
+{{--                <div class="swiper-slide">--}}
+{{--                    <a href="{{route('detail', ['property' => $land->id])}}">--}}
+{{--                    <div class="property-card">--}}
+{{--                        <div class="relative">--}}
+{{--                            --}}{{-- INNER SWIPER --}}
+{{--                            <div class="swiper inner-swiper h-48">--}}
+{{--                                <div class="swiper-wrapper">--}}
+
+{{--                                    @if(optional($land->images)->count() > 0)--}}
+{{--                                        @foreach($land->images as $img)--}}
+{{--                                            <div class="swiper-slide">--}}
+{{--                                                <img src="{{ asset('storage/' . $img->url) }}"--}}
+{{--                                                     class="w-full h-full object-cover"--}}
+{{--                                                     alt="{{ $land->title ?? 'Land' }}" />--}}
+{{--                                            </div>--}}
+{{--                                        @endforeach--}}
+{{--                                    @else--}}
+{{--                                        --}}{{-- Fallback images --}}
+{{--                                        <div class="swiper-slide">--}}
+{{--                                            <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"--}}
+{{--                                                 class="w-full h-full object-cover" alt="Land plot" />--}}
+{{--                                        </div>--}}
+{{--                                        <div class="swiper-slide">--}}
+{{--                                            <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"--}}
+{{--                                                 class="w-full h-full object-cover" alt="Land view" />--}}
+{{--                                        </div>--}}
+{{--                                        <div class="swiper-slide">--}}
+{{--                                            <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"--}}
+{{--                                                 class="w-full h-full object-cover" alt="Land landscape" />--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+
+{{--                                </div>--}}
+
+{{--                                <div class="swiper-button-next"></div>--}}
+{{--                                <div class="swiper-button-prev"></div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- BADGE --}}
+{{--                            <div class="absolute top-3 left-3">--}}
+{{--                                @php--}}
+{{--                                    $badgeType  = strtoupper($land->type ?? 'SALE'); // RENT / SALE--}}
+{{--                                    $badgeColor = ($land->type ?? '') === 'rent' ? 'bg-blue-600' : 'bg-green-600';--}}
+{{--                                @endphp--}}
+
+{{--                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">--}}
+{{--                        FOR {{ $badgeType }}--}}
+{{--                    </span>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- FAVORITE ICON --}}
+{{--                            <div class="absolute top-3 right-3">--}}
+{{--                                <button--}}
+{{--                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">--}}
+{{--                                    <i class="far fa-heart"></i>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- PRICE OVERLAY --}}
+{{--                            <div--}}
+{{--                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center--}}
+{{--                           bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">--}}
+{{--                    <span class="text-white font-semibold text-lg">--}}
+{{--                        {{ display_price($bestDeal->price) }}--}}
+{{--                    </span>--}}
+
+{{--                                <div class="flex space-x-3 text-white text-lg">--}}
+{{--                                    <button class="expand-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-expand"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="favorite-btn hover:text-red-400 transition">--}}
+{{--                                        <i class="far fa-heart"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <button class="compare-btn hover:text-gray-300 transition">--}}
+{{--                                        <i class="fas fa-plus"></i>--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        --}}{{-- CONTENT --}}
+{{--                        <div class="p-4">--}}
+{{--                            <div class="flex justify-between items-start">--}}
+{{--                                <div>--}}
+{{--                                    <h3 class="font-bold text-lg text-gray-800">--}}
+{{--                                        {{ $land->title ?? 'Prime Land' }}--}}
+{{--                                    </h3>--}}
+{{--                                    <p class="text-gray-600 text-sm flex items-center mt-1">--}}
+{{--                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>--}}
+{{--                                        {{ $land->address ?? 'Location not specified' }}--}}
+{{--                                        @if(optional($land->city)->name)--}}
+{{--                                            , {{ $land->city->name }}--}}
+{{--                                        @endif--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- META ROW: Area + Road Access + Water Supply --}}
+{{--                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">--}}
+{{--                                --}}{{-- Area --}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>--}}
+{{--                                    <span>--}}
+{{--                            @if($land->area)--}}
+{{--                                            {{ $land->area }} sqft--}}
+{{--                                        @else--}}
+{{--                                            Area not specified--}}
+{{--                                        @endif--}}
+{{--                        </span>--}}
+{{--                                </div>--}}
+
+{{--                                --}}{{-- Road Access (amenity based) --}}
+{{--                                @php--}}
+{{--                                    $hasRoad = optional($land->amenities)--}}
+{{--                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)--}}
+{{--                                        : false;--}}
+{{--                                @endphp--}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-road text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $hasRoad ? 'Road Access' : 'Road info N/A' }}</span>--}}
+{{--                                </div>--}}
+
+{{--                                --}}{{-- Water Supply (amenity based) --}}
+{{--                                @php--}}
+{{--                                    $hasWater = optional($land->amenities)--}}
+{{--                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)--}}
+{{--                                        : false;--}}
+{{--                                @endphp--}}
+{{--                                <div class="flex items-center">--}}
+{{--                                    <i class="fas fa-tint text-gray-400 mr-1"></i>--}}
+{{--                                    <span>{{ $hasWater ? 'Water Supply' : 'Water info N/A' }}</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            --}}{{-- AGENT + TIME --}}
+{{--                            <div class="flex justify-between items-center mt-4">--}}
+{{--                                @php--}}
+{{--                                    $agent     = optional($land->listedBy);--}}
+{{--                                    $agentName = $agent->name ?? 'Agent';--}}
+{{--                                    $initials  = collect(explode(' ', $agentName))--}}
+{{--                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))--}}
+{{--                                                    ->take(2)->implode('');--}}
+{{--                                @endphp--}}
+
+{{--                                <div class="flex items-center">--}}
+{{--                                    <div--}}
+{{--                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500--}}
+{{--                                   flex items-center justify-center text-white font-bold">--}}
+{{--                                        {{ $initials }}--}}
+{{--                                    </div>--}}
+{{--                                    <div class="ml-3">--}}
+{{--                                        <p class="text-sm font-medium text-gray-900">--}}
+{{--                                            {{ $agentName }}--}}
+{{--                                        </p>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="flex items-center space-x-2">--}}
+{{--                                    <button--}}
+{{--                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center--}}
+{{--                                   text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                        <i class="fas fa-share-alt"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <p class="text-xs text-gray-500">--}}
+{{--                                        {{ $land->created_at?->diffForHumans() ?? '' }}--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
+
+
+{{--            <!-- Additional land slides would go here -->--}}
+{{--        </div>--}}
+
+{{--        <div class="custom-controls mt-8 flex flex-col items-center ">--}}
+{{--            <!-- Pagination + Arrows in One Row -->--}}
+{{--            <div class="flex items-center justify-center">--}}
+{{--                <!-- Prev Button -->--}}
+{{--                <button--}}
+{{--                    class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                    <i class="fas fa-chevron-left text-white hover:text-white"></i>--}}
+{{--                </button>--}}
+
+{{--                <!-- Pagination Dots (Centered) -->--}}
+{{--                <div class="custom-pagination land-pagination flex justify-center text-black "></div>--}}
+
+{{--                <!-- Next Button -->--}}
+{{--                <button--}}
+{{--                    class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
+{{--                    <i class="fas fa-chevron-right text-white hover:text-white"></i>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+
+{{--            <!-- Slide Counter (Below Pagination Row) -->--}}
+{{--            <div class="slide-counter text-sm text-gray-600">--}}
+{{--                <span class="land-current-slide font-medium">1</span> / <span--}}
+{{--                    class="land-total-slides font-medium">6</span>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+{{--        <style>--}}
+{{--            .land-pagination .swiper-pagination-bullet {--}}
+{{--                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;--}}
+{{--            }--}}
+
+{{--            .land-pagination .swiper-pagination-bullet-active {--}}
+{{--                @apply bg-green-600 w-5;--}}
+{{--            }--}}
+{{--        </style>--}}
+
+{{--    </div>--}}
+{{--</section>--}}
+
 <section class="w-full max-w-7xl mx-auto px-4 py-8">
     <div class="text-center mb-12 fade-in">
-        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Lands</h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of prime land parcels
-            designed for your future development.</p>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            {{ __('index.lands.section.title') }}
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+            {{ __('index.lands.section.subtitle') }}
+        </p>
     </div>
 
     <div class="swiper land-multiple-slide-carousel w-full relative fade-in">
@@ -655,203 +1194,204 @@
             <!-- Land Slide 1 -->
             @foreach(($lands ?? collect()) as $land)
                 <div class="swiper-slide">
-                    <a href="{{route('detail', ['property' => $land->id])}}">
-                    <div class="property-card">
-                        <div class="relative">
-                            {{-- INNER SWIPER --}}
-                            <div class="swiper inner-swiper h-48">
-                                <div class="swiper-wrapper">
+                    <a href="{{ route('detail', ['property' => $land->id]) }}">
+                        <div class="property-card">
+                            <div class="relative">
+                                {{-- INNER SWIPER --}}
+                                <div class="swiper inner-swiper h-48">
+                                    <div class="swiper-wrapper">
 
-                                    @if(optional($land->images)->count() > 0)
-                                        @foreach($land->images as $img)
+                                        @if(optional($land->images)->count() > 0)
+                                            @foreach($land->images as $img)
+                                                <div class="swiper-slide">
+                                                    <img src="{{ asset('storage/' . $img->url) }}"
+                                                         class="w-full h-full object-cover"
+                                                         alt="{{ $land->title ?? __('index.lands.fallback.land') }}" />
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            {{-- Fallback images --}}
                                             <div class="swiper-slide">
-                                                <img src="{{ asset('storage/' . $img->url) }}"
+                                                <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"
                                                      class="w-full h-full object-cover"
-                                                     alt="{{ $land->title ?? 'Land' }}" />
+                                                     alt="{{ __('index.lands.fallback.land_plot') }}" />
                                             </div>
-                                        @endforeach
-                                    @else
-                                        {{-- Fallback images --}}
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"
-                                                 class="w-full h-full object-cover" alt="Land plot" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"
-                                                 class="w-full h-full object-cover" alt="Land view" />
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"
-                                                 class="w-full h-full object-cover" alt="Land landscape" />
-                                        </div>
-                                    @endif
+                                            <div class="swiper-slide">
+                                                <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"
+                                                     class="w-full h-full object-cover"
+                                                     alt="{{ __('index.lands.fallback.land_view') }}" />
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"
+                                                     class="w-full h-full object-cover"
+                                                     alt="{{ __('index.lands.fallback.land_landscape') }}" />
+                                            </div>
+                                        @endif
 
+                                    </div>
+
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
                                 </div>
 
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
+                                {{-- BADGE --}}
+                                <div class="absolute top-3 left-3">
+                                    @php
+                                        $rawType = strtolower((string) ($land->type ?? 'sale'));
+                                        $typeKey = $rawType === 'rent' ? 'rent' : 'sale';
+                                        $badgeColor = $rawType === 'rent' ? 'bg-blue-600' : 'bg-green-600';
+                                    @endphp
 
-                            {{-- BADGE --}}
-                            <div class="absolute top-3 left-3">
-                                @php
-                                    $badgeType  = strtoupper($land->type ?? 'SALE'); // RENT / SALE
-                                    $badgeColor = ($land->type ?? '') === 'rent' ? 'bg-blue-600' : 'bg-green-600';
-                                @endphp
+                                    <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
+                                        {{ __('index.lands.labels.for') }}
+                                        {{ strtoupper(__('index.lands.labels.' . $typeKey)) }}
+                                    </span>
+                                </div>
 
-                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">
-                        FOR {{ $badgeType }}
-                    </span>
-                            </div>
-
-                            {{-- FAVORITE ICON --}}
-                            <div class="absolute top-3 right-3">
-                                <button
-                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-
-                            {{-- PRICE OVERLAY --}}
-                            <div
-                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
-                           bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
-                    <span class="text-white font-semibold text-lg">
-                        {{ display_price($bestDeal->price) }}
-                    </span>
-
-                                <div class="flex space-x-3 text-white text-lg">
-                                    <button class="expand-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-expand"></i>
-                                    </button>
-                                    <button class="favorite-btn hover:text-red-400 transition">
+                                {{-- FAVORITE ICON --}}
+                                <div class="absolute top-3 right-3">
+                                    <button
+                                        class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">
                                         <i class="far fa-heart"></i>
                                     </button>
-                                    <button class="compare-btn hover:text-gray-300 transition">
-                                        <i class="fas fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- CONTENT --}}
-                        <div class="p-4">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="font-bold text-lg text-gray-800">
-                                        {{ $land->title ?? 'Prime Land' }}
-                                    </h3>
-                                    <p class="text-gray-600 text-sm flex items-center mt-1">
-                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                        {{ $land->address ?? 'Location not specified' }}
-                                        @if(optional($land->city)->name)
-                                            , {{ $land->city->name }}
-                                        @endif
-                                    </p>
-                                </div>
-                            </div>
-
-                            {{-- META ROW: Area + Road Access + Water Supply --}}
-                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                {{-- Area --}}
-                                <div class="flex items-center">
-                                    <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>
-                                    <span>
-                            @if($land->area)
-                                            {{ $land->area }} sqft
-                                        @else
-                                            Area not specified
-                                        @endif
-                        </span>
                                 </div>
 
-                                {{-- Road Access (amenity based) --}}
-                                @php
-                                    $hasRoad = optional($land->amenities)
-                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)
-                                        : false;
-                                @endphp
-                                <div class="flex items-center">
-                                    <i class="fas fa-road text-gray-400 mr-1"></i>
-                                    <span>{{ $hasRoad ? 'Road Access' : 'Road info N/A' }}</span>
-                                </div>
+                                {{-- PRICE OVERLAY --}}
+                                <div
+                                    class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center
+                           bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
 
-                                {{-- Water Supply (amenity based) --}}
-                                @php
-                                    $hasWater = optional($land->amenities)
-                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)
-                                        : false;
-                                @endphp
-                                <div class="flex items-center">
-                                    <i class="fas fa-tint text-gray-400 mr-1"></i>
-                                    <span>{{ $hasWater ? 'Water Supply' : 'Water info N/A' }}</span>
-                                </div>
-                            </div>
+                                    <span class="text-white font-semibold text-lg">
+                                        {{-- ✅ FIX: $bestDeal -> $land --}}
+                                        {{ display_price($land->price) }}
+                                    </span>
 
-                            {{-- AGENT + TIME --}}
-                            <div class="flex justify-between items-center mt-4">
-                                @php
-                                    $agent     = optional($land->listedBy);
-                                    $agentName = $agent->name ?? 'Agent';
-                                    $initials  = collect(explode(' ', $agentName))
-                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))
-                                                    ->take(2)->implode('');
-                                @endphp
-
-                                <div class="flex items-center">
-                                    <div
-                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500
-                                   flex items-center justify-center text-white font-bold">
-                                        {{ $initials }}
+                                    <div class="flex space-x-3 text-white text-lg">
+                                        <button class="expand-btn hover:text-gray-300 transition">
+                                            <i class="fas fa-expand"></i>
+                                        </button>
+                                        <button class="favorite-btn hover:text-red-400 transition">
+                                            <i class="far fa-heart"></i>
+                                        </button>
+                                        <button class="compare-btn hover:text-gray-300 transition">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
                                     </div>
-                                    <div class="ml-3">
-                                        <p class="text-sm font-medium text-gray-900">
-                                            {{ $agentName }}
+                                </div>
+                            </div>
+
+                            {{-- CONTENT --}}
+                            <div class="p-4">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-800">
+                                            {{ $land->title ?? __('index.lands.fallback.prime_land') }}
+                                        </h3>
+                                        <p class="text-gray-600 text-sm flex items-center mt-1">
+                                            <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
+                                            {{ $land->address ?? __('index.lands.fallback.location_not_specified') }}
+                                            @if(optional($land->city)->name)
+                                                , {{ $land->city->name }}
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
 
-                                <div class="flex items-center space-x-2">
-                                    <button
-                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
+                                {{-- META ROW: Area + Road Access + Water Supply --}}
+                                <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                    {{-- Area --}}
+                                    <div class="flex items-center">
+                                        <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>
+                                        <span>
+                                            @if($land->area)
+                                                {{ $land->area }} {{ __('index.lands.labels.sqft') }}
+                                            @else
+                                                {{ __('index.lands.labels.area_not_specified') }}
+                                            @endif
+                                        </span>
+                                    </div>
+
+                                    {{-- Road Access (amenity based) --}}
+                                    @php
+                                        $hasRoad = optional($land->amenities)
+                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)
+                                            : false;
+                                    @endphp
+                                    <div class="flex items-center">
+                                        <i class="fas fa-road text-gray-400 mr-1"></i>
+                                        <span>{{ $hasRoad ? __('index.lands.labels.road_access') : __('index.lands.labels.road_na') }}</span>
+                                    </div>
+
+                                    {{-- Water Supply (amenity based) --}}
+                                    @php
+                                        $hasWater = optional($land->amenities)
+                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)
+                                            : false;
+                                    @endphp
+                                    <div class="flex items-center">
+                                        <i class="fas fa-tint text-gray-400 mr-1"></i>
+                                        <span>{{ $hasWater ? __('index.lands.labels.water_supply') : __('index.lands.labels.water_na') }}</span>
+                                    </div>
+                                </div>
+
+                                {{-- AGENT + TIME --}}
+                                <div class="flex justify-between items-center mt-4">
+                                    @php
+                                        $agent     = optional($land->listedBy);
+                                        $agentName = $agent->name ?? __('index.lands.fallback.agent');
+                                        $initials  = collect(explode(' ', $agentName))
+                                                        ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+                                                        ->take(2)->implode('');
+                                    @endphp
+
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500
+                                   flex items-center justify-center text-white font-bold">
+                                            {{ $initials }}
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-900">
+                                                {{ $agentName }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-2">
+                                        <button
+                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
                                    text-gray-600 hover:bg-gray-200 transition-colors">
-                                        <i class="fas fa-share-alt"></i>
-                                    </button>
-                                    <p class="text-xs text-gray-500">
-                                        {{ $land->created_at?->diffForHumans() ?? '' }}
-                                    </p>
+                                            <i class="fas fa-share-alt"></i>
+                                        </button>
+                                        <p class="text-xs text-gray-500">
+                                            {{ $land->created_at?->diffForHumans() ?? '' }}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </a>
                 </div>
             @endforeach
-
 
             <!-- Additional land slides would go here -->
         </div>
 
         <div class="custom-controls mt-8 flex flex-col items-center ">
-            <!-- Pagination + Arrows in One Row -->
             <div class="flex items-center justify-center">
-                <!-- Prev Button -->
                 <button
                     class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
                     <i class="fas fa-chevron-left text-white hover:text-white"></i>
                 </button>
 
-                <!-- Pagination Dots (Centered) -->
                 <div class="custom-pagination land-pagination flex justify-center text-black "></div>
 
-                <!-- Next Button -->
                 <button
                     class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">
                     <i class="fas fa-chevron-right text-white hover:text-white"></i>
                 </button>
             </div>
 
-            <!-- Slide Counter (Below Pagination Row) -->
             <div class="slide-counter text-sm text-gray-600">
                 <span class="land-current-slide font-medium">1</span> / <span
                     class="land-total-slides font-medium">6</span>

@@ -252,11 +252,11 @@
                     {{__('header.contact')}}
                 </a>
 
-                <a href="{{ route('dashboard') }}"
-                    class="text-black hover:text-blue-500 transition flex items-center hover-lift">
-                    <i class="fas fa-envelope mr-1"></i>
-                    {{__('header.dashboard')}}
-                </a>
+{{--                <a href="{{ route('dashboard') }}"--}}
+{{--                    class="text-black hover:text-blue-500 transition flex items-center hover-lift">--}}
+{{--                    <i class="fas fa-envelope mr-1"></i>--}}
+{{--                    {{__('header.dashboard')}}--}}
+{{--                </a>--}}
 
                 <!-- Enhanced Currency Dropdown -->
                 <div class="relative group">
@@ -376,14 +376,14 @@
                 </div>
 
                 <!-- User Profile / Login -->
-                {{-- <div class="relative group">
-                    <button class="flex items-center text-white  transition hover-lift">
+                 <div class="relative group">
+                    <a href="{{ route('dashboard') }}" class="flex items-center text-white  transition hover-lift">
                         <div
                             class="w-8 h-8 bg-gradient-to-r from-blue-400 to-sky-400 rounded-full flex items-center justify-center">
                             <i class="fas fa-user text-white"></i>
                         </div>
-                    </button>
-                </div> --}}
+                    </a>
+                </div>
             </div>
 
             <!-- Mobile Button -->

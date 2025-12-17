@@ -38,4 +38,82 @@ return [
 
     'final_cta_title' => 'Own Your Piece of Koh Samui',
     'final_cta_btn'   => 'Explore Available Opportunities',
+
+    'best_deals' => [
+        'title' => 'Best Deals',
+        'subtitle' => 'Discover our carefully curated selection of premium properties designed to enhance your lifestyle.',
+
+        'rent' => 'Rent',
+        'sale' => 'Sale',
+
+        'no_image' => 'No Image',
+        'no_address' => 'No Address',
+
+        'beds' => 'Beds',
+        'baths' => 'Baths',
+        'sqft' => 'sqft',
+    ],
+
+    'villas' => [
+
+        'section' => [
+            'title'    => 'Villas',
+            'subtitle' => 'Discover our carefully curated selection of luxury villas designed to enhance your lifestyle.',
+        ],
+
+        'fallback' => [
+            'property'   => 'Property',
+            'no_image'   => 'No image available',
+            'untitled'   => 'Untitled Property',
+            'no_address' => 'No address',
+            'agent'      => 'Agent',
+        ],
+
+        'labels' => [
+            'for'   => 'FOR',
+            'rent'  => 'RENT',
+            'sale'  => 'SALE',
+
+            'beds'  => 'Beds',
+            'baths' => 'Baths',
+            'sqft'  => 'sqft',
+        ],
+    ],
+
+    'lands' => [
+
+        'section' => [
+            'title'    => 'Lands',
+            'subtitle' => 'Discover our carefully curated selection of prime land parcels designed for your future development.',
+        ],
+
+        'fallback' => [
+            'land'                 => 'Land',
+            'land_plot'            => 'Land plot',
+            'land_view'            => 'Land view',
+            'land_landscape'       => 'Land landscape',
+
+            'prime_land'           => 'Prime Land',
+            'location_not_specified' => 'Location not specified',
+
+            'agent'                => 'Agent',
+        ],
+
+        'labels' => [
+            'for'   => 'FOR',
+            'rent'  => 'RENT',
+            'sale'  => 'SALE',
+
+            'sqft'  => 'sqft',
+
+            'area_not_specified' => 'Area not specified',
+
+            'road_access' => 'Road Access',
+            'road_na'     => 'Road info N/A',
+
+            'water_supply' => 'Water Supply',
+            'water_na'     => 'Water info N/A',
+        ],
+    ],
+
 ];
