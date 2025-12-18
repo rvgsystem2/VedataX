@@ -337,7 +337,19 @@
                     <button class="flex items-center text-black hover:text-blue-500 transition hover-lift"
                         onclick="toggleDropdown('language')">
                         <i class="fas fa-globe mr-1"></i>
-                        English
+                        @php
+                            $loc = app()->getLocale();
+
+                            $languages = [
+                                'en' => ['label' => 'English', 'flag' => 'fi fi-us'],
+                                'th' => ['label' => 'ไทย', 'flag' => 'fi fi-th'],
+                                'zh' => ['label' => '中文', 'flag' => 'fi fi-cn'],
+                                'fr' => ['label' => 'Français', 'flag' => 'fi fi-fr'],
+                            ];
+
+                            $current = $languages[$loc] ?? $languages['en'];
+                        @endphp
+                        {{ $current['label'] }}
                         <svg id="arrow-language" class="w-4 h-4 ml-1 transition-transform" fill="none"
                             stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -358,18 +370,15 @@
                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
                                 <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย
                             </a>
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文--}}
-{{--                            </a>--}}
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français--}}
-{{--                            </a>--}}
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย--}}
-{{--                            </a>--}}
+                            <a href="{{route('set-lang', 'zh')}}"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文
+                            </a>
+                            <a href="{{route('set-lang', 'fr')}}"
+                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français
+                            </a>
+
                         </div>
 
                     </div>

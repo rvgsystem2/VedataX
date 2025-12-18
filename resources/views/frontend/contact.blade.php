@@ -35,9 +35,10 @@
             <div class="lg:w-1/2">
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6">
 
-                    <h1 class="text-4xl font-bold text-gray-800 mb-4 font-spartan">Contact Us</h1>
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4 font-spartan">{{__('contact.title')}}</h1>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto font-spartan">
-                        Get in touch with Vedata Real Estate experts for questions about properties, listings, or tailored support in Samui. We're here to help you find the right home or investment.
+{{--                        Get in touch with Vedata Real Estate experts for questions about properties, listings, or tailored support in Samui. We're here to help you find the right home or investment.--}}
+                        {{__('contact.subtitle')}}
                     </p>
                     <div class="space-y-6">
                         <!-- Address -->
@@ -46,13 +47,14 @@
                                 <i class="fas fa-map-marker-alt text-blue-600"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-700 font-spartan">Address</p>
+                                <p class="font-semibold text-gray-700 font-spartan">{{__('contact.address_label')}}</p>
 
                                 <a
                                     href="https://www.google.com/maps/search/?api=1&query=7%2F21+moo+6+Maenam+84330%2C+Koh+Samui%2C+Thailand"
                                     target="_blank"
                                     class="text-gray-600 mt-1 font-spartan hover:text-blue-600 underline">
-                                    7/21 moo 6 Maenam 84330, Koh Samui, Thailand
+{{--                                    7/21 moo 6 Maenam 84330, Koh Samui, Thailand--}}
+                                    {{__('contact.address_text')}}
                                 </a>
                             </div>
 
@@ -64,7 +66,7 @@
                                 <i class="fas fa-envelope text-blue-600"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-700 font-spartan">Email</p>
+                                <p class="font-semibold text-gray-700 font-spartan">{{__('contact.email_label')}}</p>
 
                                 <a
                                     href="mailto:info@vedata.co"
@@ -82,7 +84,7 @@
                             </div>
                             <div>
                                 <div>
-                                    <p class="font-semibold text-gray-700 font-spartan">Phone:</p>
+                                    <p class="font-semibold text-gray-700 font-spartan">{{__('contact.phone_label')}}</p>
 
                                     <a href="tel:+66968075911"
                                        class="text-gray-600 mt-1 font-spartan font-bold hover:text-blue-600 underline block">
@@ -101,7 +103,7 @@
 
                 <!-- Social Media -->
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-                    <h2 class="text-xl font-bold text-gray-800 mb-4 font-spartan">Follow Us</h2>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 font-spartan">{{__('contact.follow_us')}}</h2>
                     <!-- Social Media Links -->
 <div class="flex flex-wrap justify-center gap-4 mt-6">
     <!-- Facebook -->
@@ -133,7 +135,7 @@
             <!-- Contact Form -->
             <div class="lg:w-2/4">
                 <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6 font-spartan">Send us a message</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 font-spartan">{{__('contact.form_title')}}</h2>
 
                     <form action="{{route('contact.save')}}" method="POST" class="space-y-6">
                         @csrf
@@ -150,7 +152,7 @@
                         <!-- FIRST + LAST NAME -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">First name</label>
+                                <label class="block text-gray-700 mb-2 font-medium">{{__('contact.first_name')}}</label>
                                 <input type="text" name="first_name"
                                        value="{{ old('first_name') }}"
                                        class="w-full px-4 py-3 border rounded-lg @error('first_name') border-red-500 @enderror">
@@ -161,7 +163,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">Last name</label>
+                                <label class="block text-gray-700 mb-2 font-medium">{{__('contact.last_name')}}</label>
                                 <input type="text" name="last_name"
                                        value="{{ old('last_name') }}"
                                        class="w-full px-4 py-3 border rounded-lg @error('last_name') border-red-500 @enderror">
@@ -175,7 +177,7 @@
                         <!-- EMAIL + PHONE -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">Email</label>
+                                <label class="block text-gray-700 mb-2 font-medium">{{__('contact.email')}}</label>
                                 <input type="email" name="email"
                                        value="{{ old('email') }}"
                                        class="w-full px-4 py-3 border rounded-lg @error('email') border-red-500 @enderror">
@@ -186,7 +188,7 @@
                             </div>
 
                             <div>
-                                <label class="block text-gray-700 mb-2 font-medium">Phone</label>
+                                <label class="block text-gray-700 mb-2 font-medium">{{__('contact.phone')}}</label>
                                 <input type="tel" name="phone"
                                        value="{{ old('phone') }}"
                                        class="w-full px-4 py-3 border rounded-lg @error('phone') border-red-500 @enderror">
@@ -199,7 +201,7 @@
 
                         <!-- SUBJECT OPTIONS -->
                         <div>
-                            <label class="block text-gray-700 mb-3 font-medium">Subject</label>
+                            <label class="block text-gray-700 mb-3 font-medium">{{__('contact.subject')}}</label>
 
                             @error('subject')
                             <p class="text-red-600 text-sm mb-2">{{ $message }}</p>
@@ -210,32 +212,32 @@
                                 <div class="property-option selected border-2 border-blue-500 rounded-lg p-4 cursor-pointer text-center"
                                      data-subject="Buy a Property">
                                     <i class="fas fa-home text-blue-500 text-xl mb-2"></i>
-                                    <p>Buy a Property</p>
+                                    <p>{{__('contact.subject_buy')}}</p>
                                 </div>
 
                                 <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
                                      data-subject="Rent a Property">
                                     <i class="fas fa-key text-blue-500 text-xl mb-2"></i>
-                                    <p>Rent a Property</p>
+                                    <p>{{__('contact.subject_rent')}}</p>
                                 </div>
 
                                 <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
                                      data-subject="List a Property">
                                     <i class="fas fa-list text-blue-500 text-xl mb-2"></i>
-                                    <p>List a Property</p>
+                                    <p>{{__('contact.subject_list')}}</p>
                                 </div>
 
                                 <div class="property-option border-2 border-gray-200 rounded-lg p-4 cursor-pointer text-center"
                                      data-subject="General Inquiry">
                                     <i class="fas fa-question-circle text-blue-500 text-xl mb-2"></i>
-                                    <p>General Inquiry</p>
+                                    <p>{{__('contact.subject_general')}}</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- MESSAGE -->
                         <div>
-                            <label class="block text-gray-700 mb-2 font-medium">Message</label>
+                            <label class="block text-gray-700 mb-2 font-medium">{{__('contact.message')}}</label>
                             <textarea name="message" rows="5"
                                       class="w-full px-4 py-3 border rounded-lg @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
 
@@ -247,7 +249,7 @@
                         <!-- SUBMIT -->
                         <button type="submit"
                                 class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold text-lg hover:bg-blue-700">
-                            SUBMIT
+                            {{__('contact.submit')}}
                         </button>
                     </form>
 

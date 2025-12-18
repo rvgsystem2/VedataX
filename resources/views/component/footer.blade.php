@@ -8,31 +8,35 @@
                 <div class="flex justify-center md:justify-start">
                     <img src="{{ asset('asset/img/footerlogo.jpeg') }}" alt="" class="max-w-[150px] h-auto rounded">
                 </div>
-                <h2 class="text-xl font-bold text-center md:text-left font-spartan">Vedata </h2>
+                <h2 class="text-xl font-bold text-center md:text-left font-spartan">
+{{--                    Vedata --}}
+                    {{ __('footer.company_name') }}
+                </h2>
 
                 <p class="text-gray-300 flex items-start gap-2 text-sm">
                     <i class="fas fa-map-marker-alt text-blue-400 mt-1"></i>
-                    7/21 Moo 6 Maenam 84330, Koh Samui, Thailand
+{{--                    7/21 Moo 6 Maenam 84330, Koh Samui, Thailand--}}
+                    {{ __('footer.address') }}
                 </p>
                 <div class="space-y-2">
                     <div class="flex items-center gap-2">
                         <i class="fas fa-envelope text-blue-400"></i>
-                        <a href="mailto:info@vedata.co" class="hover:text-blue-300 transition-colors text-sm font-spartan">info@vedata.co</a>
+                        <a href="mailto:info@vedata.co" class="hover:text-blue-300 transition-colors text-sm font-spartan">{{ __('footer.email') }}</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-phone text-blue-400"></i>
-                        <a href="tel:+06966626272" class="hover:text-blue-300 transition-colors text-sm font-spartan">+66 96 662 6272</a>
+                        <a href="tel:+06966626272" class="hover:text-blue-300 transition-colors text-sm font-spartan">{{ __('footer.phone_1') }}</a>
                     </div>
                     <div class="flex items-center gap-2">
                         <i class="fas fa-phone text-blue-400"></i>
-                        <a href="tel:+06536427888" class="hover:text-blue-300 transition-colors text-sm font-spartan">+66 96 807 5911</a>
+                        <a href="tel:+06536427888" class="hover:text-blue-300 transition-colors text-sm font-spartan"> {{ __('footer.phone_2') }}</a>
                     </div>
                 </div>
             </div>
 
             <!-- Sale Collection Section -->
             <div>
-                <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 font-spartan">Categories</h3>
+                <h3 class="text-lg font-semibold mb-4 border-b border-gray-700 pb-2 font-spartan">{{ __('footer.categories') }}</h3>
                 <ul class="space-y-2">
                     @php
                         $propertyTypes = \App\Models\PropertyType::all();
@@ -64,19 +68,19 @@
 
             <!-- Resources Section -->
             <div>
-                <h4 class="text-md font-semibold mb-4 text-gray-300 font-spartan ">Other Links</h4>
+                <h4 class="text-md font-semibold mb-4 text-gray-300 font-spartan ">{{ __('footer.other_links') }}</h4>
                 <ul class="space-y-2">
                    <a href="{{route('contact')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
-                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Contact Us
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> {{ __('footer.contact') }}
                     </li></a>
                     <a href="{{route('privacy')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
-                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Privacy Policy
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i>{{ __('footer.privacy') }}
                     </li></a>
                     <a href="{{route('term')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
-                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Terms & Conditions
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> {{ __('footer.terms') }}
                     </li></a>
                     <a href="{{route('frontend.agent')}}">  <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
-                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> Agents
+                        <i class="fas fa-chevron-right text-xs text-blue-400"></i> {{ __('footer.agents') }}
                     </li></a>
                     {{-- <a href="{{route('property')}}"> <li class="flex items-center gap-2 hover:text-blue-300 transition-colors cursor-pointer text-sm font-spartan">
                         <i class="fas fa-chevron-right text-xs text-blue-400"></i>
@@ -96,7 +100,7 @@
         <!-- Copyright -->
         <div class="flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-gray-400 text-sm text-center font-spartan">
-                © 2025 All Rights Reserved | Vedata Properties
+                {{ __('footer.copyright') }}
             </p>
             <div class="flex space-x-3">
                 <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
