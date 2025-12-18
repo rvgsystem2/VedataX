@@ -175,7 +175,6 @@ class HomeController extends Controller
 
     public function property(Request $request, $type = null)
     {
-        dd('hello');
         // Base query
         $query = Property::with([
             'city',
