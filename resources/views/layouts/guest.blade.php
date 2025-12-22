@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         {{-- <link rel="preconnect" href="https://fonts.bunny.net"> --}}
-        <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+        <link rel="icon" href="{{ asset('asset/img/head-logo.jpeg') }}" type="image/x-icon">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->

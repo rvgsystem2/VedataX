@@ -18,7 +18,7 @@
     @endphp
 
         <!-- Header -->
-    <header class="bg-white shadow-sm">
+    {{-- <header class="bg-white shadow-sm">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
                 <span class="text-xl font-bold text-blue-700">ExpertPropertyAsia</span>
@@ -32,7 +32,7 @@
                 </span>
             </div>
         </div>
-    </header>
+    </header> --}}
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
