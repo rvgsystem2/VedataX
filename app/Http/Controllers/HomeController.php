@@ -9,6 +9,7 @@ use App\Models\HomePageMedia;
 use App\Models\PriceRange;
 use App\Models\Property;
 use App\Models\PropertyType;
+use App\Models\SocialLink;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,8 @@ class HomeController extends Controller
 
     public function contact(){
         $address = HomePageMedia::first()?->address;
-        return view('frontend.contact', compact('address'));
+        $socialLinks = SocialLink::first();
+        return view('frontend.contact', compact('address', 'socialLinks'));
     }
 
     public function buy(){

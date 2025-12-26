@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandController;
+use App\Http\Controllers\SocialLinkController;
 use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Response;
@@ -153,6 +154,12 @@ Route::middleware('auth')->group(function () {
 
         Route::get('home-page-media/delete-image/{field}', [HomePageMediaController::class, 'destroyImage'])
             ->name('home.media.deleteImage');
+    });
+
+    Route::prefix('social-links')->name('social-links.')->group(function(){
+        Route::get('/', [SocialLinkController::class, 'index'])->name('index');
+        Route::get('edit', [SocialLinkController::class, 'edit'])->name('edit');
+        Route::post('store', [SocialLinkController::class, 'store'])->name('store');
     });
 
 

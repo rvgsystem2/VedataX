@@ -107,19 +107,51 @@
                     <!-- Social Media Links -->
 <div class="flex flex-wrap justify-center gap-4 mt-6">
     <!-- Facebook -->
-    <a href="https://facebook.com" target="_blank" aria-label="Facebook"
+    <a href="{{$socialLinks && $socialLinks->facebook ? $socialLinks->facebook : 'https://facebook.com'}}" target="_blank" aria-label="Facebook"
       class="flex items-center justify-center w-12 h-12 rounded-full bg-blue-600 text-white shadow-md hover:bg-blue-700 hover:scale-105 transition-transform duration-300 ease-out">
       <i class="fab fa-facebook-f text-lg"></i>
     </a>
 
-    <!-- WhatsApp -->
-    <a href="https://wa.me/1234567890" target="_blank" aria-label="WhatsApp"
-      class="flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-md hover:bg-green-600 hover:scale-105 transition-transform duration-300 ease-out">
-      <i class="fab fa-whatsapp text-lg"></i>
+{{--    <!-- WhatsApp -->--}}
+{{--    <a href="{{$socialLinks && $socialLinks->whatsapp ? $socialLinks->whatsapp : 'https://wa.me/1234567890'}} " target="_blank" aria-label="WhatsApp"--}}
+{{--      class="flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-md hover:bg-green-600 hover:scale-105 transition-transform duration-300 ease-out">--}}
+{{--      <i class="fab fa-whatsapp text-lg"></i>--}}
+{{--    </a>--}}
+
+
+    @php
+        $raw = $socialLinks->whatsapp ?? null;
+
+        // fallback
+        $waUrl = 'https://wa.me/1234567890';
+
+        if($raw){
+          $raw = trim($raw);
+
+          // अगर full link है तो direct use
+          if(Str::startsWith($raw, ['http://', 'https://', 'wa.me/', 'api.whatsapp.com'])){
+              $waUrl = Str::startsWith($raw, 'wa.me/') ? 'https://' . $raw : $raw;
+          } else {
+              // वरना number मानकर clean करो
+              $digits = preg_replace('/\D+/', '', $raw);
+
+              // 10 digit => India 91 add
+              if(strlen($digits) === 10) $digits = '66'.$digits;
+
+              // minimum sanity check
+              if(strlen($digits) >= 11) $waUrl = 'https://wa.me/'.$digits;
+          }
+        }
+    @endphp
+
+        <!-- WhatsApp -->
+    <a href="{{ $waUrl }}" target="_blank" aria-label="WhatsApp"
+       class="flex items-center justify-center w-12 h-12 rounded-full bg-green-500 text-white shadow-md hover:bg-green-600 hover:scale-105 transition-transform duration-300 ease-out">
+        <i class="fab fa-whatsapp text-lg"></i>
     </a>
 
     <!-- Instagram -->
-    <a href="https://instagram.com" target="_blank" aria-label="Instagram"
+    <a href="{{$socialLinks && $socialLinks->instagram ? $socialLinks->instagram : 'https://instagram.com'}}" target="_blank" aria-label="Instagram"
       class="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-tr from-pink-500 via-red-500 to-yellow-500 text-white shadow-md hover:opacity-90 hover:scale-105 transition-transform duration-300 ease-out">
       <i class="fab fa-instagram text-lg"></i>
     </a>
