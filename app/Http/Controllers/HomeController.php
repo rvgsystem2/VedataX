@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ContactMail;
 use App\Models\City;
 use App\Models\Enquiry;
+use App\Models\HomePageMedia;
 use App\Models\PriceRange;
 use App\Models\Property;
 use App\Models\PropertyType;
@@ -44,7 +45,8 @@ class HomeController extends Controller
                 ->first()?->properties ?? collect();
         $minPrices = PriceRange::where('type', 'min')->get();
         $maxPrices = PriceRange::where('type', 'max')->get();
-        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands', 'minPrices','maxPrices'));
+        $homePageMedia = HomePageMedia::first();
+        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands', 'minPrices','maxPrices', 'homePageMedia'));
     }
 
     public function landproperty(){
@@ -56,7 +58,8 @@ class HomeController extends Controller
     }
 
     public function contact(){
-        return view('frontend.contact');
+        $address = HomePageMedia::first()?->address;
+        return view('frontend.contact', compact('address'));
     }
 
     public function buy(){
@@ -189,6 +192,7 @@ class HomeController extends Controller
 
         // 2) Location (city name se)
         if ($request->filled('city')) {
+
             $cityName = $request->input('city');
 
             $query->whereHas('city', function ($q) use ($cityName) {

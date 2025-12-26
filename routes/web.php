@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 
+use App\Http\Controllers\HomePageMediaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 
@@ -144,6 +145,16 @@ Route::middleware('auth')->group(function () {
        Route::post('store', 'store')->name('store');
        Route::delete('delete/{range}', 'destroy')->name('destroy');
     });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('home-page-media', [HomePageMediaController::class, 'index'])->name('home.media.index');
+        Route::get('home-page-media/edit', [HomePageMediaController::class, 'edit'])->name('home.media.edit');
+        Route::post('home-page-media', [HomePageMediaController::class, 'store'])->name('home.media.store');
+
+        Route::get('home-page-media/delete-image/{field}', [HomePageMediaController::class, 'destroyImage'])
+            ->name('home.media.deleteImage');
+    });
+
 
 
 });

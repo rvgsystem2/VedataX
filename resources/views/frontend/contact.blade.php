@@ -278,8 +278,19 @@
 
 {{-- map --}}
 <div class="w-full mt-12  flex justify-center">
+{{--    @php--}}
+{{--        $address = $business->address ?? 'New Delhi, India';--}}
+{{--        $mapAddress = urlencode($address);--}}
+{{--    @endphp--}}
+{{--    <iframe--}}
+{{--        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2714825.355713062!2d-112.21401231472422!3d41.76651791208626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sin!4v1759477293939!5m2!1sen!2sin"--}}
+{{--        class="w-full max-w-9xl h-[450px] border-0"--}}
+{{--        allowfullscreen=""--}}
+{{--        loading="lazy"--}}
+{{--        referrerpolicy="no-referrer-when-downgrade">--}}
+{{--    </iframe>--}}
     <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2714825.355713062!2d-112.21401231472422!3d41.76651791208626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited%20States!5e0!3m2!1sen!2sin!4v1759477293939!5m2!1sen!2sin"
+        src="https://www.google.com/maps?q={{ $address ?? 'Thailand'}}&output=embed"
         class="w-full max-w-9xl h-[450px] border-0"
         allowfullscreen=""
         loading="lazy"
