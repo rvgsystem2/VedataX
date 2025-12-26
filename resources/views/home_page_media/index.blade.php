@@ -52,14 +52,25 @@
                                          class="w-full h-full object-cover"
                                          alt="{{ $label }}">
                                 </div>
+
                             @else
                                 <div class="w-full h-40 rounded-lg bg-gray-50 border border-dashed border-gray-200 flex items-center justify-center">
                                     <span class="text-xs text-gray-400">No image</span>
                                 </div>
                             @endif
+
                         </div>
                     @endforeach
                 </div>
+                @if($media && $media->address)
+                    <div class="mt-6 border-t pt-4">
+                        <div class="text-sm font-semibold text-gray-700 mb-1">Address</div>
+                        <div class="text-sm text-gray-600 whitespace-pre-line">
+                            {{ $media->address }}
+                        </div>
+                    </div>
+                @endif
+
             @endif
         </div>
     </div>

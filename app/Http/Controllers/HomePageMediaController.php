@@ -63,6 +63,7 @@ class HomePageMediaController extends Controller
             'location_4'   => 'nullable|image|max:4096',
             'about_image'  => 'nullable|image|max:4096',
             'final_cat_bg' => 'nullable|image|max:4096',
+            'address'      => 'nullable|string|max:255',
         ]);
 
         foreach ($allowed as $field) {
@@ -74,6 +75,7 @@ class HomePageMediaController extends Controller
             }
         }
 
+        $media->address = $request->address;
         $media->save();
 
         return back()->with('success', 'Homepage media updated successfully');

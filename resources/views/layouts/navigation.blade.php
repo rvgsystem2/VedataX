@@ -105,9 +105,9 @@
                         </div>
                     </div>
 
-{{--                    <x-nav-link :href="route('lands.index')" :active="request()->routeIs('lands.*')" class="block px-4 py-2 text-left">--}}
-{{--                        <i class="fas fa-layer-group mr-1"></i> Lands--}}
-{{--                    </x-nav-link>--}}
+                    <x-nav-link :href="route('home.media.index')" :active="request()->routeIs('home.media.*')" class="block px-4 py-2 text-left">
+                        <i class="fas fa-layer-group mr-1"></i> Home Page Media
+                    </x-nav-link>
 
 
 {{--                    <div class="relative" x-data="{ openEnquiries: false }">--}}

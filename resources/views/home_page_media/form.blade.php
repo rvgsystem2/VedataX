@@ -51,4 +51,20 @@
         </div>
     @endforeach
 
+        {{-- Address --}}
+        <div class="md:col-span-2 border border-gray-200 rounded-xl p-4">
+            <div class="text-sm font-semibold text-gray-800 mb-2">
+                Address
+            </div>
+
+            <textarea name="address" rows="3"
+                      class="w-full text-sm border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-[#c21108] focus:border-[#c21108]"
+                      placeholder="Enter address for home page display">{{ old('address', $media->address ?? '') }}</textarea>
+
+            <p class="text-xs text-gray-500 mt-1">
+                This address will be shown on the home page (footer / contact section).
+            </p>
+        </div>
+
+
 </div>
