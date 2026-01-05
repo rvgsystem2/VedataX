@@ -121,11 +121,31 @@
                     </div>
 
                     {{-- Usually listed_by = Auth::id(), but keeping field if you really want to set manually --}}
+{{--                    <div>--}}
+{{--                        <label class="block text-sm font-medium text-gray-700">Listed By (User ID)</label>--}}
+{{--                        <input type="number" name="listed_by" value="{{ old('listed_by', $property->listed_by ?? '') }}"--}}
+{{--                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />--}}
+{{--                    </div>--}}
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Listed By (User ID)</label>
-                        <input type="number" name="listed_by" value="{{ old('listed_by', $property->listed_by ?? '') }}"
-                               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+                        <label class="block text-sm font-medium text-gray-700">
+                            Listed By (User)
+                        </label>
+
+                        <select name="listed_by"
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+
+                            <option value="">-- Select User --</option>
+
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}"
+                                    {{ old('listed_by', $property->listed_by ?? '') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }} (ID: {{ $user->id }})
+                                </option>
+                            @endforeach
+
+                        </select>
                     </div>
+
                 </div>
 
                 {{-- DESCRIPTION --}}

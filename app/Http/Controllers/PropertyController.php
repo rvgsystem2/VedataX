@@ -6,6 +6,7 @@ use App\Models\Amenity;
 use App\Models\City;
 use App\Models\Property;
 use App\Models\PropertyType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,8 @@ class PropertyController extends Controller
         $propertyTypes = PropertyType::all();
         $cities = City::all();
         $amenities = Amenity::all();
-        return view('properties.form', compact('propertyTypes', 'cities', 'amenities'));
+        $users = User::all();
+        return view('properties.form', compact('propertyTypes', 'cities', 'amenities', 'users'));
     }
 
 
