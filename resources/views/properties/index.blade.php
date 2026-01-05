@@ -69,7 +69,7 @@
                                   class="inline-block"
                                   onsubmit="return confirm('Are you sure you want to delete this property?');">
                                 @csrf
-                                @method('DELETE')
+
                                 <button type="submit" class="text-red-600 hover:underline">Delete</button>
                             </form>
                                 @endcan
