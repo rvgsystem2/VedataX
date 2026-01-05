@@ -109,7 +109,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Area (sqft)</label>
+                        <label class="block text-sm font-medium text-gray-700">Area (sqm)</label>
                         <input type="number" step="0.1" name="area" value="{{ old('area', $property->area ?? '') }}"
                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
                     </div>
