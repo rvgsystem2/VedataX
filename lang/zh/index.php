@@ -51,7 +51,7 @@ return [
 
         'beds' => '卧室',
         'baths' => '浴室',
-        'sqft' => '平方英尺',
+        'sqft' => '平方米',
     ],
 
     'villas' => [
@@ -76,7 +76,7 @@ return [
 
             'beds'  => '卧室',
             'baths' => '浴室',
-            'sqft'  => '平方英尺',
+            'sqft'  => '平方米',
         ],
     ],
 
@@ -104,7 +104,7 @@ return [
             'rent'  => '出租',
             'sale'  => '出售',
 
-            'sqft'  => '平方英尺',
+            'sqft'  => '平方米',
 
             'area_not_specified' => '面积未注明',
 

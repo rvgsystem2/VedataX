@@ -51,7 +51,7 @@ return [
 
         'beds' => 'Chambres',
         'baths' => 'Salles de bain',
-        'sqft' => 'pi²',
+        'sqft' => 'm²',
     ],
 
     'villas' => [
@@ -76,7 +76,7 @@ return [
 
             'beds'  => 'Chambres',
             'baths' => 'Salles de bain',
-            'sqft'  => 'pi²',
+            'sqft'  => 'm²',
         ],
     ],
 
@@ -104,7 +104,7 @@ return [
             'rent'  => 'LOCATION',
             'sale'  => 'VENTE',
 
-            'sqft'  => 'pi²',
+            'sqft'  => 'm²',
 
             'area_not_specified' => 'Surface non précisée',
 

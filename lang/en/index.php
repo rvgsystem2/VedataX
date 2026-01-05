@@ -51,7 +51,7 @@ return [
 
         'beds' => 'Beds',
         'baths' => 'Baths',
-        'sqft' => 'sqft',
+        'sqft' => 'sqm',
     ],
 
     'villas' => [
@@ -76,7 +76,7 @@ return [
 
             'beds'  => 'Beds',
             'baths' => 'Baths',
-            'sqft'  => 'sqft',
+            'sqft'  => 'sqm',
         ],
     ],
 
@@ -104,7 +104,7 @@ return [
             'rent'  => 'RENT',
             'sale'  => 'SALE',
 
-            'sqft'  => 'sqft',
+            'sqft'  => 'sqm',
 
             'area_not_specified' => 'Area not specified',
 
