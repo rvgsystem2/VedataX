@@ -115,6 +115,9 @@ Route::middleware('auth')->group(function () {
         Route::post('destroy/{property}', 'destroy')->name('destroy');
     });
 
+    Route::delete('/properties/images/{image}', [\App\Http\Controllers\PropertyController::class, 'deleteImage'])
+        ->name('properties.images.delete');
+
     Route::controller(\App\Http\Controllers\AmenityController::class)->prefix('amenities')->name('amenities.')->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('create', 'create')->name('create');

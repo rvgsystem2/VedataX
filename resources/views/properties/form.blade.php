@@ -216,21 +216,31 @@
                     @if(isset($property) && $property->images->count())
                         <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
                             @foreach($property->images as $idx => $img)
-                                <div class="border rounded p-2 text-center">
-                                    <img src="{{ asset('storage/'.$img->path) }}" alt="" class="w-full h-24 object-cover mb-1">
+                                <div id="property-image-{{ $img->id }}" class="border rounded p-2 text-center">
+                                    <img
+                                        src="{{ asset('storage/'.$img->url) }}"
+                                        data-full="{{ asset('storage/'.$img->url) }}"
+                                        class="w-full h-24 object-cover mb-1 cursor-pointer rounded"
+                                        onclick="openImageModal(this)"
+                                    >
+
                                     <div class="text-xs text-gray-600 truncate">{{ $img->path }}</div>
-                                    <div class="mt-1 flex items-center justify-center gap-2">
+
+                                    <div class="mt-1 flex items-center justify-center gap-3">
                                         <label class="inline-flex items-center text-xs">
                                             <input type="radio" name="existing_main_image" value="{{ $idx }}"
                                                 {{ $property->main_image_index == $idx ? 'checked' : '' }}>
                                             <span class="ml-1">Main</span>
                                         </label>
-                                        <label class="inline-flex items-center text-xs text-red-600">
-                                            <input type="checkbox" name="delete_images[]" value="{{ $img->id }}">
-                                            <span class="ml-1">Delete</span>
-                                        </label>
+
+                                        <button type="button"
+                                                class="inline-flex items-center text-xs text-red-600 hover:text-red-700 hover:underline"
+                                                onclick="deletePropertyImage({{ $img->id }}, this)">
+                                            Delete
+                                        </button>
                                     </div>
                                 </div>
+
                             @endforeach
                         </div>
                     @endif
@@ -403,8 +413,76 @@
                 </div>
             </form>
 
+            {{-- IMAGE PREVIEW MODAL --}}
+            <div id="imageModal"
+                 class="fixed inset-0 z-[9999] hidden items-center justify-center">
+                {{-- Backdrop --}}
+                <div class="absolute inset-0 bg-black/70" onclick="closeImageModal()"></div>
+
+                {{-- Modal Box --}}
+                <div class="relative z-10 w-[95vw] max-w-5xl rounded-2xl bg-white shadow-2xl overflow-hidden">
+                    <div class="flex items-center justify-between px-4 py-3 border-b">
+                        <p class="text-sm font-semibold text-gray-800">Image Preview</p>
+                        <button type="button"
+                                class="h-9 w-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700"
+                                onclick="closeImageModal()">
+                            ✕
+                        </button>
+                    </div>
+
+                    <div class="p-3 bg-black">
+                        <img id="modalImage"
+                             src=""
+                             alt="Preview"
+                             class="w-full max-h-[75vh] object-contain rounded-lg bg-black">
+                    </div>
+
+                    <div class="px-4 py-3 flex items-center justify-end gap-2 border-t">
+                        <button type="button"
+                                class="px-4 py-2 text-sm rounded-lg bg-gray-100 hover:bg-gray-200"
+                                onclick="closeImageModal()">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
 
     </div>
+
+    <script>
+        // existing functions...
+        // addDynamicRow(), removeDynamicRow() already there
+
+        function openImageModal(imgEl) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+
+            const src = imgEl.getAttribute('data-full') || imgEl.src;
+            modalImg.src = src;
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+
+            modalImg.src = '';
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // ESC to close
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeImageModal();
+        });
+    </script>
+
+
     {{-- SIMPLE JS FOR DYNAMIC ROWS --}}
     <script>
         function addDynamicRow(group) {
@@ -476,5 +554,42 @@
             if (row) row.remove();
         }
     </script>
+
+
+    <script>
+        async function deletePropertyImage(imageId, btnEl) {
+            if (!confirm('Delete this image permanently?')) return;
+
+            // UI: disable
+            btnEl.disabled = true;
+            btnEl.classList.add('opacity-60', 'pointer-events-none');
+
+            try {
+                const res = await fetch(`{{ route('properties.images.delete', '__ID__') }}`.replace('__ID__', imageId), {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || !data.status) {
+                    throw new Error(data.message || 'Delete failed');
+                }
+
+                // remove card from UI
+                const card = document.getElementById(`property-image-${imageId}`);
+                if (card) card.remove();
+
+            } catch (err) {
+                alert(err.message || 'Something went wrong');
+                btnEl.disabled = false;
+                btnEl.classList.remove('opacity-60', 'pointer-events-none');
+            }
+        }
+    </script>
+
 
 </x-app-layout>

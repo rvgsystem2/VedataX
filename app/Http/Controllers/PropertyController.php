@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Amenity;
 use App\Models\City;
 use App\Models\Property;
+use App\Models\PropertyImage;
 use App\Models\PropertyType;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -323,14 +324,14 @@ class PropertyController extends Controller
         // images handle (simple: nayi aayi to purani sab hata kar replace)
         if ($request->hasFile('images')) {
             // old files delete
-            foreach ($property->images as $img) {
-                if ($img->url) {
-                    Storage::disk('public')->delete($img->url);
-                }
-            }
+//            foreach ($property->images as $img) {
+//                if ($img->url) {
+//                    Storage::disk('public')->delete($img->url);
+//                }
+//            }
 
             // old records delete
-            $property->images()->delete();
+//            $property->images()->delete();
 
             // new save
             $mainIndex = (int)($validated['main_image_index'] ?? 0);
@@ -356,4 +357,26 @@ class PropertyController extends Controller
         $property->delete();
         return redirect()->route('properties.index')->with('success', 'Property deleted successfully.');
     }
+
+
+    public function deleteImage(Request $request, PropertyImage $image)
+    {
+        // (Optional but recommended) authorization check:
+        // abort_if($image->property->business_id !== auth()->user()->current_business_id, 403);
+
+        // storage file delete
+        // If $image->url = 'properties/xx.jpg' type path
+        if ($image->url && Storage::disk('public')->exists($image->url)) {
+            Storage::disk('public')->delete($image->url);
+        }
+
+        $image->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Image deleted successfully',
+            'deleted_id' => $image->id,
+        ]);
+    }
+
 }
