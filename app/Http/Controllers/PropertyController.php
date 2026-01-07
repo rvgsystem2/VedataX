@@ -179,6 +179,7 @@ class PropertyController extends Controller
         $propertyTypes = PropertyType::all();
         $cities        = City::all();
         $amenities     = Amenity::all();
+        $users = User::all();
 
         // relations load
         $property->load([
@@ -189,7 +190,7 @@ class PropertyController extends Controller
             'safetySecurities',
         ]);
 
-        return view('properties.form', compact('property', 'propertyTypes', 'cities', 'amenities'));
+        return view('properties.form', compact('property', 'propertyTypes', 'cities', 'amenities', 'users'));
     }
 
     public function show(Property $property){

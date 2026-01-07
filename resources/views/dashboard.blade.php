@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="text-right">
                                         <div class="text-sm font-bold text-emerald-600">
-                                            ₹ {{ number_format($property->price, 2) }}
+                                            THB {{ number_format($property->price, 2) }}
                                         </div>
                                         <div class="text-xs text-gray-400">
                                             {{ $property->created_at->diffForHumans() }}
