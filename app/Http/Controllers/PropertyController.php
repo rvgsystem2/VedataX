@@ -65,7 +65,7 @@ class PropertyController extends Controller
             'amenities.*'       => 'exists:amenities,id',
 
             'images'            => 'nullable|array',
-            'images.*'          => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images.*'          => 'image|mimes:jpg,jpeg,png',
 
             'main_image_index'  => 'nullable|integer|min:0',
 
@@ -220,7 +220,7 @@ class PropertyController extends Controller
             'amenities.*'       => 'exists:amenities,id',
 
             'images'            => 'nullable|array',
-            'images.*'          => 'image|mimes:jpg,jpeg,png|max:2048',
+            'images.*'          => 'image|mimes:jpg,jpeg,png',
 
             'main_image_index'  => 'nullable|integer|min:0',
 
