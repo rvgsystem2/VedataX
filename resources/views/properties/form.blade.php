@@ -228,8 +228,11 @@
 
                                     <div class="mt-1 flex items-center justify-center gap-3">
                                         <label class="inline-flex items-center text-xs">
-                                            <input type="radio" name="existing_main_image" value="{{ $idx }}"
-                                                {{ $property->main_image_index == $idx ? 'checked' : '' }}>
+{{--                                            <input type="radio" name="existing_main_image" value="{{ $idx }}"--}}
+{{--                                                {{ $property->main_image_index == $idx ? 'checked' : '' }}>--}}
+                                            <input type="radio" name="existing_main_image" value="{{ $img->id }}"
+                                                {{ $img->is_main ? 'checked' : '' }}>
+
                                             <span class="ml-1">Main</span>
                                         </label>
 

@@ -223,6 +223,7 @@ class PropertyController extends Controller
             'images.*'          => 'image|mimes:jpg,jpeg,png',
 
             'main_image_index'  => 'nullable|integer|min:0',
+            'existing_main_image' => 'nullable|integer|exists:property_images,id',
 
             'best_deal'         => 'nullable|boolean',
 
@@ -320,6 +321,27 @@ class PropertyController extends Controller
                 }
             }
         }
+
+
+        // ✅ MAIN IMAGE CHANGE (existing images) - when no new upload
+        if (!$request->hasFile('images') && $request->filled('existing_main_image')) {
+
+            // safety: selected image must belong to this property
+            $imgId = (int) $request->existing_main_image;
+
+            $belongs = $property->images()->where('id', $imgId)->exists();
+            if ($belongs) {
+                // reset all
+                $property->images()->update(['is_main' => 0]);
+
+                // set selected
+                $property->images()->where('id', $imgId)->update(['is_main' => 1]);
+
+                // (optional) if you store main_image_index in properties table:
+                // $property->update(['main_image_index' => 0]); // or compute index if needed
+            }
+        }
+
 
         // images handle (simple: nayi aayi to purani sab hata kar replace)
         if ($request->hasFile('images')) {
