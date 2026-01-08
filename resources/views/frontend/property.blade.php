@@ -184,18 +184,21 @@
 
                                         {{-- Beds / Baths / Area --}}
                                         <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                            @if(!is_null($property->bedrooms))
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                                    <span>{{ $property->bedrooms }} Beds</span>
-                                                </div>
-                                            @endif
+                                            @if(!($property->propertyType->title== 'Land' || $property->propertyType->slug == 'land'))
+                                                @if(!is_null($property->bedrooms))
+                                                    <div class="flex items-center">
+                                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                                        <span>{{ $property->bedrooms }} Beds</span>
+                                                    </div>
+                                                @endif
 
-                                            @if(!is_null($property->bathrooms))
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                                    <span>{{ $property->bathrooms }} Baths</span>
-                                                </div>
+                                                @if(!is_null($property->bathrooms))
+                                                    <div class="flex items-center">
+                                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                                        <span>{{ $property->bathrooms }} Baths</span>
+                                                    </div>
+                                                @endif
+
                                             @endif
 
                                             @if(!is_null($property->area))
@@ -211,7 +214,11 @@
                                             <div class="flex items-center">
                                                 <div
                                                     class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
+                                                    @if($agent->profile_image)
+                                                        <img src="{{asset('storage/'. $agent->profile_image)}}" alt="" class="rounded-2xl w-full h-full">
+                                                    @else
                                                     {{ $initials }}
+                                                    @endif
                                                 </div>
                                                 <div class="ml-3">
                                                     <p class="text-sm font-medium text-gray-900">
@@ -223,10 +230,10 @@
                                             <!-- Share Button and Time -->
                                             <div class="flex items-center space-x-2">
                                                 <!-- Share Icon -->
-                                                <button
-                                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                                    <i class="fas fa-share-alt"></i>
-                                                </button>
+{{--                                                <button--}}
+{{--                                                    class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                                    <i class="fas fa-share-alt"></i>--}}
+{{--                                                </button>--}}
                                                 <!-- Time Posted -->
                                                 @if($postedAgo)
                                                     <p class="text-xs text-gray-500">{{ $postedAgo }}</p>

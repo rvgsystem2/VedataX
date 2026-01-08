@@ -485,7 +485,11 @@
                                     <div class="flex items-center">
                                         <div
                                             class="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold">
+                                            @if($bestDeal->listedBy->profile_image)
+                                                <img src="{{asset('storage/'. $bestDeal->listedBy->profile_image)}}" alt="" class="rounded-2xl w-full h-full">
+                                            @else
                                             {{ strtoupper(substr($bestDeal->listedBy->name, 0, 2)) }}
+                                            @endif
                                         </div>
 
                                         <div class="ml-3">
@@ -496,10 +500,10 @@
                                     </div>
 
                                     <div class="flex items-center space-x-2">
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
+{{--                                        <button--}}
+{{--                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                            <i class="fas fa-share-alt"></i>--}}
+{{--                                        </button>--}}
 
                                         {{-- Time ago --}}
                                         <p class="text-xs text-gray-500">
@@ -1312,26 +1316,26 @@
                                     </div>
 
                                     {{-- Road Access (amenity based) --}}
-                                    @php
-                                        $hasRoad = optional($land->amenities)
-                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)
-                                            : false;
-                                    @endphp
-                                    <div class="flex items-center">
-                                        <i class="fas fa-road text-gray-400 mr-1"></i>
-                                        <span>{{ $hasRoad ? __('index.lands.labels.road_access') : __('index.lands.labels.road_na') }}</span>
-                                    </div>
+{{--                                    @php--}}
+{{--                                        $hasRoad = optional($land->amenities)--}}
+{{--                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)--}}
+{{--                                            : false;--}}
+{{--                                    @endphp--}}
+{{--                                    <div class="flex items-center">--}}
+{{--                                        <i class="fas fa-road text-gray-400 mr-1"></i>--}}
+{{--                                        <span>{{ $hasRoad ? __('index.lands.labels.road_access') : __('index.lands.labels.road_na') }}</span>--}}
+{{--                                    </div>--}}
 
                                     {{-- Water Supply (amenity based) --}}
-                                    @php
-                                        $hasWater = optional($land->amenities)
-                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)
-                                            : false;
-                                    @endphp
-                                    <div class="flex items-center">
-                                        <i class="fas fa-tint text-gray-400 mr-1"></i>
-                                        <span>{{ $hasWater ? __('index.lands.labels.water_supply') : __('index.lands.labels.water_na') }}</span>
-                                    </div>
+{{--                                    @php--}}
+{{--                                        $hasWater = optional($land->amenities)--}}
+{{--                                            ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)--}}
+{{--                                            : false;--}}
+{{--                                    @endphp--}}
+{{--                                    <div class="flex items-center">--}}
+{{--                                        <i class="fas fa-tint text-gray-400 mr-1"></i>--}}
+{{--                                        <span>{{ $hasWater ? __('index.lands.labels.water_supply') : __('index.lands.labels.water_na') }}</span>--}}
+{{--                                    </div>--}}
                                 </div>
 
                                 {{-- AGENT + TIME --}}
@@ -1348,7 +1352,11 @@
                                         <div
                                             class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500
                                    flex items-center justify-center text-white font-bold">
+                                            @if($agent->profile_image)
+                                                <img src="{{asset('storage/'. $agent->profile_image)}}" alt="" class="rounded-2xl w-full h-full">
+                                            @else
                                             {{ $initials }}
+                                                @endif
                                         </div>
                                         <div class="ml-3">
                                             <p class="text-sm font-medium text-gray-900">
@@ -1358,11 +1366,11 @@
                                     </div>
 
                                     <div class="flex items-center space-x-2">
-                                        <button
-                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center
-                                   text-gray-600 hover:bg-gray-200 transition-colors">
-                                            <i class="fas fa-share-alt"></i>
-                                        </button>
+{{--                                        <button--}}
+{{--                                            class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center--}}
+{{--                                   text-gray-600 hover:bg-gray-200 transition-colors">--}}
+{{--                                            <i class="fas fa-share-alt"></i>--}}
+{{--                                        </button>--}}
                                         <p class="text-xs text-gray-500">
                                             {{ $land->created_at?->diffForHumans() ?? '' }}
                                         </p>

@@ -4,6 +4,7 @@
     @php
         $cityName  = optional($property->city)->name;
         $typeTitle = optional($property->propertyType)->title ?? ucfirst($property->type ?? '');
+        $propertyType = $property->propertyType;
         $reference = $property->reference ?? ('PP' . str_pad($property->id, 5, '0', STR_PAD_LEFT));
 
         $bedrooms  = $property->bedrooms;
@@ -37,83 +38,203 @@
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
         <!-- Property Header -->
-        <div class="bg-white rounded-lg property-card p-6 mb-6">
-            <div class="flex flex-col md:flex-row justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-800">
+{{--        <div class="bg-white rounded-lg property-card p-6 mb-6">--}}
+{{--            <div class="flex flex-col md:flex-row justify-between">--}}
+{{--                <div>--}}
+{{--                    <h1 class="text-2xl font-bold text-gray-800">--}}
+{{--                        {{ $property->title }}--}}
+{{--                    </h1>--}}
+{{--                    <div class="flex flex-wrap items-center mt-2 text-gray-600">--}}
+{{--                        <i class="fas fa-map-marker-alt mr-1"></i>--}}
+{{--                        <span>--}}
+{{--                            @if($property->address)--}}
+{{--                                {{ $property->address }}--}}
+{{--                            @endif--}}
+{{--                            @if($property->address && $cityName)--}}
+{{--                                ,--}}
+{{--                            @endif--}}
+{{--                            {{ $cityName }}--}}
+{{--                        </span>--}}
+{{--                        @if($typeTitle)--}}
+{{--                            <span class="mx-2">•</span>--}}
+{{--                            <span>{{ $typeTitle }}</span>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="mt-4 md:mt-0 text-right">--}}
+{{--                    <div class="text-3xl font-bold text-blue-700">--}}
+{{--                        --}}{{-- THB ke hisaab se – agar aap INR use karenge to symbol change kar lena --}}
+{{--                        ฿{{ number_format($property->price, 0) }}--}}
+{{--                    </div>--}}
+{{--                    <div class="text-sm text-gray-500 mt-1">--}}
+{{--                        Reference: {{ $reference }}--}}
+{{--                    </div>--}}
+
+{{--                    @if($property->status)--}}
+{{--                        <div--}}
+{{--                            class="inline-flex mt-2 px-3 py-1 rounded-full text-xs font-semibold--}}
+{{--                            {{ $property->status === 'available' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">--}}
+{{--                            {{ ucfirst($property->status) }}--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+{{--            <!-- Property Stats -->--}}
+{{--            @if(!($propertyType->title == 'Land' || !$propertyType->slug == 'land'))--}}
+{{--            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200">--}}
+{{--                @if(!is_null($bedrooms))--}}
+{{--                    <div class="text-center">--}}
+{{--                        <div class="text-2xl font-bold text-gray-800">{{ $bedrooms }}</div>--}}
+{{--                        <div class="text-sm text-gray-600">Beds</div>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+
+{{--                @if(!is_null($bathrooms))--}}
+{{--                    <div class="text-center">--}}
+{{--                        <div class="text-2xl font-bold text-gray-800">{{ $bathrooms }}</div>--}}
+{{--                        <div class="text-sm text-gray-600">Baths</div>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+
+{{--                @if(!is_null($interiorSize))--}}
+{{--                    <div class="text-center">--}}
+{{--                        <div class="text-2xl font-bold text-gray-800">--}}
+{{--                            {{ rtrim(rtrim(number_format($interiorSize, 2, '.', ''), '0'), '.') }} m²--}}
+{{--                        </div>--}}
+{{--                        <div class="text-sm text-gray-600">Interior Size</div>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+
+{{--                @if(!is_null($landSize))--}}
+{{--                    <div class="text-center">--}}
+{{--                        <div class="text-2xl font-bold text-gray-800">--}}
+{{--                            {{ rtrim(rtrim(number_format($landSize, 2, '.', ''), '0'), '.') }} m²--}}
+{{--                        </div>--}}
+{{--                        <div class="text-sm text-gray-600">Land Size</div>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
+{{--            </div>--}}
+{{--            @endif--}}
+{{--        </div>--}}
+
+        <div class="bg-white rounded-xl property-card p-4 sm:p-6 mb-6 shadow-sm border border-gray-100">
+
+            {{-- TOP SECTION --}}
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+
+                {{-- LEFT: Title + Address --}}
+                <div class="space-y-1">
+                    <h1 class="text-lg sm:text-2xl font-bold text-gray-800 leading-snug">
                         {{ $property->title }}
                     </h1>
-                    <div class="flex flex-wrap items-center mt-2 text-gray-600">
-                        <i class="fas fa-map-marker-alt mr-1"></i>
+
+                    <div class="flex flex-wrap items-center gap-1 text-sm text-gray-600">
+                        <i class="fas fa-map-marker-alt text-xs"></i>
+
                         <span>
-                            @if($property->address)
+                    @if($property->address)
                                 {{ $property->address }}
                             @endif
+
                             @if($property->address && $cityName)
                                 ,
                             @endif
+
                             {{ $cityName }}
-                        </span>
+                </span>
+
                         @if($typeTitle)
-                            <span class="mx-2">•</span>
-                            <span>{{ $typeTitle }}</span>
+                            <span class="mx-1">•</span>
+                            <span class="font-medium">{{ $typeTitle }}</span>
                         @endif
                     </div>
                 </div>
-                <div class="mt-4 md:mt-0 text-right">
-                    <div class="text-3xl font-bold text-blue-700">
-                        {{-- THB ke hisaab se – agar aap INR use karenge to symbol change kar lena --}}
-                        ฿{{ number_format($property->price, 0) }}
-                    </div>
-                    <div class="text-sm text-gray-500 mt-1">
-                        Reference: {{ $reference }}
+
+                {{-- RIGHT: Price + Ref + Status --}}
+                <div class="sm:text-right flex sm:block items-center justify-between gap-4">
+
+                    <div>
+                        <div class="text-xl sm:text-3xl font-bold text-blue-700 leading-tight">
+                            ฿{{ number_format($property->price, 0) }}
+                        </div>
+
+                        <div class="text-xs text-gray-500 mt-0.5">
+                            Reference: {{ $reference }}
+                        </div>
                     </div>
 
                     @if($property->status)
-                        <div
-                            class="inline-flex mt-2 px-3 py-1 rounded-full text-xs font-semibold
-                            {{ $property->status === 'available' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700' }}">
-                            {{ ucfirst($property->status) }}
-                        </div>
+                        <span
+                            class="inline-flex h-fit px-3 py-1 rounded-full text-xs font-semibold
+                    {{ $property->status === 'available'
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-700' }}">
+                    {{ ucfirst($property->status) }}
+                </span>
                     @endif
                 </div>
+
             </div>
 
-            <!-- Property Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200">
-                @if(!is_null($bedrooms))
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-gray-800">{{ $bedrooms }}</div>
-                        <div class="text-sm text-gray-600">Beds</div>
-                    </div>
-                @endif
 
-                @if(!is_null($bathrooms))
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-gray-800">{{ $bathrooms }}</div>
-                        <div class="text-sm text-gray-600">Baths</div>
-                    </div>
-                @endif
+            {{-- Property Stats --}}
+            {{-- ✅ Show stats ONLY if NOT Land --}}
+            @if(!($propertyType->title === 'Land' || $propertyType->slug === 'land'))
+                <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-6 pt-5 border-t border-gray-200">
 
-                @if(!is_null($interiorSize))
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-gray-800">
-                            {{ rtrim(rtrim(number_format($interiorSize, 2, '.', ''), '0'), '.') }} m²
+                    @if(!is_null($bedrooms))
+                        <div class="text-center">
+                            <div class="text-lg sm:text-2xl font-bold text-gray-800">
+                                {{ $bedrooms }}
+                            </div>
+                            <div class="text-[11px] sm:text-sm text-gray-600">
+                                Beds
+                            </div>
                         </div>
-                        <div class="text-sm text-gray-600">Interior Size</div>
-                    </div>
-                @endif
+                    @endif
 
-                @if(!is_null($landSize))
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-gray-800">
-                            {{ rtrim(rtrim(number_format($landSize, 2, '.', ''), '0'), '.') }} m²
+                    @if(!is_null($bathrooms))
+                        <div class="text-center">
+                            <div class="text-lg sm:text-2xl font-bold text-gray-800">
+                                {{ $bathrooms }}
+                            </div>
+                            <div class="text-[11px] sm:text-sm text-gray-600">
+                                Baths
+                            </div>
                         </div>
-                        <div class="text-sm text-gray-600">Land Size</div>
-                    </div>
-                @endif
-            </div>
+                    @endif
+
+                    @if(!is_null($interiorSize))
+                        <div class="text-center">
+                            <div class="text-lg sm:text-2xl font-bold text-gray-800">
+                                {{ rtrim(rtrim(number_format($interiorSize, 2, '.', ''), '0'), '.') }} m²
+                            </div>
+                            <div class="text-[11px] sm:text-sm text-gray-600">
+                                Interior Size
+                            </div>
+                        </div>
+                    @endif
+
+                    {{-- Desktop par Land Size alag se --}}
+                    @if(!is_null($landSize))
+                        <div class="hidden sm:block text-center">
+                            <div class="text-lg sm:text-2xl font-bold text-gray-800">
+                                {{ rtrim(rtrim(number_format($landSize, 2, '.', ''), '0'), '.') }} m²
+                            </div>
+                            <div class="text-[11px] sm:text-sm text-gray-600">
+                                Land Size
+                            </div>
+                        </div>
+                    @endif
+
+                </div>
+            @endif
+
+
         </div>
+
+
 
         <div class="flex flex-col lg:flex-row gap-6">
             <!-- Left Column -->
@@ -154,6 +275,8 @@
                     </p>
                 </div>
 
+
+                @if(!($propertyType->title == 'Land' || $propertyType->slug == 'land'))
                 <!-- Property Features -->
                 <div class="bg-white rounded-lg property-card p-6 mb-6">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">Property Features</h2>
@@ -216,6 +339,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
                 <!-- Location Highlights (simple dynamic info) -->
                 <div class="bg-white rounded-lg property-card p-6 mb-6">
@@ -391,6 +515,7 @@
                         @endif
                     </div>
 
+                    @if(!($propertyType->title == 'Land' || $propertyType->slug == 'land'))
                     <div class="mt-6 pt-6 border-t border-gray-200">
                         <h3 class="font-semibold text-gray-700 mb-2">Room Dimensions</h3>
                         <div class="space-y-2 text-sm">
@@ -418,6 +543,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

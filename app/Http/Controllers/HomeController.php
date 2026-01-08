@@ -230,7 +230,7 @@ class HomeController extends Controller
 
         // Final result (agar chaho to paginate bhi kar sakte ho)
         // $properties = $query->paginate(12)->appends($request->query());
-        $properties = $query->paginate(2);
+        $properties = $query->paginate(12);
 
         // Filters ke liye dropdown data
         $cities        = City::orderBy('name')->get();
