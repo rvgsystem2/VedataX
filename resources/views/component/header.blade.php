@@ -96,32 +96,32 @@
                     $propertyTypes = \App\Models\PropertyType::all();
 
                     $currencies = [
+                        ['code' => 'THB', 'symbol' => '฿',  'label' => 'THB - Thai Baht'],
                         ['code' => 'INR', 'symbol' => '₹',  'label' => 'INR - Indian Rupee'],
                         ['code' => 'USD', 'symbol' => '$',  'label' => 'USD - US Dollar'],
                         ['code' => 'EUR', 'symbol' => '€',  'label' => 'EUR - Euro'],
                         ['code' => 'GBP', 'symbol' => '£',  'label' => 'GBP - British Pound'],
-                        ['code' => 'AUD', 'symbol' => '$',  'label' => 'AUD - Australian Dollar'],
-                        ['code' => 'CAD', 'symbol' => '$',  'label' => 'CAD - Canadian Dollar'],
+                    //    ['code' => 'AUD', 'symbol' => '$',  'label' => 'AUD - Australian Dollar'],
+                    //    ['code' => 'CAD', 'symbol' => '$',  'label' => 'CAD - Canadian Dollar'],
                         ['code' => 'JPY', 'symbol' => '¥',  'label' => 'JPY - Japanese Yen'],
-                        ['code' => 'CNY', 'symbol' => '¥',  'label' => 'CNY - Chinese Yuan'],
+                    //    ['code' => 'CNY', 'symbol' => '¥',  'label' => 'CNY - Chinese Yuan'],
                         ['code' => 'SGD', 'symbol' => '$',  'label' => 'SGD - Singapore Dollar'],
-                        ['code' => 'NZD', 'symbol' => '$',  'label' => 'NZD - New Zealand Dollar'],
-                        ['code' => 'CHF', 'symbol' => 'CHF','label' => 'CHF - Swiss Franc'],
-                        ['code' => 'HKD', 'symbol' => '$',  'label' => 'HKD - Hong Kong Dollar'],
-                        ['code' => 'SEK', 'symbol' => 'kr', 'label' => 'SEK - Swedish Krona'],
+                    //    ['code' => 'NZD', 'symbol' => '$',  'label' => 'NZD - New Zealand Dollar'],
+                    //    ['code' => 'CHF', 'symbol' => 'CHF','label' => 'CHF - Swiss Franc'],
+                    //    ['code' => 'HKD', 'symbol' => '$',  'label' => 'HKD - Hong Kong Dollar'],
+                    //    ['code' => 'SEK', 'symbol' => 'kr', 'label' => 'SEK - Swedish Krona'],
                         ['code' => 'KRW', 'symbol' => '₩',  'label' => 'KRW - South Korean Won'],
-                        ['code' => 'BRL', 'symbol' => 'R$', 'label' => 'BRL - Brazilian Real'],
-                        ['code' => 'ZAR', 'symbol' => 'R',  'label' => 'ZAR - South African Rand'],
-                        ['code' => 'MXN', 'symbol' => '$',  'label' => 'MXN - Mexican Peso'],
-                        ['code' => 'TRY', 'symbol' => '₺',  'label' => 'TRY - Turkish Lira'],
-                        ['code' => 'RUB', 'symbol' => '₽',  'label' => 'RUB - Russian Ruble'],
-                        ['code' => 'AED', 'symbol' => 'د.إ','label' => 'AED - UAE Dirham'],
-                        ['code' => 'SAR', 'symbol' => '﷼',  'label' => 'SAR - Saudi Riyal'],
-                        ['code' => 'THB', 'symbol' => '฿',  'label' => 'THB - Thai Baht'],
+                    //    ['code' => 'BRL', 'symbol' => 'R$', 'label' => 'BRL - Brazilian Real'],
+                    //    ['code' => 'ZAR', 'symbol' => 'R',  'label' => 'ZAR - South African Rand'],
+                    //    ['code' => 'MXN', 'symbol' => '$',  'label' => 'MXN - Mexican Peso'],
+                    //    ['code' => 'TRY', 'symbol' => '₺',  'label' => 'TRY - Turkish Lira'],
+                    //    ['code' => 'RUB', 'symbol' => '₽',  'label' => 'RUB - Russian Ruble'],
+                    //    ['code' => 'AED', 'symbol' => 'د.إ','label' => 'AED - UAE Dirham'],
+                    //    ['code' => 'SAR', 'symbol' => '﷼',  'label' => 'SAR - Saudi Riyal'],
                         ['code' => 'IDR', 'symbol' => 'Rp', 'label' => 'IDR - Indonesian Rupiah'],
-                        ['code' => 'PKR', 'symbol' => '₨',  'label' => 'PKR - Pakistani Rupee'],
-                        ['code' => 'EGP', 'symbol' => '£',  'label' => 'EGP - Egyptian Pound'],
-                        ['code' => 'NGN', 'symbol' => '₦',  'label' => 'NGN - Nigerian Naira'],
+                    //    ['code' => 'PKR', 'symbol' => '₨',  'label' => 'PKR - Pakistani Rupee'],
+                    //    ['code' => 'EGP', 'symbol' => '£',  'label' => 'EGP - Egyptian Pound'],
+                    //    ['code' => 'NGN', 'symbol' => '₦',  'label' => 'NGN - Nigerian Naira'],
                         ['code' => 'TWD', 'symbol' => 'NT$','label' => 'TWD - Taiwan Dollar'],
                     ];
 
@@ -162,77 +162,12 @@
                                             {{ $propertyType->title ?? $propertyType->name }}
                                         </div>
                                         <div class="text-xs text-gray-500">
-                                            {{ number_format($propertyType->properties_count) }} properties
+                                            {{ number_format($propertyType->properties->count()) }} properties
                                         </div>
                                     </div>
                                 </a>
                             @endforeach
                         </div>
-
-                        {{--                        <div class="py-2">--}}
-{{--                            @foreach($propertyTypes as $propertyType)--}}
-{{--                                <a href="{{ route('property', 'villa-house') }}"--}}
-{{--                                   class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                                        <i class="{{$propertyType->icon_class}} text-gray-600"></i>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <div class="font-medium">{{$propertyType->name}}</div>--}}
-{{--                                        <div class="text-xs text-gray-500">{{number_format($propertyType->properties->count())}} properties</div>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            @endforeach--}}
-
-{{--                            <a href="{{ route('property', 'sea-view') }}"--}}
-{{--                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                                    <i class="fas fa-umbrella-beach text-gray-600"></i>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <div class="font-medium">Sea View</div>--}}
-{{--                                    <div class="text-xs text-gray-500">567 properties</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                            <a href="{{route('property', 'beachfront')}}"--}}
-{{--                                class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                                    <i class="fas fa-city text-gray-600"></i>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <div class="font-medium">Beachfront</div>--}}
-{{--                                    <div class="text-xs text-gray-500">890 properties</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                            <a href="{{route('property', 'land')}}" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                                    <i class="fas fa-mountain text-gray-600"></i>--}}
-{{--                                </div>--}}
-{{--                                <div>--}}
-{{--                                    <div class="font-medium">Land</div>--}}
-{{--                                    <div class="text-xs text-gray-500">321 properties</div>--}}
-{{--                                </div>--}}
-{{--                            </a>--}}
-{{--                            <a href="{{route('property', 'business')}}"--}}
-{{--                            class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                            <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                                <i class="fas fa-city text-gray-600"></i>--}}
-{{--                            </div>--}}
-{{--                            <div>--}}
-{{--                                <div class="font-medium">Bussiness</div>--}}
-{{--                                <div class="text-xs text-gray-500">890 properties</div>--}}
-{{--                            </div>--}}
-{{--                        </a>--}}
-{{--                        --}}{{-- <a href="{{route('property')}}"--}}
-{{--                        class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                        <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
-{{--                            <i class="fas fa-city text-gray-600"></i>--}}
-{{--                        </div>--}}
-{{--                        <div>--}}
-{{--                            <div class="font-medium">Rental</div>--}}
-{{--                            <div class="text-xs text-gray-500">890 properties</div>--}}
-{{--                        </div>--}}
-{{--                    </a> --}}
-{{--                        </div>--}}
                     </div>
                 </div>
 
@@ -271,37 +206,6 @@
                         </svg>
                     </button>
 
-
-{{--                    <div id="menu-currency"--}}
-{{--                        class="absolute mt-2 w-40 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"--}}
-{{--                        style="z-index: 70;">--}}
-{{--                        <div class="p-3 dropdown-header text-white">--}}
-{{--                            <h3 class="font-semibold">Select Currency</h3>--}}
-{{--                        </div>--}}
-{{--                        <div class="py-2">--}}
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <span class="font-medium mr-2">Baht</span>- THB ฿--}}
-{{--                            </a>--}}
-{{--                            <a href="#"--}}
-{{--                               class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
-{{--                                <span class="font-medium mr-2">United</span>- USD $--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <span class="font-medium mr-2">Euro</span>- EUR €--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <span class="font-medium mr-2">Pound Sterling</span>- GBP £--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <span class="font-medium mr-2">Russian Ruble</span>- RUB ₽--}}
-{{--                            </a>--}}
-{{--                            <a href="#" class="flex items-center px-4 py-3 hover:bg-gray-50 transition">--}}
-{{--                                <span class="font-medium mr-2">Chinese Yuan</span>- CNY ¥--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-
-{{--                    </div>--}}
 
                     <div id="menu-currency"
                          class="absolute mt-2 w-56 bg-white rounded-lg dropdown-shadow hidden overflow-hidden dropdown-enter"
@@ -464,44 +368,195 @@
                 Contact
             </a>
 
-            <div class="pt-2 border-t border-white/20 ">
-                <div class="text-white text-sm font-medium mb-2 px-3">Settings</div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-white/10 rounded-lg p-3">
-                        <label class="text-white text-xs block mb-1">Currency</label>
-                        <select class="w-full bg-transparent text-white text-sm focus:outline-none">
-                            <option class="text-gray-800">THB ฿</option>
-                            <option class="text-gray-800">USD $</option>
-                            <option class="text-gray-800">EUR €</option>
-                        </select>
-                    </div>
-                    <div class="bg-white/10 rounded-lg p-3">
-                        <label class="text-white text-xs block mb-1">Language</label>
-                        <select class="w-full text-black text-sm focus:outline-none">
+{{--            <div class="pt-2 border-t border-white/20 ">--}}
+{{--                <div class="text-white text-sm font-medium mb-2 px-3">Settings</div>--}}
+{{--                <div class="grid grid-cols-2 gap-3">--}}
+{{--                    <div class="bg-white/10 rounded-lg p-3">--}}
+{{--                        <label class="text-white text-xs block mb-1">Currency</label>--}}
+{{--                        <select class="w-full bg-transparent text-white text-sm focus:outline-none">--}}
+{{--                            <option class="text-gray-800">THB ฿</option>--}}
+{{--                            <option class="text-gray-800">USD $</option>--}}
+{{--                            <option class="text-gray-800">EUR €</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                    <div class="bg-white/10 rounded-lg p-3">--}}
+{{--                        <label class="text-white text-xs block mb-1">Language</label>--}}
+{{--                        <select class="w-full text-black text-sm focus:outline-none">--}}
 
-                            <option><span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English<option>
-                           <option ><span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย</option>
-                           <option >  <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文</option>
-                           <option > <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français</option>
-                           <option> <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย</option>
-                        </select>
+{{--                            <option><span class="w-6 mr-2 text-center"><span class="fi fi-us"></span></span> English<option>--}}
+{{--                           <option ><span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ไทย</option>--}}
+{{--                           <option >  <span class="w-6 mr-2 text-center"><span class="fi fi-cn"></span></span> 中文</option>--}}
+{{--                           <option > <span class="w-6 mr-2 text-center"><span class="fi fi-fr"></span></span> Français</option>--}}
+{{--                           <option> <span class="w-6 mr-2 text-center"><span class="fi fi-th"></span></span> ภาษาไทย</option>--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+
+            {{-- =======================
+   MOBILE SETTINGS (same as desktop)
+======================= --}}
+
+            <div class="pt-2 border-t border-white/20">
+                <div class="text-white text-sm font-medium mb-2 px-3">Settings</div>
+
+                {{-- Currency --}}
+                <div class="relative">
+                    <button onclick="toggleMobileDropdown('currency-mobile')"
+                            class="w-full text-left py-3 flex justify-between items-center text-white hover:bg-white/10 rounded-lg px-3 transition">
+                        <div class="flex items-center">
+                            <i class="fas fa-money-bill-wave mr-3 w-5 text-center"></i>
+                            Currency
+                            <span class="ml-2 text-white/80 text-sm">
+                    {{ $activeCurrencyCode }} {{ $activeCurrencySymbol }}
+                </span>
+                        </div>
+                        <svg id="arrow-currency-mobile" class="w-4 h-4 transition-transform" fill="none"
+                             stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div id="menu-currency-mobile" class="mt-2 mx-3 rounded-lg bg-white/10 hidden">
+                        @foreach($currencies as $cur)
+                            <form action="{{ route('setCurrency') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="currency" value="{{ $cur['code'] . '-' . $cur['symbol'] }}">
+                                <button type="submit"
+                                        class="w-full text-left px-4 py-3 hover:bg-white/10 transition
+                        {{ $activeCurrencyCode === $cur['code'] ? 'bg-white/20 font-semibold' : '' }}">
+                                    {{ $cur['label'] }} ({{ $cur['symbol'] }})
+                                </button>
+                            </form>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- Language --}}
+                <div class="relative mt-2">
+                    <button onclick="toggleMobileDropdown('language-mobile')"
+                            class="w-full text-left py-3 flex justify-between items-center text-white hover:bg-white/10 rounded-lg px-3 transition">
+                        <div class="flex items-center">
+                            <i class="fas fa-globe mr-3 w-5 text-center"></i>
+                            Language
+                            <span class="ml-2 text-white/80 text-sm">
+                    {{ $current['label'] }}
+                </span>
+                        </div>
+                        <svg id="arrow-language-mobile" class="w-4 h-4 transition-transform" fill="none"
+                             stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <div id="menu-language-mobile" class="mt-2 mx-3 rounded-lg bg-white/10 hidden">
+                        <a href="{{ route('set-lang', 'en') }}" class="block px-4 py-3 hover:bg-white/10">English</a>
+                        <a href="{{ route('set-lang', 'th') }}" class="block px-4 py-3 hover:bg-white/10">ไทย</a>
+                        <a href="{{ route('set-lang', 'zh') }}" class="block px-4 py-3 hover:bg-white/10">中文</a>
+                        <a href="{{ route('set-lang', 'fr') }}" class="block px-4 py-3 hover:bg-white/10">Français</a>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </nav>
 
 <!-- JS: Enhanced Dropdown Logic -->
+{{--<script>--}}
+{{--    let currentDropdown = null;--}}
+
+{{--    // Toggle dropdown (desktop)--}}
+{{--    function toggleDropdown(id) {--}}
+{{--        const menu = document.getElementById(`menu-${id}`);--}}
+{{--        const arrow = document.getElementById(`arrow-${id}`);--}}
+
+{{--        // If same dropdown clicked, close it--}}
+{{--        if (currentDropdown === id) {--}}
+{{--            menu.classList.add('hidden');--}}
+{{--            arrow.classList.remove('rotate-180');--}}
+{{--            currentDropdown = null;--}}
+{{--            return;--}}
+{{--        }--}}
+
+{{--        // Close any open dropdown--}}
+{{--        if (currentDropdown) {--}}
+{{--            const prevMenu = document.getElementById(`menu-${currentDropdown}`);--}}
+{{--            const prevArrow = document.getElementById(`arrow-${currentDropdown}`);--}}
+{{--            prevMenu?.classList.add('hidden');--}}
+{{--            prevArrow?.classList.remove('rotate-180');--}}
+{{--        }--}}
+
+{{--        // Open the new dropdown--}}
+{{--        menu?.classList.remove('hidden');--}}
+{{--        arrow?.classList.add('rotate-180');--}}
+{{--        currentDropdown = id;--}}
+{{--    }--}}
+
+{{--    // Toggle mobile menu--}}
+{{--    function toggleMobileMenu() {--}}
+{{--        const menu = document.getElementById('mobile-menu');--}}
+{{--        menu.classList.toggle('hidden');--}}
+
+{{--        // Reset mobile categories dropdown when closing mobile menu--}}
+{{--        if (menu.classList.contains('hidden')) {--}}
+{{--            document.getElementById('menu-categories-mobile')?.classList.add('hidden');--}}
+{{--            document.getElementById('arrow-categories-mobile')?.classList.remove('rotate-180');--}}
+{{--        }--}}
+{{--    }--}}
+
+{{--    // Toggle mobile dropdowns (like categories)--}}
+{{--    function toggleMobileDropdown(id) {--}}
+{{--        const menu = document.getElementById(`menu-${id}`);--}}
+{{--        const arrow = document.getElementById(`arrow-${id}`);--}}
+
+{{--        menu?.classList.toggle('hidden');--}}
+{{--        arrow?.classList.toggle('rotate-180');--}}
+{{--    }--}}
+
+{{--    // Global click listener: close dropdowns when clicking outside--}}
+{{--    document.addEventListener('click', function (e) {--}}
+{{--        // Close desktop dropdowns--}}
+{{--        if (currentDropdown) {--}}
+{{--            const menu = document.getElementById(`menu-${currentDropdown}`);--}}
+{{--            const toggleBtn = document.querySelector(`[onclick="toggleDropdown('${currentDropdown}')"]`);--}}
+
+{{--            if (menu && toggleBtn && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {--}}
+{{--                menu.classList.add('hidden');--}}
+{{--                document.getElementById(`arrow-${currentDropdown}`).classList.remove('rotate-180');--}}
+{{--                currentDropdown = null;--}}
+{{--            }--}}
+{{--        }--}}
+
+{{--        // Close mobile dropdown (categories)--}}
+{{--        const mobileMenu = document.getElementById('menu-categories-mobile');--}}
+{{--        const mobileToggle = document.querySelector(`[onclick="toggleMobileDropdown('categories-mobile')"]`);--}}
+
+{{--        if (--}}
+{{--            mobileMenu &&--}}
+{{--            !mobileMenu.classList.contains('hidden') &&--}}
+{{--            !mobileMenu.contains(e.target) &&--}}
+{{--            !mobileToggle.contains(e.target)--}}
+{{--        ) {--}}
+{{--            mobileMenu.classList.add('hidden');--}}
+{{--            document.getElementById('arrow-categories-mobile')?.classList.remove('rotate-180');--}}
+{{--        }--}}
+{{--    });--}}
+{{--</script>--}}
+
+
+
 <script>
     let currentDropdown = null;
+    let currentMobileDropdown = null;
 
-    // Toggle dropdown (desktop)
     function toggleDropdown(id) {
         const menu = document.getElementById(`menu-${id}`);
         const arrow = document.getElementById(`arrow-${id}`);
 
-        // If same dropdown clicked, close it
         if (currentDropdown === id) {
             menu.classList.add('hidden');
             arrow.classList.remove('rotate-180');
@@ -509,67 +564,61 @@
             return;
         }
 
-        // Close any open dropdown
         if (currentDropdown) {
-            const prevMenu = document.getElementById(`menu-${currentDropdown}`);
-            const prevArrow = document.getElementById(`arrow-${currentDropdown}`);
-            prevMenu?.classList.add('hidden');
-            prevArrow?.classList.remove('rotate-180');
+            document.getElementById(`menu-${currentDropdown}`)?.classList.add('hidden');
+            document.getElementById(`arrow-${currentDropdown}`)?.classList.remove('rotate-180');
         }
 
-        // Open the new dropdown
-        menu?.classList.remove('hidden');
-        arrow?.classList.add('rotate-180');
+        menu.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
         currentDropdown = id;
     }
 
-    // Toggle mobile menu
     function toggleMobileMenu() {
         const menu = document.getElementById('mobile-menu');
         menu.classList.toggle('hidden');
 
-        // Reset mobile categories dropdown when closing mobile menu
         if (menu.classList.contains('hidden')) {
-            document.getElementById('menu-categories-mobile')?.classList.add('hidden');
-            document.getElementById('arrow-categories-mobile')?.classList.remove('rotate-180');
+            closeMobileDropdown('categories-mobile');
+            closeMobileDropdown('currency-mobile');
+            closeMobileDropdown('language-mobile');
+            currentMobileDropdown = null;
         }
     }
 
-    // Toggle mobile dropdowns (like categories)
+    function closeMobileDropdown(id) {
+        document.getElementById(`menu-${id}`)?.classList.add('hidden');
+        document.getElementById(`arrow-${id}`)?.classList.remove('rotate-180');
+    }
+
     function toggleMobileDropdown(id) {
         const menu = document.getElementById(`menu-${id}`);
         const arrow = document.getElementById(`arrow-${id}`);
 
-        menu?.classList.toggle('hidden');
-        arrow?.classList.toggle('rotate-180');
-    }
-
-    // Global click listener: close dropdowns when clicking outside
-    document.addEventListener('click', function (e) {
-        // Close desktop dropdowns
-        if (currentDropdown) {
-            const menu = document.getElementById(`menu-${currentDropdown}`);
-            const toggleBtn = document.querySelector(`[onclick="toggleDropdown('${currentDropdown}')"]`);
-
-            if (menu && toggleBtn && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {
-                menu.classList.add('hidden');
-                document.getElementById(`arrow-${currentDropdown}`).classList.remove('rotate-180');
-                currentDropdown = null;
-            }
+        if (currentMobileDropdown === id) {
+            closeMobileDropdown(id);
+            currentMobileDropdown = null;
+            return;
         }
 
-        // Close mobile dropdown (categories)
-        const mobileMenu = document.getElementById('menu-categories-mobile');
-        const mobileToggle = document.querySelector(`[onclick="toggleMobileDropdown('categories-mobile')"]`);
+        if (currentMobileDropdown) {
+            closeMobileDropdown(currentMobileDropdown);
+        }
 
-        if (
-            mobileMenu &&
-            !mobileMenu.classList.contains('hidden') &&
-            !mobileMenu.contains(e.target) &&
-            !mobileToggle.contains(e.target)
-        ) {
-            mobileMenu.classList.add('hidden');
-            document.getElementById('arrow-categories-mobile')?.classList.remove('rotate-180');
+        menu.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+        currentMobileDropdown = id;
+    }
+
+    document.addEventListener('click', function (e) {
+        if (currentMobileDropdown) {
+            const menu = document.getElementById(`menu-${currentMobileDropdown}`);
+            const btn = document.querySelector(`[onclick="toggleMobileDropdown('${currentMobileDropdown}')"]`);
+
+            if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+                closeMobileDropdown(currentMobileDropdown);
+                currentMobileDropdown = null;
+            }
         }
     });
 </script>

@@ -133,6 +133,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('status/{enquiry}', 'status')->name('status');
         Route::post('destroy/{enquiry}', 'destroy')->name('destroy');
+        Route::get('show/{enquiry}','show')->name('show');
     });
 
 

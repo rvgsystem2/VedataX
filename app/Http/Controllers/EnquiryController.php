@@ -37,6 +37,13 @@ class EnquiryController extends Controller
 
         return view('enquiries.index', compact('enquiries'));
     }
+    public function show(\App\Models\Enquiry $enquiry)
+    {
+        // relations optional (agar aapne banayi hain)
+        $enquiry->load(['property']);
+
+        return view('enquiries.show', compact('enquiry'));
+    }
     public function status(Request $request, Enquiry $enquiry){
         $enquiry->update(['status' => $request->status]);
         return back()->with('success', 'Status updated successfully');

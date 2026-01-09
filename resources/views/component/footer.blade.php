@@ -2,7 +2,9 @@
 <footer class="bg-[#102540] text-white">
     <div class="container mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:mx-24">
-
+@php
+    $address = \App\Models\HomePageMedia::first()?->address;
+@endphp
             <!-- Company Info -->
             <div class="space-y-4 ">
                 <div class="flex justify-center md:justify-start">
@@ -16,7 +18,7 @@
                 <p class="text-gray-300 flex items-start gap-2 text-sm">
                     <i class="fas fa-map-marker-alt text-blue-400 mt-1"></i>
 {{--                    7/21 Moo 6 Maenam 84330, Koh Samui, Thailand--}}
-                    {{ __('footer.address') }}
+                    {{ $address ?? __('footer.address') }}
                 </p>
                 <div class="space-y-2">
                     <div class="flex items-center gap-2">

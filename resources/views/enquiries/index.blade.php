@@ -20,9 +20,10 @@
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">#</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Name</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">subject</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Email</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Phone</th>
-                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Message</th>
+{{--                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Message</th>--}}
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Property</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Status</th>
                     <th class="px-6 py-3 text-right text-sm font-medium text-gray-600 uppercase">Actions</th>
@@ -33,9 +34,10 @@
                     <tr>
                         <td class="px-6 py-4 text-sm text-gray-800">{{ $enquiries->firstItem() + $index }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900 font-semibold">{{ $enquiry->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $enquiry->subject }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $enquiry->email }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $enquiry->phone }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600">{{ $enquiry->message }}</td>
+{{--                        <td class="px-6 py-4 text-sm text-gray-600">{{ $enquiry->message }}</td>--}}
                         <td class="px-6 py-4 text-sm text-blue-600">
                             @if($enquiry->property)
                                 <a href="{{ route('properties.edit', $enquiry->property->id) }}" class="hover:underline">
@@ -60,13 +62,31 @@
                         </td>
 
                         <td class="px-6 py-4 text-right text-sm">
-                            <form action="{{ route('enquiries.destroy', $enquiry->id) }}" method="POST"
-                                  onsubmit="return confirm('Are you sure you want to delete this enquiry?');"
-                                  class="inline-block">
-                                @csrf
-                                <button type="submit" class="text-red-600 hover:underline">Delete</button>
-                            </form>
+                            <div class="flex justify-end gap-3">
+
+                                {{-- View Button --}}
+                                <a href="{{ route('enquiries.show', $enquiry->id) }}"
+                                   class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-blue-600
+                  border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white
+                  transition duration-200">
+                                    👁️ View
+                                </a>
+
+                                {{-- Delete Button --}}
+                                <form action="{{ route('enquiries.destroy', $enquiry->id) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure you want to delete this enquiry?');">
+                                    @csrf
+                                    <button type="submit"
+                                            class="inline-flex items-center gap-1 px-3 py-1.5 text-sm font-medium
+                           text-red-600 border border-red-600 rounded-md
+                           hover:bg-red-600 hover:text-white transition duration-200">
+                                        🗑️ Delete
+                                    </button>
+                                </form>
+
+                            </div>
                         </td>
+
                     </tr>
                 @empty
                     <tr>

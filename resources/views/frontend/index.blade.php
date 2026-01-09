@@ -274,6 +274,12 @@
                                                 <button type="button"
                                                         class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
                                                         data-value="3">3+</button>
+                                                <button type="button"
+                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                        data-value="4">4+</button>
+                                                <button type="button"
+                                                        class="bb-bed px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                        data-value="5">5+</button>
                                             </div>
                                         </div>
 
@@ -293,6 +299,12 @@
                                                 <button type="button"
                                                         class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
                                                         data-value="3">3+</button>
+                                                <button type="button"
+                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                        data-value="4">4+</button>
+                                                <button type="button"
+                                                        class="bb-bath px-3 py-2 border border-black rounded-lg text-xs font-medium"
+                                                        data-value="5">5+</button>
                                             </div>
                                         </div>
 

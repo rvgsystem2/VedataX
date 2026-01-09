@@ -54,7 +54,7 @@
                                     target="_blank"
                                     class="text-gray-600 mt-1 font-spartan hover:text-blue-600 underline">
 {{--                                    7/21 moo 6 Maenam 84330, Koh Samui, Thailand--}}
-                                    {{__('contact.address_text')}}
+                                    {{ $address ?? __('contact.address_text')}}
                                 </a>
                             </div>
 

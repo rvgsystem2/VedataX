@@ -462,15 +462,17 @@
                                 {{-- BEDROOMS, BATHROOMS, AREA --}}
                                 <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
 
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                        <span>{{ $bestDeal->bedrooms ?? '-' }} {{ __('index.best_deals.beds') }}</span>
-                                    </div>
+                                    @if(!($bestDeal->propertyType->title== 'Land' || $bestDeal->propertyType->slug == 'land'))
+                                        <div class="flex items-center">
+                                            <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                            <span>{{ $bestDeal->bedrooms ?? '-' }} {{ __('index.best_deals.beds') }}</span>
+                                        </div>
 
-                                    <div class="flex items-center">
-                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                        <span>{{ $bestDeal->bathrooms ?? '-' }} {{ __('index.best_deals.baths') }}</span>
-                                    </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                            <span>{{ $bestDeal->bathrooms ?? '-' }} {{ __('index.best_deals.baths') }}</span>
+                                        </div>
+                                    @endif
 
                                     <div class="flex items-center">
                                         <i class="fas fa-vector-square text-gray-400 mr-1"></i>
