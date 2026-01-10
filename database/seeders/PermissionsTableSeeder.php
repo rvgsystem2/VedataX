@@ -51,6 +51,8 @@ class PermissionsTableSeeder extends Seeder
             'show price ranges',
             'add price ranges',
             'remove price ranges',
+            'home page media',
+            'show social links',
 
 
         ];

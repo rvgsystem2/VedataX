@@ -105,13 +105,17 @@
                         </div>
                     </div>
 
+                    @can('home page media')
                     <x-nav-link :href="route('home.media.index')" :active="request()->routeIs('home.media.*')" class="block px-4 py-2 text-left">
                         <i class="fas fa-layer-group mr-1"></i> Home Page Media
                     </x-nav-link>
+                    @endcan
 
+                    @can('show social links')
                     <x-nav-link :href="route('social-links.index')" :active="request()->routeIs('social-links.*')" class="block px-4 py-2 text-left">
                         <i class="fas fa-layer-group mr-1"></i> Social Links
                     </x-nav-link>
+                    @endcan
 
 
 {{--                    <div class="relative" x-data="{ openEnquiries: false }">--}}

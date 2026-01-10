@@ -9,6 +9,7 @@ use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 // use Spatie\Permission\Contracts\Role;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -40,8 +41,9 @@ class UserController extends Controller implements HasMiddleware
     {
         $roles = Role::orderBy('name', 'ASC')->get();
         $selectedRoles = []; // Empty array for new users (no roles assigned)
+        $permissions=Permission::all();
 
-        return view('user.edit', compact('roles', 'selectedRoles'));
+        return view('user.edit', compact('roles', 'selectedRoles', 'permissions'));
     }
 
 
@@ -60,6 +62,10 @@ class UserController extends Controller implements HasMiddleware
 
             'password' => 'required|min:6',
             'role'     => 'required|exists:roles,name',
+
+            // ✅ IDs from Blade
+            'permissions'   => ['nullable','array'],
+            'permissions.*' => ['integer','exists:permissions,id'],
         ]);
 
         // Prepare data for user creation
@@ -85,6 +91,15 @@ class UserController extends Controller implements HasMiddleware
         // Assign role (single role radio button)
         $user->syncRoles([$request->role]);
 
+
+        // ✅ Convert IDs to Permission models (guard web)
+        $permIds = $request->input('permissions', []);
+        $perms   = Permission::whereIn('id', $permIds)
+            ->where('guard_name', 'web')
+            ->get();
+
+        $user->syncPermissions($perms);
+
         return redirect()->route('user.index')
             ->with('success', 'User created successfully.');
     }
@@ -94,8 +109,10 @@ class UserController extends Controller implements HasMiddleware
     {
         $roles = Role::orderBy('name', 'ASC')->get();
         $selectedRoleName = $user->getRoleNames()->first(); // ✅ Get assigned role IDs
+        $permissions=Permission::all();
+        $selectedPermissions = $user->permissions->pluck('id')->toArray();
 
-        return view('user.edit', compact('user', 'roles', 'selectedRoleName'));
+        return view('user.edit', compact('user', 'roles', 'selectedRoleName', 'permissions', 'selectedPermissions'));
     }
 
 
@@ -114,6 +131,9 @@ class UserController extends Controller implements HasMiddleware
 
             // Role (Spatie)
             'role'     => 'required|exists:roles,name',
+            // ✅ IDs from Blade
+            'permissions'   => ['nullable','array'],
+            'permissions.*' => ['integer','exists:permissions,id'],
 
             // Password optional on update
             'password' => 'nullable|min:6',
@@ -150,8 +170,13 @@ class UserController extends Controller implements HasMiddleware
         // User update
         $user->update($data);
 
-        // Role sync (single role)
-        $user->syncRoles([$request->role]);
+        // ✅ Convert IDs to Permission models (guard web)
+        $permIds = $request->input('permissions', []);
+        $perms   = Permission::whereIn('id', $permIds)
+            ->where('guard_name', 'web')
+            ->get();
+
+        $user->syncPermissions($perms);
 
         return redirect()
             ->route('user.index')

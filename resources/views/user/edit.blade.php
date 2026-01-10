@@ -173,6 +173,20 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">Permissions</label>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+                            @foreach($permissions as $permission)
+                                <label class="flex items-center space-x-2">
+                                    <input type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                           class="rounded border-gray-300 focus:ring-blue-500"
+                                        {{ in_array($permission->id, $selectedPermissions ?? []) ? 'checked' : '' }}>
+                                    <span>{{ $permission->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
                     {{-- SUBMIT BUTTON --}}
                     <div>
                         <button type="submit"

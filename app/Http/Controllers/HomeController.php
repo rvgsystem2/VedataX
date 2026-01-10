@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
@@ -170,6 +171,8 @@ class HomeController extends Controller
     }
 
     public function agent(){
+        Permission::firstOrCreate(['name' => 'home page media']);
+        Permission::firstOrCreate(['name' => 'show social links']);
         $users = User::role('agent')->get();
         return view('frontend.agent', compact('users'));
     }
