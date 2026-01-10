@@ -318,6 +318,12 @@
                                     <button type="button"
                                             class="bb-bed {{ $beds === '3+' || $beds === '3' ? 'active' : '' }}"
                                             data-value="3+">3+</button>
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === '4+' || $beds === '4' ? 'active' : '' }}"
+                                            data-value="4+">4+</button>
+                                    <button type="button"
+                                            class="bb-bed {{ $beds === '5+' || $beds === '5' ? 'active' : '' }}"
+                                            data-value="5+">5+</button>
                                 </div>
                             </div>
 
@@ -338,6 +344,12 @@
                                     <button type="button"
                                             class="bb-bath {{ $baths === '3+' || $baths === '3' ? 'active' : '' }}"
                                             data-value="3+">3+</button>
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === '4+' || $baths === '4' ? 'active' : '' }}"
+                                            data-value="4+">4+</button>
+                                    <button type="button"
+                                            class="bb-bath {{ $baths === '5+' || $baths === '5' ? 'active' : '' }}"
+                                            data-value="5+">5+</button>
                                 </div>
                             </div>
 
