@@ -171,8 +171,7 @@ class HomeController extends Controller
     }
 
     public function agent(){
-        Permission::firstOrCreate(['name' => 'home page media']);
-        Permission::firstOrCreate(['name' => 'show social links']);
+
         $users = User::role('agent')->get();
         return view('frontend.agent', compact('users'));
     }
