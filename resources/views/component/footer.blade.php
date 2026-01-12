@@ -106,13 +106,13 @@
                 {{ __('footer.copyright') }}
             </p>
             <div class="flex space-x-3">
-                <a href="{{$socialLinks && $socialLinks->facebook ? $socialLinks->facebook : 'https://facebook.com'}}" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
+                <a href="{{$socialLinks && $socialLinks->facebook ? $socialLinks->facebook : 'https://facebook.com'}}" target="_blank" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-facebook-f"></i>
                 </a>
                 {{-- <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-400 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-twitter"></i>
                 </a> --}}
-                <a href="{{$socialLinks && $socialLinks->instagram ? $socialLinks->instagram : 'https://instagram.com'}}" class="bg-gray-800 text-gray-300 hover:bg-pink-600 hover:text-white p-2 rounded-full transition">
+                <a href="{{$socialLinks && $socialLinks->instagram ? $socialLinks->instagram : 'https://instagram.com'}}" target="_blank" class="bg-gray-800 text-gray-300 hover:bg-pink-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-instagram"></i>
                 </a>
 
