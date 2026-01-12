@@ -4,6 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:mx-24">
 @php
     $address = \App\Models\HomePageMedia::first()?->address;
+    $socialLinks = \App\Models\SocialLink::first();
 @endphp
             <!-- Company Info -->
             <div class="space-y-4 ">
@@ -105,16 +106,42 @@
                 {{ __('footer.copyright') }}
             </p>
             <div class="flex space-x-3">
-                <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
+                <a href="{{$socialLinks && $socialLinks->facebook ? $socialLinks->facebook : 'https://facebook.com'}}" class="bg-gray-800 text-gray-300 hover:bg-blue-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-facebook-f"></i>
                 </a>
                 {{-- <a href="#" class="bg-gray-800 text-gray-300 hover:bg-blue-400 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-twitter"></i>
                 </a> --}}
-                <a href="#" class="bg-gray-800 text-gray-300 hover:bg-pink-600 hover:text-white p-2 rounded-full transition">
+                <a href="{{$socialLinks && $socialLinks->instagram ? $socialLinks->instagram : 'https://instagram.com'}}" class="bg-gray-800 text-gray-300 hover:bg-pink-600 hover:text-white p-2 rounded-full transition">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://wa.me/1234567890" target="_blank"
+
+                @php
+                    $raw = $socialLinks->whatsapp ?? null;
+
+                    // fallback
+                    $waUrl = 'https://wa.me/1234567890';
+
+                    if($raw){
+                      $raw = trim($raw);
+
+                      // अगर full link है तो direct use
+                      if(Str::startsWith($raw, ['http://', 'https://', 'wa.me/', 'api.whatsapp.com'])){
+                          $waUrl = Str::startsWith($raw, 'wa.me/') ? 'https://' . $raw : $raw;
+                      } else {
+                          // वरना number मानकर clean करो
+                          $digits = preg_replace('/\D+/', '', $raw);
+
+                          // 10 digit => India 91 add
+                          if(strlen($digits) === 10) $digits = '66'.$digits;
+
+                          // minimum sanity check
+                          if(strlen($digits) >= 11) $waUrl = 'https://wa.me/'.$digits;
+                      }
+                    }
+                @endphp
+
+                <a href="{{$waUrl}}" target="_blank"
    class="bg-gray-800 text-gray-300 hover:bg-green-600 hover:text-white p-2 rounded-full transition">
   <i class="fab fa-whatsapp"></i>
 </a>
