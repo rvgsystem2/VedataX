@@ -29,10 +29,12 @@ class PropertyTypeController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255|unique:property_types,title',
+            'icon_class' => 'nullable|string|max:255',
         ]);
 
         PropertyType::create([
             'title' => $request->title,
+            'icon_class' => $request->icon_class,
             'slug' => Str::slug($request->title),
         ]);
 
@@ -55,10 +57,12 @@ class PropertyTypeController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255|unique:property_types,title,' . $propertyType->id,
+            'icon_class' => 'nullable|string|max:255',
         ]);
 
         $propertyType->update([
             'title' => $request->title,
+            'icon_class' => $request->icon_class,
             'slug' => Str::slug($request->title),
         ]);
 

@@ -34,6 +34,14 @@
                        value="{{ old('title', $propertyType->title ?? '') }}" required>
             </div>
 
+            <div class="mb-4">
+                <label for="icon_class" class="block text-sm font-medium text-gray-700 mb-1">Icon Class</label>
+                <input type="text" name="icon_class" id="icon_class"
+                       class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-[#c21108] focus:border-[#c21108] sm:text-sm"
+                       placeholder="fa fa-home"
+                       value="{{ old('icon_class', $propertyType->icon_class ?? '') }}" required>
+            </div>
+
             <div class="flex justify-end">
                 <button type="submit"
                         class="bg-gradient-to-r from-[#c21108] to-[#000308] text-white font-semibold px-6 py-2 rounded-md shadow-md hover:from-[#000308] hover:to-[#c21108] transition duration-300">
