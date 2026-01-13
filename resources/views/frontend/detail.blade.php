@@ -3,20 +3,30 @@
 
     @php
         $cityName  = optional($property->city)->name;
-        $typeTitle = optional($property->propertyType)->title ?? ucfirst($property->type ?? '');
-        $propertyType = $property->propertyType;
+
+        // ✅ many-to-many types
+        $typeTitles = $property->propertyTypes?->pluck('title')->filter()->values() ?? collect();
+        $typeTitle  = $typeTitles->isNotEmpty()
+            ? $typeTitles->implode(', ')
+            : ucfirst($property->type ?? '');
+
+        // ✅ Land detect (slug OR title)
+        $isLand = $property->propertyTypes?->contains(function ($t) {
+            return strtolower((string)$t->slug) === 'land' || strtolower((string)$t->title) === 'land';
+        }) ?? false;
+
         $reference = $property->reference ?? ('PP' . str_pad($property->id, 5, '0', STR_PAD_LEFT));
 
         $bedrooms  = $property->bedrooms;
         $bathrooms = $property->bathrooms;
         $interiorSize = $property->area;               // m²
-        $landSize = $property->land_size ?? null;      // agar future me column add karein
+        $landSize = $property->land_size ?? null;
 
-        // Main image pick
         $mainImage = $property->images
             ? $property->images->firstWhere('is_main', true) ?? $property->images->first()
             : null;
     @endphp
+
 
         <!-- Header -->
     {{-- <header class="bg-white shadow-sm">
@@ -180,7 +190,7 @@
 
             {{-- Property Stats --}}
             {{-- ✅ Show stats ONLY if NOT Land --}}
-            @if(!($propertyType->title === 'Land' || $propertyType->slug === 'land'))
+            @if(!$isLand)
                 <div class="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-6 pt-5 border-t border-gray-200">
 
                     @if(!is_null($bedrooms))
@@ -276,7 +286,7 @@
                 </div>
 
 
-                @if(!($propertyType->title == 'Land' || $propertyType->slug == 'land'))
+                @if(!$isLand)
                 <!-- Property Features -->
                 <div class="bg-white rounded-lg property-card p-6 mb-6">
                     <h2 class="text-xl font-bold text-gray-800 mb-4">Property Features</h2>
@@ -503,12 +513,34 @@
                             </div>
                         @endif
 
-                        <div class="flex justify-between">
-                            <span class="text-gray-600">Property Type:</span>
-                            <span class="font-medium">{{ $typeTitle }}</span>
-                        </div>
+{{--                        <div class="flex justify-between">--}}
+{{--                            <span class="text-gray-600">Property Type:</span>--}}
+{{--                            <span class="font-medium">{{ $typeTitle }}</span>--}}
+{{--                        </div>--}}
+                            <div class="flex justify-between gap-3">
+                                <span class="text-gray-600 shrink-0">Property Type:</span>
 
-                        <div class="flex justify-between">
+                                <div class="text-right">
+                                    @if(($property->propertyTypes?->count() ?? 0) > 0)
+                                        <div class="flex flex-wrap justify-end gap-1">
+                                            @foreach($property->propertyTypes as $t)
+                                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                                                             bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                                    @if(!empty($t->icon_class))
+                                                                                    <i class="{{ $t->icon_class }} mr-1 text-[10px]"></i>
+                                                                                @endif
+                                                                                {{ $t->title }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <span class="font-medium">{{ ucfirst($property->type ?? '-') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <div class="flex justify-between">
                             <span class="text-gray-600">Location:</span>
                             <span class="font-medium text-right">
                                 {{ $cityName ?: '-' }}
@@ -523,7 +555,7 @@
                         @endif
                     </div>
 
-                    @if(!($propertyType->title == 'Land' || $propertyType->slug == 'land'))
+                    @if(!$isLand)
                     <div class="mt-6 pt-6 border-t border-gray-200">
                         <h3 class="font-semibold text-gray-700 mb-2">Room Dimensions</h3>
                         <div class="space-y-2 text-sm">

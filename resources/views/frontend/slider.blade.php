@@ -462,7 +462,23 @@
                                 {{-- BEDROOMS, BATHROOMS, AREA --}}
                                 <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
 
-                                    @if(!($bestDeal->propertyType->title== 'Land' || $bestDeal->propertyType->slug == 'land'))
+{{--                                    @if(!($bestDeal->propertyType->title== 'Land' || $bestDeal->propertyType->slug == 'land'))--}}
+{{--                                        <div class="flex items-center">--}}
+{{--                                            <i class="fas fa-bed text-gray-400 mr-1"></i>--}}
+{{--                                            <span>{{ $bestDeal->bedrooms ?? '-' }} {{ __('index.best_deals.beds') }}</span>--}}
+{{--                                        </div>--}}
+
+{{--                                        <div class="flex items-center">--}}
+{{--                                            <i class="fas fa-bath text-gray-400 mr-1"></i>--}}
+{{--                                            <span>{{ $bestDeal->bathrooms ?? '-' }} {{ __('index.best_deals.baths') }}</span>--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+
+                                    @php
+                                        $isLand = $bestDeal->propertyTypes?->contains(fn($t) => $t->slug === 'land') ?? false;
+                                    @endphp
+
+                                    @if(!$isLand)
                                         <div class="flex items-center">
                                             <i class="fas fa-bed text-gray-400 mr-1"></i>
                                             <span>{{ $bestDeal->bedrooms ?? '-' }} {{ __('index.best_deals.beds') }}</span>
@@ -473,6 +489,7 @@
                                             <span>{{ $bestDeal->bathrooms ?? '-' }} {{ __('index.best_deals.baths') }}</span>
                                         </div>
                                     @endif
+
 
                                     <div class="flex items-center">
                                         <i class="fas fa-vector-square text-gray-400 mr-1"></i>
@@ -895,11 +912,25 @@
                                         @endif
                                     </p>
 
+{{--                                    <div class="flex gap-4 text-sm text-gray-600 mt-4">--}}
+{{--                                        <span>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>--}}
+{{--                                        <span>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>--}}
+{{--                                        <span>{{ $villa->area ?? '-' }} {{ __('index.villas.labels.sqft') }}</span>--}}
+{{--                                    </div>--}}
+
+                                    @php
+                                        $isLand = $villa->propertyTypes?->contains(fn($t) => strtolower((string)$t->slug) === 'land') ?? false;
+                                    @endphp
+
                                     <div class="flex gap-4 text-sm text-gray-600 mt-4">
-                                        <span>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>
-                                        <span>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>
+                                        @if(!$isLand)
+                                            <span>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>
+                                            <span>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>
+                                        @endif
+
                                         <span>{{ $villa->area ?? '-' }} {{ __('index.villas.labels.sqft') }}</span>
                                     </div>
+
 
                                     <div class="flex justify-between items-center mt-4">
                                         <div class="text-sm font-medium">

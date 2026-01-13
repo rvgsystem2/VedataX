@@ -20,36 +20,133 @@ use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $propertyTypes = PropertyType::all();
-        $properties = Property::where('status', 'available')->with('images')->get()->map(function ($property) {
+//    public function index(){
+//        $propertyTypes = PropertyType::all();
+//        $properties = Property::where('status', 'available')->with('images')->get()->map(function ($property) {
+//            return [
+//                'title' => $property->title,
+//                'price' => '₹' . number_format($property->price),
+//                'location' => $property->location,
+//                'date' => $property->created_at->diffForHumans(),
+//                'beds' => $property->bedrooms,
+//                'baths' => $property->bathrooms,
+//                'area' => $property->area . ' Sqft',
+//                'images' => $property->images->map(function ($img) {
+//                    return asset('storage/' . $img->filename);
+//                })->toArray(),
+//            ];
+//        });
+//        $cities = City::all();
+//        $bestDeals = Property::where('best_deal', true)->get();
+//        $villas = PropertyType::where('slug', 'like', "%villa%")->orWhere('slug', 'like', "%house%")->first()?->properties;
+//// Option 1: PropertyType se (tumhari style)
+//        $lands = PropertyType::where(function ($q) {
+//                $q->where('slug', 'like', '%land%');
+//            })
+//                ->with(['properties.images', 'properties.city', 'properties.listedBy', 'properties.amenities'])
+//                ->first()?->properties ?? collect();
+//        $minPrices = PriceRange::where('type', 'min')->get();
+//        $maxPrices = PriceRange::where('type', 'max')->get();
+//        $homePageMedia = HomePageMedia::first();
+//        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands', 'minPrices','maxPrices', 'homePageMedia'));
+//    }
+
+    public function index()
+    {
+        // ✅ Types + correct count (many-to-many)
+        $propertyTypes = PropertyType::query()
+            ->withCount('properties')  // properties_count
+            ->orderBy('title')
+            ->get();
+
+        // ✅ Available properties (card data) + needed relations
+        $availableProperties = Property::query()
+            ->where('status', 'available')
+            ->with(['images', 'city', 'propertyTypes'])
+            ->latest()
+            ->get();
+
+        // ✅ Same output format as your current map (but fixed fields)
+        $properties = $availableProperties->map(function ($property) {
+            $images = $property->images->map(function ($img) {
+                // ✅ store() me 'url' save ho raha hai
+                $path = $img->url ?? $img->filename ?? null;
+                return $path ? asset('storage/' . ltrim($path, '/')) : null;
+            })->filter()->values()->toArray();
+
             return [
-                'title' => $property->title,
-                'price' => '₹' . number_format($property->price),
-                'location' => $property->location,
-                'date' => $property->created_at->diffForHumans(),
-                'beds' => $property->bedrooms,
-                'baths' => $property->bathrooms,
-                'area' => $property->area . ' Sqft',
-                'images' => $property->images->map(function ($img) {
-                    return asset('storage/' . $img->filename);
-                })->toArray(),
+                'title'     => $property->title,
+                'price'     => '₹' . number_format((float)$property->price),
+                // ✅ aapke table me address hai; location column nahi dikh raha
+                'location'  => $property->address ?? optional($property->city)->name ?? '-',
+                'date'      => optional($property->created_at)->diffForHumans(),
+                'beds'      => $property->bedrooms,
+                'baths'     => $property->bathrooms,
+                'area'      => $property->area ? ($property->area . ' Sqft') : null,
+                'images'    => $images,
+                // optional: show types on cards too
+                'types'     => $property->propertyTypes->pluck('title')->values()->toArray(),
             ];
         });
-        $cities = City::all();
-        $bestDeals = Property::where('best_deal', true)->get();
-        $villas = PropertyType::where('slug', 'like', "%villa%")->orWhere('slug', 'like', "%house%")->first()?->properties;
-// Option 1: PropertyType se (tumhari style)
-        $lands = PropertyType::where(function ($q) {
+
+        $cities = City::query()->orderBy('name')->get();
+
+        // ✅ Best deals (also load relations for view)
+        $bestDeals = Property::query()
+            ->where('best_deal', true)
+            ->with(['images', 'city', 'listedBy', 'amenities', 'propertyTypes'])
+            ->latest()
+            ->get();
+
+        // ✅ Villas (many-to-many: type slug match -> properties)
+        $villasType = PropertyType::query()
+            ->where(function ($q) {
+                $q->where('slug', 'like', '%villa%')
+                    ->orWhere('slug', 'like', '%house%');
+            })
+            ->first();
+
+        $villas = $villasType
+            ? $villasType->properties()
+                ->where('status', 'available')
+                ->with(['images', 'city', 'listedBy', 'amenities', 'propertyTypes'])
+                ->latest()
+                ->get()
+            : collect();
+
+        // ✅ Lands (many-to-many: type slug match -> properties)
+        $landsType = PropertyType::query()
+            ->where(function ($q) {
                 $q->where('slug', 'like', '%land%');
             })
-                ->with(['properties.images', 'properties.city', 'properties.listedBy', 'properties.amenities'])
-                ->first()?->properties ?? collect();
+            ->first();
+
+        $lands = $landsType
+            ? $landsType->properties()
+                ->where('status', 'available')
+                ->with(['images', 'city', 'listedBy', 'amenities', 'propertyTypes'])
+                ->latest()
+                ->get()
+            : collect();
+
         $minPrices = PriceRange::where('type', 'min')->get();
         $maxPrices = PriceRange::where('type', 'max')->get();
+
         $homePageMedia = HomePageMedia::first();
-        return view('frontend.index', compact('propertyTypes', 'properties', 'cities', 'bestDeals', 'villas', 'lands', 'minPrices','maxPrices', 'homePageMedia'));
+
+        return view('frontend.index', compact(
+            'propertyTypes',
+            'properties',
+            'cities',
+            'bestDeals',
+            'villas',
+            'lands',
+            'minPrices',
+            'maxPrices',
+            'homePageMedia'
+        ));
     }
+
 
     public function landproperty(){
         return view('frontend.landproperty');
@@ -144,19 +241,36 @@ class HomeController extends Controller
         return view('frontend.blog');
     }
 
-    public function detail(Property $property = null){
+//    public function detail(Property $property = null){
+//
+//        $property->load([
+//            'city',
+//            'propertyType',
+//            'images',
+//            'interiors',
+//            'utilityInfrastructures',
+//            'safetySecurities',
+//            'amenities',
+//        ]);
+//        return view('frontend.detail', compact('property'));
+//    }
 
+    public function detail(Property $property = null)
+    {
         $property->load([
             'city',
-            'propertyType',
+            'propertyTypes',          // ✅ new many-to-many
             'images',
             'interiors',
             'utilityInfrastructures',
             'safetySecurities',
             'amenities',
+            'listedBy',               // (optional but useful in detail page)
         ]);
+
         return view('frontend.detail', compact('property'));
     }
+
 
     public function term(){
         return view('frontend.term');
@@ -180,71 +294,138 @@ class HomeController extends Controller
         return view('frontend.disclaimer');
     }
 
+//    public function property(Request $request, $type = null)
+//    {
+//        // Base query
+//        $query = Property::with([
+//            'city',
+//            'images',
+//            'listedBy',     // ya 'user' agar relation ka naam woh hai
+//        ])->latest();
+//
+//        // 1) Type filter (rent / sale) – URL se aa raha hai
+//        if (!empty($type)) {
+//            $query->where('slug', 'like', "%$type%");    // example: /properties/rent
+//        }
+//
+//        // 2) Location (city name se)
+//        if ($request->filled('city')) {
+//
+//            $cityName = $request->input('city');
+//
+//            $query->whereHas('city', function ($q) use ($cityName) {
+//                $q->where('name', $cityName);
+//            });
+//        }
+//
+//        // 3) Property Type
+//        if ($request->filled('property_type_id')) {
+//            $query->where('property_type_id', $request->input('property_type_id'));
+//        }
+//
+//        // 4) Min / Max Price
+//        if ($request->filled('min_price')) {
+//            $query->where('price', '>=', (float) $request->input('min_price'));
+//        }
+//
+//        if ($request->filled('max_price')) {
+//            $query->where('price', '<=', (float) $request->input('max_price'));
+//        }
+//
+//        // 5) Bedrooms
+//        $bedrooms = $request->input('bedrooms', 'any');
+//        if ($bedrooms !== 'any' && $bedrooms !== null && $bedrooms !== '') {
+//            $query->where('bedrooms', '>=', (int) $bedrooms);
+//        }
+//
+//        // 6) Bathrooms
+//        $bathrooms = $request->input('bathrooms', 'any');
+//        if ($bathrooms !== 'any' && $bathrooms !== null && $bathrooms !== '') {
+//            $query->where('bathrooms', '>=', (int) $bathrooms);
+//        }
+//
+//        // Final result (agar chaho to paginate bhi kar sakte ho)
+//        // $properties = $query->paginate(12)->appends($request->query());
+//        $properties = $query->paginate(12);
+//
+//        // Filters ke liye dropdown data
+//        $cities        = City::orderBy('name')->get();
+//        $propertyTypes = PropertyType::orderBy('title')->get();
+//        $minPrices = PriceRange::where('type', 'min')->orderBy('value')->get();
+//        $maxPrices = PriceRange::where('type', 'max')->orderBy('value')->get();
+//        return view('frontend.property', compact(
+//            'properties',
+//            'cities',
+//            'propertyTypes',
+//            'type',
+//            'minPrices', 'maxPrices'
+//        ));
+//    }
+
     public function property(Request $request, $type = null)
     {
-        // Base query
-        $query = Property::with([
-            'city',
-            'images',
-            'listedBy',     // ya 'user' agar relation ka naam woh hai
-        ])->latest();
+        $query = Property::query()
+            ->with(['city','images','listedBy','propertyTypes'])
+            ->latest();
 
-        // 1) Type filter (rent / sale) – URL se aa raha hai
+        /**
+         * ✅ If URL param matches property type slug (like villahouse, land, seaview)
+         * then filter via many-to-many relation
+         */
         if (!empty($type)) {
-            $query->where('slug', 'like', "%$type%");    // example: /properties/rent
+            $typeSlug = strtolower(trim($type));
+
+            // if it's rent/sale then filter by column
+            if (in_array($typeSlug, ['rent','sale'], true)) {
+                $query->where('type', $typeSlug);
+            } else {
+                // ✅ property type slug filter (many-to-many)
+                $query->whereHas('propertyTypes', function ($q) use ($typeSlug) {
+                    $q->where('property_types.slug', $typeSlug);
+                });
+            }
         }
 
-        // 2) Location (city name se)
+        // City filter
         if ($request->filled('city')) {
-
             $cityName = $request->input('city');
-
-            $query->whereHas('city', function ($q) use ($cityName) {
-                $q->where('name', $cityName);
-            });
+            $query->whereHas('city', fn($q) => $q->where('name', $cityName));
         }
 
-        // 3) Property Type
-        if ($request->filled('property_type_id')) {
-            $query->where('property_type_id', $request->input('property_type_id'));
+        // ✅ Dropdown property types (single or multi)
+        if ($request->filled('property_type_ids')) {
+            $ids = array_filter((array) $request->input('property_type_ids'));
+            $query->whereHas('propertyTypes', fn($q) => $q->whereIn('property_types.id', $ids));
+        } elseif ($request->filled('property_type_id')) {
+            $id = (int) $request->input('property_type_id');
+            $query->whereHas('propertyTypes', fn($q) => $q->where('property_types.id', $id));
         }
 
-        // 4) Min / Max Price
-        if ($request->filled('min_price')) {
-            $query->where('price', '>=', (float) $request->input('min_price'));
-        }
+        // Min / Max price
+        if ($request->filled('min_price')) $query->where('price', '>=', (float)$request->min_price);
+        if ($request->filled('max_price')) $query->where('price', '<=', (float)$request->max_price);
 
-        if ($request->filled('max_price')) {
-            $query->where('price', '<=', (float) $request->input('max_price'));
-        }
-
-        // 5) Bedrooms
+        // Bedrooms
         $bedrooms = $request->input('bedrooms', 'any');
-        if ($bedrooms !== 'any' && $bedrooms !== null && $bedrooms !== '') {
-            $query->where('bedrooms', '>=', (int) $bedrooms);
+        if ($bedrooms !== 'any' && $bedrooms !== '' && $bedrooms !== null) {
+            $query->where('bedrooms', '>=', (int)$bedrooms);
         }
 
-        // 6) Bathrooms
+        // Bathrooms
         $bathrooms = $request->input('bathrooms', 'any');
-        if ($bathrooms !== 'any' && $bathrooms !== null && $bathrooms !== '') {
-            $query->where('bathrooms', '>=', (int) $bathrooms);
+        if ($bathrooms !== 'any' && $bathrooms !== '' && $bathrooms !== null) {
+            $query->where('bathrooms', '>=', (int)$bathrooms);
         }
 
-        // Final result (agar chaho to paginate bhi kar sakte ho)
-        // $properties = $query->paginate(12)->appends($request->query());
-        $properties = $query->paginate(12);
+        $properties = $query->paginate(12)->appends($request->query());
 
-        // Filters ke liye dropdown data
         $cities        = City::orderBy('name')->get();
         $propertyTypes = PropertyType::orderBy('title')->get();
-        $minPrices = PriceRange::where('type', 'min')->orderBy('value')->get();
-        $maxPrices = PriceRange::where('type', 'max')->orderBy('value')->get();
+        $minPrices     = PriceRange::where('type','min')->orderBy('value')->get();
+        $maxPrices     = PriceRange::where('type','max')->orderBy('value')->get();
+
         return view('frontend.property', compact(
-            'properties',
-            'cities',
-            'propertyTypes',
-            'type',
-            'minPrices', 'maxPrices'
+            'properties','cities','propertyTypes','type','minPrices','maxPrices'
         ));
     }
 

@@ -49,4 +49,14 @@ class Property extends Model
     {
         return $this->hasMany(Enquiry::class);
     }
+
+    public function propertyTypes()
+    {
+        return $this->belongsToMany(
+            \App\Models\PropertyType::class,
+            'property_property_types',
+            'property_id',
+            'property_type_id'
+        )->withTimestamps();
+    }
 }

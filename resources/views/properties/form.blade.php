@@ -76,17 +76,72 @@
                         </select>
                     </div>
 
+                    @php
+                        $selectedTypeIds = old(
+                            'property_type_ids',
+                            isset($property) ? $property->propertyTypes->pluck('id')->toArray() : []
+                        );
+                    @endphp
+
+{{--                    <div>--}}
+{{--                        <label class="block text-sm font-medium text-gray-700">Property Type</label>--}}
+{{--                        <select name="property_type_ids[]" required multiple class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">--}}
+{{--                            <option value="">-- Select Category --</option>--}}
+{{--                            @foreach($propertyTypes as $type)--}}
+{{--                                <option value="{{ $type->id }}"--}}
+{{--                                    {{ old('property_type_id', $property->property_type_id ?? '') == $type->id ? 'selected' : '' }}>--}}
+{{--                                    {{ $type->title }}--}}
+{{--                                </option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </div>--}}
+
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Property Type</label>
-                        <select name="property_type_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            <option value="">-- Select Category --</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Property Type <span class="text-red-600">*</span>
+                        </label>
+
+                        <div class="relative">
+                            <select name="property_type_ids[]"
+                                    multiple
+                                    required
+                                    size="6"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm
+                       focus:ring-blue-500 focus:border-blue-500">
+                                @foreach($propertyTypes as $type)
+                                    <option value="{{ $type->id }}"
+                                        {{ in_array($type->id, $selectedTypeIds) ? 'selected' : '' }}>
+                                        {{ $type->title }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <p class="text-xs text-gray-500 mt-1">
+                                Multiple select: <span class="font-semibold">Ctrl</span> (Windows) / <span class="font-semibold">Cmd</span> (Mac) + click
+                            </p>
+
+                            @error('property_type_ids')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                            @error('property_type_ids.*')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        {{-- Selected badges preview --}}
+                        <div class="mt-2 flex flex-wrap gap-2">
                             @foreach($propertyTypes as $type)
-                                <option value="{{ $type->id }}"
-                                    {{ old('property_type_id', $property->property_type_id ?? '') == $type->id ? 'selected' : '' }}>
-                                    {{ $type->title }}
-                                </option>
+                                @if(in_array($type->id, $selectedTypeIds))
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                             bg-indigo-50 text-indigo-700 border border-indigo-200">
+                    @if($type->icon_class)
+                                            <i class="{{ $type->icon_class }} mr-1 text-[10px]"></i>
+                                        @endif
+                                        {{ $type->title }}
+                </span>
+                                @endif
                             @endforeach
-                        </select>
+                        </div>
                     </div>
 
                     <div>

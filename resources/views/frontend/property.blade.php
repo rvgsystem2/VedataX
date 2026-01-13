@@ -182,29 +182,61 @@
 
                                         {{-- Beds / Baths / Area --}}
                                         <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
-                                            @if(!($property->propertyType->title== 'Land' || $property->propertyType->slug == 'land'))
-                                                @if(!is_null($property->bedrooms))
-                                                    <div class="flex items-center">
-                                                        <i class="fas fa-bed text-gray-400 mr-1"></i>
-                                                        <span>{{ $property->bedrooms }} Beds</span>
-                                                    </div>
+{{--                                            @if(!($property->propertyType->title== 'Land' || $property->propertyType->slug == 'land'))--}}
+{{--                                                @if(!is_null($property->bedrooms))--}}
+{{--                                                    <div class="flex items-center">--}}
+{{--                                                        <i class="fas fa-bed text-gray-400 mr-1"></i>--}}
+{{--                                                        <span>{{ $property->bedrooms }} Beds</span>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
+
+{{--                                                @if(!is_null($property->bathrooms))--}}
+{{--                                                    <div class="flex items-center">--}}
+{{--                                                        <i class="fas fa-bath text-gray-400 mr-1"></i>--}}
+{{--                                                        <span>{{ $property->bathrooms }} Baths</span>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
+
+{{--                                            @endif--}}
+
+                                            @php
+                                                $isLand = $property->propertyTypes?->contains(function ($t) {
+                                                    return strtolower((string)$t->slug) === 'land' || strtolower((string)$t->title) === 'land';
+                                                }) ?? false;
+                                            @endphp
+
+                                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
+                                                @if(!$isLand)
+                                                    @if(!is_null($property->bedrooms))
+                                                        <div class="flex items-center">
+                                                            <i class="fas fa-bed text-gray-400 mr-1"></i>
+                                                            <span>{{ $property->bedrooms }} Beds</span>
+                                                        </div>
+                                                    @endif
+
+                                                    @if(!is_null($property->bathrooms))
+                                                        <div class="flex items-center">
+                                                            <i class="fas fa-bath text-gray-400 mr-1"></i>
+                                                            <span>{{ $property->bathrooms }} Baths</span>
+                                                        </div>
+                                                    @endif
                                                 @endif
 
-                                                @if(!is_null($property->bathrooms))
+                                                @if(!is_null($property->area))
                                                     <div class="flex items-center">
-                                                        <i class="fas fa-bath text-gray-400 mr-1"></i>
-                                                        <span>{{ $property->bathrooms }} Baths</span>
+                                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
+                                                        <span>{{ rtrim(rtrim(number_format($property->area, 2, '.', ''), '0'), '.') }} SQM</span>
                                                     </div>
                                                 @endif
+                                            </div>
 
-                                            @endif
 
-                                            @if(!is_null($property->area))
-                                                <div class="flex items-center">
-                                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>
-                                                    <span>{{ rtrim(rtrim(number_format($property->area, 2, '.', ''), '0'), '.') }} SQM</span>
-                                                </div>
-                                            @endif
+{{--                                            @if(!is_null($property->area))--}}
+{{--                                                <div class="flex items-center">--}}
+{{--                                                    <i class="fas fa-vector-square text-gray-400 mr-1"></i>--}}
+{{--                                                    <span>{{ rtrim(rtrim(number_format($property->area, 2, '.', ''), '0'), '.') }} SQM</span>--}}
+{{--                                                </div>--}}
+{{--                                            @endif--}}
                                         </div>
 
                                         <div class="flex justify-between items-center mt-4">

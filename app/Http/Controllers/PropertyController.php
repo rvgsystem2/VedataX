@@ -51,7 +51,9 @@ class PropertyController extends Controller
             'price'             => 'required|numeric',
             'type'              => 'required|in:rent,sale',
             'status'            => 'required|in:available,sold,rented',
-            'property_type_id'  => 'required|exists:property_types,id',
+//            'property_type_id'  => 'required|exists:property_types,id',
+            'property_type_ids'     => 'required|array|min:1',
+            'property_type_ids.*'   => 'exists:property_types,id',
             'city_id'           => 'nullable|exists:cities,id',
             'address'           => 'nullable|string|max:255',
             'latitude'          => 'nullable|numeric',
@@ -107,14 +109,17 @@ class PropertyController extends Controller
             $data['main_image_index'],
             $data['interiors'],
             $data['utilities'],
-            $data['safeties']
+            $data['safeties'],
+                $data['property_type_ids'] // ✅ add this
         );
 
         // Create property
         $property = Property::create($data + [
                 'slug'      => $slug,
                 'listed_by' => auth()->id(),
+                'property_type_id' => $request->property_type_ids[0],
             ]);
+        $property->propertyTypes()->sync($validated['property_type_ids'] ?? []);
 
         // Amenities sync
         $property->amenities()->sync($validated['amenities'] ?? []);
@@ -206,7 +211,9 @@ class PropertyController extends Controller
             'price'             => 'required|numeric',
             'type'              => 'required|in:rent,sale',
             'status'            => 'required|in:available,sold,rented',
-            'property_type_id'  => 'required|exists:property_types,id',
+//            'property_type_id'  => 'required|exists:property_types,id',
+            'property_type_ids'     => 'required|array|min:1',
+            'property_type_ids.*'   => 'exists:property_types,id',
             'city_id'           => 'nullable|exists:cities,id',
             'address'           => 'nullable|string|max:255',
             'latitude'          => 'nullable|numeric',
@@ -271,7 +278,8 @@ class PropertyController extends Controller
             $data['main_image_index'],
             $data['interiors'],
             $data['utilities'],
-            $data['safeties']
+            $data['safeties'],
+            $data['property_type_ids'] // ✅ add this
         );
 
         // listed_by ko current user se override karna hai
@@ -280,6 +288,7 @@ class PropertyController extends Controller
         // basic update
         $property->update($data);
 
+        $property->propertyTypes()->sync($validated['property_type_ids'] ?? []);
         // amenities sync
         $property->amenities()->sync($validated['amenities'] ?? []);
 

@@ -30,7 +30,7 @@
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Title</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Type</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Price</th>
-                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Category</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Property Types</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">City</th>
                     <th class="px-6 py-3 text-left text-sm font-medium text-gray-600 uppercase">Status</th>
                     <th class="px-6 py-3 text-right text-sm font-medium text-gray-600 uppercase">Actions</th>
@@ -43,7 +43,20 @@
                         <td class="px-6 py-4 text-sm text-gray-900 font-semibold">{{ $property->title }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700 capitalize">{{ $property->type }}</td>
                         <td class="px-6 py-4 text-sm text-gray-700">฿{{ number_format($property->price, 2) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-700">{{ $property->propertyType->title ?? '-' }}</td>
+{{--                        <td class="px-6 py-4 text-sm text-gray-700">{{ $property->propertyType->title ?? '-' }}</td>--}}
+                        <td class="px-6 py-4 text-sm text-gray-700">
+                            <div class="flex flex-wrap gap-1 mt-2">
+                                @forelse($property->propertyTypes as $type)
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                                                 bg-indigo-50 text-indigo-700 border border-indigo-200">
+                                        <i class="fa-solid fa-tag text-[10px] mr-1"></i>
+                                        {{ $type->title }}
+                                    </span>
+                                @empty
+                                    <span class="text-xs text-gray-400">No Property Type</span>
+                                @endforelse
+                            </div>
+                        </td>
                         <td class="px-6 py-4 text-sm text-gray-700">{{ $property->city->name ?? '-' }}</td>
                         <td class="px-6 py-4 text-sm">
                             <span class="inline-block px-2 py-1 text-xs rounded-full

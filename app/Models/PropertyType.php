@@ -8,7 +8,18 @@ class PropertyType extends Model
 {
     protected $guarded = ['id'];
 
-    public function properties(){
-        return $this->hasMany(Property::class, 'property_type_id');
+//    public function properties(){
+//        return $this->hasMany(Property::class, 'property_type_id');
+//    }
+
+    public function properties()
+    {
+        return $this->belongsToMany(
+            \App\Models\Property::class,
+            'property_property_types',
+            'property_type_id',
+            'property_id'
+        )->withTimestamps();
     }
+
 }

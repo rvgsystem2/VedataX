@@ -93,7 +93,7 @@
                     Rent
                 </a> --}}
                 @php
-                    $propertyTypes = \App\Models\PropertyType::all();
+                    $propertyTypes = \App\Models\PropertyType::withCount('properties')->get();
 
                     $currencies = [
                         ['code' => 'THB', 'symbol' => '฿',  'label' => 'THB - Thai Baht'],
@@ -151,22 +151,42 @@
                             <h3 class="font-semibold">{{__('header.property_type')}}</h3>
                         </div>
                         <div class="py-2">
+{{--                            @foreach($propertyTypes as $propertyType)--}}
+{{--                                <a href="{{ route('property', $propertyType->slug) }}"--}}
+{{--                                   class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">--}}
+{{--                                    <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">--}}
+{{--                                        <i class="{{ $propertyType->icon_class }} text-gray-600"></i>--}}
+{{--                                    </div>--}}
+{{--                                    <div>--}}
+{{--                                        <div class="font-medium">--}}
+{{--                                            {{ $propertyType->title ?? $propertyType->name }}--}}
+{{--                                        </div>--}}
+{{--                                        <div class="text-xs text-gray-500">--}}
+{{--                                            {{ number_format($propertyType->properties->count()) }} properties--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </a>--}}
+{{--                            @endforeach--}}
                             @foreach($propertyTypes as $propertyType)
                                 <a href="{{ route('property', $propertyType->slug) }}"
                                    class="flex items-center px-4 py-3 hover:bg-gray-50 transition border-b border-gray-100">
+
                                     <div class="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
                                         <i class="{{ $propertyType->icon_class }} text-gray-600"></i>
                                     </div>
+
                                     <div>
                                         <div class="font-medium">
-                                            {{ $propertyType->title ?? $propertyType->name }}
+                                            {{ $propertyType->title }}
                                         </div>
+
                                         <div class="text-xs text-gray-500">
-                                            {{ number_format($propertyType->properties->count()) }} properties
+                                            {{ number_format($propertyType->properties_count) }} properties
                                         </div>
                                     </div>
                                 </a>
                             @endforeach
+
                         </div>
                     </div>
                 </div>
