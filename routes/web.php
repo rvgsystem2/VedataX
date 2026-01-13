@@ -149,6 +149,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('price-ranges')->name('price-ranges.')->controller(\App\Http\Controllers\PriceRangeController::class)->group(function(){
        Route::get('index', 'index')->name('index');
        Route::get('create', 'create')->name('create');
+       Route::get('edit/{range}', 'edit')->name('edit');
+       Route::post('update/{range}', 'update')->name('update');
        Route::post('store', 'store')->name('store');
        Route::delete('delete/{range}', 'destroy')->name('destroy');
     });

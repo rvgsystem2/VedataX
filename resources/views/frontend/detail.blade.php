@@ -282,6 +282,7 @@
                     <h2 class="text-xl font-bold text-gray-800 mb-4">Property Features</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        @if($property->interiors->count() > 0)
                         <div>
                             <h3 class="font-semibold text-gray-700 mb-2">Interior Features</h3>
                             <ul class="text-gray-600 space-y-1">
@@ -295,6 +296,8 @@
                                 @endforelse
                             </ul>
                         </div>
+                        @endif
+                        @if($property->amenities->count() > 0)
                         <div>
                             <h3 class="font-semibold text-gray-700 mb-2">Outdoor Amenities</h3>
                             <ul class="text-gray-600 space-y-1">
@@ -308,9 +311,11 @@
                                 @endforelse
                             </ul>
                         </div>
+                        @endif
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                        @if($property->utilityInfrastructures->count() > 0)
                         <div>
                             <h3 class="font-semibold text-gray-700 mb-2">Utilities and Infrastructure</h3>
                             <ul class="text-gray-600 space-y-1">
@@ -324,6 +329,8 @@
                                 @endforelse
                             </ul>
                         </div>
+                        @endif
+                        @if($property->safetySecurities->count() > 0)
                         <div>
                             <h3 class="font-semibold text-gray-700 mb-2">Safety and Security</h3>
                             <ul class="text-gray-600 space-y-1">
@@ -337,6 +344,7 @@
                                 @endforelse
                             </ul>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endif

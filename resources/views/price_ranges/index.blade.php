@@ -75,6 +75,10 @@
                         <td class="px-6 py-4 text-right text-sm">
 
                             @can('remove price ranges')
+
+                                    <a href="{{ route('price-ranges.edit', $range->id) }}" class="text-green-600 hover:underline">
+                                        edit
+                                    </a> &nbsp;
                             <form action="{{ route('price-ranges.destroy', $range->id) }}"
                                   method="POST"
                                   class="inline-block"

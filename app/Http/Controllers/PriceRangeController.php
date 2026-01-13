@@ -23,6 +23,11 @@ class PriceRangeController extends Controller
         return view('price_ranges.create');
     }
 
+    public function edit(PriceRange $range)
+    {
+        return view('price_ranges.create', compact('range'));
+    }
+
     /**
      * Store new price range
      */
@@ -40,6 +45,23 @@ class PriceRangeController extends Controller
             ->route('price-ranges.index')
             ->with('success', 'Price range added successfully.');
     }
+
+
+    public function update(Request $request, PriceRange $range)
+    {
+        $data = $request->validate([
+            'type'  => 'required|in:min,max',
+            'label' => 'required|string|max:191',   // e.g. "฿1,000,000"
+            'value' => 'nullable|integer|min:0',    // e.g. 1000000
+        ]);
+
+        $range->update($data);
+
+        return redirect()
+            ->route('price-ranges.index')
+            ->with('success', 'Price range updated successfully.');
+    }
+
 
     /**
      * Show edit form

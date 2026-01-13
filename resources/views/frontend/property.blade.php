@@ -73,6 +73,7 @@
                                     $badgeText = 'BEST DEAL';
                                 }
 
+
                                 // Card filters
                                 $dataType     = $property->type;                          // rent / sale
                                 $dataCategory = $property->best_deal ? 'luxury' : 'standard';
@@ -118,12 +119,9 @@
                                         </div>
 
                                         {{-- Badge (Top Left) --}}
-                                        <div class="absolute top-3 left-3">
+                                        <div class="absolute top-3 left-3 z-30">
                                             <span class="bg-green-600 text-white text-xs font-medium px-2 py-1 rounded">
                                                 {{ $badgeText }}
-                                                @if($property->type === 'rent')
-                                                    RENTAL
-                                                @endif
                                             </span>
                                         </div>
 
