@@ -824,7 +824,7 @@
 
 
 <section class="w-full max-w-7xl mx-auto px-4 py-8">
-    <div class="text-center mb-12 fade-in">
+    <div class="text-center mb-12 fade-in ">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
             {{ __('index.villas.section.title') }}
         </h1>
@@ -833,12 +833,12 @@
         </p>
     </div>
 
-    <div class="swiper villa-multiple-slide-carousel w-full relative fade-in">
+    <div class="swiper villa-multiple-slide-carousel w-full relative fade-in p-4">
         <div class="swiper-wrapper">
 
             @if(!empty($villas))
                 @foreach($villas as $villa)
-                    <div class="swiper-slide">
+                    <div class="swiper-slide ">
                         <a href="{{ route('detail', ['property' => $villa->id]) }}">
                             <div class="property-card">
                                 <div class="relative">
