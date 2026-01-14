@@ -933,10 +933,33 @@
 
 
                                     <div class="flex justify-between items-center mt-4">
-                                        <div class="text-sm font-medium">
-                                            {{ optional($villa->listedBy)->name ?? __('index.villas.fallback.agent') }}
-                                        </div>
+{{--                                        <div class="text-sm font-medium">--}}
+{{--                                            {{ optional($villa->listedBy)->name ?? __('index.villas.fallback.agent') }}--}}
+{{--                                        </div>--}}
 
+                                        @php
+                                            $agent     = optional($villa->listedBy);
+                                            $agentName = $agent->name ?? __('index.villas.fallback.agent');
+                                            $initials  = collect(explode(' ', $agentName))
+                                                            ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+                                                            ->take(2)->implode('');
+                                        @endphp
+                                        <div class="flex items-center">
+                                            <div
+                                                class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500
+                                   flex items-center justify-center text-white font-bold">
+                                                @if($agent->profile_image)
+                                                    <img src="{{asset('storage/'. $agent->profile_image)}}" alt="" class="rounded-2xl w-full h-full">
+                                                @else
+                                                    {{ $initials }}
+                                                @endif
+                                            </div>
+                                            <div class="ml-3">
+                                                <p class="text-sm font-medium text-gray-900">
+                                                    {{ $agentName }}
+                                                </p>
+                                            </div>
+                                        </div>
                                         <div class="text-xs text-gray-500">
                                             {{ $villa->created_at?->diffForHumans() }}
                                         </div>
@@ -987,234 +1010,6 @@
     });
 </script>
 
-<!-- Premium Land Deals Section -->
-{{--<section class="w-full max-w-7xl mx-auto px-4 py-8">--}}
-{{--    <div class="text-center mb-12 fade-in">--}}
-{{--        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Lands</h1>--}}
-{{--        <p class="text-gray-600 max-w-2xl mx-auto">Discover our carefully curated selection of prime land parcels--}}
-{{--            designed for your future development.</p>--}}
-{{--    </div>--}}
-
-{{--    <div class="swiper land-multiple-slide-carousel w-full relative fade-in">--}}
-{{--        <div class="swiper-wrapper">--}}
-{{--            <!-- Land Slide 1 -->--}}
-{{--            @foreach(($lands ?? collect()) as $land)--}}
-{{--                <div class="swiper-slide">--}}
-{{--                    <a href="{{route('detail', ['property' => $land->id])}}">--}}
-{{--                    <div class="property-card">--}}
-{{--                        <div class="relative">--}}
-{{--                            --}}{{-- INNER SWIPER --}}
-{{--                            <div class="swiper inner-swiper h-48">--}}
-{{--                                <div class="swiper-wrapper">--}}
-
-{{--                                    @if(optional($land->images)->count() > 0)--}}
-{{--                                        @foreach($land->images as $img)--}}
-{{--                                            <div class="swiper-slide">--}}
-{{--                                                <img src="{{ asset('storage/' . $img->url) }}"--}}
-{{--                                                     class="w-full h-full object-cover"--}}
-{{--                                                     alt="{{ $land->title ?? 'Land' }}" />--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
-{{--                                    @else--}}
-{{--                                        --}}{{-- Fallback images --}}
-{{--                                        <div class="swiper-slide">--}}
-{{--                                            <img src="https://cdn.pixabay.com/photo/2023/06/13/11/45/landscape-8060760_1280.jpg"--}}
-{{--                                                 class="w-full h-full object-cover" alt="Land plot" />--}}
-{{--                                        </div>--}}
-{{--                                        <div class="swiper-slide">--}}
-{{--                                            <img src="https://cdn.pixabay.com/photo/2014/08/26/21/52/map-428639_1280.jpg"--}}
-{{--                                                 class="w-full h-full object-cover" alt="Land view" />--}}
-{{--                                        </div>--}}
-{{--                                        <div class="swiper-slide">--}}
-{{--                                            <img src="https://cdn.pixabay.com/photo/2014/10/08/20/52/cereals-480691_1280.jpg"--}}
-{{--                                                 class="w-full h-full object-cover" alt="Land landscape" />--}}
-{{--                                        </div>--}}
-{{--                                    @endif--}}
-
-{{--                                </div>--}}
-
-{{--                                <div class="swiper-button-next"></div>--}}
-{{--                                <div class="swiper-button-prev"></div>--}}
-{{--                            </div>--}}
-
-{{--                            --}}{{-- BADGE --}}
-{{--                            <div class="absolute top-3 left-3">--}}
-{{--                                @php--}}
-{{--                                    $badgeType  = strtoupper($land->type ?? 'SALE'); // RENT / SALE--}}
-{{--                                    $badgeColor = ($land->type ?? '') === 'rent' ? 'bg-blue-600' : 'bg-green-600';--}}
-{{--                                @endphp--}}
-
-{{--                                <span class="{{ $badgeColor }} text-white text-xs font-medium px-2 py-1 rounded">--}}
-{{--                        FOR {{ $badgeType }}--}}
-{{--                    </span>--}}
-{{--                            </div>--}}
-
-{{--                            --}}{{-- FAVORITE ICON --}}
-{{--                            <div class="absolute top-3 right-3">--}}
-{{--                                <button--}}
-{{--                                    class="favorite-btn bg-white/90 hover:bg-white text-gray-800 rounded-full w-8 h-8 flex items-center justify-center transition">--}}
-{{--                                    <i class="far fa-heart"></i>--}}
-{{--                                </button>--}}
-{{--                            </div>--}}
-
-{{--                            --}}{{-- PRICE OVERLAY --}}
-{{--                            <div--}}
-{{--                                class="absolute bottom-0 left-0 right-0 px-4 py-3 flex justify-between items-center--}}
-{{--                           bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">--}}
-{{--                    <span class="text-white font-semibold text-lg">--}}
-{{--                        {{ display_price($bestDeal->price) }}--}}
-{{--                    </span>--}}
-
-{{--                                <div class="flex space-x-3 text-white text-lg">--}}
-{{--                                    <button class="expand-btn hover:text-gray-300 transition">--}}
-{{--                                        <i class="fas fa-expand"></i>--}}
-{{--                                    </button>--}}
-{{--                                    <button class="favorite-btn hover:text-red-400 transition">--}}
-{{--                                        <i class="far fa-heart"></i>--}}
-{{--                                    </button>--}}
-{{--                                    <button class="compare-btn hover:text-gray-300 transition">--}}
-{{--                                        <i class="fas fa-plus"></i>--}}
-{{--                                    </button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        --}}{{-- CONTENT --}}
-{{--                        <div class="p-4">--}}
-{{--                            <div class="flex justify-between items-start">--}}
-{{--                                <div>--}}
-{{--                                    <h3 class="font-bold text-lg text-gray-800">--}}
-{{--                                        {{ $land->title ?? 'Prime Land' }}--}}
-{{--                                    </h3>--}}
-{{--                                    <p class="text-gray-600 text-sm flex items-center mt-1">--}}
-{{--                                        <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>--}}
-{{--                                        {{ $land->address ?? 'Location not specified' }}--}}
-{{--                                        @if(optional($land->city)->name)--}}
-{{--                                            , {{ $land->city->name }}--}}
-{{--                                        @endif--}}
-{{--                                    </p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            --}}{{-- META ROW: Area + Road Access + Water Supply --}}
-{{--                            <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">--}}
-{{--                                --}}{{-- Area --}}
-{{--                                <div class="flex items-center">--}}
-{{--                                    <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>--}}
-{{--                                    <span>--}}
-{{--                            @if($land->area)--}}
-{{--                                            {{ $land->area }} sqft--}}
-{{--                                        @else--}}
-{{--                                            Area not specified--}}
-{{--                                        @endif--}}
-{{--                        </span>--}}
-{{--                                </div>--}}
-
-{{--                                --}}{{-- Road Access (amenity based) --}}
-{{--                                @php--}}
-{{--                                    $hasRoad = optional($land->amenities)--}}
-{{--                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'road') !== false)--}}
-{{--                                        : false;--}}
-{{--                                @endphp--}}
-{{--                                <div class="flex items-center">--}}
-{{--                                    <i class="fas fa-road text-gray-400 mr-1"></i>--}}
-{{--                                    <span>{{ $hasRoad ? 'Road Access' : 'Road info N/A' }}</span>--}}
-{{--                                </div>--}}
-
-{{--                                --}}{{-- Water Supply (amenity based) --}}
-{{--                                @php--}}
-{{--                                    $hasWater = optional($land->amenities)--}}
-{{--                                        ? $land->amenities->contains(fn($a) => stripos($a->name, 'water') !== false)--}}
-{{--                                        : false;--}}
-{{--                                @endphp--}}
-{{--                                <div class="flex items-center">--}}
-{{--                                    <i class="fas fa-tint text-gray-400 mr-1"></i>--}}
-{{--                                    <span>{{ $hasWater ? 'Water Supply' : 'Water info N/A' }}</span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            --}}{{-- AGENT + TIME --}}
-{{--                            <div class="flex justify-between items-center mt-4">--}}
-{{--                                @php--}}
-{{--                                    $agent     = optional($land->listedBy);--}}
-{{--                                    $agentName = $agent->name ?? 'Agent';--}}
-{{--                                    $initials  = collect(explode(' ', $agentName))--}}
-{{--                                                    ->map(fn($n) => strtoupper(substr($n, 0, 1)))--}}
-{{--                                                    ->take(2)->implode('');--}}
-{{--                                @endphp--}}
-
-{{--                                <div class="flex items-center">--}}
-{{--                                    <div--}}
-{{--                                        class="w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-blue-500--}}
-{{--                                   flex items-center justify-center text-white font-bold">--}}
-{{--                                        {{ $initials }}--}}
-{{--                                    </div>--}}
-{{--                                    <div class="ml-3">--}}
-{{--                                        <p class="text-sm font-medium text-gray-900">--}}
-{{--                                            {{ $agentName }}--}}
-{{--                                        </p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="flex items-center space-x-2">--}}
-{{--                                    <button--}}
-{{--                                        class="share-btn w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center--}}
-{{--                                   text-gray-600 hover:bg-gray-200 transition-colors">--}}
-{{--                                        <i class="fas fa-share-alt"></i>--}}
-{{--                                    </button>--}}
-{{--                                    <p class="text-xs text-gray-500">--}}
-{{--                                        {{ $land->created_at?->diffForHumans() ?? '' }}--}}
-{{--                                    </p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-
-
-{{--            <!-- Additional land slides would go here -->--}}
-{{--        </div>--}}
-
-{{--        <div class="custom-controls mt-8 flex flex-col items-center ">--}}
-{{--            <!-- Pagination + Arrows in One Row -->--}}
-{{--            <div class="flex items-center justify-center">--}}
-{{--                <!-- Prev Button -->--}}
-{{--                <button--}}
-{{--                    class="custom-nav-btn land-prev-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
-{{--                    <i class="fas fa-chevron-left text-white hover:text-white"></i>--}}
-{{--                </button>--}}
-
-{{--                <!-- Pagination Dots (Centered) -->--}}
-{{--                <div class="custom-pagination land-pagination flex justify-center text-black "></div>--}}
-
-{{--                <!-- Next Button -->--}}
-{{--                <button--}}
-{{--                    class="custom-nav-btn land-next-btn w-12 h-8 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transition">--}}
-{{--                    <i class="fas fa-chevron-right text-white hover:text-white"></i>--}}
-{{--                </button>--}}
-{{--            </div>--}}
-
-{{--            <!-- Slide Counter (Below Pagination Row) -->--}}
-{{--            <div class="slide-counter text-sm text-gray-600">--}}
-{{--                <span class="land-current-slide font-medium">1</span> / <span--}}
-{{--                    class="land-total-slides font-medium">6</span>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
-{{--        <style>--}}
-{{--            .land-pagination .swiper-pagination-bullet {--}}
-{{--                @apply bg-gray-900 w-3 h-3 rounded-full transition-all duration-300;--}}
-{{--            }--}}
-
-{{--            .land-pagination .swiper-pagination-bullet-active {--}}
-{{--                @apply bg-green-600 w-5;--}}
-{{--            }--}}
-{{--        </style>--}}
-
-{{--    </div>--}}
-{{--</section>--}}
 
 <section class="w-full max-w-7xl mx-auto px-4 py-8">
     <div class="text-center mb-12 fade-in">
