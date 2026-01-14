@@ -96,30 +96,222 @@
 {{--                        </select>--}}
 {{--                    </div>--}}
 
+{{--                    <div>--}}
+{{--                        <label class="block text-sm font-medium text-gray-700 mb-1">--}}
+{{--                            Property Type <span class="text-red-600">*</span>--}}
+{{--                        </label>--}}
+
+{{--                        <div class="relative">--}}
+{{--                            <select name="property_type_ids[]"--}}
+{{--                                    multiple--}}
+{{--                                    required--}}
+{{--                                    size="6"--}}
+{{--                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm--}}
+{{--                       focus:ring-blue-500 focus:border-blue-500">--}}
+{{--                                @foreach($propertyTypes as $type)--}}
+{{--                                    <option value="{{ $type->id }}"--}}
+{{--                                        {{ in_array($type->id, $selectedTypeIds) ? 'selected' : '' }}>--}}
+{{--                                        {{ $type->title }}--}}
+{{--                                    </option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+
+{{--                            <p class="text-xs text-gray-500 mt-1">--}}
+{{--                                Multiple select: <span class="font-semibold">Ctrl</span> (Windows) / <span class="font-semibold">Cmd</span> (Mac) + click--}}
+{{--                            </p>--}}
+
+{{--                            @error('property_type_ids')--}}
+{{--                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>--}}
+{{--                            @enderror--}}
+{{--                            @error('property_type_ids.*')--}}
+{{--                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
+
+{{--                        --}}{{-- Selected badges preview --}}
+{{--                        <div class="mt-2 flex flex-wrap gap-2">--}}
+{{--                            @foreach($propertyTypes as $type)--}}
+{{--                                @if(in_array($type->id, $selectedTypeIds))--}}
+{{--                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium--}}
+{{--                             bg-indigo-50 text-indigo-700 border border-indigo-200">--}}
+{{--                    @if($type->icon_class)--}}
+{{--                                            <i class="{{ $type->icon_class }} mr-1 text-[10px]"></i>--}}
+{{--                                        @endif--}}
+{{--                                        {{ $type->title }}--}}
+{{--                </span>--}}
+{{--                                @endif--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+
+                    @php
+                        $selectedTypeIds = old(
+                            'property_type_ids',
+                            isset($property) ? $property->propertyTypes->pluck('id')->toArray() : []
+                        );
+
+                        $typeOptions = $propertyTypes->map(function($t){
+                            return [
+                                'id'    => (int) $t->id,
+                                'label' => (string) $t->title,
+                                'icon'  => (string) ($t->icon_class ?? ''),
+                            ];
+                        })->values();
+                    @endphp
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">
                             Property Type <span class="text-red-600">*</span>
                         </label>
 
-                        <div class="relative">
-                            <select name="property_type_ids[]"
-                                    multiple
-                                    required
-                                    size="6"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm
-                       focus:ring-blue-500 focus:border-blue-500">
-                                @foreach($propertyTypes as $type)
-                                    <option value="{{ $type->id }}"
-                                        {{ in_array($type->id, $selectedTypeIds) ? 'selected' : '' }}>
-                                        {{ $type->title }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div
+                            x-data="multiSelectTypes({
+                                options: @js($typeOptions),
+                                selected: @js(array_map('intval', $selectedTypeIds)),
+                                placeholder: 'Search & select property types...'
+                            })"
+                            x-init="init()"
+                            class="relative">
 
-                            <p class="text-xs text-gray-500 mt-1">
-                                Multiple select: <span class="font-semibold">Ctrl</span> (Windows) / <span class="font-semibold">Cmd</span> (Mac) + click
-                            </p>
+                            {{-- Hidden inputs (IMPORTANT) --}}
+                            <template x-for="id in selected" :key="'hid-'+id">
+                                <input type="hidden" name="property_type_ids[]" :value="id">
+                            </template>
 
+                            {{-- Input / Trigger --}}
+                            <button
+                                type="button"
+                                @click="toggleOpen()"
+                                @keydown.enter.prevent="toggleOpen()"
+                                @keydown.escape.prevent="open=false"
+                                class="w-full min-h-[46px] rounded-lg border border-gray-300 bg-white px-3 py-2 shadow-sm
+                   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500
+                   flex items-center gap-2 flex-wrap"
+                            >
+                                {{-- Chips --}}
+                                <template x-if="selected.length">
+                                    <div class="flex flex-wrap gap-2">
+                                        <template x-for="id in selected" :key="'chip-'+id">
+                        <span
+                            class="inline-flex items-center gap-1 rounded-full border border-indigo-200 bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700"
+                        >
+                            <template x-if="getIcon(id)">
+                                <i :class="getIcon(id) + ' text-[10px]'"></i>
+                            </template>
+
+                            <span x-text="getLabel(id)"></span>
+
+                            <span
+                                class="ml-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+                                @click.stop="remove(id)"
+                                title="Remove"
+                                >×</span>
+                            </span>
+                                        </template>
+                                    </div>
+                                </template>
+
+                                {{-- Placeholder --}}
+                                <template x-if="!selected.length">
+                                    <span class="text-sm text-gray-400" x-text="placeholder"></span>
+                                </template>
+
+                                <span class="ml-auto text-gray-400">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd" />
+                                    </svg>
+                                </span>
+                            </button>
+
+                            {{-- Dropdown --}}
+                            <div
+                                x-show="open"
+                                x-transition
+                                @click.outside="open=false"
+                                class="absolute z-[60] mt-2 w-full rounded-xl border border-gray-200 bg-white shadow-xl overflow-hidden"
+                                style="display:none;"
+                            >
+                                {{-- Top actions --}}
+                                <div class="p-3 border-b bg-gray-50">
+                                    <div class="flex items-center gap-2">
+                                        <div class="relative flex-1">
+                                            <input
+                                                type="text"
+                                                x-model="search"
+                                                @keydown.escape.prevent="open=false"
+                                                placeholder="Search..."
+                                                class="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm
+                                   focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                            >
+                                        </div>
+
+                                        <button
+                                            type="button"
+                                            class="text-xs px-3 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100"
+                                            @click="selectAllFiltered()"
+                                        >
+                                            Select all
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="text-xs px-3 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-100"
+                                            @click="clearAll()"
+                                        >
+                                            Clear
+                                        </button>
+                                    </div>
+
+                                    <div class="mt-2 text-xs text-gray-500 flex items-center justify-between">
+                                        <span>Selected: <span class="font-semibold" x-text="selected.length"></span></span>
+                                        <span x-show="search" class="text-gray-400">Filtered: <span x-text="filteredOptions().length"></span></span>
+                                    </div>
+                                </div>
+
+                                {{-- Options list --}}
+                                <div class="max-h-72 overflow-auto">
+                                    <template x-if="filteredOptions().length === 0">
+                                        <div class="p-4 text-sm text-gray-500">No results found.</div>
+                                    </template>
+
+                                    <template x-for="opt in filteredOptions()" :key="'opt-'+opt.id">
+                                        <label
+                                            class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-50 cursor-pointer border-b last:border-b-0"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                                :checked="isSelected(opt.id)"
+                                                @change="toggle(opt.id)"
+                                            >
+
+                                            <div class="flex items-center gap-2">
+                                                <template x-if="opt.icon">
+                                                    <i :class="opt.icon + ' text-sm text-gray-600'"></i>
+                                                </template>
+                                                <span class="text-sm text-gray-800" x-text="opt.label"></span>
+                                            </div>
+                                        </label>
+                                    </template>
+                                </div>
+
+                                {{-- Footer --}}
+                                <div class="p-3 bg-gray-50 border-t flex items-center justify-between">
+                                    <p class="text-xs text-gray-500">
+                                        Tip: Search karke multiple select kar sakte ho ✅
+                                    </p>
+                                    <button
+                                        type="button"
+                                        class="text-sm px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+                                        @click="open=false"
+                                    >
+                                        Done
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- Errors --}}
                             @error('property_type_ids')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -127,22 +319,9 @@
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-
-                        {{-- Selected badges preview --}}
-                        <div class="mt-2 flex flex-wrap gap-2">
-                            @foreach($propertyTypes as $type)
-                                @if(in_array($type->id, $selectedTypeIds))
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                             bg-indigo-50 text-indigo-700 border border-indigo-200">
-                    @if($type->icon_class)
-                                            <i class="{{ $type->icon_class }} mr-1 text-[10px]"></i>
-                                        @endif
-                                        {{ $type->title }}
-                </span>
-                                @endif
-                            @endforeach
-                        </div>
                     </div>
+
+
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700">City</label>
@@ -648,6 +827,86 @@
             }
         }
     </script>
+
+
+
+    <script>
+        function multiSelectTypes({ options = [], selected = [], placeholder = 'Select...' }) {
+            return {
+                open: false,
+                search: '',
+                options: options,
+                selected: Array.isArray(selected) ? selected : [],
+                placeholder: placeholder,
+
+                init() {
+                    // unique + int
+                    this.selected = [...new Set(this.selected.map(v => parseInt(v, 10)).filter(Boolean))];
+                },
+
+                toggleOpen() {
+                    this.open = !this.open;
+                    if (this.open) {
+                        this.$nextTick(() => {
+                            const inp = this.$el.querySelector('input[x-model="search"]');
+                            if (inp) inp.focus();
+                        });
+                    }
+                },
+
+                filteredOptions() {
+                    const q = (this.search || '').toLowerCase().trim();
+                    if (!q) return this.options;
+                    return this.options.filter(o => (o.label || '').toLowerCase().includes(q));
+                },
+
+                isSelected(id) {
+                    id = parseInt(id, 10);
+                    return this.selected.includes(id);
+                },
+
+                toggle(id) {
+                    id = parseInt(id, 10);
+                    if (!id) return;
+
+                    if (this.selected.includes(id)) {
+                        this.selected = this.selected.filter(x => x !== id);
+                    } else {
+                        this.selected.push(id);
+                    }
+                },
+
+                remove(id) {
+                    id = parseInt(id, 10);
+                    this.selected = this.selected.filter(x => x !== id);
+                },
+
+                clearAll() {
+                    this.selected = [];
+                },
+
+                selectAllFiltered() {
+                    const ids = this.filteredOptions().map(o => parseInt(o.id, 10)).filter(Boolean);
+                    const set = new Set(this.selected);
+                    ids.forEach(i => set.add(i));
+                    this.selected = [...set];
+                },
+
+                getLabel(id) {
+                    id = parseInt(id, 10);
+                    const o = this.options.find(x => parseInt(x.id, 10) === id);
+                    return o ? o.label : ('#' + id);
+                },
+
+                getIcon(id) {
+                    id = parseInt(id, 10);
+                    const o = this.options.find(x => parseInt(x.id, 10) === id);
+                    return o ? (o.icon || '') : '';
+                },
+            }
+        }
+    </script>
+
 
 
 </x-app-layout>

@@ -53,7 +53,7 @@ class Property extends Model
     public function propertyTypes()
     {
         return $this->belongsToMany(
-            \App\Models\PropertyType::class,
+            PropertyType::class,
             'property_property_types',
             'property_id',
             'property_type_id'

@@ -924,11 +924,11 @@
 
                                     <div class="flex gap-4 text-sm text-gray-600 mt-4">
                                         @if(!$isLand)
-                                            <span>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>
-                                            <span>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>
+                                            <span><i class="fas fa-bed text-gray-400 mr-1"></i>{{ $villa->bedrooms ?? '-' }} {{ __('index.villas.labels.beds') }}</span>
+                                            <span><i class="fas fa-bath text-gray-400 mr-1"></i>{{ $villa->bathrooms ?? '-' }} {{ __('index.villas.labels.baths') }}</span>
                                         @endif
 
-                                        <span>{{ $villa->area ?? '-' }} {{ __('index.villas.labels.sqft') }}</span>
+                                        <span><i class="fas fa-vector-square text-gray-400 mr-1"></i>{{ $villa->area ?? '-' }} {{ __('index.villas.labels.sqft') }}</span>
                                     </div>
 
 
@@ -1338,7 +1338,7 @@
                                 <div class="flex justify-start text-sm text-gray-600 mt-4 gap-4">
                                     {{-- Area --}}
                                     <div class="flex items-center">
-                                        <i class="fas fa-ruler-combined text-gray-400 mr-1"></i>
+                                        <i class="fas fa-vector-square text-gray-400 mr-1"></i>
                                         <span>
                                             @if($land->area)
                                                 {{ $land->area }} {{ __('index.lands.labels.sqft') }}
